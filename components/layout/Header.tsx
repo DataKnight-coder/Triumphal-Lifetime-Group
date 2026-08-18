@@ -70,18 +70,18 @@ export default function Header() {
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex justify-between items-center text-white">
           
           {/* Logo Area */}
-          <div className="flex-shrink-0 relative z-[60] flex items-center gap-4">
+          <div className="flex-shrink-0 relative z-[60] flex items-center">
             <Link 
               href="/" 
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-4 group"
+              className="flex items-center gap-2 md:gap-4 group"
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 relative overflow-hidden rounded-sm mix-blend-screen">
+              <div className="w-8 h-8 md:w-12 md:h-12 shrink-0 relative overflow-hidden rounded-sm mix-blend-screen">
                 <Image src="/logo.jpeg" alt="TLG Crest" fill className="object-contain" />
               </div>
               <div className="flex flex-col items-start leading-none group-hover:opacity-80 transition-opacity">
-                <span className="font-serif text-xl md:text-2xl font-medium tracking-tight">Triumphal</span>
-                <span className="text-[0.55rem] md:text-[0.65em] tracking-[0.25em] uppercase text-tlg-signatureGold font-sans mt-1">Lifetime Group</span>
+                <span className="font-serif text-lg md:text-2xl font-medium tracking-tight">Triumphal</span>
+                <span className="text-[0.45rem] md:text-[0.65em] tracking-[0.2em] md:tracking-[0.25em] uppercase text-tlg-signatureGold font-sans mt-1">Lifetime Group</span>
               </div>
             </Link>
           </div>
