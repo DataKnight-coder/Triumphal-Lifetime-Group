@@ -68,7 +68,7 @@ export default function Partners() {
             <div className="mt-32 pt-16 border-t border-tlg-stone flex flex-col md:flex-row justify-between items-center bg-tlg-midnight text-white p-16">
               <div className="max-w-xl mb-8 md:mb-0">
                 <h3 className="text-3xl font-serif mb-4">Become a Strategic Partner</h3>
-                <p className="text-white/70 font-light">Join our ecosystem and provide your clients with unparalleled access to international markets.</p>
+                <p className="text-white/70 font-light">Join our ecosystem and provide your clients with direct access to international markets.</p>
               </div>
               <Link href="/contact" className="inline-flex items-center gap-4 bg-white text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-tlg-signatureGold hover:text-white transition-colors shrink-0">
                 Contact Partnership Team <ArrowRight size={14} />

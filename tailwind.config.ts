@@ -10,12 +10,13 @@ const config: Config = {
     extend: {
       colors: {
         tlg: {
-          midnight: "#030713",
-          emerald: "#092A19",
-          signatureGold: "#CE9129",
-          heritageGold: "#DBAE57",
+          midnight: "#07152F", // Primary Navy
+          emerald: "#082A19", // Emerald Accent
+          purple: "#2A104A", // Purple Accent
+          signatureGold: "#D09A3A", // Premium Gold
+          heritageGold: "#DBAE57", // Keep for legacy compatibility if used
           champagne: "#F7CB64",
-          ivory: "#F7F5EF",
+          ivory: "#F5F3F0", // Off-White
           stone: "#EEEEEE",
           charcoal: "#181A1C",
           white: "#FFFFFF",

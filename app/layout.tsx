@@ -15,9 +15,24 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Triumphal Lifetime Group",
-  description: "Empowering People. Elevating Businesses. Enriching Communities.",
+  metadataBase: new URL("https://triumphallifetimegroup.com"),
+  title: {
+    template: "%s | Triumphal Lifetime Group",
+    default: "Triumphal Lifetime Group | Integrated Global Advisory",
+  },
+  description: "A diversified business network providing structural, operational, and strategic support across multiple high-impact sectors globally.",
+  openGraph: {
+    title: "Triumphal Lifetime Group",
+    description: "A diversified business network providing structural, operational, and strategic support across multiple high-impact sectors globally.",
+    url: "https://triumphallifetimegroup.com",
+    siteName: "Triumphal Lifetime Group",
+    locale: "en_US",
+    type: "website",
+  },
 };
+
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function RootLayout({
   children,
@@ -26,8 +41,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${cormorant.variable} bg-tlg-ivory text-tlg-charcoal`}>
-        {children}
+      <body className={`${manrope.variable} ${cormorant.variable} bg-tlg-ivory text-tlg-charcoal flex flex-col min-h-screen`}>
+        <Header />
+        <div className="flex-1">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );

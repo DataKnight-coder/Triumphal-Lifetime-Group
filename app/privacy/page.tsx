@@ -1,130 +1,133 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
-export default function PrivacyPolicy() {
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "How Triumphal Lifetime Group collects, uses, and protects your personal data.",
+};
+
+export default function PrivacyPage() {
   return (
-    <>
-      <Header />
-      <main className="bg-tlg-ivory">
-        
-        {/* Cinematic Hero */}
-        <section className="relative h-screen min-h-[700px] w-full flex flex-col justify-end overflow-hidden bg-tlg-midnight">
-          <div className="absolute inset-0 z-0">
-            <div 
-              className="absolute inset-0 bg-cover bg-center animate-slow-zoom scale-105 opacity-40"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=2070&auto=format&fit=crop')" }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/80 to-tlg-midnight/20"></div>
-          </div>
-          
-          <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10 pb-24 md:pb-32">
-            <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest block mb-6 animate-reveal-up">Corporate Governance</span>
-            <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-serif text-white leading-[0.9] tracking-tight mb-8 animate-reveal-up-delayed">
-              Privacy<br />
-              <span className="italic font-light text-white/80">Policy.</span>
-            </h1>
-            <div className="w-24 h-[1px] bg-tlg-signatureGold mb-8 animate-draw-line"></div>
-            <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl leading-relaxed animate-reveal-up-delayed">
-              Transparency and data security are foundational to our operations across North America, Europe, and Africa.
+    <main className="bg-white min-h-screen">
+      {/* Hero */}
+      <section className="pt-40 pb-16 bg-tlg-ivory border-b border-tlg-stone">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12">
+          <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.3em] mb-6 block">Legal</span>
+          <h1 className="text-4xl md:text-5xl font-serif text-tlg-midnight leading-[1.1] mb-4">Privacy Policy</h1>
+          <p className="text-sm text-gray-400 font-light">Last updated: August 2025</p>
+        </div>
+      </section>
+
+      {/* Body */}
+      <section className="py-20">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12">
+          <div className="space-y-12 text-[15px] text-gray-600 font-light leading-[1.85]">
+
+            <p>
+              Triumphal Lifetime Group (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;the Group&rdquo;) is committed to protecting the personal data you share with us. This Privacy Policy explains what information we collect when you use our website or services, why we collect it, and how we protect it.
             </p>
-          </div>
-        </section>
 
-        {/* Legal Document Layout */}
-        <section className="py-32 bg-white relative">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-              
-              {/* Sticky Table of Contents */}
-              <div className="lg:col-span-4">
-                <div className="sticky top-32">
-                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400 block mb-8">Table of Contents</span>
-                  <ul className="flex flex-col gap-4 text-sm font-semibold uppercase tracking-widest text-tlg-midnight">
-                    <li className="flex items-center gap-3 text-tlg-signatureGold"><div className="w-4 h-[1px] bg-tlg-signatureGold"></div> 1. Information Collection</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">2. Use of Data</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">3. Data Sharing & Transfers</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">4. Security Protocols</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">5. Your Privacy Rights</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">6. Contact Information</li>
-                  </ul>
-                  
-                  <div className="mt-16 p-8 bg-tlg-ivory border border-tlg-stone">
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold block mb-2">Last Updated</span>
-                    <p className="font-serif text-xl text-tlg-midnight">August 2026</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Legal Text */}
-              <div className="lg:col-span-8 max-w-3xl">
-                
-                <div className="prose prose-lg prose-gray">
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">1. Information We Collect</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-8 text-lg">
-                    Triumphal Lifetime Group ("we," "our," or "us") is committed to protecting your privacy. As a multinational corporate advisory, real estate, and digital products entity operating across Nigeria, the UAE, and Canada, we collect personal data that is necessary to provide our premium services.
-                  </p>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    This includes, but is not limited to: identity data (passport copies, government IDs), contact data, financial data (bank statements for property acquisitions or visa applications), and technical data (IP addresses, browser types) collected through our digital interfaces.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">2. How We Use Your Data</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-4 text-lg">
-                    We utilize your personal information exclusively for the following corporate functions:
-                  </p>
-                  <ul className="list-disc pl-6 text-gray-500 font-light mb-12 text-lg space-y-2">
-                    <li>Executing corporate contracts, real estate acquisitions, and immigration filings.</li>
-                    <li>Conducting mandatory Due Diligence (DD), Know Your Customer (KYC), and Anti-Money Laundering (AML) checks required by UAE, Canadian, and Nigerian law.</li>
-                    <li>Providing access to our Digital Products & Learning platforms.</li>
-                    <li>Improving our global service delivery through analytical data processing.</li>
-                  </ul>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">3. International Data Transfers</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    Because we are a global group, your data may be transferred between our operational hubs in Lagos, Dubai, and Toronto. We ensure that all cross-border data transfers comply with international data protection frameworks, including the GDPR (Europe), PIPEDA (Canada), NDPR (Nigeria), and UAE Data Protection Laws. Data is encrypted both in transit and at rest using enterprise-grade cryptographic protocols.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">4. Security Protocols</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    We have implemented rigorous technical and organizational security measures designed to secure your personal information from accidental loss, unauthorized access, or disclosure. Access to client data is strictly limited on a "need-to-know" basis to employees, contractors, and legal counsel subject to severe confidentiality obligations.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">5. Your Privacy Rights</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-4 text-lg">
-                    Depending on your jurisdiction, you possess the right to:
-                  </p>
-                  <ul className="list-disc pl-6 text-gray-500 font-light mb-12 text-lg space-y-2">
-                    <li>Request access to your personal data held by the Group.</li>
-                    <li>Request immediate correction of any inaccurate data.</li>
-                    <li>Request the erasure of your personal data ("Right to be Forgotten"), subject to overriding legal retention requirements.</li>
-                    <li>Object to the processing of your data for direct marketing.</li>
-                  </ul>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">6. Contact Our Legal Team</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    For inquiries regarding this Privacy Policy or to exercise your data rights, please contact our Data Protection Officer at <strong>legal@triumphallifetimegroup.com</strong>.
-                  </p>
-                </div>
-                
-              </div>
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">1. Information We Collect</h2>
+              <p className="mb-4">When you interact with our website, we may collect the following categories of personal data:</p>
+              <ul className="space-y-2 list-none">
+                {[
+                  ["Identity Data", "Your name, title, and similar identifiers you provide when contacting us or submitting a form."],
+                  ["Contact Data", "Your email address, phone number, and country of residence."],
+                  ["Inquiry Data", "The content of messages you send us, including your area of interest or service enquiry."],
+                  ["Technical Data", "Your IP address, browser type, device type, and pages visited, collected automatically through standard web server logs."],
+                ].map(([term, def]) => (
+                  <li key={term} className="flex flex-col sm:flex-row gap-1">
+                    <span className="font-semibold text-tlg-midnight min-w-[160px] shrink-0">{term}:</span>
+                    <span>{def}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </section>
 
-        {/* Action Section */}
-        <section className="py-24 bg-tlg-ivory relative flex flex-col items-center justify-center text-center border-t border-tlg-stone">
-          <div className="max-w-3xl px-6">
-            <h2 className="text-3xl font-serif text-tlg-midnight mb-6">Require Further Clarification?</h2>
-            <Link href="/contact" className="inline-flex items-center gap-4 bg-tlg-midnight text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-tlg-signatureGold transition-colors">
-              Contact Global HQ <ArrowRight size={14} />
-            </Link>
-          </div>
-        </section>
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">2. How We Use Your Data</h2>
+              <p className="mb-4">We process your personal data only where we have a lawful basis to do so. The main purposes are:</p>
+              <ul className="space-y-2 list-disc list-inside">
+                <li>To respond to your inquiry or consultation request.</li>
+                <li>To provide the advisory services you have requested.</li>
+                <li>To maintain communication records and service logs.</li>
+                <li>To comply with applicable legal or regulatory obligations.</li>
+              </ul>
+              <p className="mt-4">We do not use your personal data for automated decision-making or profiling, and we do not sell it to third parties.</p>
+            </div>
 
-      </main>
-      <Footer />
-    </>
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">3. Data Retention</h2>
+              <p>
+                We retain personal data only for as long as it is necessary for the purpose for which it was collected, or as required by applicable law. Inquiry and consultation records are typically retained for up to 3 years from the date of last contact.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">4. Data Security</h2>
+              <p>
+                We apply appropriate technical and organisational measures to safeguard personal data against unauthorised access, loss, alteration, or disclosure. Access to personal data is restricted to team members and authorised service providers who require it to perform their responsibilities.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">5. Your Rights</h2>
+              <p className="mb-4">Depending on your jurisdiction, you may have the right to:</p>
+              <ul className="space-y-2 list-disc list-inside">
+                <li>Access the personal data we hold about you.</li>
+                <li>Request correction of inaccurate data.</li>
+                <li>Request deletion of your data, subject to legal obligations.</li>
+                <li>Object to or restrict certain types of processing.</li>
+                <li>Withdraw consent where processing is consent-based.</li>
+              </ul>
+              <p className="mt-4">To exercise any of these rights, please contact us using the details below.</p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">6. Cookies</h2>
+              <p>
+                Our website may use cookies and similar tracking technologies. Please refer to our{" "}
+                <Link href="/cookies" className="text-tlg-signatureGold underline underline-offset-4 hover:text-tlg-midnight transition-colors">Cookie Policy</Link>{" "}
+                for a full explanation of what cookies we use and how to manage them.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">7. Third-Party Services</h2>
+              <p>
+                We may use third-party services (such as analytics providers or communication tools) that process data on our behalf. Where we do, we ensure appropriate data processing agreements are in place and that those providers offer adequate data protection standards.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">8. Changes to This Policy</h2>
+              <p>
+                We may update this Privacy Policy from time to time to reflect changes in our practices or applicable law. The &ldquo;Last updated&rdquo; date at the top of this page indicates when it was last revised. Continued use of the website after any changes constitutes acceptance of the updated policy.
+              </p>
+            </div>
+
+            {/* Contact Box */}
+            <div className="bg-tlg-ivory border border-tlg-stone p-8 mt-4">
+              <p className="text-sm text-tlg-midnight font-semibold mb-2">Privacy Inquiries &amp; Data Requests</p>
+              <p className="text-sm text-gray-500 font-light mb-3">For privacy-related questions, data access requests, or deletion requests, please contact our team directly.</p>
+              <a href="mailto:legal@triumphallifetimegroup.com" className="text-sm text-tlg-signatureGold hover:text-tlg-midnight transition-colors font-medium">
+                legal@triumphallifetimegroup.com
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Nav */}
+      <section className="py-10 border-t border-tlg-stone bg-tlg-ivory">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12 flex flex-wrap gap-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+          <Link href="/terms" className="hover:text-tlg-midnight transition-colors">Terms &amp; Conditions</Link>
+          <Link href="/cookies" className="hover:text-tlg-midnight transition-colors">Cookie Policy</Link>
+          <Link href="/contact" className="hover:text-tlg-midnight transition-colors">Contact Us</Link>
+        </div>
+      </section>
+    </main>
   );
 }

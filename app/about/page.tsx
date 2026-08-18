@@ -1,142 +1,91 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Our Group",
+  description: "Triumphal Lifetime Group is a diversified business network providing structural, operational, and strategic support across multiple high-impact sectors globally.",
+};
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export default function AboutGroup() {
+export default function AboutGroupPage() {
   return (
-    <>
-      <Header />
-      <main className="bg-tlg-ivory">
-        
-        {/* About Hero */}
-        <section className="relative h-[80vh] min-h-[600px] w-full flex flex-col justify-end overflow-hidden bg-tlg-midnight">
-          <div className="absolute inset-0 z-0">
-            <div 
-              className="absolute inset-0 bg-cover bg-center animate-slow-zoom scale-105 opacity-60"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop')" }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/50 to-transparent"></div>
-          </div>
-          <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10 pb-24">
-            <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-serif text-white leading-[0.9] tracking-tight mb-8 animate-reveal-up">
-              The Group<br />
-              <span className="italic font-light text-tlg-signatureGold">Ecosystem.</span>
+    <main className="bg-white pt-32 pb-24">
+      <section className="relative pt-16 pb-24 border-b border-tlg-stone bg-tlg-ivory">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+          <div className="max-w-4xl animate-reveal-up">
+            <span className="text-tlg-signatureGold text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 block">About The Group</span>
+            <h1 className="text-4xl md:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8">
+              Expertise That Moves<br />Ambition Forward.
             </h1>
-            <p className="text-xl text-white/80 font-light max-w-2xl animate-reveal-up-delayed">
-              A unified platform of seven specialized companies designed to drive international growth, from corporate structuring to community enrichment.
+            <p className="text-xl text-gray-600 font-light leading-relaxed mb-12">
+              Triumphal Lifetime Group is a diversified business network providing structural, operational, and strategic support across multiple high-impact sectors globally.
             </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Who We Are & Story Preview */}
-        <section className="py-32 bg-white relative">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
-              <div className="animate-reveal-up">
-                <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest block mb-6">Who We Are</span>
-                <h2 className="text-4xl md:text-5xl font-serif text-tlg-midnight mb-8 leading-tight">
-                  We empower people to elevate businesses, creating wealth that enriches communities.
-                </h2>
-                <div className="flex flex-col gap-6 text-gray-500 font-light leading-relaxed">
-                  <p>
-                    Established as a multidisciplinary platform, Triumphal Lifetime Group eliminates the friction of cross-border growth. Whether you are expanding operations into the UAE, securing prime real estate in Nigeria, or establishing educational pathways in Canada, our ecosystem provides end-to-end execution.
-                  </p>
+      <section className="py-24">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-4 relative">
+            <div className="sticky top-40 bg-tlg-ivory p-8 border border-tlg-stone">
+              <h4 className="text-lg font-serif text-tlg-midnight mb-6">About Us</h4>
+              <ul className="flex flex-col gap-4 text-sm">
+                <li><Link href="/about/our-story" className="text-gray-500 hover:text-tlg-signatureGold transition-colors block">Our Story & History</Link></li>
+                <li><Link href="/about/leadership" className="text-gray-500 hover:text-tlg-signatureGold transition-colors block">Executive Leadership</Link></li>
+                <li><Link href="/about/global-presence" className="text-gray-500 hover:text-tlg-signatureGold transition-colors block">Global Presence</Link></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="lg:col-span-8">
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-tlg-midnight prose-p:text-gray-600 prose-p:font-light prose-p:leading-relaxed max-w-none">
+              <h2 className="text-3xl font-serif text-tlg-midnight mb-6 border-b border-tlg-stone pb-4">Our Core Philosophy</h2>
+              <p className="mb-6">
+                Modern business and personal challenges rarely fit neatly into a single category. Whether an enterprise is expanding into a new jurisdiction, or an individual is navigating international education and mobility, the solutions require interconnected expertise.
+              </p>
+              <p className="mb-12">
+                Triumphal Lifetime Group was founded on the principle that integrated advisory—combining human resources, real estate, technology, and compliance under one ecosystem—delivers superior, frictionless results for our clients.
+              </p>
+
+              <h2 className="text-3xl font-serif text-tlg-midnight mb-6 border-b border-tlg-stone pb-4">Our Operating Divisions</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div className="bg-white border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-2">HR & Business Consulting</h4>
+                  <p className="text-sm text-gray-500">Workforce engineering and corporate governance.</p>
                 </div>
-                <div className="mt-12">
-                  <Link href="/about/our-story" className="inline-flex items-center gap-4 bg-tlg-midnight text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-tlg-signatureGold transition-colors">
-                    Read Our Story <ArrowRight size={14} />
-                  </Link>
+                <div className="bg-white border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-2">Real Estate Advisory</h4>
+                  <p className="text-sm text-gray-500">Commercial property strategy and facilities management.</p>
+                </div>
+                <div className="bg-white border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-2">Global Mobility</h4>
+                  <p className="text-sm text-gray-500">Logistics and administrative relocation support.</p>
+                </div>
+                <div className="bg-white border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-2">Education Advisory</h4>
+                  <p className="text-sm text-gray-500">Academic planning and institutional placement.</p>
+                </div>
+                <div className="bg-white border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-2">Information Technology</h4>
+                  <p className="text-sm text-gray-500">Enterprise systems and digital transformation.</p>
+                </div>
+                <div className="bg-white border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-2">Digital Learning</h4>
+                  <p className="text-sm text-gray-500">Corporate training and digital curriculum.</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="h-[300px] bg-tlg-stone/20 bg-cover bg-center rounded-sm" style={{backgroundImage: "url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?q=80&w=1932&auto=format&fit=crop')"}}></div>
-                <div className="h-[300px] bg-tlg-stone/20 bg-cover bg-center rounded-sm translate-y-12" style={{backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop')"}}></div>
+
+              <div className="bg-tlg-midnight text-white p-12 mt-16 flex flex-col items-start">
+                <h3 className="text-2xl font-serif mb-4">Discover the full scope of our expertise</h3>
+                <Link href="/companies" className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold hover:text-white transition-colors">
+                  Explore Our Companies <ArrowRight size={14} className="ml-2" />
+                </Link>
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Mission, Vision, Values */}
-        <section className="py-32 bg-tlg-midnight text-white">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 border-t border-white/10 pt-16">
-              
-              <div>
-                <h3 className="text-2xl font-serif text-tlg-signatureGold mb-6">Our Vision</h3>
-                <p className="text-white/70 font-light leading-relaxed">
-                  To be the world's most trusted integrated platform for global mobility, corporate structuring, and generational wealth creation.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-serif text-tlg-signatureGold mb-6">Our Mission</h3>
-                <p className="text-white/70 font-light leading-relaxed">
-                  To provide seamless, high-integrity advisory and execution services that bridge emerging markets with established global economies.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-serif text-tlg-signatureGold mb-6">Core Values</h3>
-                <ul className="text-white/70 font-light space-y-3">
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-tlg-signatureGold rounded-full"></div> Uncompromising Integrity</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-tlg-signatureGold rounded-full"></div> Ecosystem Thinking</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-tlg-signatureGold rounded-full"></div> Global Excellence</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-tlg-signatureGold rounded-full"></div> Community Enrichment</li>
-                </ul>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* Further Routing Links */}
-        <section className="py-32 bg-tlg-ivory">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              
-              <Link href="/companies" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-signatureGold transition-colors flex flex-col h-full">
-                <span className="text-xs uppercase tracking-widest text-tlg-signatureGold font-bold mb-4 block">Ecosystem</span>
-                <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Our Companies</h3>
-                <div className="mt-auto pt-8 border-t border-tlg-stone group-hover:border-tlg-signatureGold flex justify-between items-center transition-colors">
-                  <span className="text-sm font-medium">Explore Division</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                </div>
-              </Link>
-
-              <Link href="/about/leadership" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-signatureGold transition-colors flex flex-col h-full">
-                <span className="text-xs uppercase tracking-widest text-tlg-signatureGold font-bold mb-4 block">People</span>
-                <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Leadership</h3>
-                <div className="mt-auto pt-8 border-t border-tlg-stone group-hover:border-tlg-signatureGold flex justify-between items-center transition-colors">
-                  <span className="text-sm font-medium">Meet the Board</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                </div>
-              </Link>
-
-              <Link href="/about/global-presence" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-signatureGold transition-colors flex flex-col h-full">
-                <span className="text-xs uppercase tracking-widest text-tlg-signatureGold font-bold mb-4 block">Markets</span>
-                <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Global Presence</h3>
-                <div className="mt-auto pt-8 border-t border-tlg-stone group-hover:border-tlg-signatureGold flex justify-between items-center transition-colors">
-                  <span className="text-sm font-medium">View Map</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                </div>
-              </Link>
-
-              <Link href="/about/partners" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-signatureGold transition-colors flex flex-col h-full">
-                <span className="text-xs uppercase tracking-widest text-tlg-signatureGold font-bold mb-4 block">Network</span>
-                <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Partners</h3>
-                <div className="mt-auto pt-8 border-t border-tlg-stone group-hover:border-tlg-signatureGold flex justify-between items-center transition-colors">
-                  <span className="text-sm font-medium">View Affiliations</span>
-                  <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                </div>
-              </Link>
-
-            </div>
-          </div>
-        </section>
-
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+    </main>
   );
 }

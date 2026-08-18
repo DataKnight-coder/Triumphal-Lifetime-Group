@@ -1,120 +1,111 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
-export default function TermsConditions() {
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Terms and conditions outlining the rules and regulations for the use of Triumphal Lifetime Group's services.",
+};
+
+export default function TermsPage() {
   return (
-    <>
-      <Header />
-      <main className="bg-tlg-ivory">
-        
-        {/* Cinematic Hero */}
-        <section className="relative h-screen min-h-[700px] w-full flex flex-col justify-end overflow-hidden bg-tlg-midnight">
-          <div className="absolute inset-0 z-0">
-            <div 
-              className="absolute inset-0 bg-cover bg-center animate-slow-zoom scale-105 opacity-40"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070&auto=format&fit=crop')" }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/80 to-tlg-midnight/20"></div>
-          </div>
-          
-          <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10 pb-24 md:pb-32">
-            <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest block mb-6 animate-reveal-up">Corporate Governance</span>
-            <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-serif text-white leading-[0.9] tracking-tight mb-8 animate-reveal-up-delayed">
-              Terms &<br />
-              <span className="italic font-light text-white/80">Conditions.</span>
-            </h1>
-            <div className="w-24 h-[1px] bg-tlg-signatureGold mb-8 animate-draw-line"></div>
-            <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl leading-relaxed animate-reveal-up-delayed">
-              The binding legal framework governing your engagement with the Triumphal Lifetime Group network.
+    <main className="bg-white min-h-screen">
+      {/* Hero */}
+      <section className="pt-40 pb-16 bg-tlg-ivory border-b border-tlg-stone">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12">
+          <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.3em] mb-6 block">Legal</span>
+          <h1 className="text-4xl md:text-5xl font-serif text-tlg-midnight leading-[1.1] mb-4">Terms of Service</h1>
+          <p className="text-sm text-gray-400 font-light">Last updated: August 2025</p>
+        </div>
+      </section>
+
+      {/* Body */}
+      <section className="py-20">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12">
+          <div className="space-y-12 text-[15px] text-gray-600 font-light leading-[1.85]">
+
+            <p>
+              These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the Triumphal Lifetime Group website and services. By accessing our website, engaging our services, or interacting with our content, you accept these Terms in full. If you disagree with any part of these Terms, you must not use our services.
             </p>
-          </div>
-        </section>
 
-        {/* Legal Document Layout */}
-        <section className="py-32 bg-white relative">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-              
-              {/* Sticky Table of Contents */}
-              <div className="lg:col-span-4">
-                <div className="sticky top-32">
-                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400 block mb-8">Table of Contents</span>
-                  <ul className="flex flex-col gap-4 text-sm font-semibold uppercase tracking-widest text-tlg-midnight">
-                    <li className="flex items-center gap-3 text-tlg-signatureGold"><div className="w-4 h-[1px] bg-tlg-signatureGold"></div> 1. Acceptance of Terms</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">2. Corporate Services</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">3. Client Obligations</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">4. Limitation of Liability</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">5. Intellectual Property</li>
-                    <li className="hover:text-tlg-signatureGold transition-colors cursor-pointer pl-7">6. Governing Law</li>
-                  </ul>
-                  
-                  <div className="mt-16 p-8 bg-tlg-ivory border border-tlg-stone">
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold block mb-2">Last Updated</span>
-                    <p className="font-serif text-xl text-tlg-midnight">August 2026</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Legal Text */}
-              <div className="lg:col-span-8 max-w-3xl">
-                
-                <div className="prose prose-lg prose-gray">
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">1. Acceptance of Terms</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    By accessing the websites, digital platforms, or retaining the corporate services of Triumphal Lifetime Group, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you are prohibited from utilizing our proprietary services or accessing this site.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">2. Corporate Services & Execution</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-4 text-lg">
-                    Triumphal Lifetime Group acts as a strategic advisory firm providing services across Real Estate, HR, IT, and Global Immigration. Please note:
-                  </p>
-                  <ul className="list-disc pl-6 text-gray-500 font-light mb-12 text-lg space-y-2">
-                    <li>We do not guarantee the final decisions of government immigration bodies regarding visa approvals.</li>
-                    <li>Real estate market valuations provided by our advisors are estimates based on rigorous market data but do not constitute guaranteed financial returns.</li>
-                    <li>Execution of services may be subject to third-party timelines (e.g., banking compliance checks, embassy processing).</li>
-                  </ul>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">3. Client Obligations</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    Clients utilizing our advisory, legal, or acquisition services must provide completely accurate, unfalsified documentation. Any deliberate misrepresentation of financial standing, legal history, or corporate structure to our agents constitutes grounds for immediate termination of the service agreement without refund, and potential reporting to relevant jurisdictional authorities.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">4. Limitation of Liability</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    To the maximum extent permitted by applicable law, in no event shall Triumphal Lifetime Group, its directors, or its subsidiaries be liable for any indirect, punitive, incidental, special, or consequential damages arising out of or in any way connected with the use of our digital platforms or the delay/inability to use our services.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">5. Intellectual Property Rights</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    All content, including digital course materials, structural blueprints, legal frameworks, corporate design assets, and logos distributed via our platforms are the exclusive property of Triumphal Lifetime Group. You are granted a limited, non-exclusive license to use these materials solely for your internal corporate purposes. Unauthorized distribution or resale is strictly prohibited.
-                  </p>
-
-                  <h2 className="text-3xl font-serif text-tlg-midnight mb-6">6. Governing Law & Jurisdiction</h2>
-                  <p className="text-gray-500 font-light leading-relaxed mb-12 text-lg">
-                    These Terms & Conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which the specific regional subsidiary is registered (e.g., the laws of the Federal Republic of Nigeria, the laws of the UAE/DIFC, or the laws of Ontario, Canada). Any disputes shall be exclusively resolved in the competent courts of the respective jurisdiction.
-                  </p>
-                </div>
-                
-              </div>
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">1. Advisory Disclaimer</h2>
+              <p className="mb-4">Triumphal Lifetime Group operates across multiple specialized divisions. It is crucial to understand the nature of our advisory services:</p>
+              <ul className="space-y-3 list-disc list-inside">
+                <li><strong className="text-tlg-midnight font-medium">Real Estate Advisory:</strong> We provide strategic property consulting and market analysis. We do not guarantee specific property yields, investment returns, or capital appreciation. All property investments carry inherent risks. Regulated valuation or legal conveyancing must be performed by appropriately licensed local professionals.</li>
+                <li><strong className="text-tlg-midnight font-medium">Global Mobility:</strong> We facilitate the administrative, logistical, and strategic aspects of cross-border relocation. We are not a government agency and do not issue visas or permits. We cannot guarantee application outcomes or processing times. Regulated immigration legal advice must be provided by authorized professionals in the relevant jurisdiction.</li>
+                <li><strong className="text-tlg-midnight font-medium">Business Consulting:</strong> Operational and strategic advice is based on available market data and client information. We do not guarantee specific financial outcomes or corporate success resulting from the implementation of our recommendations.</li>
+              </ul>
             </div>
-          </div>
-        </section>
 
-        {/* Action Section */}
-        <section className="py-24 bg-tlg-ivory relative flex flex-col items-center justify-center text-center border-t border-tlg-stone">
-          <div className="max-w-3xl px-6">
-            <h2 className="text-3xl font-serif text-tlg-midnight mb-6">Legal Inquiries</h2>
-            <Link href="/contact" className="inline-flex items-center gap-4 bg-tlg-midnight text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-tlg-signatureGold transition-colors">
-              Contact General Counsel <ArrowRight size={14} />
-            </Link>
-          </div>
-        </section>
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">2. Intellectual Property Rights</h2>
+              <p>
+                Unless otherwise stated, Triumphal Lifetime Group and/or its licensors own the intellectual property rights for all material on this website. This includes, but is not limited to, text, graphics, logos, images, methodologies, and frameworks. All intellectual property rights are reserved. You may view and print pages for personal, non-commercial use, subject to restrictions set out in these terms.
+              </p>
+              <p className="mt-4">You must not:</p>
+              <ul className="space-y-2 list-disc list-inside mt-2">
+                <li>Republish material from our website without proper attribution.</li>
+                <li>Sell, rent, or sub-license material from our website.</li>
+                <li>Reproduce, duplicate, or copy material for commercial purposes without explicit written consent.</li>
+              </ul>
+            </div>
 
-      </main>
-      <Footer />
-    </>
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">3. User Obligations</h2>
+              <p>
+                When using our website or engaging our services, you agree to provide accurate and complete information. You are prohibited from using our website in any way that causes, or may cause, damage to the website or impairment of the availability or accessibility of the website; or in any way which is unlawful, illegal, fraudulent, or harmful.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">4. Limitation of Liability</h2>
+              <p>
+                To the maximum extent permitted by applicable law, Triumphal Lifetime Group excludes all representations, warranties, and conditions relating to our website and the use of this website. We will not be liable for any direct, indirect, special, or consequential loss or damage arising under these terms or in connection with our website, whether arising in tort, contract, or otherwise.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">5. Third-Party Links</h2>
+              <p>
+                Our website may contain links to external sites that are not operated by us. We have no control over the content and practices of these sites and cannot accept responsibility or liability for their respective privacy policies or terms of service.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">6. Governing Law &amp; Jurisdiction</h2>
+              <p>
+                These Terms will be governed by and interpreted in accordance with the laws of the jurisdiction in which the relevant Triumphal Lifetime Group operating entity is registered (e.g., Nigeria, UAE, or Canada), depending on the nature of the engagement. Any disputes relating to these Terms will be subject to the exclusive jurisdiction of the courts of that respective jurisdiction.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">7. Modifications to Terms</h2>
+              <p>
+                We reserve the right to revise these Terms at any time. We will post the revised Terms on the website, and by using this website you are expected to review these Terms on a regular basis. Your continued use of the website following any changes signifies your acceptance of the updated Terms.
+              </p>
+            </div>
+
+            {/* Contact Box */}
+            <div className="bg-tlg-ivory border border-tlg-stone p-8 mt-4">
+              <p className="text-sm text-tlg-midnight font-semibold mb-2">Legal &amp; Compliance Inquiries</p>
+              <p className="text-sm text-gray-500 font-light mb-3">If you have any questions or require clarification regarding these Terms of Service, please contact our legal team.</p>
+              <a href="mailto:legal@triumphallifetimegroup.com" className="text-sm text-tlg-signatureGold hover:text-tlg-midnight transition-colors font-medium">
+                legal@triumphallifetimegroup.com
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Nav */}
+      <section className="py-10 border-t border-tlg-stone bg-tlg-ivory">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12 flex flex-wrap gap-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+          <Link href="/privacy" className="hover:text-tlg-midnight transition-colors">Privacy Policy</Link>
+          <Link href="/cookies" className="hover:text-tlg-midnight transition-colors">Cookie Policy</Link>
+          <Link href="/contact" className="hover:text-tlg-midnight transition-colors">Contact Us</Link>
+        </div>
+      </section>
+    </main>
   );
 }

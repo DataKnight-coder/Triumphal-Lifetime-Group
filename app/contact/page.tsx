@@ -1,194 +1,148 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MapPin, Mail, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
-export default function Contact() {
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: "Direct your inquiry to the relevant regional office or operating division of Triumphal Lifetime Group.",
+};
+
+export default function ContactPage() {
   return (
-    <>
-      <Header />
-      <main className="bg-tlg-ivory">
-        
-        {/* Cinematic Hero */}
-        <section className="relative h-screen min-h-[700px] w-full flex flex-col justify-end overflow-hidden bg-tlg-midnight">
-          <div className="absolute inset-0 z-0">
-            <div 
-              className="absolute inset-0 bg-cover bg-center animate-slow-zoom scale-105 opacity-40"
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop')" }}
-            ></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/80 to-tlg-midnight/20"></div>
+    <main className="bg-white min-h-screen">
+      {/* Hero */}
+      <section className="pt-40 pb-24 bg-tlg-midnight text-white">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+          <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.3em] mb-6 block">Get In Touch</span>
+          <h1 className="text-5xl md:text-7xl font-serif leading-[1.05] mb-6 max-w-2xl">
+            Let&rsquo;s Start a Conversation.
+          </h1>
+          <p className="text-white/60 font-light text-lg max-w-xl leading-relaxed">
+            Reach the team directly — by regional office, or send a general inquiry and we will route it to the right division.
+          </p>
+        </div>
+      </section>
+
+      {/* Regional Offices */}
+      <section className="py-20 bg-tlg-ivory border-b border-tlg-stone">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-12">Regional Offices</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-tlg-stone border border-tlg-stone">
+
+            {/* Nigeria */}
+            <div className="p-10 hover:bg-white transition-colors group">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 block">Nigeria</span>
+              <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Lagos</h3>
+              <p className="text-sm text-gray-400 font-light mb-6">Serving Africa</p>
+              <div className="space-y-3">
+                <a href="mailto:africa@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-600 hover:text-tlg-signatureGold transition-colors font-light">
+                  <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
+                  africa@triumphallifetimegroup.com
+                </a>
+              </div>
+            </div>
+
+            {/* UAE */}
+            <div className="p-10 hover:bg-white transition-colors group">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 block">United Arab Emirates</span>
+              <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Dubai</h3>
+              <p className="text-sm text-gray-400 font-light mb-6">Serving the Middle East</p>
+              <div className="space-y-3">
+                <a href="mailto:mena@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-600 hover:text-tlg-signatureGold transition-colors font-light">
+                  <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
+                  mena@triumphallifetimegroup.com
+                </a>
+              </div>
+            </div>
+
+            {/* Canada */}
+            <div className="p-10 hover:bg-white transition-colors group">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 block">Canada</span>
+              <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Toronto</h3>
+              <p className="text-sm text-gray-400 font-light mb-6">Serving North America</p>
+              <div className="space-y-3">
+                <a href="mailto:na@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-600 hover:text-tlg-signatureGold transition-colors font-light">
+                  <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
+                  na@triumphallifetimegroup.com
+                </a>
+              </div>
+            </div>
+
           </div>
-          
-          <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10 pb-24 md:pb-32">
-            <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest block mb-6 animate-reveal-up">Global Network</span>
-            <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-serif text-white leading-[0.9] tracking-tight mb-8 animate-reveal-up-delayed">
-              Contact<br />
-              <span className="italic font-light text-white/80">Our Hubs.</span>
-            </h1>
-            <div className="w-24 h-[1px] bg-tlg-signatureGold mb-8 animate-draw-line"></div>
-            <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl leading-relaxed animate-reveal-up-delayed">
-              Access our executive advisory teams across North America, the Middle East, and West Africa.
+        </div>
+      </section>
+
+      {/* Inquiry Form */}
+      <section className="py-24">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+
+          {/* Left — Context */}
+          <div className="lg:col-span-2">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold mb-6 block">General Inquiry</span>
+            <h2 className="text-3xl md:text-4xl font-serif text-tlg-midnight mb-6 leading-[1.2]">Send Us a Message</h2>
+            <p className="text-gray-500 font-light leading-relaxed mb-10 text-sm">
+              For a structured consultation, use the <Link href="/book" className="underline underline-offset-4 hover:text-tlg-signatureGold transition-colors">Book a Consultation</Link> page. For all other inquiries, use this form and we will respond within two business days.
             </p>
-          </div>
-        </section>
-
-        {/* Philosophy / Authority Quote */}
-        <section className="py-24 md:py-32 bg-white relative border-b border-tlg-stone">
-          <div className="max-w-[1200px] mx-auto px-6 text-center">
-            <span className="text-gray-400 text-xs font-bold uppercase tracking-widest block mb-8">Direct Access</span>
-            <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight leading-[1.3]">
-              "Time is the ultimate luxury. Our decentralized global communication infrastructure ensures immediate, secure access to our directors regardless of your time zone."
-            </h2>
-          </div>
-        </section>
-
-        {/* Global Hubs Grid */}
-        <section className="py-24 md:py-32 bg-tlg-ivory relative">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            
-            <div className="flex flex-col md:flex-row justify-between items-end mb-20">
-              <h2 className="text-4xl md:text-6xl font-serif text-tlg-midnight">Operating Hubs</h2>
-              <p className="text-gray-500 font-light max-w-sm mt-6 md:mt-0">Select your nearest regional headquarters to initiate a strategic partnership.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-              
-              {/* Hub 1: Dubai */}
-              <div className="bg-white border border-tlg-stone group hover:border-tlg-signatureGold transition-colors">
-                <div className="h-64 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2s]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop')" }}></div>
-                  <div className="absolute inset-0 bg-tlg-midnight/20 group-hover:bg-tlg-midnight/10 transition-colors"></div>
-                  <div className="absolute bottom-6 left-6 text-white">
-                    <span className="text-[10px] uppercase font-bold tracking-widest mb-1 block">Middle East HQ</span>
-                    <h3 className="text-3xl font-serif">Dubai, UAE</h3>
-                  </div>
-                </div>
-                <div className="p-10">
-                  <div className="flex items-start gap-4 mb-6">
-                    <MapPin className="text-tlg-signatureGold shrink-0 mt-1" size={18} />
-                    <p className="text-sm font-light text-gray-500 leading-relaxed">
-                      Level 42, Emirates Towers<br />
-                      Sheikh Zayed Road<br />
-                      Dubai, United Arab Emirates
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <Mail className="text-tlg-signatureGold shrink-0" size={18} />
-                    <a href="mailto:uae@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">uae@triumphallifetimegroup.com</a>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <Phone className="text-tlg-signatureGold shrink-0" size={18} />
-                    <p className="text-sm font-light text-tlg-midnight">+1 647 774 0409</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Hub 2: Toronto */}
-              <div className="bg-white border border-tlg-stone group hover:border-tlg-signatureGold transition-colors">
-                <div className="h-64 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2s]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517935706615-2717063c2225?q=80&w=2070&auto=format&fit=crop')" }}></div>
-                  <div className="absolute inset-0 bg-tlg-midnight/20 group-hover:bg-tlg-midnight/10 transition-colors"></div>
-                  <div className="absolute bottom-6 left-6 text-white">
-                    <span className="text-[10px] uppercase font-bold tracking-widest mb-1 block">North America HQ</span>
-                    <h3 className="text-3xl font-serif">Toronto, CA</h3>
-                  </div>
-                </div>
-                <div className="p-10">
-                  <div className="flex items-start gap-4 mb-6">
-                    <MapPin className="text-tlg-signatureGold shrink-0 mt-1" size={18} />
-                    <p className="text-sm font-light text-gray-500 leading-relaxed">
-                      First Canadian Place<br />
-                      100 King St W<br />
-                      Toronto, ON M5X 1A9, Canada
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <Mail className="text-tlg-signatureGold shrink-0" size={18} />
-                    <a href="mailto:ca@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">ca@triumphallifetimegroup.com</a>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <Phone className="text-tlg-signatureGold shrink-0" size={18} />
-                    <p className="text-sm font-light text-tlg-midnight">+1 647 774 0409</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Hub 3: Lagos */}
-              <div className="bg-white border border-tlg-stone group hover:border-tlg-signatureGold transition-colors">
-                <div className="h-64 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2s]" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1598257006458-087169a1f08d?q=80&w=2070&auto=format&fit=crop')" }}></div>
-                  <div className="absolute inset-0 bg-tlg-midnight/20 group-hover:bg-tlg-midnight/10 transition-colors"></div>
-                  <div className="absolute bottom-6 left-6 text-white">
-                    <span className="text-[10px] uppercase font-bold tracking-widest mb-1 block">West Africa HQ</span>
-                    <h3 className="text-3xl font-serif">Lagos, NG</h3>
-                  </div>
-                </div>
-                <div className="p-10">
-                  <div className="flex items-start gap-4 mb-6">
-                    <MapPin className="text-tlg-signatureGold shrink-0 mt-1" size={18} />
-                    <p className="text-sm font-light text-gray-500 leading-relaxed">
-                      Heritage Place<br />
-                      21 Lugard Ave, Ikoyi<br />
-                      Lagos, Nigeria
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <Mail className="text-tlg-signatureGold shrink-0" size={18} />
-                    <a href="mailto:ng@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">ng@triumphallifetimegroup.com</a>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <Phone className="text-tlg-signatureGold shrink-0" size={18} />
-                    <p className="text-sm font-light text-tlg-midnight">+1 647 774 0409</p>
-                  </div>
-                </div>
-              </div>
-
+            <div className="space-y-4 text-sm text-gray-500 font-light">
+              <p className="flex items-center gap-3"><Mail size={14} className="text-tlg-signatureGold shrink-0" /> info@triumphallifetimegroup.com</p>
             </div>
           </div>
-        </section>
 
-        {/* Global Directory / Departments */}
-        <section className="py-24 bg-white relative border-y border-tlg-stone">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-            <h2 className="text-3xl font-serif text-tlg-midnight mb-12 text-center">Global Directory</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div>
-                <span className="text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold block mb-2">Corporate Advisory</span>
-                <a href="mailto:advisory@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">advisory@triumphallifetimegroup.com</a>
+          {/* Right — Form */}
+          <div className="lg:col-span-3 bg-tlg-ivory border border-tlg-stone p-8 md:p-12">
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Full Name</label>
+                  <input type="text" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Email Address</label>
+                  <input type="email" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Phone (Optional)</label>
+                  <input type="tel" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Country</label>
+                  <input type="text" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
+                </div>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold block mb-2">Real Estate Acquisitions</span>
-                <a href="mailto:realestate@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">realestate@triumphallifetimegroup.com</a>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Division / Subject</label>
+                <select className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm">
+                  <option>HR &amp; Business Consulting</option>
+                  <option>Real Estate Advisory</option>
+                  <option>Global Mobility</option>
+                  <option>Education Advisory</option>
+                  <option>Information Technology</option>
+                  <option>Digital Products &amp; Learning</option>
+                  <option>Social Impact / Foundation</option>
+                  <option>General / Other</option>
+                </select>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold block mb-2">Legal & Compliance</span>
-                <a href="mailto:legal@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">legal@triumphallifetimegroup.com</a>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Message</label>
+                <textarea rows={5} className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm text-gray-600"></textarea>
               </div>
-              <div>
-                <span className="text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold block mb-2">Careers & HR</span>
-                <a href="mailto:careers@triumphallifetimegroup.com" className="text-sm font-light text-tlg-midnight hover:text-tlg-signatureGold transition-colors">careers@triumphallifetimegroup.com</a>
+              <div className="flex items-start gap-3">
+                <input type="checkbox" id="privacy" className="mt-1 accent-tlg-midnight" />
+                <label htmlFor="privacy" className="text-xs text-gray-500 font-light leading-relaxed">
+                  I agree to the processing of my personal data in accordance with the <Link href="/privacy" className="underline underline-offset-4 hover:text-tlg-signatureGold transition-colors">Privacy Policy</Link>.
+                </label>
               </div>
-            </div>
+              <button type="button" className="w-full bg-tlg-midnight text-white p-4 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-tlg-signatureGold transition-colors">
+                Send Message
+              </button>
+              <p className="text-center text-xs text-gray-400 italic">We aim to respond within two business days.</p>
+            </form>
           </div>
-        </section>
 
-        {/* Action Section / Booking Integration */}
-        <section className="py-32 bg-tlg-midnight relative flex flex-col items-center justify-center text-center">
-          <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-          <div className="max-w-3xl px-6 relative z-10">
-            <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest block mb-6">Structured Engagement</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-white mb-8">Schedule a Consultation</h2>
-            <p className="text-white/70 font-light leading-relaxed mb-12 text-lg">
-              To ensure the highest level of service, we require all new corporate and high-net-worth clients to submit an initial consultation request detailing their exact strategic requirements.
-            </p>
-            <Link href="/book" className="inline-flex items-center gap-4 bg-white text-tlg-midnight px-10 py-5 text-xs font-bold uppercase tracking-widest hover:bg-tlg-signatureGold hover:text-white transition-colors">
-              Access Booking Portal <ArrowRight size={14} />
-            </Link>
-          </div>
-        </section>
-
-      </main>
-      <Footer />
-    </>
+        </div>
+      </section>
+    </main>
   );
 }
