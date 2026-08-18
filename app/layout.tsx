@@ -33,6 +33,8 @@ export const metadata: Metadata = {
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AnimationProvider from "@/components/providers/AnimationProvider";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 export default function RootLayout({
   children,
@@ -41,12 +43,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${cormorant.variable} bg-tlg-ivory text-tlg-charcoal flex flex-col min-h-screen`}>
-        <Header />
-        <div className="flex-1">
-          {children}
-        </div>
-        <Footer />
+      <body className={`${manrope.variable} ${cormorant.variable} bg-tlg-ivory text-tlg-charcoal flex flex-col min-h-screen safe-pb md:pb-0`}>
+        <AnimationProvider>
+          <CustomCursor />
+          <Header />
+          <div className="flex-1">
+            {children}
+          </div>
+          <Footer />
+        </AnimationProvider>
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 };
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function GlobalPresencePage() {
@@ -36,10 +37,14 @@ export default function GlobalPresencePage() {
             
             {/* UAE */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-              <div className="md:col-span-5 bg-tlg-stone/20 aspect-square border border-tlg-stone p-12 flex flex-col justify-end">
-                <span className="text-4xl font-serif text-tlg-midnight/20 mb-auto">01</span>
-                <h3 className="text-4xl font-serif text-tlg-midnight mb-2">Dubai</h3>
-                <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold">United Arab Emirates</p>
+              <div className="md:col-span-5 relative aspect-square rounded-[24px] overflow-hidden p-12 flex flex-col justify-end group">
+                <Image src="/visuals/real-estate.jpg" alt="Dubai UAE" fill className="object-cover group-hover:scale-105 transition-transform duration-1000 z-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/40 to-transparent z-10" />
+                <div className="relative z-20 flex flex-col h-full">
+                  <span className="text-4xl font-serif text-white/50 mb-auto">01</span>
+                  <h3 className="text-4xl font-serif text-white mb-2">Dubai</h3>
+                  <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold">United Arab Emirates</p>
+                </div>
               </div>
               <div className="md:col-span-7 md:pl-12">
                 <h4 className="text-2xl font-serif text-tlg-midnight mb-6">The Commercial Nucleus</h4>
@@ -63,19 +68,27 @@ export default function GlobalPresencePage() {
                   Contact Nigeria Office <ArrowRight size={14} className="ml-2" />
                 </Link>
               </div>
-              <div className="md:col-span-5 bg-tlg-stone/20 aspect-square border border-tlg-stone p-12 flex flex-col justify-end md:order-2 order-1">
-                <span className="text-4xl font-serif text-tlg-midnight/20 mb-auto">02</span>
-                <h3 className="text-4xl font-serif text-tlg-midnight mb-2">Lagos</h3>
-                <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold">Nigeria</p>
+              <div className="md:col-span-5 relative aspect-square rounded-[24px] overflow-hidden p-12 flex flex-col justify-end md:order-2 order-1 group">
+                <Image src="/visuals/global-mobility.jpg" alt="Lagos Nigeria" fill className="object-cover group-hover:scale-105 transition-transform duration-1000 z-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/40 to-transparent z-10" />
+                <div className="relative z-20 flex flex-col h-full">
+                  <span className="text-4xl font-serif text-white/50 mb-auto">02</span>
+                  <h3 className="text-4xl font-serif text-white mb-2">Lagos</h3>
+                  <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold">Nigeria</p>
+                </div>
               </div>
             </div>
 
             {/* Canada */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-              <div className="md:col-span-5 bg-tlg-stone/20 aspect-square border border-tlg-stone p-12 flex flex-col justify-end">
-                <span className="text-4xl font-serif text-tlg-midnight/20 mb-auto">03</span>
-                <h3 className="text-4xl font-serif text-tlg-midnight mb-2">Toronto</h3>
-                <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold">Canada</p>
+              <div className="md:col-span-5 relative aspect-square rounded-[24px] overflow-hidden p-12 flex flex-col justify-end group">
+                <Image src="/visuals/education.jpg" alt="Toronto Canada" fill className="object-cover group-hover:scale-105 transition-transform duration-1000 z-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/40 to-transparent z-10" />
+                <div className="relative z-20 flex flex-col h-full">
+                  <span className="text-4xl font-serif text-white/50 mb-auto">03</span>
+                  <h3 className="text-4xl font-serif text-white mb-2">Toronto</h3>
+                  <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold">Canada</p>
+                </div>
               </div>
               <div className="md:col-span-7 md:pl-12">
                 <h4 className="text-2xl font-serif text-tlg-midnight mb-6">The North American Bridge</h4>

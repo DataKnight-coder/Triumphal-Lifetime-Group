@@ -24,6 +24,25 @@
   .clip-path-reveal {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
+  
+  /* Mobile UI Specific Utilities */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .safe-pb {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 20px));
+  }
+  
+  .text-fluid-hero {
+    font-size: clamp(2.6rem, 12vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
 }
 
 /* Premium Animations */

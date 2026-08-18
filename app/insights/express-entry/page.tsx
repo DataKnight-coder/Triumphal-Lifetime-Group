@@ -1,13 +1,10 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Share2, Linkedin, Twitter } from "lucide-react";
 
 export default function ExpressEntryReport() {
   return (
     <>
-      <Header />
-      <main className="bg-tlg-ivory">
+            <main className="bg-tlg-ivory">
         
         {/* Editorial Hero */}
         <section className="relative pt-40 pb-24 md:pt-48 md:pb-32 bg-tlg-midnight border-b border-tlg-stone">
@@ -139,7 +136,6 @@ export default function ExpressEntryReport() {
         </section>
 
       </main>
-      <Footer />
-    </>
+          </>
   );
 }

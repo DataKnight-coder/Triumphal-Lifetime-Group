@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 };
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function CompaniesDirectoryPage() {
@@ -28,71 +29,114 @@ export default function CompaniesDirectoryPage() {
       <section className="py-24 bg-white">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12">
           
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <Link href="/solutions/hr-consulting" className="group bg-tlg-ivory border border-tlg-stone p-12 flex flex-col hover:border-tlg-midnight transition-colors min-h-[400px]">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">01</span>
-              <h3 className="text-3xl font-serif text-tlg-midnight mb-6">HR & Business Consulting</h3>
-              <p className="text-gray-600 font-light leading-relaxed mb-auto">
-                Workforce engineering, executive search, and corporate governance for expanding enterprises.
-              </p>
-              <div className="mt-8 pt-6 border-t border-tlg-stone flex items-center text-xs font-bold uppercase tracking-widest text-tlg-midnight">
-                View Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+            {/* HR */}
+            <Link href="/solutions/hr-consulting" data-cursor="card" data-cursor-text="VIEW" className="group relative overflow-hidden rounded-[24px] bg-tlg-ivory min-h-[400px] flex flex-col justify-end p-8">
+              <Image src="/visuals/hr.jpg" alt="HR Consulting" fill className="object-cover group-hover:scale-105 transition-transform duration-700 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/60 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="absolute top-8 left-8 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-sm z-20 border border-white/20">Consulting</span>
+              
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-serif text-white mb-4">HR & Business Consulting</h3>
+                <p className="text-white/80 font-light text-sm leading-relaxed mb-6">
+                  Workforce engineering, executive search, and corporate governance for expanding enterprises.
+                </p>
+                <div className="pt-6 border-t border-white/20 flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                  Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </div>
               </div>
             </Link>
 
-            <Link href="/solutions/real-estate" className="group bg-tlg-ivory border border-tlg-stone p-12 flex flex-col hover:border-tlg-midnight transition-colors min-h-[400px]">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">02</span>
-              <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Real Estate Advisory</h3>
-              <p className="text-gray-600 font-light leading-relaxed mb-auto">
-                Strategic property acquisition planning and international facility management.
-              </p>
-              <div className="mt-8 pt-6 border-t border-tlg-stone flex items-center text-xs font-bold uppercase tracking-widest text-tlg-midnight">
-                View Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+            {/* Real Estate */}
+            <Link href="/solutions/real-estate" data-cursor="card" data-cursor-text="VIEW" className="group relative overflow-hidden rounded-[24px] bg-tlg-ivory min-h-[400px] flex flex-col justify-end p-8">
+              <Image src="/visuals/real-estate.jpg" alt="Real Estate" fill className="object-cover group-hover:scale-105 transition-transform duration-700 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/60 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="absolute top-8 left-8 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-sm z-20 border border-white/20">Real Estate</span>
+              
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-serif text-white mb-4">Real Estate Advisory</h3>
+                <p className="text-white/80 font-light text-sm leading-relaxed mb-6">
+                  Strategic property acquisition planning and international facility management.
+                </p>
+                <div className="pt-6 border-t border-white/20 flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                  Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </div>
               </div>
             </Link>
 
-            <Link href="/solutions/education" className="group bg-tlg-ivory border border-tlg-stone p-12 flex flex-col hover:border-tlg-midnight transition-colors min-h-[400px]">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">03</span>
-              <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Education Advisory</h3>
-              <p className="text-gray-600 font-light leading-relaxed mb-auto">
-                Strategic academic planning and global institutional partnerships.
-              </p>
-              <div className="mt-8 pt-6 border-t border-tlg-stone flex items-center text-xs font-bold uppercase tracking-widest text-tlg-midnight">
-                View Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+            {/* Education */}
+            <Link href="/solutions/education" data-cursor="card" data-cursor-text="VIEW" className="group relative overflow-hidden rounded-[24px] bg-tlg-ivory min-h-[400px] flex flex-col justify-end p-8">
+              <Image src="/visuals/education.jpg" alt="Education" fill className="object-cover group-hover:scale-105 transition-transform duration-700 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/60 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="absolute top-8 left-8 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-sm z-20 border border-white/20">Education</span>
+              
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-serif text-white mb-4">Education Advisory</h3>
+                <p className="text-white/80 font-light text-sm leading-relaxed mb-6">
+                  Strategic academic planning and global institutional partnerships.
+                </p>
+                <div className="pt-6 border-t border-white/20 flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                  Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </div>
               </div>
             </Link>
 
-            <Link href="/solutions/global-mobility" className="group bg-tlg-ivory border border-tlg-stone p-12 flex flex-col hover:border-tlg-midnight transition-colors min-h-[400px]">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">04</span>
-              <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Global Mobility</h3>
-              <p className="text-gray-600 font-light leading-relaxed mb-auto">
-                Corporate relocation logistics and cross-border administrative processing.
-              </p>
-              <div className="mt-8 pt-6 border-t border-tlg-stone flex items-center text-xs font-bold uppercase tracking-widest text-tlg-midnight">
-                View Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+            {/* Global Mobility */}
+            <Link href="/solutions/global-mobility" data-cursor="card" data-cursor-text="VIEW" className="group relative overflow-hidden rounded-[24px] bg-tlg-ivory min-h-[400px] flex flex-col justify-end p-8">
+              <Image src="/visuals/global-mobility.jpg" alt="Mobility" fill className="object-cover group-hover:scale-105 transition-transform duration-700 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/60 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="absolute top-8 left-8 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-sm z-20 border border-white/20">Mobility</span>
+              
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-serif text-white mb-4">Global Mobility</h3>
+                <p className="text-white/80 font-light text-sm leading-relaxed mb-6">
+                  Corporate relocation logistics and cross-border administrative processing.
+                </p>
+                <div className="pt-6 border-t border-white/20 flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                  Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </div>
               </div>
             </Link>
 
-            <Link href="/solutions/digital-learning" className="group bg-tlg-ivory border border-tlg-stone p-12 flex flex-col hover:border-tlg-midnight transition-colors min-h-[400px]">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">05</span>
-              <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Digital Learning</h3>
-              <p className="text-gray-600 font-light leading-relaxed mb-auto">
-                Scalable learning platforms and professional capability building.
-              </p>
-              <div className="mt-8 pt-6 border-t border-tlg-stone flex items-center text-xs font-bold uppercase tracking-widest text-tlg-midnight">
-                View Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+            {/* Digital Learning */}
+            <Link href="/solutions/digital-learning" data-cursor="card" data-cursor-text="VIEW" className="group relative overflow-hidden rounded-[24px] bg-tlg-ivory min-h-[400px] flex flex-col justify-end p-8">
+              <Image src="/visuals/digital-learning.jpg" alt="Digital" fill className="object-cover group-hover:scale-105 transition-transform duration-700 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/60 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="absolute top-8 left-8 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-sm z-20 border border-white/20">Digital</span>
+              
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-serif text-white mb-4">Digital Learning</h3>
+                <p className="text-white/80 font-light text-sm leading-relaxed mb-6">
+                  Scalable learning platforms and professional capability building.
+                </p>
+                <div className="pt-6 border-t border-white/20 flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                  Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </div>
               </div>
             </Link>
 
-            <Link href="/solutions/technology" className="group bg-tlg-ivory border border-tlg-stone p-12 flex flex-col hover:border-tlg-midnight transition-colors min-h-[400px]">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">06</span>
-              <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Information Technology</h3>
-              <p className="text-gray-600 font-light leading-relaxed mb-auto">
-                Enterprise systems integration and strategic digital transformation.
-              </p>
-              <div className="mt-8 pt-6 border-t border-tlg-stone flex items-center text-xs font-bold uppercase tracking-widest text-tlg-midnight">
-                View Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+            {/* Technology */}
+            <Link href="/solutions/technology" data-cursor="card" data-cursor-text="VIEW" className="group relative overflow-hidden rounded-[24px] bg-tlg-ivory min-h-[400px] flex flex-col justify-end p-8">
+              <Image src="/visuals/technology.jpg" alt="Technology" fill className="object-cover group-hover:scale-105 transition-transform duration-700 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight via-tlg-midnight/60 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="absolute top-8 left-8 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-sm z-20 border border-white/20">Technology</span>
+              
+              <div className="relative z-20 mt-auto">
+                <h3 className="text-2xl font-serif text-white mb-4">Information Technology</h3>
+                <p className="text-white/80 font-light text-sm leading-relaxed mb-6">
+                  Enterprise systems integration and strategic digital transformation.
+                </p>
+                <div className="pt-6 border-t border-white/20 flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                  Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                </div>
               </div>
             </Link>
 

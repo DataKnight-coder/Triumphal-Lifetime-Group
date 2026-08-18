@@ -5,16 +5,13 @@ export const metadata: Metadata = {
   description: "Driving sustainable change through the Triumphal Lifetime Charity Foundation.",
 };
 
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { ArrowRight, Heart } from "lucide-react";
 
 export default function CharityFoundation() {
   return (
     <>
-      <Header />
-      <main className="bg-white">
+            <main className="bg-white">
         
         {/* Cinematic Light Hero */}
         <section className="relative min-h-[85vh] w-full flex flex-col justify-end overflow-hidden bg-[#f4ece3] pt-32 pb-24">
@@ -167,7 +164,6 @@ export default function CharityFoundation() {
         </section>
 
       </main>
-      <Footer />
-    </>
+          </>
   );
 }

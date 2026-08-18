@@ -1,13 +1,10 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Partners() {
   return (
     <>
-      <Header />
-      <main className="bg-tlg-ivory">
+            <main className="bg-tlg-ivory">
         
         <section className="relative pt-48 pb-32 w-full bg-tlg-midnight">
           <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10">
@@ -79,7 +76,6 @@ export default function Partners() {
         </section>
 
       </main>
-      <Footer />
-    </>
+          </>
   );
 }
