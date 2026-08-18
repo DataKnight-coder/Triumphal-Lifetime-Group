@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  
+  body {
+    @apply bg-tlg-ivory text-tlg-charcoal font-sans antialiased overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-tlg-midnight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .clip-path-reveal {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* Premium Animations */
+@keyframes revealUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes drawLine {
+  0% { width: 0; opacity: 0; }
+  100% { width: 100%; opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-reveal-up {
+  animation: revealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-reveal-up-delayed {
+  opacity: 0;
+  animation: revealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+.animate-reveal-up-delayed-2 {
+  opacity: 0;
+  animation: revealUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s ease-out infinite alternate;
+}
+
+.animate-draw-line {
+  animation: drawLine 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.hover-trigger:hover .hover-zoom {
+  transform: scale(1.05);
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #CE9129 0%, #F7CB64 50%, #CE9129 100%);
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite linear;
+  color: transparent;
+  -webkit-background-clip: text;
+}
