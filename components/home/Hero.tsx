@@ -29,13 +29,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center gap-6 mb-16 animate-reveal-up-delayed-more w-full sm:w-auto">
             <Link 
               href="/book" 
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-tlg-midnight text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-tlg-signatureGold transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-tlg-midnight text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-tlg-signatureGold transition-colors"
             >
               Book a Consultation
             </Link>
             <Link 
               href="/companies" 
-              className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent border border-tlg-stone text-tlg-midnight px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:border-tlg-midnight transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center bg-transparent border border-tlg-stone text-tlg-midnight px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:border-tlg-midnight transition-colors"
             >
               Explore Our Companies
             </Link>
@@ -55,8 +55,9 @@ export default function Hero() {
 
         {/* Right: Premium Imagery */}
         <div className="lg:col-span-6 hidden lg:block h-full min-h-[600px] relative animate-reveal-up-delayed">
+          {/* Organic Shape Image Container */}
           <div 
-            className="absolute inset-0 bg-cover bg-center rounded-sm shadow-xl"
+            className="absolute inset-0 bg-cover bg-center shadow-xl rounded-[40px] rounded-tl-[120px] rounded-br-[120px] border-[8px] border-white/50"
             style={{ backgroundImage: "url('/images/hero.jpg')" }}
           ></div>
         </div>

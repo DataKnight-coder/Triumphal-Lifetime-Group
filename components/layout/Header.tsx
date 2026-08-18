@@ -134,7 +134,7 @@ export default function Header() {
           <div className="relative z-[60] flex items-center gap-6">
             <Link 
               href="/book" 
-              className="hidden md:inline-flex items-center justify-center bg-tlg-midnight text-white px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-tlg-signatureGold transition-colors"
+              className="hidden md:inline-flex items-center justify-center bg-tlg-midnight text-white px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-tlg-signatureGold transition-colors"
             >
               Book a Consultation
             </Link>
@@ -180,7 +180,7 @@ export default function Header() {
             <Link 
               href="/book" 
               onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex w-full items-center justify-center bg-tlg-midnight text-white px-8 py-4 text-xs font-bold uppercase tracking-widest"
+              className="inline-flex w-full items-center justify-center bg-tlg-midnight text-white px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-full hover:bg-tlg-signatureGold transition-colors"
             >
               Book a Consultation
             </Link>

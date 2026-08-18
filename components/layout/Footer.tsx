@@ -75,14 +75,14 @@ export default function Footer() {
             <p className="text-white/60 font-light leading-relaxed mb-6 text-sm">
               Subscribe to our insights on international mobility, business growth, and market opportunities.
             </p>
-            <form className="flex border-b border-white/30 focus-within:border-tlg-signatureGold transition-colors pb-2 mb-10">
+            <form className="flex items-center bg-white/5 rounded-full border border-white/10 focus-within:border-tlg-signatureGold focus-within:bg-white/10 transition-all p-1 pl-5 mb-10 group">
               <input 
                 type="email" 
                 placeholder="Email address" 
-                className="bg-transparent border-none outline-none w-full text-white placeholder:text-white/30 text-sm font-light"
+                className="bg-transparent border-none outline-none w-full text-white placeholder:text-white/40 text-sm font-light py-2"
                 required
               />
-              <button type="submit" className="text-white hover:text-tlg-signatureGold transition-colors pl-4 shrink-0">
+              <button type="submit" className="w-10 h-10 rounded-full bg-white/10 group-focus-within:bg-tlg-signatureGold flex items-center justify-center text-white group-focus-within:text-tlg-midnight hover:bg-white transition-colors shrink-0">
                 <ArrowRight size={16} />
               </button>
             </form>

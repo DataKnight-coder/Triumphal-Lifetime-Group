@@ -17,23 +17,21 @@ export default function Home() {
       {/* 02 - Light Editorial Hero */}
       <Hero />
       
-      {/* 03 - Group Positioning */}
-      <section className="py-24 md:py-32 bg-white relative border-b border-tlg-stone">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[400px] md:h-[500px] w-full rounded-[20px] overflow-hidden shadow-2xl">
-              <Image src="/visuals/homepage_hero.jpg" alt="Triumphal Lifetime Group" fill className="object-cover hover:scale-105 transition-transform duration-700" />
-            </div>
-            <div>
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">The Power of Synergy</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-tlg-midnight mb-6">One Group. Multiple Solutions.</h2>
-              <p className="text-lg text-gray-600 font-light leading-relaxed mb-6">
-                Modern challenges rarely fit into one category. That is why Triumphal Lifetime Group brings complementary expertise together within one business ecosystem.
-              </p>
-              <p className="text-lg text-gray-600 font-light leading-relaxed">
-                Whether you are building a stronger organisation, exploring property opportunities, pursuing international education, or adopting technology, our specialist teams provide structured support from beginning to execution.
-              </p>
-            </div>
+      {/* 02 - Brand Statement */}
+      <section className="py-24 md:py-32 bg-white relative">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 text-center mb-16 md:mb-24">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8">
+            Modern challenges rarely fit into one category. That is why Triumphal Lifetime Group brings complementary expertise together within one business ecosystem.
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
+            Whether you are building a stronger organisation, exploring property opportunities, pursuing international education, or adopting technology, our specialist teams provide structured support from beginning to execution.
+          </p>
+        </div>
+        
+        {/* Panoramic rounded image */}
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12">
+          <div className="relative h-[300px] md:h-[500px] w-full rounded-[40px] overflow-hidden shadow-2xl">
+            <Image src="/visuals/homepage_hero.jpg" alt="Triumphal Lifetime Group" fill className="object-cover hover:scale-105 transition-transform duration-1000" />
           </div>
         </div>
       </section>
@@ -41,171 +39,183 @@ export default function Home() {
       {/* 04 - Smart Need Finder */}
       <SmartNeedFinder />
       
-      {/* 05 - Our Companies (6 Clean Editorial Cards) */}
-      <section className="py-24 md:py-32 bg-tlg-ivory relative">
+      {/* 03 - Triumphal Ecosystem */}
+      <section className="py-24 md:py-32 bg-tlg-emerald relative">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-          <div className="mb-16">
-            <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">Our Companies</span>
-            <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">An Integrated Business Ecosystem</h2>
+          <div className="mb-16 flex flex-col items-center text-center">
+            <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">Our Ecosystem</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6">An Integrated Advantage</h2>
+            <p className="text-white/70 font-light max-w-2xl mx-auto text-lg">Explore our specialized divisions, each built to deliver premium advisory and operational support.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* HR & Consulting */}
-            <Link href="/solutions/hr-consulting" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-midnight transition-colors flex flex-col h-full">
+            {/* HR */}
+            <Link href="/solutions/hr-consulting" className="group bg-tlg-ivory p-8 rounded-[24px] hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full overflow-hidden relative">
+              <span className="absolute top-8 left-8 bg-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-tlg-midnight shadow-sm z-10">Consulting</span>
+              <div className="relative h-48 w-full rounded-[16px] overflow-hidden mb-8 mt-12">
+                 <Image src="/visuals/hr.jpg" alt="HR" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
               <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Human Resources & Business Consulting</h3>
-              <p className="text-gray-600 font-light text-sm leading-relaxed mb-10 flex-1">
-                Building stronger organisations through HR advisory, organisational development, talent solutions, workforce strategy and business consulting.
+              <p className="text-gray-600 font-light text-sm leading-relaxed mb-8 flex-1">
+                Building stronger organisations through HR advisory, organisational development, and workforce strategy.
               </p>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
-                Explore HR & Consulting <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
             
             {/* Real Estate */}
-            <Link href="/solutions/real-estate" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-midnight transition-colors flex flex-col h-full">
-              <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Real Estate</h3>
-              <p className="text-gray-600 font-light text-sm leading-relaxed mb-10 flex-1">
-                Supporting clients with informed property sourcing, investment support, market research and real estate advisory.
+            <Link href="/solutions/real-estate" className="group bg-tlg-ivory p-8 rounded-[24px] hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full overflow-hidden relative">
+              <span className="absolute top-8 left-8 bg-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-tlg-midnight shadow-sm z-10">Real Estate</span>
+              <div className="relative h-48 w-full rounded-[16px] overflow-hidden mb-8 mt-12">
+                 <Image src="/visuals/real-estate.jpg" alt="Real Estate" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
+              <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Real Estate Advisory</h3>
+              <p className="text-gray-600 font-light text-sm leading-relaxed mb-8 flex-1">
+                Supporting clients with informed property sourcing, investment support, and real estate advisory.
               </p>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
-                Explore Real Estate <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
 
             {/* Education */}
-            <Link href="/solutions/education" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-midnight transition-colors flex flex-col h-full">
-              <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Education</h3>
-              <p className="text-gray-600 font-light text-sm leading-relaxed mb-10 flex-1">
-                Helping students and professionals identify educational opportunities aligned with their academic, career and international goals.
+            <Link href="/solutions/education" className="group bg-tlg-ivory p-8 rounded-[24px] hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full overflow-hidden relative">
+              <span className="absolute top-8 left-8 bg-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-tlg-midnight shadow-sm z-10">Education</span>
+              <div className="relative h-48 w-full rounded-[16px] overflow-hidden mb-8 mt-12">
+                 <Image src="/visuals/education.jpg" alt="Education" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
+              <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Education Advisory</h3>
+              <p className="text-gray-600 font-light text-sm leading-relaxed mb-8 flex-1">
+                Helping students and professionals identify educational opportunities aligned with their global goals.
               </p>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
-                Explore Education <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
 
             {/* Global Mobility */}
-            <Link href="/solutions/global-mobility" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-midnight transition-colors flex flex-col h-full">
+            <Link href="/solutions/global-mobility" className="group bg-tlg-ivory p-8 rounded-[24px] hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full overflow-hidden relative">
+              <span className="absolute top-8 left-8 bg-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-tlg-midnight shadow-sm z-10">Mobility</span>
+              <div className="relative h-48 w-full rounded-[16px] overflow-hidden mb-8 mt-12">
+                 <Image src="/visuals/global-mobility.jpg" alt="Mobility" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
               <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Global Mobility & Immigration</h3>
-              <p className="text-gray-600 font-light text-sm leading-relaxed mb-10 flex-1">
-                Providing structured administrative and advisory support for international mobility while working within applicable regulatory requirements.
+              <p className="text-gray-600 font-light text-sm leading-relaxed mb-8 flex-1">
+                Providing structured administrative and advisory support for international mobility.
               </p>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
-                Explore Global Mobility <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
 
-            {/* Digital Products & Learning */}
-            <Link href="/solutions/digital-learning" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-midnight transition-colors flex flex-col h-full">
+            {/* Digital Learning */}
+            <Link href="/solutions/digital-learning" className="group bg-tlg-ivory p-8 rounded-[24px] hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full overflow-hidden relative">
+              <span className="absolute top-8 left-8 bg-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-tlg-midnight shadow-sm z-10">Digital</span>
+              <div className="relative h-48 w-full rounded-[16px] overflow-hidden mb-8 mt-12">
+                 <Image src="/visuals/digital-learning.jpg" alt="Digital Learning" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
               <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Digital Products & Learning</h3>
-              <p className="text-gray-600 font-light text-sm leading-relaxed mb-10 flex-1">
-                Creating practical digital resources, professional development programmes and learning solutions for individuals and organisations.
+              <p className="text-gray-600 font-light text-sm leading-relaxed mb-8 flex-1">
+                Creating practical digital resources and professional development programmes.
               </p>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
-                Explore Digital Learning <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
 
-            {/* Information Technology */}
-            <Link href="/solutions/technology" className="group bg-white p-12 border border-tlg-stone hover:border-tlg-midnight transition-colors flex flex-col h-full">
+            {/* IT */}
+            <Link href="/solutions/technology" className="group bg-tlg-ivory p-8 rounded-[24px] hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full overflow-hidden relative">
+              <span className="absolute top-8 left-8 bg-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase text-tlg-midnight shadow-sm z-10">Technology</span>
+              <div className="relative h-48 w-full rounded-[16px] overflow-hidden mb-8 mt-12">
+                 <Image src="/visuals/technology.jpg" alt="IT" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              </div>
               <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Information Technology</h3>
-              <p className="text-gray-600 font-light text-sm leading-relaxed mb-10 flex-1">
-                Supporting businesses with technology solutions designed to improve efficiency, digital operations and sustainable growth.
+              <p className="text-gray-600 font-light text-sm leading-relaxed mb-8 flex-1">
+                Supporting businesses with technology solutions designed to improve digital operations.
               </p>
               <span className="text-xs font-bold uppercase tracking-[0.15em] text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
-                Explore Technology <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
+                Explore Division <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 06 - Global Presence */}
-      <section className="py-24 md:py-32 bg-white relative border-y border-tlg-stone">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-            <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight max-w-2xl">
-              An International Perspective.<br />
-              <span className="italic font-light text-gray-500">Connected Opportunities.</span>
-            </h2>
-            <p className="text-gray-600 font-light mt-6 md:mt-0 max-w-md">
-              We understand the complexities and opportunities associated with operating, studying, and investing across different markets.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border-l border-tlg-stone pl-8 py-4">
-              <h3 className="text-2xl font-serif text-tlg-midnight mb-3">Nigeria</h3>
-              <p className="text-sm text-gray-500 font-light leading-relaxed">Strategic hub for entrepreneurship, talent acquisition, and emerging-market expansion.</p>
-            </div>
-            <div className="border-l border-tlg-stone pl-8 py-4">
-              <h3 className="text-2xl font-serif text-tlg-midnight mb-3">United Arab Emirates</h3>
-              <p className="text-sm text-gray-500 font-light leading-relaxed">Commercial nucleus for international commerce, real estate investment, and global connectivity.</p>
-            </div>
-            <div className="border-l border-tlg-stone pl-8 py-4">
-              <h3 className="text-2xl font-serif text-tlg-midnight mb-3">Canada</h3>
-              <p className="text-sm text-gray-500 font-light leading-relaxed">North American bridge for education pathways, professional development, and mobility.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 07 - Why Triumphal Lifetime? */}
+      {/* 04 - What Makes TLG Different */}
       <section className="py-24 md:py-32 bg-tlg-ivory">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight mb-6">Why Triumphal Lifetime?</h2>
-        </div>
-        
-        <div className="max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div>
-            <h4 className="text-lg font-serif text-tlg-midnight mb-3 border-b border-tlg-stone pb-3">Integrated Expertise</h4>
-            <p className="text-sm text-gray-600 font-light leading-relaxed">Access complementary professional services through one connected business ecosystem.</p>
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16">
+          <div className="lg:w-1/3">
+            <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">The TLG Difference</span>
+            <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight mb-6 leading-tight">Expertise that Connects and Scales</h2>
+            <p className="text-gray-600 font-light leading-relaxed mb-8">
+              We move beyond isolated services to provide a holistic ecosystem. Our integrated approach ensures that every strategy aligns with your overarching goals.
+            </p>
+            <Link href="/about" className="inline-flex items-center justify-center bg-transparent border border-tlg-midnight text-tlg-midnight px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-tlg-midnight hover:text-white transition-colors">
+              Our Story
+            </Link>
           </div>
-          <div>
-            <h4 className="text-lg font-serif text-tlg-midnight mb-3 border-b border-tlg-stone pb-3">Client-Centred</h4>
-            <p className="text-sm text-gray-600 font-light leading-relaxed">Every engagement begins with understanding your objectives, circumstances and priorities.</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-serif text-tlg-midnight mb-3 border-b border-tlg-stone pb-3">Structured Delivery</h4>
-            <p className="text-sm text-gray-600 font-light leading-relaxed">Our approach prioritises clarity, professionalism, documentation and measurable objectives.</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-serif text-tlg-midnight mb-3 border-b border-tlg-stone pb-3">Long-Term Value</h4>
-            <p className="text-sm text-gray-600 font-light leading-relaxed">We seek to build relationships and solutions that remain valuable beyond a single transaction.</p>
+          
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white p-10 rounded-[24px] shadow-sm flex flex-col justify-center">
+              <h4 className="text-xl font-serif text-tlg-midnight mb-3">Global Reach</h4>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">Operating across Nigeria, UAE, and Canada, giving you access to strategic international markets.</p>
+            </div>
+            <div className="bg-white p-10 rounded-[24px] shadow-sm flex flex-col justify-center md:translate-y-8">
+              <h4 className="text-xl font-serif text-tlg-midnight mb-3">Integrated Ecosystem</h4>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">Access complementary professional services—from real estate to IT—through one connected group.</p>
+            </div>
+            <div className="bg-white p-10 rounded-[24px] shadow-sm flex flex-col justify-center">
+              <h4 className="text-xl font-serif text-tlg-midnight mb-3">Community Impact</h4>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">Committed to sustainable business practices and supporting education through our Charity Foundation.</p>
+            </div>
+            <div className="bg-white p-10 rounded-[24px] shadow-sm flex flex-col justify-center md:translate-y-8">
+              <h4 className="text-xl font-serif text-tlg-midnight mb-3">Measurable Results</h4>
+              <p className="text-sm text-gray-600 font-light leading-relaxed">Our structured approach prioritises clarity, professionalism, and delivering long-term value.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 08 - Our Approach */}
-      <section className="py-24 md:py-32 bg-tlg-midnight text-white text-center">
+      {/* 05 - Our Approach */}
+      <section className="py-24 md:py-32 bg-white">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">Methodology</span>
-          <h2 className="text-3xl md:text-5xl font-serif mb-16">Our Approach</h2>
+          <div className="text-center mb-16">
+            <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">Methodology</span>
+            <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Our Approach</h2>
+          </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 relative">
-            <div className="hidden md:block absolute top-6 left-[10%] right-[10%] h-[1px] bg-white/20 z-0"></div>
-            
-            <div className="relative z-10 flex flex-col items-center">
-              <span className="w-12 h-12 rounded-full bg-tlg-midnight border-2 border-tlg-signatureGold flex items-center justify-center text-sm font-bold mb-6">01</span>
-              <h4 className="text-xl font-serif mb-3">Understand</h4>
-              <p className="text-xs text-white/70 font-light leading-relaxed max-w-[200px]">We begin by understanding your goals, challenges and desired outcomes.</p>
+          <div className="flex flex-col">
+            <div className="flex flex-col md:flex-row gap-8 items-start py-8 border-t border-tlg-signatureGold/30 hover:bg-tlg-ivory transition-colors px-6 rounded-[24px]">
+              <span className="text-4xl font-serif text-tlg-signatureGold w-16 shrink-0">01</span>
+              <div>
+                <h4 className="text-2xl font-serif text-tlg-midnight mb-3">Understand</h4>
+                <p className="text-gray-600 font-light leading-relaxed">We begin by understanding your goals, challenges and desired outcomes.</p>
+              </div>
             </div>
             
-            <div className="relative z-10 flex flex-col items-center">
-              <span className="w-12 h-12 rounded-full bg-tlg-midnight border-2 border-tlg-signatureGold flex items-center justify-center text-sm font-bold mb-6">02</span>
-              <h4 className="text-xl font-serif mb-3">Strategise</h4>
-              <p className="text-xs text-white/70 font-light leading-relaxed max-w-[200px]">We develop a practical pathway appropriate to your circumstances.</p>
+            <div className="flex flex-col md:flex-row gap-8 items-start py-8 border-t border-tlg-signatureGold/30 hover:bg-tlg-ivory transition-colors px-6 rounded-[24px]">
+              <span className="text-4xl font-serif text-tlg-signatureGold w-16 shrink-0">02</span>
+              <div>
+                <h4 className="text-2xl font-serif text-tlg-midnight mb-3">Strategise</h4>
+                <p className="text-gray-600 font-light leading-relaxed">We develop a practical pathway and tailored framework appropriate to your circumstances.</p>
+              </div>
             </div>
             
-            <div className="relative z-10 flex flex-col items-center">
-              <span className="w-12 h-12 rounded-full bg-tlg-midnight border-2 border-tlg-signatureGold flex items-center justify-center text-sm font-bold mb-6">03</span>
-              <h4 className="text-xl font-serif mb-3">Execute</h4>
-              <p className="text-xs text-white/70 font-light leading-relaxed max-w-[200px]">Our specialists support implementation with defined responsibilities.</p>
+            <div className="flex flex-col md:flex-row gap-8 items-start py-8 border-t border-tlg-signatureGold/30 hover:bg-tlg-ivory transition-colors px-6 rounded-[24px]">
+              <span className="text-4xl font-serif text-tlg-signatureGold w-16 shrink-0">03</span>
+              <div>
+                <h4 className="text-2xl font-serif text-tlg-midnight mb-3">Execute</h4>
+                <p className="text-gray-600 font-light leading-relaxed">Our specialists support seamless implementation with clearly defined responsibilities.</p>
+              </div>
             </div>
             
-            <div className="relative z-10 flex flex-col items-center">
-              <span className="w-12 h-12 rounded-full bg-tlg-midnight border-2 border-tlg-signatureGold flex items-center justify-center text-sm font-bold mb-6">04</span>
-              <h4 className="text-xl font-serif mb-3">Review</h4>
-              <p className="text-xs text-white/70 font-light leading-relaxed max-w-[200px]">We evaluate progress and identify opportunities for continued improvement.</p>
+            <div className="flex flex-col md:flex-row gap-8 items-start py-8 border-t border-tlg-signatureGold/30 hover:bg-tlg-ivory transition-colors px-6 rounded-[24px]">
+              <span className="text-4xl font-serif text-tlg-signatureGold w-16 shrink-0">04</span>
+              <div>
+                <h4 className="text-2xl font-serif text-tlg-midnight mb-3">Review</h4>
+                <p className="text-gray-600 font-light leading-relaxed">We evaluate progress and continuously identify opportunities for improvement.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -235,37 +245,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10 - Social Impact */}
-      <section className="py-24 md:py-32 bg-tlg-ivory border-t border-tlg-stone">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-4 block">Triumphal Lifetime Charity Foundation</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-tlg-midnight mb-6">Success That Extends Beyond Business</h2>
-              <p className="text-lg text-gray-600 font-light leading-relaxed mb-10">
-                We believe sustainable business should contribute to stronger people and communities. Through the Group’s social-impact initiatives, we seek opportunities to support education, employability, entrepreneurship, and community advancement.
-              </p>
-              <Link href="/impact" className="inline-flex items-center justify-center bg-transparent border border-tlg-midnight text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-tlg-midnight hover:text-white transition-colors">
-                Discover Our Impact
-              </Link>
-            </div>
-            <div className="order-1 lg:order-2 relative h-[400px] md:h-[500px] w-full rounded-[20px] overflow-hidden shadow-2xl">
-              <Image src="/visuals/social_impact.jpg" alt="Social Impact Initiatives" fill className="object-cover hover:scale-105 transition-transform duration-700" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* 12 - Final CTA */}
-      <section className="py-32 bg-tlg-midnight text-white text-center">
-        <div className="max-w-[800px] mx-auto px-6 md:px-12">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-10">Your Next Chapter Starts With a Conversation.</h2>
+      {/* 07 - Final CTA */}
+      <section className="py-32 bg-tlg-midnight relative overflow-hidden">
+        {/* Subtle Emerald glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-tlg-emerald opacity-20 blur-[100px] rounded-full pointer-events-none"></div>
+        
+        <div className="max-w-[800px] mx-auto px-6 md:px-12 text-center relative z-10">
+          <span className="text-tlg-signatureGold text-[10px] uppercase font-bold tracking-[0.2em] mb-6 block">Ready to Begin?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif mb-10 text-white leading-tight">
+            Success That Extends <br/>
+            <span className="italic font-light">Beyond Business.</span>
+          </h2>
           <p className="text-lg text-white/70 font-light mb-12 max-w-xl mx-auto">
-            Whether you are representing a business, pursuing an international opportunity or exploring one of our specialist services, our team is ready to understand your goals.
+            Whether you are representing a business, pursuing an international opportunity, or exploring one of our specialist services, our team is ready to understand your goals.
           </p>
-          <Link href="/book" className="inline-flex items-center justify-center bg-tlg-signatureGold text-tlg-midnight px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors">
+          <Link href="/book" className="inline-flex items-center justify-center bg-tlg-signatureGold text-tlg-midnight px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-white transition-colors">
             Book a Consultation
           </Link>
         </div>
