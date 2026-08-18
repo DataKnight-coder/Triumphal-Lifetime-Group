@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative h-[100vh] min-h-[600px] w-full flex flex-col justify-end overflow-hidden bg-tlg-midnight">
+    <section className="relative min-h-[100vh] w-full flex flex-col justify-end overflow-hidden bg-tlg-midnight">
       {/* Edge-to-edge Background Image */}
       <div className="absolute inset-0 z-0">
         <div 
@@ -15,7 +15,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight/95 via-tlg-midnight/40 to-tlg-midnight/80"></div>
       </div>
       
-      <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10 pb-12 md:pb-16 flex flex-col md:flex-row md:items-end justify-between gap-12 mt-auto">
+      <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 relative z-10 pt-40 pb-12 md:pb-16 flex flex-col md:flex-row md:items-end justify-between gap-12 mt-auto">
         
         {/* Left: Massive Typography */}
         <div className="max-w-4xl animate-reveal-up">
