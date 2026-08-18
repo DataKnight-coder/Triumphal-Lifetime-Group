@@ -26,27 +26,46 @@ export default function Leadership() {
               </p>
             </div>
 
-            {/* Leadership Grid (Placeholder for the 5 partners/bios mentioned in CONTENT_GAPS.md) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="group">
-                  <div className="aspect-[3/4] bg-tlg-stone/20 mb-6 overflow-hidden">
-                    {/* Placeholder image until actual bios are provided */}
-                    <div 
-                      className="w-full h-full bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700"
-                      style={{ backgroundImage: `url('https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop')` }}
-                    ></div>
-                  </div>
-                  <h3 className="text-2xl font-serif text-tlg-midnight mb-2">Executive Partner {i}</h3>
-                  <span className="text-xs uppercase tracking-widest text-tlg-signatureGold font-bold block mb-4">Board Member</span>
-                  <p className="text-sm text-gray-500 font-light leading-relaxed line-clamp-3">
-                    Biography and credentials to be provided. Driving strategic vision across the Triumphal Lifetime Group global network.
-                  </p>
+            {/* CEO Feature Card */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+              <div className="lg:col-span-5">
+                <div className="aspect-[3/4] overflow-hidden bg-tlg-stone/20">
+                  <div
+                    className="w-full h-full bg-cover bg-center transition-transform duration-700 hover:scale-105"
+                    style={{ backgroundImage: `url('/Adekemi Arike Adedayo.jpeg')` }}
+                  ></div>
                 </div>
-              ))}
-
+              </div>
+              <div className="lg:col-span-7 flex flex-col justify-center">
+                <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest block mb-6">Founder & Chief Executive</span>
+                <h2 className="text-5xl md:text-6xl font-serif text-tlg-midnight leading-[0.95] tracking-tight mb-8">
+                  Adekemi Arike<br /><span className="italic font-light">Adedayo</span>
+                </h2>
+                <div className="w-16 h-px bg-tlg-signatureGold mb-8"></div>
+                <p className="text-lg text-gray-500 font-light leading-relaxed mb-6">
+                  A visionary entrepreneur and global mobility strategist, Adekemi Arike Adedayo founded Triumphal Lifetime Group with a singular mandate: to build the world's most trusted gateway for individuals and corporations navigating international borders, capital flows, and opportunity landscapes.
+                </p>
+                <p className="text-gray-500 font-light leading-relaxed mb-10">
+                  With deep expertise spanning immigration law, real estate development, HR consulting, and digital education, she has architected a group of companies that now serves clients across Nigeria, the UAE, Canada, and beyond — delivering precision, discretion, and transformational outcomes at every engagement.
+                </p>
+                <div className="flex gap-8 text-sm">
+                  <div>
+                    <span className="text-3xl font-serif text-tlg-midnight block">500+</span>
+                    <span className="text-xs uppercase tracking-widest text-gray-400">Clients Served</span>
+                  </div>
+                  <div>
+                    <span className="text-3xl font-serif text-tlg-midnight block">3</span>
+                    <span className="text-xs uppercase tracking-widest text-gray-400">Continents</span>
+                  </div>
+                  <div>
+                    <span className="text-3xl font-serif text-tlg-midnight block">7</span>
+                    <span className="text-xs uppercase tracking-widest text-gray-400">Companies</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
+
 
           </div>
         </section>

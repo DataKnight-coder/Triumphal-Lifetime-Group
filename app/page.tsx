@@ -296,8 +296,13 @@ export default function Home() {
                 </Link>
               </div>
               <div className="relative h-[600px] w-full">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?q=80&w=1932&auto=format&fit=crop')" }}></div>
-                <div className="absolute inset-0 bg-tlg-midnight/10"></div>
+                <div className="absolute inset-0 bg-cover bg-top" style={{ backgroundImage: "url('/Adekemi Arike Adedayo.jpeg')" }}></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight/60 via-transparent to-transparent"></div>
+                {/* CEO Name Tag */}
+                <div className="absolute bottom-8 left-8 z-10">
+                  <p className="text-white font-serif text-xl">Adekemi Arike Adedayo</p>
+                  <p className="text-tlg-signatureGold text-xs uppercase tracking-widest font-bold">Founder & CEO</p>
+                </div>
                 {/* Abstract overlay element */}
                 <div className="absolute -bottom-8 -left-8 w-64 h-64 border border-tlg-signatureGold z-10 hidden md:block"></div>
               </div>
