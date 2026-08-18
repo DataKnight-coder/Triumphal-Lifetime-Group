@@ -74,10 +74,10 @@ export default function Header() {
             <Link 
               href="/" 
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 md:gap-4 group"
+              className="flex items-center gap-3 md:gap-4 group"
             >
-              <div className="w-8 h-8 md:w-12 md:h-12 shrink-0 relative overflow-hidden rounded-sm mix-blend-screen">
-                <Image src="/logo.jpeg" alt="TLG Crest" fill className="object-contain" />
+              <div className="w-9 h-9 md:w-12 md:h-12 min-w-[36px] md:min-w-[48px] shrink-0 relative overflow-hidden rounded-full shadow-lg border border-tlg-signatureGold/20">
+                <Image src="/logo.jpeg" alt="TLG Crest" fill className="object-cover scale-110" />
               </div>
               <div className="flex flex-col items-start leading-none group-hover:opacity-80 transition-opacity">
                 <span className="font-serif text-lg md:text-2xl font-medium tracking-tight">Triumphal</span>
