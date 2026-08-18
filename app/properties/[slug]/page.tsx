@@ -3,7 +3,8 @@ import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { ArrowRight, MapPin, Bed, Bath, Square, Check } from "lucide-react";
 
-export default function PropertyDetail({ params }: { params: { slug: string } }) {
+export default async function PropertyDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   return (
     <>
       <Header />
