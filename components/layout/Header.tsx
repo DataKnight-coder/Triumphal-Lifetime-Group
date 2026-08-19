@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { m } from "motion/react";
 import MobileDock from "./MobileDock";
 
 export default function Header() {
@@ -52,7 +53,12 @@ export default function Header() {
       <header className="fixed top-0 left-0 w-full z-50 pointer-events-none h-24">
         
         {/* Logo - Fixed Top Left */}
-        <div className="absolute top-6 left-6 md:left-12 pointer-events-auto">
+        <m.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="absolute top-6 left-6 md:left-12 pointer-events-auto"
+        >
           <Link 
             href="/" 
             onClick={() => setMobileMenuOpen(false)}
@@ -66,71 +72,78 @@ export default function Header() {
               <span className="text-[0.55rem] tracking-[0.25em] uppercase text-gray-500 font-sans mt-1">Lifetime Group</span>
             </div>
           </Link>
-        </div>
+        </m.div>
 
         {/* Center Pill: Desktop Navigation */}
-        <nav className={`absolute top-6 left-1/2 -translate-x-1/2 pointer-events-auto hidden xl:flex items-center bg-white/95 backdrop-blur-md border border-tlg-stone/50 rounded-full p-1.5 gap-1 text-sm font-semibold tracking-wide text-tlg-charcoal transition-all duration-500 ${scrolled ? 'shadow-xl -translate-y-1' : 'shadow-md'}`}>
-          <Link href="/" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">Home</Link>
-          <Link href="/about" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">About</Link>
-          
-          {/* Our Companies Dropdown */}
-          <div 
-            className="relative group flex items-center h-full"
-            onMouseEnter={() => setActiveDropdown('companies')}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <button className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full transition-colors ${activeDropdown === 'companies' ? 'bg-tlg-ivory text-tlg-signatureGold' : 'hover:bg-tlg-ivory hover:text-tlg-signatureGold'}`}>
-              Our Companies <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
-            </button>
+        <m.div 
+          initial={{ opacity: 0, y: -20, x: "-50%" }}
+          animate={{ opacity: 1, y: 0, x: "-50%" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="absolute top-6 left-1/2 pointer-events-auto hidden xl:flex"
+        >
+          <nav className={`flex items-center bg-white/95 backdrop-blur-md border border-tlg-stone/50 rounded-full p-1.5 gap-1 text-sm font-semibold tracking-wide text-tlg-charcoal transition-all duration-500 ${scrolled ? 'shadow-xl -translate-y-1' : 'shadow-md'}`}>
+            <Link href="/" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">Home</Link>
+            <Link href="/about" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">About</Link>
             
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-tlg-stone rounded-[24px] shadow-2xl transition-all duration-300 flex flex-col py-2 z-50 overflow-hidden ${activeDropdown === 'companies' ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible translate-y-4 scale-95'}`}>
-              {companiesLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  href={link.path}
-                  className={`px-6 py-3 text-sm hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors ${link.isHighlight ? 'border-t border-tlg-stone font-bold mt-2 pt-4' : 'text-gray-600'}`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Solutions Dropdown */}
-          <div 
-            className="relative group flex items-center h-full"
-            onMouseEnter={() => setActiveDropdown('solutions')}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <button className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full transition-colors ${activeDropdown === 'solutions' ? 'bg-tlg-ivory text-tlg-signatureGold' : 'hover:bg-tlg-ivory hover:text-tlg-signatureGold'}`}>
-              Solutions <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
-            </button>
-            
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-tlg-stone rounded-[24px] shadow-2xl transition-all duration-300 flex flex-col py-2 z-50 overflow-hidden ${activeDropdown === 'solutions' ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible translate-y-4 scale-95'}`}>
-              <span className="px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">By Outcome</span>
-              {solutionsLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  href={link.path}
-                  className="px-6 py-3 text-sm text-gray-600 hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <Link href="/insights" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">Insights</Link>
-          
-          <div className="ml-2 pl-2 border-l border-tlg-stone/60 flex items-center">
-            <Link 
-              href="/book" 
-              className="inline-flex items-center justify-center bg-tlg-midnight text-white px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-tlg-signatureGold transition-colors shadow-md hover:shadow-lg"
+            {/* Our Companies Dropdown */}
+            <div 
+              className="relative group flex items-center h-full"
+              onMouseEnter={() => setActiveDropdown('companies')}
+              onMouseLeave={() => setActiveDropdown(null)}
             >
-              Book a Consultation
-            </Link>
-          </div>
-        </nav>
+              <button className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full transition-colors ${activeDropdown === 'companies' ? 'bg-tlg-ivory text-tlg-signatureGold' : 'hover:bg-tlg-ivory hover:text-tlg-signatureGold'}`}>
+                Our Companies <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
+              </button>
+              
+              <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-tlg-stone rounded-[24px] shadow-2xl transition-all duration-300 flex flex-col py-2 z-50 overflow-hidden ${activeDropdown === 'companies' ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible translate-y-4 scale-95'}`}>
+                {companiesLinks.map((link) => (
+                  <Link 
+                    key={link.name} 
+                    href={link.path}
+                    className={`px-6 py-3 text-sm hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors ${link.isHighlight ? 'border-t border-tlg-stone font-bold mt-2 pt-4' : 'text-gray-600'}`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Solutions Dropdown */}
+            <div 
+              className="relative group flex items-center h-full"
+              onMouseEnter={() => setActiveDropdown('solutions')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <button className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full transition-colors ${activeDropdown === 'solutions' ? 'bg-tlg-ivory text-tlg-signatureGold' : 'hover:bg-tlg-ivory hover:text-tlg-signatureGold'}`}>
+                Solutions <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
+              </button>
+              
+              <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-tlg-stone rounded-[24px] shadow-2xl transition-all duration-300 flex flex-col py-2 z-50 overflow-hidden ${activeDropdown === 'solutions' ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible translate-y-4 scale-95'}`}>
+                <span className="px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">By Outcome</span>
+                {solutionsLinks.map((link) => (
+                  <Link 
+                    key={link.name} 
+                    href={link.path}
+                    className="px-6 py-3 text-sm text-gray-600 hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <Link href="/insights" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">Insights</Link>
+            
+            <div className="ml-2 pl-2 border-l border-tlg-stone/60 flex items-center">
+              <Link 
+                href="/book" 
+                className="inline-flex items-center justify-center bg-tlg-midnight text-white px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-tlg-signatureGold transition-colors shadow-md hover:shadow-lg"
+              >
+                Book a Consultation
+              </Link>
+            </div>
+          </nav>
+        </m.div>
 
         {/* Note: Mobile Top-Right Toggle removed in favor of MobileDock */}
       </header>
