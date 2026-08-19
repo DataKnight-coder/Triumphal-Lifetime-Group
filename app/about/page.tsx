@@ -75,7 +75,44 @@ export default function AboutGroupPage() {
                   <p className="text-sm text-gray-500">Corporate training and digital curriculum.</p>
                 </div>
               </div>
+              <h2 className="text-3xl font-serif text-tlg-midnight mt-20 mb-6 border-b border-tlg-stone pb-4">Corporate Governance & Trust</h2>
+              <p className="mb-12">
+                As a global advisory firm, we hold ourselves to the highest standards of transparency, regulatory compliance, and operational excellence. Our reputation is built upon measurable results and rigorous adherence to international standards.
+              </p>
+              
+              <div className="space-y-12 mb-12">
+                {/* Registrations & Licences */}
+                <div className="bg-tlg-ivory border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-4">Corporate Registrations & Accreditations</h4>
+                  <ul className="text-sm text-gray-600 space-y-3 font-light">
+                    <li><strong className="font-semibold text-tlg-midnight">Canada:</strong> [Placeholder: Registered Corporation / specific professional designations]</li>
+                    <li><strong className="font-semibold text-tlg-midnight">UAE:</strong> [Placeholder: Mainland / Free Zone Registration Details]</li>
+                    <li><strong className="font-semibold text-tlg-midnight">Nigeria:</strong> [Placeholder: CAC Registration Number]</li>
+                  </ul>
+                </div>
 
+                {/* Case Studies / Results */}
+                <div className="bg-tlg-ivory border border-tlg-stone p-8">
+                  <h4 className="font-serif text-xl text-tlg-midnight mb-4">Verifiable Impact & Case Studies</h4>
+                  <ul className="text-sm text-gray-600 space-y-4 font-light">
+                    <li><strong className="font-semibold text-tlg-midnight">HR Transformation:</strong> [Placeholder: Successfully restructured a 500+ employee logistics firm in West Africa, reducing operational friction by 30%.]</li>
+                    <li><strong className="font-semibold text-tlg-midnight">Global Mobility:</strong> [Placeholder: Processed 150+ corporate relocations to North America in 2023 with a 98% retention rate.]</li>
+                    <li><strong className="font-semibold text-tlg-midnight">Real Estate:</strong> [Placeholder: Managed a $10M+ commercial property acquisition portfolio in Dubai for international clients.]</li>
+                  </ul>
+                </div>
+
+                {/* Testimonials */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="border border-tlg-stone p-8 italic text-sm text-gray-600">
+                    "[Placeholder Client Testimonial: Triumphal Lifetime Group provided the strategic clarity we needed to expand our operations into the MENA region. Their integrated approach saved us months of administrative overhead.]"
+                    <span className="block mt-4 not-italic font-semibold text-tlg-midnight">— [Client Name], CEO of [Company]</span>
+                  </div>
+                  <div className="border border-tlg-stone p-8 italic text-sm text-gray-600">
+                    "[Placeholder Client Testimonial: The precision and professionalism of the Global Mobility team ensured our executives relocated to Canada without a single operational disruption.]"
+                    <span className="block mt-4 not-italic font-semibold text-tlg-midnight">— [Client Name], Director at [Company]</span>
+                  </div>
+                </div>
+              </div>
               <div className="bg-tlg-midnight text-white p-12 mt-16 flex flex-col items-start">
                 <h3 className="text-2xl font-serif mb-4">Discover the full scope of our expertise</h3>
                 <Link href="/companies" className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-widest text-tlg-signatureGold hover:text-white transition-colors">

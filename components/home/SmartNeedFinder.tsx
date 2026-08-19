@@ -138,7 +138,7 @@ export default function SmartNeedFinder() {
                       <Link href={recommendation.url} className="w-full sm:w-auto bg-tlg-midnight text-white px-8 py-4 text-sm font-bold tracking-widest uppercase hover:bg-tlg-emerald transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tlg-emerald text-center">
                         Explore Company
                       </Link>
-                      <Link href={recommendation.contactType === 'donate' ? '/foundation/donate' : '/book'} className="w-full sm:w-auto border border-tlg-stone text-tlg-charcoal px-8 py-4 text-sm font-bold tracking-widest uppercase hover:border-tlg-signatureGold hover:text-tlg-signatureGold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tlg-signatureGold text-center">
+                      <Link href={recommendation.contactType === 'donate' ? '/contact' : '/book'} className="w-full sm:w-auto border border-tlg-stone text-tlg-charcoal px-8 py-4 text-sm font-bold tracking-widest uppercase hover:border-tlg-signatureGold hover:text-tlg-signatureGold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tlg-signatureGold text-center">
                         {recommendation.contactType === 'book' ? 'Book Consultation' : recommendation.contactType === 'donate' ? 'Donate Now' : 'Enquire Now'}
                       </Link>
                     </div>

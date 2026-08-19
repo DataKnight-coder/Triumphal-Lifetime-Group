@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, GraduationCap, BookOpen, Globe2, Building } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Education Advisory | Triumphal Lifetime Group",
+  title: "Education Advisory ",
   description: "Academic planning, institutional placement, and international education strategy.",
 };
 

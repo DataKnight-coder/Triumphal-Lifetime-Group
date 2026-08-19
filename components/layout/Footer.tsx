@@ -77,13 +77,13 @@ export default function Footer() {
                     <a href="tel:+971551995483" className="hover:text-tlg-signatureGold transition-colors">055 199 5483</a>
                   </li>
                   <li className="pt-2">
-                    <a href="mailto:info@triumphallifetimehr.ca" className="hover:text-tlg-signatureGold transition-colors border-b border-white/20 pb-0.5">
-                      info@triumphallifetimehr.ca
+                    <a href="mailto:info@triumphallifetimegroup.com" className="hover:text-tlg-signatureGold transition-colors border-b border-white/20 pb-0.5">
+                      info@triumphallifetimegroup.com
                     </a>
                   </li>
                   <li className="pt-2">
-                    <a href="https://www.triumphallifetimehr.ca" target="_blank" rel="noopener noreferrer" className="hover:text-tlg-signatureGold transition-colors text-xs text-white/50">
-                      www.triumphallifetimehr.ca
+                    <a href="https://www.triumphallifetimegroup.com" target="_blank" rel="noopener noreferrer" className="hover:text-tlg-signatureGold transition-colors text-xs text-white/50">
+                      www.triumphallifetimegroup.com
                     </a>
                   </li>
                 </ul>

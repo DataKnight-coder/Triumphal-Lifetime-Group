@@ -186,8 +186,9 @@ export default function Home() {
             </Link>
           </div>
           
-          <div className="md:hidden text-left text-tlg-midnight/40 text-[10px] uppercase tracking-widest mt-[-20px] mb-2 flex items-center gap-2">Swipe to read <ArrowRight size={10} /></div>
-          <div className="lg:w-2/3 flex md:grid md:grid-cols-2 gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-6 px-6 md:mx-0 md:px-0">
+          <div className="lg:w-2/3 flex flex-col">
+            <div className="md:hidden text-left text-tlg-midnight/40 text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2">Swipe to read <ArrowRight size={10} /></div>
+            <div className="w-full flex md:grid md:grid-cols-2 gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-6 px-6 md:mx-0 md:px-0">
             <div className="shrink-0 w-[85vw] snap-center md:w-auto bg-white p-8 md:p-10 rounded-[24px] shadow-sm flex flex-col justify-center">
               <h4 className="text-xl font-serif text-tlg-midnight mb-3">Global Reach</h4>
               <p className="text-sm text-gray-600 font-light leading-relaxed">Operating across Nigeria, UAE, and Canada, giving you access to strategic international markets.</p>
@@ -203,6 +204,7 @@ export default function Home() {
             <div className="shrink-0 w-[85vw] snap-center md:w-auto bg-white p-8 md:p-10 rounded-[24px] shadow-sm flex flex-col justify-center md:translate-y-8">
               <h4 className="text-xl font-serif text-tlg-midnight mb-3">Measurable Results</h4>
               <p className="text-sm text-gray-600 font-light leading-relaxed">Our structured approach prioritises clarity, professionalism, and delivering long-term value.</p>
+            </div>
             </div>
           </div>
         </div>

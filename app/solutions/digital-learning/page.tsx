@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, MonitorPlay, Layers, BookOpen, Presentation, Code2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Digital Products & Learning | Triumphal Lifetime Group",
+  title: "Digital Products & Learning ",
   description: "Corporate training ecosystems, digital curriculum design, and capability building.",
 };
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, ChevronDown, MapPin, Target, Users, LayoutTemplate, Briefcase, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "HR & Business Consulting | Triumphal Lifetime Group",
+  title: "HR & Business Consulting ",
   description: "Workforce engineering, executive search, and corporate governance for international markets.",
 };
 

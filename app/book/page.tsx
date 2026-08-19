@@ -102,7 +102,7 @@ export default function BookConsultationPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Division / Area of Interest</label>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Division / Service Needed</label>
                 <select className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm">
                   <option>HR &amp; Business Consulting</option>
                   <option>Real Estate Advisory</option>
@@ -110,10 +110,11 @@ export default function BookConsultationPage() {
                   <option>Education Advisory</option>
                   <option>Information Technology</option>
                   <option>Digital Products &amp; Learning</option>
+                  <option>Charity Foundation / Grants</option>
                   <option>General / I am not sure yet</option>
                 </select>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Preferred Date</label>
                   <input type="date" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm" />
@@ -122,14 +123,27 @@ export default function BookConsultationPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Preferred Time</label>
                   <input type="time" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm" />
                 </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Time Zone</label>
+                  <select className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm">
+                    <option>GMT / UTC</option>
+                    <option>EST / EDT (Toronto)</option>
+                    <option>WAT (Lagos)</option>
+                    <option>GST (Dubai)</option>
+                    <option>Other</option>
+                  </select>
+                </div>
               </div>
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Preferred Format</label>
-                <select className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm">
+                <select className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-600 text-sm mb-2">
                   <option>Video Call (Zoom or Teams)</option>
                   <option>Phone Call</option>
                   <option>In-Person (Lagos / Dubai / Toronto)</option>
                 </select>
+                <p className="text-xs text-tlg-signatureGold font-semibold italic">
+                  * For in-person meetings: Available by appointment only. Location details provided after confirmation.
+                </p>
               </div>
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-2">Brief Message</label>

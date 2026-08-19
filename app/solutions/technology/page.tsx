@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, ShieldCheck, Database, CloudCog, Cpu, Network, Laptop } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Information Technology | Triumphal Lifetime Group",
+  title: "Information Technology ",
   description: "Enterprise systems, digital transformation, and cybersecurity advisory.",
 };
 

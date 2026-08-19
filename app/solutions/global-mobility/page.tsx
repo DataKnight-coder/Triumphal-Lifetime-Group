@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, Plane, FileCheck, Briefcase, Building2, MapPin, Search } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Global Mobility | Triumphal Lifetime Group",
+  title: "Global Mobility ",
   description: "Administrative logistics and strategic advisory for cross-border relocation.",
 };
 
@@ -66,9 +66,14 @@ export default function GlobalMobilityPage() {
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <div className="bg-tlg-stone/30 border-l-4 border-tlg-signatureGold p-6">
             <p className="text-[10px] text-tlg-midnight font-bold uppercase tracking-widest mb-1">Advisory Disclaimer</p>
-            <p className="text-sm text-gray-600 font-light leading-relaxed">
+            <p className="text-sm text-gray-600 font-light leading-relaxed mb-4">
               Triumphal Lifetime Group provides administrative coordination, logistical planning, and general mobility advisory. We are not a government agency and do not issue visas or permits. We cannot guarantee application outcomes or processing times. Regulated immigration legal advice must be provided by authorized professionals in the relevant jurisdiction.
             </p>
+            <div className="bg-white border border-tlg-stone p-4 rounded-md inline-block">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-tlg-midnight mb-1">Authorised Representative</p>
+              <p className="text-sm text-gray-800 font-medium">[Name of RCIC / Lawyer]</p>
+              <p className="text-xs text-gray-500">[Regulator / Licence Number, e.g., CICC #Rxxxxxx]</p>
+            </div>
           </div>
         </div>
       </section>

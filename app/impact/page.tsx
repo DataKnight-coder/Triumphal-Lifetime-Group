@@ -144,6 +144,50 @@ export default function CharityFoundation() {
           </div>
         </section>
 
+        {/* Evidence & Impact Reports */}
+        <section className="py-24 bg-tlg-ivory relative border-b border-tlg-stone">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+            <div className="text-center mb-16">
+              <span className="text-gray-400 text-xs font-bold uppercase tracking-[0.2em] block mb-4">Proof of Impact</span>
+              <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Verified Deployments</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              
+              <div className="bg-white border border-tlg-stone p-8">
+                <h3 className="text-2xl font-serif text-tlg-midnight mb-2">Project: Future Builders UAE</h3>
+                <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold mb-6">Dubai, UAE | Completed 2023</p>
+                <p className="text-gray-600 font-light text-sm leading-relaxed mb-6">
+                  [Placeholder Data: In partnership with local educational authorities, we deployed $1.2M to establish two vocational tech-training centers in underserved areas, directly certifying over 1,200 students in advanced digital skills.]
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 bg-tlg-stone/20 text-tlg-midnight text-[10px] font-bold uppercase tracking-widest">Education</span>
+                  <span className="px-3 py-1 bg-tlg-stone/20 text-tlg-midnight text-[10px] font-bold uppercase tracking-widest">Technology</span>
+                </div>
+                <Link href="#" className="text-xs font-bold uppercase tracking-widest text-tlg-midnight hover:text-tlg-signatureGold transition-colors inline-flex items-center">
+                  View Full Report <ArrowRight size={14} className="ml-2" />
+                </Link>
+              </div>
+
+              <div className="bg-white border border-tlg-stone p-8">
+                <h3 className="text-2xl font-serif text-tlg-midnight mb-2">Project: Healthcare Anchor West Africa</h3>
+                <p className="text-xs uppercase font-bold tracking-widest text-tlg-signatureGold mb-6">Lagos, Nigeria | Ongoing (2022-2025)</p>
+                <p className="text-gray-600 font-light text-sm leading-relaxed mb-6">
+                  [Placeholder Data: A $2.5M multi-year commitment to funding medical supply chains and clinic construction. Over 8,500 families have received subsidized primary care through our partnered regional clinics.]
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 bg-tlg-stone/20 text-tlg-midnight text-[10px] font-bold uppercase tracking-widest">Healthcare</span>
+                  <span className="px-3 py-1 bg-tlg-stone/20 text-tlg-midnight text-[10px] font-bold uppercase tracking-widest">Infrastructure</span>
+                </div>
+                <Link href="#" className="text-xs font-bold uppercase tracking-widest text-tlg-midnight hover:text-tlg-signatureGold transition-colors inline-flex items-center">
+                  View Full Report <ArrowRight size={14} className="ml-2" />
+                </Link>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
         {/* Action Section */}
         <section className="py-32 bg-tlg-ivory relative flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl px-6">

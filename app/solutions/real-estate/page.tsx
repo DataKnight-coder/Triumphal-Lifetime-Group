@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, MapPin, Building2, TrendingUp, Key, Search, FileCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Real Estate Advisory | Triumphal Lifetime Group",
+  title: "Real Estate Advisory ",
   description: "Commercial property strategy and strategic facility management.",
 };
 
