@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 };
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function InsightsPage() {
@@ -33,7 +34,12 @@ export default function InsightsPage() {
             {/* Article 1 */}
             <Link href="/insights/express-entry-canada-2024" className="group flex flex-col border border-tlg-stone hover:border-tlg-midnight transition-colors h-full">
               <div className="h-48 bg-tlg-stone/20 w-full shrink-0 relative overflow-hidden">
-                <div className="absolute inset-0 bg-tlg-stone opacity-30 group-hover:scale-105 transition-transform duration-700"></div>
+                <Image 
+                  src="/visuals/global-mobility.jpg" 
+                  alt="Global Mobility" 
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
               </div>
               <div className="p-8 flex flex-col flex-1 bg-white">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-tlg-signatureGold mb-3">Global Mobility</span>
@@ -50,7 +56,12 @@ export default function InsightsPage() {
             {/* Article 2 */}
             <Link href="/insights/dubai-real-estate-trends" className="group flex flex-col border border-tlg-stone hover:border-tlg-midnight transition-colors h-full">
               <div className="h-48 bg-tlg-stone/20 w-full shrink-0 relative overflow-hidden">
-                <div className="absolute inset-0 bg-tlg-stone opacity-30 group-hover:scale-105 transition-transform duration-700"></div>
+                <Image 
+                  src="/visuals/real-estate.jpg" 
+                  alt="Real Estate" 
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
               </div>
               <div className="p-8 flex flex-col flex-1 bg-white">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-tlg-signatureGold mb-3">Real Estate</span>
@@ -67,7 +78,12 @@ export default function InsightsPage() {
             {/* Article 3 */}
             <Link href="/insights/hr-restructuring-guide" className="group flex flex-col border border-tlg-stone hover:border-tlg-midnight transition-colors h-full">
               <div className="h-48 bg-tlg-stone/20 w-full shrink-0 relative overflow-hidden">
-                <div className="absolute inset-0 bg-tlg-stone opacity-30 group-hover:scale-105 transition-transform duration-700"></div>
+                <Image 
+                  src="/visuals/hr.jpg" 
+                  alt="HR Consulting" 
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
               </div>
               <div className="p-8 flex flex-col flex-1 bg-white">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-tlg-signatureGold mb-3">HR Consulting</span>
