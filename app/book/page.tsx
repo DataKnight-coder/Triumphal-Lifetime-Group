@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle, Clock, Globe, Video, ArrowRight } from "lucide-react";
+import { CheckCircle, Clock, Globe, Video, ArrowRight, ChevronDown } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 
 export const metadata: Metadata = {
@@ -18,9 +18,12 @@ export default function BookConsultationPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* Hero */}
-      <section className="pt-40 pb-24 bg-tlg-midnight text-white relative overflow-hidden">
-        {/* Subtle background element */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none"></div>
+      <section className="pt-40 pb-24 bg-tlg-midnight text-white relative overflow-hidden bg-[url('/images/hero.jpg')] bg-cover bg-center bg-fixed">
+        {/* Deep overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-tlg-midnight/90 backdrop-blur-[2px]"></div>
+        
+        {/* Subtle decorative gradient */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-tlg-signatureGold/10 to-transparent pointer-events-none"></div>
         
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
           <div>
@@ -131,16 +134,19 @@ export default function BookConsultationPage() {
                   </div>
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Division / Service Needed <span className="text-tlg-signatureGold">*</span></label>
-                    <select className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-gray-700 text-base appearance-none cursor-pointer">
-                      <option>HR &amp; Business Consulting</option>
-                      <option>Real Estate Advisory</option>
-                      <option>Global Mobility</option>
-                      <option>Education Advisory</option>
-                      <option>Information Technology</option>
-                      <option>Digital Products &amp; Learning</option>
-                      <option>Charity Foundation / Grants</option>
-                      <option>General / I am not sure yet</option>
-                    </select>
+                    <div className="relative">
+                      <select className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-gray-700 text-base appearance-none cursor-pointer pr-10">
+                        <option>HR &amp; Business Consulting</option>
+                        <option>Real Estate Advisory</option>
+                        <option>Global Mobility</option>
+                        <option>Education Advisory</option>
+                        <option>Information Technology</option>
+                        <option>Digital Products &amp; Learning</option>
+                        <option>Charity Foundation / Grants</option>
+                        <option>General / I am not sure yet</option>
+                      </select>
+                      <ChevronDown size={16} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div>
@@ -153,13 +159,16 @@ export default function BookConsultationPage() {
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Time Zone</label>
-                      <select className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-gray-700 text-base appearance-none cursor-pointer">
-                        <option>GMT / UTC</option>
-                        <option>EST / EDT (Toronto)</option>
-                        <option>WAT (Lagos)</option>
-                        <option>GST (Dubai)</option>
-                        <option>Other</option>
-                      </select>
+                      <div className="relative">
+                        <select className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-gray-700 text-base appearance-none cursor-pointer pr-10">
+                          <option>GMT / UTC</option>
+                          <option>EST / EDT (Toronto)</option>
+                          <option>WAT (Lagos)</option>
+                          <option>GST (Dubai)</option>
+                          <option>Other</option>
+                        </select>
+                        <ChevronDown size={16} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                      </div>
                     </div>
                   </div>
                   <div>
