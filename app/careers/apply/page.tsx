@@ -51,7 +51,7 @@ export default function ApplyPage() {
                 </div>
                 <div>
                   <label htmlFor="role" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Role/Position</label>
-                  <input type="text" id="role" placeholder="e.g. Senior Consultant" className="w-full bg-tlg-ivory border border-tlg-stone px-4 py-4 focus:outline-none focus:border-tlg-signatureGold transition-colors text-tlg-midnight placeholder:text-gray-400" />
+                  <input type="text" id="role" className="w-full bg-tlg-ivory border border-tlg-stone px-4 py-4 focus:outline-none focus:border-tlg-signatureGold transition-colors text-tlg-midnight placeholder:text-gray-400" />
                 </div>
               </div>
             </div>

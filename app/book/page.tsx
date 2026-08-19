@@ -115,21 +115,21 @@ export default function BookConsultationPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Full Name <span className="text-tlg-signatureGold">*</span></label>
-                      <input type="text" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" placeholder="Jane Doe" />
+                      <input type="text" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Email Address <span className="text-tlg-signatureGold">*</span></label>
-                      <input type="email" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" placeholder="jane@example.com" />
+                      <input type="email" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Phone Number</label>
-                      <input type="tel" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" placeholder="+1 (555) 000-0000" />
+                      <input type="tel" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Country of Residence</label>
-                      <input type="text" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" placeholder="e.g. Canada" />
+                      <input type="text" className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-tlg-signatureGold transition-colors text-base text-tlg-midnight" />
                     </div>
                   </div>
                   <div>
@@ -193,7 +193,7 @@ export default function BookConsultationPage() {
                   </div>
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Brief Message</label>
-                    <textarea rows={4} placeholder="Briefly describe what you would like to discuss..." className="w-full border border-gray-200 rounded-xl p-4 bg-gray-50 focus:bg-white focus:outline-none focus:border-tlg-signatureGold focus:ring-1 focus:ring-tlg-signatureGold transition-all text-base text-tlg-midnight placeholder:text-gray-400 resize-none"></textarea>
+                    <textarea rows={4} className="w-full border border-gray-200 rounded-xl p-4 bg-gray-50 focus:bg-white focus:outline-none focus:border-tlg-signatureGold focus:ring-1 focus:ring-tlg-signatureGold transition-all text-base text-tlg-midnight resize-none"></textarea>
                   </div>
                   
                   <div className="pt-8">
