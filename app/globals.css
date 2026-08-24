@@ -6,14 +6,25 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    font-size: 17px;
   }
   
   body {
-    @apply bg-tlg-ivory text-tlg-charcoal font-sans antialiased overflow-x-hidden;
+    @apply bg-tlg-ivory text-gray-800 font-sans antialiased overflow-x-hidden;
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  p {
+    @apply text-gray-700;
+    line-height: 1.75;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif text-tlg-midnight;
+    line-height: 1.1;
   }
 }
 
@@ -101,3 +112,16 @@
   color: transparent;
   -webkit-background-clip: text;
 }
+
+/* Remove browser default arrow from FAQ details/summary */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details > summary::marker {
+  display: none;
+}
+

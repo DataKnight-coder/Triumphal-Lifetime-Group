@@ -4,9 +4,9 @@ import { LazyMotion, domAnimation } from "motion/react";
 import { ReactNode } from "react";
 
 export default function AnimationProvider({ children }: { children: ReactNode }) {
-  return (
-    <LazyMotion features={domAnimation}>
-      {children}
-    </LazyMotion>
-  );
+ return (
+ <LazyMotion features={domAnimation}>
+ {children}
+ </LazyMotion>
+ );
 }

@@ -1,140 +1,113 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Share2, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Calendar, User } from "lucide-react";
+import { m } from "motion/react";
+import Reveal from "@/components/animations/Reveal";
 
-export default function TaxComplianceReport() {
+export const metadata: Metadata = {
+  title: "Dubai Commercial Real Estate: Q3 2026 Market Analysis | Triumphal Lifetime Group",
+  description: "Evaluating the surge in prime office space demand across the DIFC and Business Bay as smart-building mandates and ESG compliance reshape the 2026 market.",
+};
+
+export default function ArticlePage() {
   return (
-    <>
-            <main className="bg-tlg-ivory">
-        
-        {/* Editorial Hero */}
-        <section className="relative pt-40 pb-24 md:pt-48 md:pb-32 bg-tlg-midnight border-b border-tlg-stone">
-          <div className="absolute inset-0 z-0 opacity-20">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop')" }}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight to-transparent"></div>
-          </div>
-          
-          <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
-            <Link href="/insights" className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-tlg-signatureGold mb-12 hover:text-white transition-colors">
-              <ArrowLeft size={14} className="mr-2" /> Back to Intelligence
+    <main className="bg-white pt-32 pb-24">
+      {/* Header */}
+      <section className="relative pt-16 pb-12 bg-tlg-ivory border-b border-tlg-stone">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12 text-center">
+          <Reveal>
+            <Link href="/insights" className="inline-flex items-center text-xs font-bold uppercase tracking-[0.2em] text-gray-800 hover:text-tlg-midnight transition-colors mb-8">
+              <ArrowRight size={14} className="mr-2 rotate-180" /> Back to Insights
             </Link>
-            
-            <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-widest text-white/50 mb-8">
-              <span className="bg-white/10 px-3 py-1">Corporate</span>
-              <span>•</span>
-              <span>July 2026</span>
-              <span>•</span>
-              <span>18 Min Read</span>
-            </div>
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-[1.1] mb-8 max-w-4xl">
-              Navigating Tax Compliance for Cross-Border Subsidiaries
+          </Reveal>
+          <Reveal delay={0.1}>
+            <span className="text-tlg-signatureGold text-[11px] font-bold uppercase tracking-[0.3em] mb-6 block">Real Estate Advisory</span>
+            <h1 className="text-3xl md:text-5xl font-serif text-tlg-midnight leading-[1.2] mb-8">
+              Dubai Commercial Real Estate: Q3 2026 Market Analysis
             </h1>
-            
-            <p className="text-xl md:text-2xl text-white/70 font-light max-w-3xl leading-relaxed">
-              Structuring corporate governance across multiple jurisdictions requires a proactive approach to evolving tax codes in Nigeria, the UAE, and Canada.
-            </p>
-          </div>
-        </section>
-
-        {/* Article Body */}
-        <section className="py-24 bg-white relative">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16">
-            
-            {/* Left Column: Metadata & Sharing (Sticky) */}
-            <div className="lg:w-1/4">
-              <div className="sticky top-32">
-                <div className="mb-12">
-                  <span className="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Authored By</span>
-                  <p className="text-tlg-midnight font-serif text-lg">TLG Corporate Governance Unit</p>
-                  <p className="text-gray-500 font-light text-sm">Toronto / Lagos HQ</p>
-                </div>
-                
-                <div className="mb-12">
-                  <span className="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-4">Share Intelligence</span>
-                  <div className="flex gap-4">
-                    <button className="w-10 h-10 border border-tlg-stone flex items-center justify-center text-tlg-midnight hover:border-tlg-signatureGold hover:text-tlg-signatureGold transition-colors">
-                      <Linkedin size={18} />
-                    </button>
-                    <button className="w-10 h-10 border border-tlg-stone flex items-center justify-center text-tlg-midnight hover:border-tlg-signatureGold hover:text-tlg-signatureGold transition-colors">
-                      <Twitter size={18} />
-                    </button>
-                    <button className="w-10 h-10 border border-tlg-stone flex items-center justify-center text-tlg-midnight hover:border-tlg-signatureGold hover:text-tlg-signatureGold transition-colors">
-                      <Share2 size={18} />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="bg-tlg-ivory p-6 border border-tlg-stone">
-                  <span className="block text-[10px] uppercase tracking-widest font-bold text-tlg-signatureGold mb-3">Executive Summary</span>
-                  <ul className="text-sm text-gray-600 font-light space-y-3">
-                    <li className="flex gap-2"><span>•</span> Implementation of the UAE 9% Corporate Tax framework.</li>
-                    <li className="flex gap-2"><span>•</span> Repatriation strategies for Canadian parent companies.</li>
-                    <li className="flex gap-2"><span>•</span> Mitigating double taxation across West African operations.</li>
-                  </ul>
-                </div>
-              </div>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="flex items-center justify-center gap-6 text-xs text-gray-700 uppercase tracking-widest font-bold">
+              <span className="flex items-center gap-2"><Calendar size={14} /> Aug 12, 2026</span>
+              <span className="flex items-center gap-2"><User size={14} /> Global Real Estate Desk</span>
             </div>
+          </Reveal>
+        </div>
+      </section>
 
-            {/* Right Column: Main Content */}
-            <div className="lg:w-3/4 max-w-none prose prose-lg prose-gray prose-headings:font-serif prose-headings:text-tlg-midnight prose-a:text-tlg-signatureGold hover:prose-a:text-tlg-midnight">
-              
-              <p className="text-2xl font-light text-gray-500 leading-relaxed mb-12 first-letter:text-7xl first-letter:font-serif first-letter:text-tlg-midnight first-letter:mr-3 first-letter:float-left">
-                The era of frictionless, unregulated offshore capital structuring has ended. As global economic blocs introduce stricter regulatory oversight, multinational corporations must adopt sophisticated, highly compliant tax architectures. For enterprises bridging operations between emerging markets and established Western economies, this transition is particularly complex.
+      {/* Featured Image */}
+      <section className="py-12">
+        <div className="max-w-[1000px] mx-auto px-6 md:px-12">
+          <Reveal delay={0.3}>
+            <div className="relative w-full aspect-[21/9] rounded-[24px] overflow-hidden bg-tlg-stone">
+              <Image src="/visuals/real-estate.jpg" alt="Dubai Commercial Real Estate" fill className="object-cover" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="pb-24">
+        <div className="max-w-[800px] mx-auto px-6 md:px-12">
+          <Reveal delay={0.4}>
+            <div className="prose prose-lg prose-headings:font-serif prose-headings:text-tlg-midnight prose-p:text-gray-800 prose-p:font-normal prose-p:leading-relaxed prose-a:text-tlg-signatureGold max-w-none">
+              <p className="lead text-xl text-tlg-midnight font-medium border-l-2 border-tlg-signatureGold pl-6 italic">
+                As we navigate the third quarter of 2026, Dubai’s commercial real estate sector has transcended its historical identity as a regional hub to become a highly sophisticated, ESG-driven global headquarters destination. 
               </p>
 
-              <h2>The UAE 9% Corporate Tax Paradigm</h2>
+              <h2 className="text-3xl mt-12 mb-6">The "Flight to Quality" in DIFC and Business Bay</h2>
               <p>
-                The introduction of a 9% federal corporate tax in the UAE on profits exceeding AED 375,000 marked a historic shift for the region. Historically utilized as a pure zero-tax jurisdiction, the UAE is now aligning itself with global OECD standards. 
+                The narrative of 2026 is defined by a hyper-accelerated "flight to quality." As international enterprises—particularly those in AI, fintech, and advanced wealth management—relocate from Europe and Asia, the demand for Grade A, ESG-compliant office space in the Dubai International Financial Centre (DIFC) and Business Bay has outstripped existing supply.
               </p>
               <p>
-                However, strategic opportunities remain robust. Companies operating within designated Free Zones (such as DIFC or DMCC) that derive "Qualifying Income" can still benefit from a 0% corporate tax rate, provided they maintain adequate economic substance within the UAE.
+                Occupancy rates in premium, smart-enabled buildings have effectively hit 98%. This scarcity has naturally compressed yields and driven up leasing rates. According to our Q3 2026 market data, average rental prices for LEED-certified commercial properties in the DIFC have seen a 14% year-over-year increase.
               </p>
 
-              <blockquote className="border-l-2 border-tlg-signatureGold pl-8 my-12 italic text-2xl font-serif text-tlg-midnight">
-                "Compliance is no longer a localized accounting function; it is a critical component of international corporate strategy. A misaligned subsidiary structure can decimate operating margins."
-              </blockquote>
-
-              <h2>Bridging North America and West Africa</h2>
+              <h2 className="text-3xl mt-12 mb-6">ESG Mandates and Smart Building Technology</h2>
               <p>
-                For our clients operating out of Nigeria and expanding into Canada (or vice versa), managing the flow of dividends and intellectual property royalties requires meticulous planning. 
+                What differentiates the 2026 market from the post-pandemic boom of 2023 is the uncompromising requirement for sustainability. With the UAE's Net Zero 2050 framework increasingly influencing corporate governance, multinational tenants are no longer accepting standard commercial leases.
               </p>
-              
-              <div className="my-12 relative h-[400px] w-full overflow-hidden border border-tlg-stone">
-                 <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2036&auto=format&fit=crop')" }}></div>
-                 <div className="absolute bottom-0 left-0 bg-white p-4 text-xs font-bold uppercase tracking-widest text-gray-500">Global Financial Analysis • Triumphal HQ</div>
+              <p>
+                Today’s premier tenants require properties equipped with AI-driven facility management systems capable of optimizing energy consumption, predicting maintenance needs, and providing granular carbon reporting. Buildings that fail to meet these smart-infrastructure benchmarks are facing a "brown discount," while highly optimized assets are commanding a significant "green premium."
+              </p>
+
+              <div className="my-10 bg-tlg-ivory p-8 rounded-xl border border-tlg-stone">
+                <h4 className="text-sm font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 mt-0">Key Drivers of Q3 2026 Demand</h4>
+                <ul className="space-y-3 m-0 p-0 list-none">
+                  <li className="flex gap-3"><span className="text-tlg-signatureGold">◆</span> <strong>Regulatory Agility:</strong> The seamless integration of Virtual Asset Regulatory Authority (VARA) frameworks.</li>
+                  <li className="flex gap-3"><span className="text-tlg-signatureGold">◆</span> <strong>Corporate Tax Maturation:</strong> Businesses have fully adapted to the 9% CT regime, finding the Free Zone exemptions highly lucrative.</li>
+                  <li className="flex gap-3"><span className="text-tlg-signatureGold">◆</span> <strong>Talent Migration:</strong> The maturity of the Golden Visa program has created a deeply rooted, highly skilled expatriate workforce.</li>
+                </ul>
               </div>
 
-              <h3>Critical Structuring Vectors</h3>
-              <ul>
-                <li><strong>Transfer Pricing:</strong> Regulatory bodies in Canada (CRA) and Nigeria (FIRS) are increasingly auditing intercompany transactions. Robust documentation proving "arm's length" pricing is now mandatory.</li>
-                <li><strong>Double Taxation Agreements (DTAs):</strong> Leveraging existing DTAs between the UAE and Canada can significantly reduce withholding taxes on dividends.</li>
-                <li><strong>Economic Substance Requirements (ESR):</strong> Shell companies are obsolete. Subsidiaries must demonstrate physical offices, local staff, and board meetings conducted within the jurisdiction of incorporation.</li>
-              </ul>
-
-              <h2>Triumphal Lifetime Group's Advisory Stance</h2>
+              <h2 className="text-3xl mt-12 mb-6">The Maturation of Fractional Ownership</h2>
               <p>
-                We advise all cross-border enterprises to conduct a bi-annual structural audit. Our HR & Business Consulting division frequently identifies legacy corporate structures—established five to ten years ago—that are now severely misaligned with current international tax laws, exposing directors to significant personal liability.
+                Historically, investing in premium Dubai commercial real estate required immense capital outlay, restricting the market to institutional players. However, 2026 has seen the mainstream adoption of blockchain-backed fractional ownership. 
               </p>
               <p>
-                The optimal structure today is a decentralized, yet highly compliant, triad: A stable operational base in West Africa, a tax-efficient holding or trading hub in the UAE, and an institutional parent or intellectual property vehicle in Canada.
+                Through properly regulated, tokenized asset platforms, individual investors—particularly those mobilizing capital from emerging markets like Nigeria—can now purchase secure, dividend-yielding shares in high-profile commercial assets for a fraction of the total property value. This has democratized access to Dubai's lucrative commercial rental yields, providing a powerful hedge against currency volatility.
               </p>
 
-              {/* In-article CTA */}
-              <div className="mt-16 bg-tlg-midnight p-10 text-center border-t-4 border-tlg-signatureGold">
-                <h4 className="text-2xl font-serif text-white mb-4">Audit Your Corporate Structure</h4>
-                <p className="text-white/70 font-light mb-8 text-sm max-w-xl mx-auto">
-                  Engage our Corporate Governance unit to review your cross-border operations and optimize your international tax strategy.
-                </p>
-                <Link href="/book" className="inline-flex items-center gap-4 bg-white text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-tlg-signatureGold hover:text-white transition-colors">
-                  Schedule Corporate Audit <ArrowRight size={14} />
+              <h2 className="text-3xl mt-12 mb-6">Strategic Outlook: 2026–2030</h2>
+              <p>
+                With supply constraints expected to persist through 2028 as new, sustainable developments catch up to demand, landlords currently hold unprecedented negotiating power. For businesses looking to establish a presence, we strongly advise securing space up to 12 months in advance and considering emerging, tech-focused commercial districts like Dubai South, which offer exceptional long-term value.
+              </p>
+              <p>
+                For international investors, the commercial market presents a compelling yield opportunity, provided rigorous due diligence is exercised regarding location, tenant covenant, and ESG compliance.
+              </p>
+              
+              <div className="bg-tlg-midnight text-white p-10 md:p-12 mt-16 rounded-[24px]">
+                <h4 className="font-serif text-2xl mt-0 mb-4 text-white">Navigate the 2026 Dubai Real Estate Market</h4>
+                <p className="text-sm text-white/80 mb-8 leading-relaxed">Whether you are seeking sustainable commercial leasing for your expanding enterprise or looking to invest in high-yield, regulated fractional assets, our Real Estate Advisory division provides end-to-end, localized guidance.</p>
+                <Link href="/solutions/real-estate" className="inline-flex items-center justify-center bg-tlg-signatureGold text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors">
+                  Consult Our Advisory Team
                 </Link>
               </div>
-
             </div>
-          </div>
-        </section>
-
-      </main>
-          </>
+          </Reveal>
+        </div>
+      </section>
+    </main>
   );
 }

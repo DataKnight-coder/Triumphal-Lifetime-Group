@@ -4,21 +4,21 @@ import { m, useReducedMotion } from "motion/react";
 import { ReactNode } from "react";
 
 interface RevealProps {
-  children: ReactNode;
-  delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
-  className?: string;
-  duration?: number;
-  once?: boolean;
+ children: ReactNode;
+ delay?: number;
+ direction?: "up" | "down" | "left" | "right" | "none";
+ className?: string;
+ duration?: number;
+ once?: boolean;
 }
 
 export default function Reveal({ 
-  children, 
-  delay = 0, 
-  direction = "up", 
-  className = "",
-  duration = 0.7,
-  once = true
+ children, 
+ delay = 0, 
+ direction = "up", 
+ className = "",
+ duration = 0.7,
+ once = true
 }: RevealProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -30,32 +30,21 @@ export default function Reveal({
     return { x: 0, y: 0 };
   };
 
-  const offset = getDirectionOffset();
-
-  if (prefersReducedMotion) {
-    return (
-      <m.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once }}
-        transition={{ duration, delay }}
-        className={className}
-      >
-        {children}
-      </m.div>
-    );
-  }
+  const offset = prefersReducedMotion ? {} : getDirectionOffset();
+  const transitionSettings = prefersReducedMotion 
+    ? { duration, delay } 
+    : { duration, delay, ease: [0.21, 0.47, 0.32, 0.98] as any };
+    
+  const viewportSettings = prefersReducedMotion
+    ? { once }
+    : { once, margin: "-50px" };
 
   return (
     <m.div
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, margin: "-50px" }}
-      transition={{ 
-        duration, 
-        delay, 
-        ease: [0.21, 0.47, 0.32, 0.98] // Premium ease-out curve
-      }}
+      viewport={viewportSettings}
+      transition={transitionSettings}
       className={className}
     >
       {children}

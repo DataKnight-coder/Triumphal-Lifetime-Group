@@ -1,0 +1,24 @@
+{
+  "name": "Triumphal Lifetime Group",
+  "short_name": "TLG",
+  "description": "Integrated Global Advisory across multiple high-impact sectors.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F3F0",
+  "theme_color": "#07152F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

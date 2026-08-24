@@ -3,6 +3,16 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'egtzvtwnlhedxsqxcmja.supabase.co',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   async redirects() {
     return [
       {

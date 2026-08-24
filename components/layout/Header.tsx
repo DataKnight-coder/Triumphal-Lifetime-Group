@@ -2,15 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
-import { m } from "motion/react";
+import { useState, useEffect, Suspense } from "react";
+import { ChevronDown, Menu, X, Search, Command } from "lucide-react";
+import { m, AnimatePresence } from "motion/react";
+import { usePathname } from "next/navigation";
+import { triggerHaptic } from "@/lib/utils/haptics";
 import MobileDock from "./MobileDock";
+import CommandMenu from "@/components/ui/CommandMenu";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [cmdOpen, setCmdOpen] = useState(false);
+  const pathname = usePathname();
+  
+  const isDarkText = !scrolled && pathname !== "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,126 +38,161 @@ export default function Header() {
   }, [mobileMenuOpen]);
 
   const companiesLinks = [
-    { name: "HR & Business Consulting", path: "/solutions/hr-consulting" },
-    { name: "Real Estate", path: "/solutions/real-estate" },
-    { name: "Education Advisory", path: "/solutions/education" },
-    { name: "Global Mobility", path: "/solutions/global-mobility" },
-    { name: "Digital Products & Learning", path: "/solutions/digital-learning" },
-    { name: "Information Technology", path: "/solutions/technology" },
-    { name: "View All Companies", path: "/companies", isHighlight: true },
-  ];
-
-  const solutionsLinks = [
-    { name: "Build a Stronger Business", path: "/solutions/hr-consulting" },
-    { name: "Find Property Opportunities", path: "/solutions/real-estate" },
-    { name: "Plan Your Education", path: "/solutions/education" },
-    { name: "Explore Global Mobility", path: "/solutions/global-mobility" },
-    { name: "Learn & Access Resources", path: "/solutions/digital-learning" },
-    { name: "Transform With Technology", path: "/solutions/technology" },
+    { name: "HR & Business Consulting", path: "/solutions/hr-consulting", image: "/visuals/hr.jpg", desc: "Workforce engineering and executive search." },
+    { name: "Real Estate", path: "/solutions/real-estate", image: "/visuals/real-estate.jpg", desc: "Premium property development and management." },
+    { name: "Education Advisory", path: "/solutions/education", image: "/visuals/education.jpg", desc: "Global academic placement and consulting." },
+    { name: "Global Mobility", path: "/solutions/global-mobility", image: "/visuals/global-mobility.jpg", desc: "Immigration and international relocation." },
+    { name: "Digital Products & Learning", path: "/solutions/digital-learning", image: "/visuals/digital-learning.jpg", desc: "E-learning platforms and skill development." },
+    { name: "Information Technology", path: "/solutions/technology", image: "/visuals/technology.jpg", desc: "Enterprise software and digital transformation." },
+    { name: "Charity Foundation", path: "/impact", image: "/images/impact_hero.jpg", desc: "Community empowerment and disaster relief." },
+    { name: "View All Companies", path: "/companies", image: "/images/hero.jpg", isHighlight: true, desc: "Explore our entire corporate portfolio." },
   ];
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 pointer-events-none h-24">
+      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 flex items-center h-20 md:h-24 px-6 md:px-12 ${scrolled || activeDropdown ? 'bg-tlg-midnight shadow-2xl' : 'bg-transparent pt-4'}`}>
         
-        {/* Logo - Fixed Top Left */}
-        <m.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="absolute top-6 left-6 md:left-12 pointer-events-auto"
-        >
-          <Link 
-            href="/" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-4 group bg-white/80 backdrop-blur-md px-2 py-2 pr-6 rounded-full shadow-sm border border-tlg-stone/50 hover:shadow-md transition-all"
+        <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between">
+          
+          {/* Logo - Left */}
+          <m.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            <div className="w-10 h-10 min-w-[40px] shrink-0 relative overflow-hidden rounded-full border border-tlg-stone/50">
-              <Image src="/logo.jpeg" alt="TLG Crest" fill className="object-cover scale-110" />
-            </div>
-            <div className="flex flex-col items-start leading-none group-hover:opacity-80 transition-opacity">
-              <span className="font-serif text-lg font-medium tracking-tight text-tlg-midnight">Triumphal</span>
-              <span className="text-[0.55rem] tracking-[0.25em] uppercase text-gray-500 font-sans mt-1">Lifetime Group</span>
-            </div>
-          </Link>
-        </m.div>
-
-        {/* Center Pill: Desktop Navigation */}
-        <m.div 
-          initial={{ opacity: 0, y: -20, x: "-50%" }}
-          animate={{ opacity: 1, y: 0, x: "-50%" }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="absolute top-6 left-1/2 pointer-events-auto hidden xl:flex"
-        >
-          <nav className={`flex items-center bg-white/95 backdrop-blur-md border border-tlg-stone/50 rounded-full p-1.5 gap-1 text-sm font-semibold tracking-wide text-tlg-charcoal transition-all duration-500 ${scrolled ? 'shadow-xl -translate-y-1' : 'shadow-md'}`}>
-            <Link href="/" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">Home</Link>
-            <Link href="/about" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">About</Link>
-            
-            {/* Our Companies Dropdown */}
-            <div 
-              className="relative group flex items-center h-full"
-              onMouseEnter={() => setActiveDropdown('companies')}
-              onMouseLeave={() => setActiveDropdown(null)}
+            <Link 
+              href="/" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-4 group"
             >
-              <button className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full transition-colors ${activeDropdown === 'companies' ? 'bg-tlg-ivory text-tlg-signatureGold' : 'hover:bg-tlg-ivory hover:text-tlg-signatureGold'}`}>
+              <div className={`w-14 h-14 min-w-[56px] shrink-0 relative overflow-hidden rounded-full transition-all duration-700 ${!isDarkText || activeDropdown ? 'border border-white/20' : 'drop-shadow-sm'}`}>
+                <Image src="/logo.png" alt="TLG Crest" fill className="object-cover scale-110" />
+              </div>
+              <div className="flex flex-col items-start leading-none group-hover:opacity-80 transition-opacity">
+                <span className={`font-serif text-xl font-medium tracking-tight transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white'}`}>Triumphal</span>
+                <span className="text-[0.65rem] tracking-[0.25em] uppercase text-tlg-signatureGold font-sans mt-1.5 font-bold">Lifetime Group</span>
+              </div>
+            </Link>
+          </m.div>
+
+          {/* Center Navigation - Desktop */}
+          <m.nav 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className={`hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white/90'}`}
+          >
+            <Link href="/" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">Home</Link>
+            <Link href="/about" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">About</Link>
+            
+            {/* Our Companies Trigger */}
+            <div 
+              className="relative flex items-center h-full"
+              onMouseEnter={() => { setActiveDropdown('companies'); setHoveredLink(companiesLinks[0].image); }}
+            >
+              <button className={`flex items-center gap-1.5 px-4 py-2 transition-colors ${activeDropdown === 'companies' ? 'text-tlg-signatureGold' : 'hover:text-tlg-signatureGold'}`}>
                 Our Companies <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
               </button>
-              
-              <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-tlg-stone rounded-[24px] shadow-2xl transition-all duration-300 flex flex-col py-2 z-50 overflow-hidden ${activeDropdown === 'companies' ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible translate-y-4 scale-95'}`}>
-                {companiesLinks.map((link) => (
-                  <Link 
-                    key={link.name} 
-                    href={link.path}
-                    className={`px-6 py-3 text-sm hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors ${link.isHighlight ? 'border-t border-tlg-stone font-bold mt-2 pt-4' : 'text-gray-600'}`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
             </div>
 
-            {/* Solutions Dropdown */}
-            <div 
-              className="relative group flex items-center h-full"
-              onMouseEnter={() => setActiveDropdown('solutions')}
-              onMouseLeave={() => setActiveDropdown(null)}
+            <Link href="/insights" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">Insights</Link>
+          </m.nav>
+
+          {/* Right CTA & Search - Desktop */}
+          <m.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="hidden xl:flex items-center gap-4"
+          >
+            <button 
+              onClick={() => { triggerHaptic(); setCmdOpen(true); }}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors border ${isDarkText && !activeDropdown ? 'border-tlg-stone text-tlg-midnight hover:bg-tlg-ivory' : 'border-white/20 text-white hover:bg-white/10'}`}
             >
-              <button className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full transition-colors ${activeDropdown === 'solutions' ? 'bg-tlg-ivory text-tlg-signatureGold' : 'hover:bg-tlg-ivory hover:text-tlg-signatureGold'}`}>
-                Solutions <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
-              </button>
-              
-              <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-tlg-stone rounded-[24px] shadow-2xl transition-all duration-300 flex flex-col py-2 z-50 overflow-hidden ${activeDropdown === 'solutions' ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible translate-y-4 scale-95'}`}>
-                <span className="px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">By Outcome</span>
-                {solutionsLinks.map((link) => (
-                  <Link 
-                    key={link.name} 
-                    href={link.path}
-                    className="px-6 py-3 text-sm text-gray-600 hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+              <Search size={14} />
+              <div className="flex items-center gap-1 text-[9px] font-bold tracking-widest uppercase opacity-70">
+                <Command size={10} /> K
               </div>
-            </div>
+            </button>
 
-            <Link href="/insights" className="px-5 py-2.5 rounded-full hover:bg-tlg-ivory hover:text-tlg-signatureGold transition-colors">Insights</Link>
-            
-            <div className="ml-2 pl-2 border-l border-tlg-stone/60 flex items-center">
-              <Link 
-                href="/book" 
-                className="inline-flex items-center justify-center bg-tlg-midnight text-white px-8 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-tlg-signatureGold transition-colors shadow-md hover:shadow-lg"
-              >
-                Book a Consultation
-              </Link>
-            </div>
-          </nav>
-        </m.div>
+            <Link 
+              href="?book=true" 
+              className={`inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-700 shadow-sm hover:shadow-md ${isDarkText && !activeDropdown ? 'bg-tlg-midnight text-white hover:bg-tlg-signatureGold' : 'bg-tlg-signatureGold text-tlg-midnight hover:bg-white'}`}
+            >
+              Book a Consultation
+            </Link>
+          </m.div>
+          
+        </div>
 
-        {/* Note: Mobile Top-Right Toggle removed in favor of MobileDock */}
+        {/* Mega Menu Full-Width Dropdown */}
+        <AnimatePresence>
+          {activeDropdown === 'companies' && (
+            <m.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onMouseEnter={() => setActiveDropdown('companies')}
+              onMouseLeave={() => setActiveDropdown(null)}
+              className="absolute top-full left-0 w-full bg-white border-t border-tlg-stone shadow-2xl z-40 overflow-hidden"
+            >
+              <div className="max-w-[1600px] mx-auto px-12 py-12 flex gap-12 min-h-[400px]">
+                
+                {/* Left Side: Links Grid */}
+                <div className="w-1/2 grid grid-cols-2 gap-x-8 gap-y-2">
+                  {companiesLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.path}
+                      onMouseEnter={() => setHoveredLink(link.image)}
+                      onClick={() => setActiveDropdown(null)}
+                      className={`group flex flex-col p-4 rounded-2xl transition-colors ${hoveredLink === link.image ? 'bg-tlg-ivory' : 'hover:bg-tlg-ivory'} ${link.isHighlight ? 'col-span-2 border border-tlg-stone mt-4 items-center justify-center text-center' : ''}`}
+                    >
+                      <span className={`font-serif text-xl mb-1 transition-colors ${hoveredLink === link.image ? 'text-tlg-signatureGold' : 'text-tlg-midnight'}`}>
+                        {link.name}
+                      </span>
+                      {!link.isHighlight && (
+                        <span className="text-xs text-gray-700 font-normal leading-relaxed">
+                          {link.desc}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Right Side: Image Preview */}
+                <div className="w-1/2 relative rounded-[32px] overflow-hidden bg-tlg-ivory border border-tlg-stone/50">
+                  <AnimatePresence mode="wait">
+                    {hoveredLink && (
+                      <m.div
+                        key={hoveredLink}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="absolute inset-0"
+                      >
+                        <Image src={hoveredLink} alt="Preview" fill className="object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-tlg-midnight/60 to-transparent" />
+                      </m.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+              </div>
+            </m.div>
+          )}
+        </AnimatePresence>
       </header>
 
+      {/* Command Menu */}
+      <CommandMenu isOpen={cmdOpen} setIsOpen={setCmdOpen} />
+
       {/* MobileDock */}
-      <MobileDock onOpenMenu={() => setMobileMenuOpen(true)} />
+      <Suspense fallback={null}>
+        <MobileDock onOpenMenu={() => setMobileMenuOpen(true)} />
+      </Suspense>
 
       {/* Mobile Bottom Sheet Backdrop */}
       <div 
@@ -167,7 +210,6 @@ export default function Header() {
         }`}
         role="dialog"
         aria-modal="true"
-        aria-expanded={mobileMenuOpen}
       >
         {/* Drag Handle & Header */}
         <div className="shrink-0 pt-4 pb-2 px-6 flex justify-between items-center border-b border-tlg-stone/50">
@@ -175,7 +217,7 @@ export default function Header() {
           <span className="font-serif text-lg text-tlg-midnight mt-4">Menu</span>
           <button 
             onClick={() => setMobileMenuOpen(false)}
-            className="p-2 -mr-2 mt-4 text-gray-400 hover:text-tlg-midnight transition-colors"
+            className="p-2 -mr-2 mt-4 text-gray-800 hover:text-tlg-midnight transition-colors"
           >
             <X size={24} />
           </button>
@@ -185,22 +227,22 @@ export default function Header() {
         <div className="overflow-y-auto hide-scrollbar flex-1 px-8 py-8 pb-[calc(100px+env(safe-area-inset-bottom,20px))]">
           
           <nav className="flex flex-col gap-6">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Home</Link>
-            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">About Us</Link>
+            <Link href="/" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Home</Link>
+            <Link href="/about" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">About Us</Link>
             
             <div className="flex flex-col gap-4 border-l-2 border-tlg-ivory pl-4 py-2">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-tlg-signatureGold">Our Companies</span>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold">Our Companies</span>
               {companiesLinks.map(link => (
-                <Link key={link.name} href={link.path} onClick={() => setMobileMenuOpen(false)} className={`text-lg transition-colors ${link.isHighlight ? 'text-tlg-midnight font-medium mt-2' : 'text-gray-500'}`}>
+                <Link key={link.name} href={link.path} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className={`text-lg transition-colors ${link.isHighlight ? 'text-tlg-midnight font-medium mt-2' : 'text-gray-700'}`}>
                   {link.name}
                 </Link>
               ))}
             </div>
 
-            <Link href="/insights" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Insights & Ideas</Link>
-            <Link href="/impact" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Social Impact</Link>
-            <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Careers</Link>
-            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Contact</Link>
+            <Link href="/insights" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Insights & Ideas</Link>
+            <Link href="/impact" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Social Impact</Link>
+            <Link href="/careers" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Careers</Link>
+            <Link href="/contact" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Contact</Link>
           </nav>
 
         </div>
