@@ -69,7 +69,7 @@ export default function Footer() {
                 <span className="italic font-normal text-white/90">Creating Lasting Value.</span>
               </h2>
 
-              {/* Social icons — shown here on mobile, hidden on desktop (shown in contact col) */}
+              {/* Social icons - shown here on mobile, hidden on desktop (shown in contact col) */}
               <div className="flex items-center gap-3 lg:hidden">
                 {socials.map(({ href, icon: Icon, label }) => (
                   <a

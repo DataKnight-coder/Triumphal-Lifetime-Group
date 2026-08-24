@@ -48,7 +48,7 @@ export default function OurStoryPage() {
  <span className="text-tlg-signatureGold font-bold text-sm tracking-widest uppercase mb-2 block">Expansion</span>
  <h3 className="text-3xl font-serif text-tlg-midnight mb-4">Market Diversification</h3>
  <p className="text-gray-800 font-normal leading-relaxed">
- As our clients expanded, their needs evolved. Recognising that modern businesses require integrated solutions, we launched specialized divisions in Real Estate Advisory, Information Technology, and Digital Learning—transforming from a single consultancy into a diversified Group.
+ As our clients expanded, their needs evolved. Recognising that modern businesses require integrated solutions, we launched specialized divisions in Real Estate Advisory, Information Technology, and Digital Learning - transforming from a single consultancy into a diversified Group.
  </p>
  </div>
 

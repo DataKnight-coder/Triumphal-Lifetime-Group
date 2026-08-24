@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
- title: "Triumphal Lifetime Group — HR, Real Estate, Education, Mobility & Technology",
+ title: "Triumphal Lifetime Group - HR, Real Estate, Education, Mobility & Technology",
  description: "Triumphal Lifetime Group is an integrated advisory ecosystem operating across Nigeria, UAE, and Canada. We connect expertise in HR consulting, real estate investment, education advisory, global mobility, digital learning, and information technology.",
 };
 
@@ -57,7 +57,7 @@ export default function Home() {
    className="text-3xl md:text-5xl lg:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8" 
  />
  <Reveal delay={0.1}><p className="text-lg md:text-xl text-gray-700 font-normal max-w-3xl mx-auto leading-relaxed mb-10">
-  Triumphal Lifetime Group brings complementary expertise together within one business ecosystem. Whether you are building a stronger organisation, exploring property opportunities, pursuing international education, navigating immigration, or adopting technology — our specialist teams provide structured support from beginning to execution.
+  Triumphal Lifetime Group brings complementary expertise together within one business ecosystem. Whether you are building a stronger organisation, exploring property opportunities, pursuing international education, navigating immigration, or adopting technology - our specialist teams provide structured support from beginning to execution.
  </p></Reveal>
  <Reveal delay={0.15}>
  <div className="flex flex-wrap justify-center gap-4 text-xs font-bold uppercase tracking-widest">
@@ -234,7 +234,7 @@ export default function Home() {
  </div>
  <div className="shrink-0 w-[85vw] snap-center md:w-auto bg-white p-8 md:p-10 rounded-[24px] shadow-sm flex flex-col justify-center md:translate-y-8">
  <h4 className="text-xl font-serif text-tlg-midnight mb-3">Integrated Ecosystem</h4>
- <p className="text-sm text-gray-700 font-normal leading-relaxed">Access complementary professional services—from real estate to IT—through one connected group.</p>
+ <p className="text-sm text-gray-700 font-normal leading-relaxed">Access complementary professional services - from real estate to IT - through one connected group.</p>
  </div>
  <div className="shrink-0 w-[85vw] snap-center md:w-auto bg-white p-8 md:p-10 rounded-[24px] shadow-sm flex flex-col justify-center">
  <h4 className="text-xl font-serif text-tlg-midnight mb-3">Community Impact</h4>
@@ -315,7 +315,7 @@ export default function Home() {
   <div className="bg-tlg-ivory border border-tlg-stone rounded-[24px] p-10 flex flex-col">
   <span className="text-tlg-signatureGold text-xs uppercase font-bold tracking-widest mb-4">UAE</span>
   <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Dubai Office</h3>
-  <p className="text-sm text-gray-700 leading-relaxed mb-6">Our real estate investment hub. We source premium Dubai properties — from off-plan residential units starting at $240,000 to fractional ownership opportunities from $40,000 — for Nigerian and international investors.</p>
+  <p className="text-sm text-gray-700 leading-relaxed mb-6">Our real estate investment hub. We source premium Dubai properties - from off-plan residential units starting at $240,000 to fractional ownership opportunities from $40,000 - for Nigerian and international investors.</p>
   <div className="mt-auto pt-6 border-t border-tlg-stone">
   <p className="text-xs text-gray-700 uppercase tracking-widest font-bold">+971 55 199 5483</p>
   </div>

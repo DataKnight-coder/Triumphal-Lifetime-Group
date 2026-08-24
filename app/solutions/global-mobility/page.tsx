@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, Plane, FileCheck, Briefcase, Building2, MapPi
 import Reveal from "@/components/animations/Reveal";
 
 export const metadata: Metadata = {
-  title: "Global Mobility & Immigration Advisory — Canada, UAE & UK | Triumphal Lifetime Group",
+  title: "Global Mobility & Immigration Advisory - Canada, UAE & UK | Triumphal Lifetime Group",
   description: "Administrative support and advisory for study visas, work permits, business visas, family relocation and international settlement. Serving Nigeria, Canada, UAE and UK.",
 };
 
@@ -153,7 +153,7 @@ export default function GlobalMobilityPage() {
             <Reveal className="order-2 md:order-1"><div>
               <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Structured Relocation Planning</h3>
               <p className="text-gray-800 text-lg leading-relaxed mb-6">
-                Moving across borders involves more than visas. We provide settlement guides and logistical support—from understanding local housing markets to navigating civic registrations—so you can transition smoothly into your new environment.
+                Moving across borders involves more than visas. We provide settlement guides and logistical support - from understanding local housing markets to navigating civic registrations - so you can transition smoothly into your new environment.
               </p>
             </div></Reveal>
             <Reveal delay={0.2} className="order-1 md:order-2"><div className="relative h-[400px] rounded-[24px] overflow-hidden border border-tlg-stone">

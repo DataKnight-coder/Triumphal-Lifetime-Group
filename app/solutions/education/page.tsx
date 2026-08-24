@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, GraduationCap, BookOpen, Globe2, Building } f
 import Reveal from "@/components/animations/Reveal";
 
 export const metadata: Metadata = {
-  title: "Education Advisory — Study in Canada, UAE & Nigeria | Triumphal Lifetime Group",
+  title: "Education Advisory - Study in Canada, UAE & Nigeria | Triumphal Lifetime Group",
   description: "Expert education advisory for students applying to Canadian, UAE and Nigerian universities. We provide profile assessment, institution research, application support, scholarship research and pre-departure guidance.",
 };
 
@@ -279,10 +279,10 @@ export default function EducationAdvisoryPage() {
           </div></Reveal>
           <div className="space-y-0">
             {[
-              { q: "Can you guarantee my admission to a university?", a: "No. Final admission decisions belong to the institutions, and we state this clearly. What we can do is help you present the strongest possible application — identifying suitable programmes, reviewing your documents, and preparing your personal statement — to significantly improve your chances." },
+              { q: "Can you guarantee my admission to a university?", a: "No. Final admission decisions belong to the institutions, and we state this clearly. What we can do is help you present the strongest possible application - identifying suitable programmes, reviewing your documents, and preparing your personal statement - to significantly improve your chances." },
               { q: "Which countries do you help students apply to?", a: "We primarily support applications to Canada, UAE, and Nigeria. Canada is a leading destination due to its post-study work options and immigration pathways. UAE offers fast-growing international campuses. We assess your profile and goals to determine which destination is the best fit." },
               { q: "Do you help with scholarships?", a: "Yes, we research available bursaries, government scholarships, and institutional funding opportunities that you may be eligible for. We cannot apply on your behalf, but we identify what is available and guide you through the process." },
-              { q: "What if I don't have high grades?", a: "Our advisory is not restricted to top-performing students. We assess your full profile — including work experience, extracurricular background, and career intent — and help identify programmes and institutions where you are realistically competitive." },
+              { q: "What if I don't have high grades?", a: "Our advisory is not restricted to top-performing students. We assess your full profile - including work experience, extracurricular background, and career intent - and help identify programmes and institutions where you are realistically competitive." },
               { q: "How soon should I start the process?", a: "Ideally 6–12 months before your intended start date. Admission timelines, document gathering, scholarship applications, and visa processing all take time. The earlier you start, the more options you have. Reach out to us for a timeline review specific to your situation." },
             ].map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>

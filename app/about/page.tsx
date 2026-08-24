@@ -96,16 +96,16 @@ export default function AboutGroupPage() {
                 Modern business and personal challenges rarely fit neatly into a single category. Whether an enterprise is expanding into a new jurisdiction, or an individual is navigating international education and mobility, the solutions require interconnected expertise.
               </p>
               <p>
-                Triumphal Lifetime Group was founded on the principle that integrated advisory — combining human resources, real estate, technology, and compliance under one ecosystem — delivers superior, frictionless results. We remove the friction of coordinating between multiple disconnected firms and replace it with a single, accountable partnership.
+                Triumphal Lifetime Group was founded on the principle that integrated advisory - combining human resources, real estate, technology, and compliance under one ecosystem - delivers superior, frictionless results. We remove the friction of coordinating between multiple disconnected firms and replace it with a single, accountable partnership.
               </p>
               <p className="text-tlg-midnight font-medium">
-                Our six divisions are not independent silos. They are deliberately designed to work in concert — so that when your business grows, every pillar of support grows with it.
+                Our six divisions are not independent silos. They are deliberately designed to work in concert - so that when your business grows, every pillar of support grows with it.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Sub-page Navigation — The Key Section */}
+        {/* Sub-page Navigation - The Key Section */}
         <section className="py-24 bg-tlg-ivory">
           <div className="max-w-[1200px] mx-auto px-6 md:px-12">
 
@@ -122,7 +122,7 @@ export default function AboutGroupPage() {
               </div>
             </div>
 
-            {/* Sub-page cards — responsive grid */}
+            {/* Sub-page cards - responsive grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
               {subPages.map((page) => {
                 const Icon = page.icon;
@@ -137,7 +137,7 @@ export default function AboutGroupPage() {
                       <div className="w-12 h-12 rounded-full bg-tlg-ivory border border-tlg-stone flex items-center justify-center group-hover:bg-tlg-midnight group-hover:border-tlg-midnight transition-colors duration-300">
                         <Icon size={18} className="text-tlg-signatureGold group-hover:text-tlg-signatureGold transition-colors" />
                       </div>
-                      {/* Arrow indicator — always visible on mobile, animated on desktop */}
+                      {/* Arrow indicator - always visible on mobile, animated on desktop */}
                       <div className="flex items-center justify-center w-9 h-9 rounded-full border border-tlg-stone group-hover:bg-tlg-midnight group-hover:border-tlg-midnight transition-all duration-300">
                         <ArrowRight size={14} className="text-gray-700 group-hover:text-white transition-colors -rotate-45 group-hover:rotate-0 duration-300" />
                       </div>
@@ -152,7 +152,7 @@ export default function AboutGroupPage() {
                       {page.description}
                     </p>
 
-                    {/* CTA row — always at bottom */}
+                    {/* CTA row - always at bottom */}
                     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-tlg-midnight group-hover:text-tlg-signatureGold transition-colors mt-auto pt-6 border-t border-tlg-stone">
                       {page.cta}
                       <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-200" />

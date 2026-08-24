@@ -58,7 +58,7 @@ export default function ArticlePage() {
 
               <h2 className="text-3xl mt-12 mb-6">The "Flight to Quality" in DIFC and Business Bay</h2>
               <p>
-                The narrative of 2026 is defined by a hyper-accelerated "flight to quality." As international enterprises—particularly those in AI, fintech, and advanced wealth management—relocate from Europe and Asia, the demand for Grade A, ESG-compliant office space in the Dubai International Financial Centre (DIFC) and Business Bay has outstripped existing supply.
+                The narrative of 2026 is defined by a hyper-accelerated "flight to quality." As international enterprises - particularly those in AI, fintech, and advanced wealth management - relocate from Europe and Asia, the demand for Grade A, ESG-compliant office space in the Dubai International Financial Centre (DIFC) and Business Bay has outstripped existing supply.
               </p>
               <p>
                 Occupancy rates in premium, smart-enabled buildings have effectively hit 98%. This scarcity has naturally compressed yields and driven up leasing rates. According to our Q3 2026 market data, average rental prices for LEED-certified commercial properties in the DIFC have seen a 14% year-over-year increase.
@@ -86,7 +86,7 @@ export default function ArticlePage() {
                 Historically, investing in premium Dubai commercial real estate required immense capital outlay, restricting the market to institutional players. However, 2026 has seen the mainstream adoption of blockchain-backed fractional ownership. 
               </p>
               <p>
-                Through properly regulated, tokenized asset platforms, individual investors—particularly those mobilizing capital from emerging markets like Nigeria—can now purchase secure, dividend-yielding shares in high-profile commercial assets for a fraction of the total property value. This has democratized access to Dubai's lucrative commercial rental yields, providing a powerful hedge against currency volatility.
+                Through properly regulated, tokenized asset platforms, individual investors - particularly those mobilizing capital from emerging markets like Nigeria - can now purchase secure, dividend-yielding shares in high-profile commercial assets for a fraction of the total property value. This has democratized access to Dubai's lucrative commercial rental yields, providing a powerful hedge against currency volatility.
               </p>
 
               <h2 className="text-3xl mt-12 mb-6">Strategic Outlook: 2026–2030</h2>

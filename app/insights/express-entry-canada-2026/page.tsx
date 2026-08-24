@@ -58,7 +58,7 @@ export default function ArticlePage() {
 
               <h2 className="text-3xl mt-12 mb-6">The End of the General Draw Dominance</h2>
               <p>
-                In 2026, the era of relying solely on general Comprehensive Ranking System (CRS) score draws has decisively ended. While general draws still occur, the CRS cut-off scores have stabilized at historically high baselines—often hovering above the 520 mark. This renders the general pathway exceptionally difficult for candidates without Canadian work experience, provincial nominations, or validated LMIA-backed job offers.
+                In 2026, the era of relying solely on general Comprehensive Ranking System (CRS) score draws has decisively ended. While general draws still occur, the CRS cut-off scores have stabilized at historically high baselines - often hovering above the 520 mark. This renders the general pathway exceptionally difficult for candidates without Canadian work experience, provincial nominations, or validated LMIA-backed job offers.
               </p>
               <p>
                 Immigration, Refugees and Citizenship Canada (IRCC) has pivoted almost entirely to <strong>Category-Based Selection</strong>, ensuring that economic migration directly addresses acute labor shortages in specific sectors of the Canadian economy.

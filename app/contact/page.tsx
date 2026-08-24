@@ -18,7 +18,7 @@ export default function ContactPage() {
  Let&rsquo;s Start a Conversation.
  </h1>
  <p className="text-white/90 font-normal text-lg max-w-xl leading-relaxed">
- Reach the team directly — by regional office, or send a general inquiry and we will route it to the right division.
+ Reach the team directly - by regional office, or send a general inquiry and we will route it to the right division.
  </p>
  </div>
  </section>
@@ -80,7 +80,7 @@ export default function ContactPage() {
  <section className="py-24">
  <div className="max-w-[1200px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
 
- {/* Left — Context */}
+ {/* Left - Context */}
  <div className="lg:col-span-2">
  <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold mb-6 block">General Inquiry</span>
  <h2 className="text-3xl md:text-4xl font-serif text-tlg-midnight mb-6 leading-[1.2]">Send Us a Message</h2>
@@ -92,7 +92,7 @@ export default function ContactPage() {
  </div>
  </div>
 
- {/* Right — Form */}
+ {/* Right - Form */}
  <div className="lg:col-span-3 bg-tlg-ivory border border-tlg-stone p-8 md:p-12">
  <form className="space-y-6">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

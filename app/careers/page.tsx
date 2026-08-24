@@ -41,7 +41,7 @@ export default function CareersPage() {
  </div>
  <div>
  <h4 className="text-lg font-serif text-tlg-midnight mb-3">Meritocratic Growth</h4>
- <p className="text-sm text-gray-800 font-normal leading-relaxed">Advancement is based strictly on performance, client impact, and leadership capability—not tenure.</p>
+ <p className="text-sm text-gray-800 font-normal leading-relaxed">Advancement is based strictly on performance, client impact, and leadership capability - not tenure.</p>
  </div>
  <div>
  <h4 className="text-lg font-serif text-tlg-midnight mb-3">Continuous Learning</h4>

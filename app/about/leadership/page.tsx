@@ -30,7 +30,7 @@ export default function LeadershipPage() {
  </div>
  </section>
 
- {/* CEO — Featured */}
+ {/* CEO - Featured */}
  <section className="py-24 border-b border-tlg-stone">
  <div className="max-w-[1200px] mx-auto px-6 md:px-12">
  <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold mb-16 block">Founder & Group Chief Executive</span>
@@ -40,7 +40,7 @@ export default function LeadershipPage() {
  <div className="relative w-full aspect-[3/4] max-w-sm overflow-hidden bg-tlg-stone/20">
  <Image
  src="/images/team/ARIKE_ADEBAYO.jpeg"
- alt="Arike Adedayo — Founder & Group CEO"
+ alt="Arike Adedayo - Founder & Group CEO"
  fill
  className="object-cover object-top"
  priority

@@ -5,7 +5,7 @@ import { ArrowRight, Building2, MapPin, Target, Landmark, Home, Phone, Map, Shie
 import Reveal from "@/components/animations/Reveal";
 import PropertyInventory from "@/components/real-estate/PropertyInventory";
 export const metadata: Metadata = {
-  title: "Real Estate & Investment Advisory — Dubai, UAE & Nigeria | Triumphal Lifetime Group",
+  title: "Real Estate & Investment Advisory - Dubai, UAE & Nigeria | Triumphal Lifetime Group",
   description: "Invest in Dubai property from Nigeria with Triumphal Lifetime Group. We offer fractional ownership from $40,000, holiday homes, residential, and commercial real estate advisory across UAE and Nigeria.",
 };
 
@@ -323,7 +323,7 @@ export default function RealEstatePage() {
           </div></Reveal>
           <div className="space-y-0">
             {[
-              { q: "How do I invest in Dubai property from Nigeria?", a: "You don't need to travel to Dubai to invest. We manage the process remotely — from property selection and price negotiation to documentation and legal verification. Payment can often be structured in installments, and we guide you through Dubai Land Department (DLD) registration requirements." },
+              { q: "How do I invest in Dubai property from Nigeria?", a: "You don't need to travel to Dubai to invest. We manage the process remotely - from property selection and price negotiation to documentation and legal verification. Payment can often be structured in installments, and we guide you through Dubai Land Department (DLD) registration requirements." },
               { q: "What does 'fractional ownership' mean?", a: "Fractional ownership allows multiple investors to co-own a premium property by each purchasing a registered ownership share. Your share entitles you to proportional rental income and capital appreciation. You are listed on the Dubai Land Department title deed and can exit by selling your shares after the agreed holding period." },
               { q: "What is the minimum investment to start?", a: "Fractional ownership shares in Dubai start from approximately $40,000 USD. Full property purchases begin from $240,000. Nigeria commercial properties are priced on application. Contact us with your budget and we will identify the most suitable opportunities." },
               { q: "Are there taxes on Dubai property gains?", a: "Dubai currently levies 0% capital gains tax on property disposals, which is one of the primary reasons it attracts international investors. You will need to factor in the one-time 4% Dubai Land Department registration fee on purchase." },

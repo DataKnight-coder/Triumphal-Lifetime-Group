@@ -24,7 +24,7 @@ export default function TechnologyPage() {
               Build Reliable Technology Systems for Your Business.
             </h1></Reveal>
             <Reveal delay={0.2}><p className="text-lg text-gray-800 leading-relaxed max-w-xl mb-10">
-              We help growing companies build, manage, and secure their IT infrastructure—from custom software development and cloud migration to managed IT support, cybersecurity, and process automation.
+              We help growing companies build, manage, and secure their IT infrastructure - from custom software development and cloud migration to managed IT support, cybersecurity, and process automation.
             </p></Reveal>
             
             <Reveal delay={0.3}>
@@ -136,7 +136,7 @@ export default function TechnologyPage() {
               </div>
               <h3 className="text-lg font-serif text-tlg-midnight mb-2">Process Automation</h3>
               <p className="text-gray-800 text-sm leading-relaxed mb-4 flex-1">
-                We identify redundant operational tasks across your organisation and deploy software scripts and integrations that allow systems to communicate seamlessly—improving efficiency and eliminating manual entry errors.
+                We identify redundant operational tasks across your organisation and deploy software scripts and integrations that allow systems to communicate seamlessly - improving efficiency and eliminating manual entry errors.
               </p>
             </div></Reveal>
 
@@ -258,7 +258,7 @@ export default function TechnologyPage() {
             {[
               { q: "Do you build websites and mobile apps?", a: "Yes. Our software development service covers web applications, internal management portals, and mobile-first platforms. We scope each project to understand your business requirements before designing any architecture." },
               { q: "How do you approach cybersecurity?", a: "We start with a vulnerability audit of your existing infrastructure. We then implement layered defences including firewall configurations, access controls, data encryption protocols, and staff security awareness programmes. Ongoing monitoring is available as a managed service." },
-              { q: "What is managed IT support?", a: "Managed IT support means we act as your outsourced technology team — handling helpdesk queries, hardware procurement, network administration, software updates, and proactive system maintenance. This model is cost-effective for organisations that do not need a full in-house IT department." },
+              { q: "What is managed IT support?", a: "Managed IT support means we act as your outsourced technology team - handling helpdesk queries, hardware procurement, network administration, software updates, and proactive system maintenance. This model is cost-effective for organisations that do not need a full in-house IT department." },
               { q: "Can you help us migrate to cloud systems?", a: "Yes. We plan and execute cloud migrations for Microsoft Azure, Google Cloud, and AWS environments. Our process is phased to avoid disruption: we audit, design the new architecture, migrate in controlled stages, and train your team before full cutover." },
               { q: "How long does a typical IT engagement take?", a: "It depends on the scope. A cybersecurity audit can take 2–4 weeks. A cloud migration for a medium-sized organisation typically takes 2–4 months. Custom software projects vary. We provide clear timelines and milestone-based delivery during the scoping phase." },
             ].map((item, i) => (

@@ -69,7 +69,7 @@ export default function RefundPolicyPage() {
 
  <h2>7. How to Request a Refund</h2>
  <p>
-   All refund requests must be submitted in writing to <a href="mailto:info@triumphallifetimegroup.com">info@triumphallifetimegroup.com</a> with the subject line <strong>&ldquo;Refund Request — [Your Name] — [Service]&rdquo;</strong>. Please include your engagement reference number, the date of payment, and the grounds for your request. We will acknowledge receipt within two business days and issue a decision within ten business days.
+   All refund requests must be submitted in writing to <a href="mailto:info@triumphallifetimegroup.com">info@triumphallifetimegroup.com</a> with the subject line <strong>&ldquo;Refund Request - [Your Name] - [Service]&rdquo;</strong>. Please include your engagement reference number, the date of payment, and the grounds for your request. We will acknowledge receipt within two business days and issue a decision within ten business days.
  </p>
 
  <h2>8. Currency and Processing</h2>
