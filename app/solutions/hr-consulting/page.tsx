@@ -44,7 +44,7 @@ export default function HRConsultingPage() {
           </div>
           <div className="w-full lg:w-1/2">
             <Reveal delay={0.2} className="relative h-[400px] lg:h-[550px] w-full rounded-[24px] overflow-hidden shadow-sm border border-tlg-stone">
-               <Image src="/visuals/hr-team.jpg" alt="Professional HR Team" fill className="object-cover" />
+               <Image src="/visuals/hr_team.jpg" alt="Professional HR Team" fill className="object-cover" />
             </Reveal>
           </div>
         </div>
