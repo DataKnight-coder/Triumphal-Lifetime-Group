@@ -101,7 +101,21 @@ export default function PrivacyPage() {
  </div>
 
  <div>
- <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">8. Changes to This Policy</h2>
+ <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">8. International Data Transfers</h2>
+ <p>
+ As an international business operating across Nigeria, the UAE, and Canada, your personal data may be transferred to, and processed in, countries other than the country in which you are resident. These countries may have data protection laws that are different from the laws of your country. However, we have taken appropriate safeguards to require that your personal data will remain protected in accordance with this Privacy Policy.
+ </p>
+ </div>
+
+ <div>
+ <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">9. Marketing Communications</h2>
+ <p>
+ We will only send you marketing communications if you have explicitly opted in to receive them, or if you are an existing client and the communication is relevant to services you have previously engaged us for. You have the right to opt-out of marketing communications at any time by contacting us or using the unsubscribe link provided in such emails.
+ </p>
+ </div>
+
+ <div>
+ <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">10. Changes to This Policy</h2>
  <p>
  We may update this Privacy Policy from time to time to reflect changes in our practices or applicable law. The &ldquo;Last updated&rdquo; date at the top of this page indicates when it was last revised. Continued use of the website after any changes constitutes acceptance of the updated policy.
  </p>

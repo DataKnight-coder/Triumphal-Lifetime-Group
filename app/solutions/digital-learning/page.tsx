@@ -24,7 +24,7 @@ export default function DigitalLearningPage() {
               Equip Your Teams With Knowledge That Scales.
             </h1></Reveal>
             <Reveal delay={0.2}><p className="text-lg text-gray-800 leading-relaxed max-w-xl mb-10">
-              From professional courses and interactive corporate workshops to downloadable business resources and structured training programmes, we help organisations standardise knowledge transfer.
+              We create practical learning resources, professional development programmes and business tools designed to help individuals and organisations build useful workplace skills. We are an advisory and training service, not an accredited university.
             </p></Reveal>
             
             <Reveal delay={0.3}>

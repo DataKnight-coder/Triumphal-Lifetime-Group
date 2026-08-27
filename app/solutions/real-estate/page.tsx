@@ -22,10 +22,10 @@ export default function RealEstatePage() {
             </Link>
             <Reveal><span className="text-tlg-signatureGold text-[11px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4 block">REAL ESTATE & INVESTMENT ADVISORY</span></Reveal>
             <Reveal delay={0.1}><h1 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.1] text-tlg-midnight mb-6">
-              Make Property Decisions With Better Information.
+              Real Estate Advisory & Property Services.
             </h1></Reveal>
             <Reveal delay={0.2}><p className="text-lg md:text-xl text-gray-800 leading-relaxed max-w-2xl mb-10">
-              Whether you are buying, renting, investing, managing a property or marketing a development, we help you define your requirements, research suitable opportunities and coordinate the next steps.
+              We support clients exploring residential, commercial and investment property opportunities by helping them understand available options, market considerations and the practical steps involved in a transaction.
             </p></Reveal>
             
             <Reveal delay={0.3}>
@@ -143,8 +143,8 @@ export default function RealEstatePage() {
               <Reveal delay={0.4}><div className="flex items-start gap-4">
                 <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-tlg-stone text-tlg-signatureGold font-bold text-xs">02</div>
                 <div>
-                  <h4 className="text-xl font-serif text-tlg-midnight mb-2">Passive Rental Income</h4>
-                  <p className="text-sm text-gray-800">Your proportional rental yield is calculated and distributed quarterly directly to your account.</p>
+                  <h4 className="text-xl font-serif text-tlg-midnight mb-2">Proportional Rental Income</h4>
+                  <p className="text-sm text-gray-800">Your proportional rental yield is calculated and distributed based on your ownership share.</p>
                 </div>
               </div></Reveal>
               
@@ -167,17 +167,10 @@ export default function RealEstatePage() {
           <div className="w-full lg:w-1/2">
             <Reveal className="relative h-[450px] w-full rounded-[24px] overflow-hidden shadow-md border border-tlg-stone">
               <Image src="https://egtzvtwnlhedxsqxcmja.supabase.co/storage/v1/object/public/property-photos/1779903358716-u9gfab.avif" alt="Fractional Investment Property" fill className="object-cover" />
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur p-6 rounded-2xl shadow-lg flex justify-between items-center">
-                <div>
-                  <p className="text-[11px] uppercase font-bold tracking-widest text-gray-800 mb-1">Target Yield</p>
-                  <p className="text-2xl font-serif text-tlg-midnight">7% - 9%</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-[11px] uppercase font-bold tracking-widest text-gray-800 mb-1">Tax on Gains</p>
-                  <p className="text-2xl font-serif text-tlg-signatureGold">0%</p>
-                </div>
-              </div>
             </Reveal>
+            <div className="mt-4 text-xs text-gray-600 bg-white border border-tlg-stone p-4 rounded-xl">
+              <strong>Disclaimer:</strong> UAE real estate transactions are facilitated through appropriately licensed real estate entities and authorised professionals in accordance with applicable UAE regulations. Illustrative or target returns are not guaranteed. Property values and rental income may increase or decrease, and investors should undertake independent financial, legal and tax due diligence before making an investment decision.
+            </div>
           </div>
         </div>
       </section>
@@ -323,7 +316,7 @@ export default function RealEstatePage() {
           </div></Reveal>
           <div className="space-y-0">
             {[
-              { q: "How do I invest in Dubai property from Nigeria?", a: "You don't need to travel to Dubai to invest. We manage the process remotely - from property selection and price negotiation to documentation and legal verification. Payment can often be structured in installments, and we guide you through Dubai Land Department (DLD) registration requirements." },
+              { q: "How do I invest in Dubai property from Nigeria?", a: "You don't need to travel to Dubai to invest. We can assist with property research and coordinate the process with the relevant licensed professionals and service providers. Payment can often be structured in installments, and we guide you through Dubai Land Department (DLD) registration requirements." },
               { q: "What does 'fractional ownership' mean?", a: "Fractional ownership allows multiple investors to co-own a premium property by each purchasing a registered ownership share. Your share entitles you to proportional rental income and capital appreciation. You are listed on the Dubai Land Department title deed and can exit by selling your shares after the agreed holding period." },
               { q: "What is the minimum investment to start?", a: "Fractional ownership shares in Dubai start from approximately $40,000 USD. Full property purchases begin from $240,000. Nigeria commercial properties are priced on application. Contact us with your budget and we will identify the most suitable opportunities." },
               { q: "Are there taxes on Dubai property gains?", a: "Dubai currently levies 0% capital gains tax on property disposals, which is one of the primary reasons it attracts international investors. You will need to factor in the one-time 4% Dubai Land Department registration fee on purchase." },
@@ -358,7 +351,7 @@ export default function RealEstatePage() {
               <div className="flex items-start gap-4">
                 <MapPin className="text-tlg-signatureGold shrink-0 mt-1" size={20} />
                 <div>
-                  <h4 className="font-bold text-sm uppercase tracking-widest text-white mb-1">Corporate Headquarters</h4>
+                  <h4 className="font-bold text-sm uppercase tracking-widest text-white mb-1">Group / Regional Operations</h4>
                   <p className="text-sm text-white/80">Abuja, FCT, Nigeria</p>
                 </div>
               </div>

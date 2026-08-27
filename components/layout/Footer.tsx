@@ -96,11 +96,13 @@ export default function Footer() {
               <div>
                 <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70 mb-5">Navigation</h4>
                 <ul className="flex flex-col gap-4 text-sm text-white/90 font-normal">
-                  <li><Link href="/" className="hover:text-tlg-signatureGold transition-colors">Home</Link></li>
-                  <li><Link href="/about" className="hover:text-tlg-signatureGold transition-colors">About Us</Link></li>
-                  <li><Link href="/companies" className="hover:text-tlg-signatureGold transition-colors">Our Companies</Link></li>
-                  <li><Link href="/insights" className="hover:text-tlg-signatureGold transition-colors">Insights</Link></li>
+                  <li><Link href="/companies" className="hover:text-tlg-signatureGold transition-colors">Our Businesses</Link></li>
+                  <li><Link href="/about" className="hover:text-tlg-signatureGold transition-colors">About</Link></li>
+                  <li><Link href="/about/leadership" className="hover:text-tlg-signatureGold transition-colors">Leadership</Link></li>
                   <li><Link href="/impact" className="hover:text-tlg-signatureGold transition-colors">Social Impact</Link></li>
+                  <li><Link href="/insights" className="hover:text-tlg-signatureGold transition-colors">Insights</Link></li>
+                  <li><Link href="/careers" className="hover:text-tlg-signatureGold transition-colors">Careers</Link></li>
+                  <li><Link href="/contact" className="hover:text-tlg-signatureGold transition-colors">Contact</Link></li>
                 </ul>
               </div>
 
@@ -137,11 +139,13 @@ export default function Footer() {
             <div className="hidden lg:flex lg:col-span-2 flex-col lg:pl-4">
               <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70 mb-8">Navigation</h4>
               <ul className="flex flex-col gap-4 text-sm text-white/90 font-normal">
-                <li><Link href="/" className="hover:text-tlg-signatureGold transition-colors">Home</Link></li>
-                <li><Link href="/about" className="hover:text-tlg-signatureGold transition-colors">About Us</Link></li>
-                <li><Link href="/companies" className="hover:text-tlg-signatureGold transition-colors">Our Companies</Link></li>
-                <li><Link href="/insights" className="hover:text-tlg-signatureGold transition-colors">Insights</Link></li>
+                <li><Link href="/companies" className="hover:text-tlg-signatureGold transition-colors">Our Businesses</Link></li>
+                <li><Link href="/about" className="hover:text-tlg-signatureGold transition-colors">About</Link></li>
+                <li><Link href="/about/leadership" className="hover:text-tlg-signatureGold transition-colors">Leadership</Link></li>
                 <li><Link href="/impact" className="hover:text-tlg-signatureGold transition-colors">Social Impact</Link></li>
+                <li><Link href="/insights" className="hover:text-tlg-signatureGold transition-colors">Insights</Link></li>
+                <li><Link href="/careers" className="hover:text-tlg-signatureGold transition-colors">Careers</Link></li>
+                <li><Link href="/contact" className="hover:text-tlg-signatureGold transition-colors">Contact</Link></li>
               </ul>
             </div>
 

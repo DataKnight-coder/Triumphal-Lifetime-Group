@@ -20,44 +20,16 @@ export default function Home() {
  {/* 02 - Light Editorial Hero */}
  <Hero />
  
- {/* Quick Trust Indicators */}
- <section className="bg-tlg-ivory py-10 border-y border-tlg-stone">
- <Reveal delay={0.2}>
- <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8 divide-y md:divide-y-0 md:divide-x divide-tlg-stone/50">
- <div className="flex-1 flex flex-col items-center text-center pt-5 md:pt-0 w-full">
- <span className="text-3xl md:text-4xl font-serif text-tlg-midnight">3</span>
- <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-700 mt-2">Countries Served</span>
- <span className="text-xs text-gray-800 mt-1">Nigeria · UAE · Canada</span>
- </div>
- <div className="flex-1 flex flex-col items-center text-center pt-5 md:pt-0 w-full">
- <span className="text-3xl md:text-4xl font-serif text-tlg-midnight">6</span>
- <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-700 mt-2">Specialist Divisions</span>
- <span className="text-xs text-gray-800 mt-1">One connected ecosystem</span>
- </div>
- <div className="flex-1 flex flex-col items-center text-center pt-5 md:pt-0 w-full">
- <span className="text-3xl md:text-4xl font-serif text-tlg-midnight">$40K+</span>
- <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-700 mt-2">Property Entry Point</span>
- <span className="text-xs text-gray-800 mt-1">Fractional UAE investments</span>
- </div>
- <div className="flex-1 flex flex-col items-center text-center pt-5 md:pt-0 w-full">
- <span className="text-3xl md:text-4xl font-serif text-tlg-midnight">7–9%</span>
- <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-700 mt-2">Target Rental Yield</span>
- <span className="text-xs text-gray-800 mt-1">Dubai property portfolio</span>
- </div>
- </div>
- </Reveal>
- </section>
-
  {/* Who We Are - Brand Statement */}
  <section className="py-24 md:py-32 bg-white relative">
  <div className="max-w-[1200px] mx-auto px-6 md:px-12 text-center">
  <Reveal><span className="text-tlg-signatureGold text-xs uppercase font-bold tracking-[0.2em] mb-4 block">Who We Are</span></Reveal>
  <TextReveal 
-   text="Modern challenges rarely fit into one category." 
+   text="Specialist Expertise. One Group." 
    className="text-3xl md:text-5xl lg:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8" 
  />
  <Reveal delay={0.1}><p className="text-lg md:text-xl text-gray-700 font-normal max-w-3xl mx-auto leading-relaxed mb-10">
-  Triumphal Lifetime Group brings complementary expertise together within one business ecosystem. Whether you are building a stronger organisation, exploring property opportunities, pursuing international education, navigating immigration, or adopting technology - our specialist teams provide structured support from beginning to execution.
+  Triumphal Lifetime Group is a diversified business group providing professional services across human resources, business consulting, real estate, education, global mobility, digital learning and technology. Through our businesses and specialist teams, we support individuals and organisations across Nigeria, the United Arab Emirates and Canada.
  </p></Reveal>
  <Reveal delay={0.15}>
  <div className="flex flex-wrap justify-center gap-4 text-xs font-bold uppercase tracking-widest">
@@ -77,14 +49,14 @@ export default function Home() {
  <div className="max-w-[1600px] mx-auto px-6 md:px-12">
  <div className="mb-16 flex flex-col items-center text-center">
  <Reveal>
- <span className="text-tlg-signatureGold text-xs uppercase font-bold tracking-[0.2em] mb-4 block">Our Ecosystem</span>
+ <span className="text-tlg-signatureGold text-xs uppercase font-bold tracking-[0.2em] mb-4 block">Our Businesses</span>
  </Reveal>
  <TextReveal 
-   text="An Integrated Advantage" 
+   text="Our Businesses" 
    className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6" 
  />
  <Reveal delay={0.1}>
- <p className="text-white/90 font-normal max-w-2xl mx-auto text-lg">Explore our specialized divisions, each built to deliver premium advisory and operational support.</p>
+ <p className="text-white/90 font-normal max-w-2xl mx-auto text-lg">Our businesses provide specialist services while sharing a common commitment to professionalism, responsible growth and long-term client relationships.</p>
  </Reveal>
  </div>
  
@@ -189,7 +161,7 @@ export default function Home() {
    </div>
    <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Charity Foundation</h3>
    <p className="text-gray-700 font-normal text-sm leading-relaxed mb-8 flex-1">
-     Deploying corporate capital to engineer sustainable social change through education and healthcare.
+     Supporting communities through education, humanitarian assistance and community-development initiatives.
    </p>
    <span className="text-xs font-bold uppercase tracking-widest text-tlg-midnight flex items-center group-hover:text-tlg-signatureGold transition-colors">
      Explore Foundation <ArrowRight size={14} className="ml-3 group-hover:translate-x-2 transition-transform" />
@@ -216,9 +188,9 @@ export default function Home() {
  <div className="max-w-[1600px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16">
  <div className="lg:w-1/3">
  <span className="text-tlg-signatureGold text-xs uppercase font-bold tracking-[0.2em] mb-4 block">The TLG Difference</span>
- <TextReveal text="Expertise that Connects and Scales" className="text-3xl md:text-5xl font-serif text-tlg-midnight mb-6 leading-tight" />
+ <TextReveal text="Specialist Expertise. One Group." className="text-3xl md:text-5xl font-serif text-tlg-midnight mb-6 leading-tight" />
  <p className="text-gray-700 font-normal leading-relaxed mb-8">
- We move beyond isolated services to provide a holistic ecosystem. Our integrated approach ensures that every strategy aligns with your overarching goals.
+ We move beyond isolated services to provide professional support across multiple sectors. Our coordinated approach ensures that every strategy aligns with your overarching goals.
  </p>
  <MagneticButton as={Link} href="/about" className="border border-tlg-midnight text-tlg-midnight px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] rounded-full">
  Our Story
@@ -233,7 +205,7 @@ export default function Home() {
  <p className="text-sm text-gray-700 font-normal leading-relaxed">Operating across Nigeria, UAE, and Canada, giving you access to strategic international markets.</p>
  </div>
  <div className="shrink-0 w-[85vw] snap-center md:w-auto bg-white p-8 md:p-10 rounded-[24px] shadow-sm flex flex-col justify-center md:translate-y-8">
- <h4 className="text-xl font-serif text-tlg-midnight mb-3">Integrated Ecosystem</h4>
+ <h4 className="text-xl font-serif text-tlg-midnight mb-3">Coordinated Support</h4>
  <p className="text-sm text-gray-700 font-normal leading-relaxed">Access complementary professional services - from real estate to IT - through one connected group.</p>
  </div>
  <div className="shrink-0 w-[85vw] snap-center md:w-auto bg-white p-8 md:p-10 rounded-[24px] shadow-sm flex flex-col justify-center">
@@ -315,7 +287,7 @@ export default function Home() {
   <div className="bg-tlg-ivory border border-tlg-stone rounded-[24px] p-10 flex flex-col">
   <span className="text-tlg-signatureGold text-xs uppercase font-bold tracking-widest mb-4">UAE</span>
   <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Dubai Office</h3>
-  <p className="text-sm text-gray-700 leading-relaxed mb-6">Our real estate investment hub. We source premium Dubai properties - from off-plan residential units starting at $240,000 to fractional ownership opportunities from $40,000 - for Nigerian and international investors.</p>
+  <p className="text-sm text-gray-700 leading-relaxed mb-6">Our real estate hub. We support clients exploring property opportunities and coordinate transactions with appropriately licensed professionals in the UAE.</p>
   <div className="mt-auto pt-6 border-t border-tlg-stone">
   <p className="text-xs text-gray-700 uppercase tracking-widest font-bold">+971 55 199 5483</p>
   </div>

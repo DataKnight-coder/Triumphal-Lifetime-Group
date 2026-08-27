@@ -29,7 +29,7 @@ export default function TermsPage() {
 
  <div>
  <h2 className="text-xl font-serif text-tlg-midnight mb-4 pb-3 border-b border-tlg-stone">1. Advisory Disclaimer</h2>
- <p className="mb-4">Triumphal Lifetime Group operates across multiple specialized divisions. It is crucial to understand the nature of our advisory services:</p>
+ <p className="mb-4">Triumphal Lifetime Group operates across multiple specialized divisions. It is important to understand the nature of our advisory services:</p>
  <ul className="space-y-3 list-disc list-inside">
  <li><strong className="text-tlg-midnight font-medium">Real Estate Advisory:</strong> We provide strategic property consulting and market analysis. We do not guarantee specific property yields, investment returns, or capital appreciation. All property investments carry inherent risks. Regulated valuation or legal conveyancing must be performed by appropriately licensed local professionals.</li>
  <li><strong className="text-tlg-midnight font-medium">Global Mobility:</strong> We facilitate the administrative, logistical, and strategic aspects of cross-border relocation. We are not a government agency and do not issue visas or permits. We cannot guarantee application outcomes or processing times. Regulated immigration legal advice must be provided by authorized professionals in the relevant jurisdiction.</li>

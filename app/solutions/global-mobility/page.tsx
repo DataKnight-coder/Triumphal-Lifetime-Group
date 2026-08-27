@@ -231,7 +231,7 @@ export default function GlobalMobilityPage() {
           <div className="bg-tlg-ivory border border-tlg-stone p-8 rounded-[24px]">
             <h3 className="text-lg font-serif text-tlg-midnight mb-3">Important Disclaimer</h3>
             <p className="text-sm text-gray-800 leading-relaxed mb-4">
-              Triumphal Lifetime Group provides administrative coordination, logistical planning, and general mobility advisory. We are not a government embassy and do not issue visas or permits. We cannot guarantee application outcomes or processing times. Final visa decisions are made by respective governments.
+              Triumphal Lifetime Group provides administrative coordination, logistical planning, and general mobility advisory. We are NOT an immigration law firm or government visa processing entity. We do not issue visas or permits and cannot guarantee application outcomes or processing times. Final visa decisions are made by respective governments.
             </p>
             <p className="text-sm text-gray-800 leading-relaxed">
               Regulated immigration legal advice must be provided by authorized professionals in the relevant jurisdiction.

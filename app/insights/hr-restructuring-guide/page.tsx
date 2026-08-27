@@ -78,7 +78,7 @@ export default function ArticlePage() {
                 The rumor mill is the enemy of stability. Long before an AI overhaul or cross-border expansion is implemented, leadership must establish a flawless communication architecture.
               </p>
               <p>
-                This means controlling the narrative by communicating the <em>why</em> behind the restructure. If a Nigerian logistics firm is automating its supply chain and expanding its management hub to the UAE, employees must understand exactly how the restructuring supports that growth, and crucially, where they fit into the modernized machine. Utilizing anonymized, continuous feedback loops via modern pulse platforms can unearth anxieties before they trigger mass resignations.
+                This means controlling the narrative by communicating the <em>why</em> behind the restructure. If a Nigerian logistics firm is automating its supply chain and expanding its management hub to the UAE, employees must understand exactly how the restructuring supports that growth, and importantly, where they fit into the modernized machine. Utilizing anonymized, continuous feedback loops via modern pulse platforms can unearth anxieties before they trigger mass resignations.
               </p>
 
               <h2 className="text-3xl mt-12 mb-6">Phase 2: Predictive Talent Retention</h2>

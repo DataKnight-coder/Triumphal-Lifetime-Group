@@ -53,7 +53,7 @@ export default function ArticlePage() {
           <Reveal delay={0.4}>
             <div className="prose prose-lg prose-headings:font-serif prose-headings:text-tlg-midnight prose-p:text-gray-800 prose-p:font-normal prose-p:leading-relaxed prose-a:text-tlg-signatureGold max-w-none">
               <p className="lead text-xl text-tlg-midnight font-medium border-l-2 border-tlg-signatureGold pl-6 italic">
-                The Canadian immigration landscape has undergone a paradigm shift. Moving away from the broad, point-heavy draws of the early 2020s, the 2026 Express Entry system is a hyper-targeted, economically driven selection matrix. For international professionals, simply having a high degree and good English is no longer a guaranteed ticket to permanent residency.
+                The Canadian immigration environment has undergone a paradigm shift. Moving away from the broad, point-heavy draws of the early 2020s, the 2026 Express Entry system is a hyper-targeted, economically driven selection matrix. For international professionals, simply having a high degree and good English is no longer a guaranteed ticket to permanent residency.
               </p>
 
               <h2 className="text-3xl mt-12 mb-6">The End of the General Draw Dominance</h2>
@@ -89,7 +89,7 @@ export default function ArticlePage() {
               <ol>
                 <li><strong>Upskill Strategically:</strong> If your profession falls outside the priority categories, consider rapid upskilling or pivoting into tech-adjacent roles (e.g., transitioning from general marketing to AI-driven growth marketing) that align with IRCC's National Occupational Classification (NOC) targets.</li>
                 <li><strong>Master French:</strong> We cannot overstate this. Achieving bilingual status is currently the most statistically reliable method of bypassing the hyper-competitive general pool.</li>
-                <li><strong>Secure Validated Employment:</strong> Leverage global recruitment networks to secure an LMIA-supported role before applying. This not only adds 50-200 points to your CRS score but drastically increases PNP viability.</li>
+                <li><strong>Secure Validated Employment:</strong> Leverage global recruitment networks to secure an LMIA-supported role before applying. This adds 50-200 points to your CRS score and drastically increases PNP viability.</li>
               </ol>
 
               <div className="bg-tlg-midnight text-white p-10 md:p-12 mt-16 rounded-[24px]">

@@ -20,46 +20,46 @@ export default function Partners() {
  
  <div className="grid grid-cols-1 md:grid-cols-2 gap-24 mb-32">
  <div>
- <h2 className="text-4xl font-serif text-tlg-midnight mb-6">A Global Network of Excellence</h2>
+ <h2 className="text-4xl font-serif text-tlg-midnight mb-6">Our Professional Network</h2>
  <p className="text-xl text-gray-700 font-normal leading-relaxed">
- Our ability to execute seamlessly across borders is empowered by our vetted network of institutional, strategic, and delivery partners.
+ Our ability to execute seamlessly across borders is supported by our vetted network of institutional, strategic, and delivery partners.
  </p>
- </div>
- <div className="grid grid-cols-2 gap-8 text-tlg-midnight">
- <div className="border-l border-tlg-stone pl-6">
- <span className="text-4xl font-serif block mb-2">50+</span>
- <span className="text-xs uppercase tracking-widest font-bold text-gray-800">Institutional Partners</span>
- </div>
- <div className="border-l border-tlg-stone pl-6">
- <span className="text-4xl font-serif block mb-2">3</span>
- <span className="text-xs uppercase tracking-widest font-bold text-gray-800">Core Jurisdictions</span>
- </div>
  </div>
  </div>
 
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
  
  <div className="bg-tlg-ivory p-12">
- <h3 className="text-2xl font-serif text-tlg-midnight mb-6">Institutional Partners</h3>
+ <h3 className="text-2xl font-serif text-tlg-midnight mb-6">Institutional Relationships</h3>
  <p className="text-sm text-gray-700 font-normal leading-relaxed mb-8">
- Academic institutions in Canada, banking partners in the UAE, and governmental agencies in Nigeria ensuring compliance and smooth transitions.
+ We work alongside established institutions, including legal and financial advisors across our jurisdictions, to ensure our clients receive compliant and effective support.
  </p>
  </div>
 
  <div className="bg-tlg-ivory p-12">
- <h3 className="text-2xl font-serif text-tlg-midnight mb-6">Professional Affiliations</h3>
+ <h3 className="text-2xl font-serif text-tlg-midnight mb-6">Professional Services</h3>
  <p className="text-sm text-gray-700 font-normal leading-relaxed mb-8">
- Registered with international real estate boards, human resource management associations, and certified immigration regulatory bodies.
+ Where our clients require regulated legal, real estate, or immigration advice, we coordinate with appropriately authorised professionals.
  </p>
  </div>
 
  <div className="bg-tlg-ivory p-12">
- <h3 className="text-2xl font-serif text-tlg-midnight mb-6">Referral Partners</h3>
+ <h3 className="text-2xl font-serif text-tlg-midnight mb-6">Business Operations</h3>
  <p className="text-sm text-gray-700 font-normal leading-relaxed mb-8">
- A closed network of B2B referral partners who trust Triumphal Lifetime Group to handle their clients' global mobility and investment needs.
+ Our network includes B2B referral partners who trust Triumphal Lifetime Group to handle their clients' strategic consulting and administrative needs.
  </p>
  </div>
 
+ </div>
+
+ <div className="mt-32">
+ <h2 className="text-3xl font-serif text-tlg-midnight mb-12 border-b border-tlg-stone pb-4">Verified Partners</h2>
+ <p className="text-gray-700 font-normal leading-relaxed mb-8">
+ [Partner Name] - [Nature of Relationship] - [Country]
+ </p>
+ <p className="text-sm text-gray-500 italic">
+ Note: Quality is more important than quantity. Only genuine, verified partnerships with explicit permission should be listed here.
+ </p>
  </div>
 
  <div className="mt-32 pt-16 border-t border-tlg-stone flex flex-col md:flex-row justify-between items-center bg-tlg-midnight text-white p-16">

@@ -56,11 +56,16 @@ export default function AboutGroupPage() {
             <div className="max-w-4xl animate-reveal-up">
               <span className="text-tlg-signatureGold text-[11px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 block">About The Group</span>
               <h1 className="text-4xl md:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8">
-                Expertise That Moves<br />Ambition Forward.
+                About Triumphal Lifetime Group
               </h1>
-              <p className="text-xl text-gray-700 font-normal leading-relaxed max-w-2xl">
-                Triumphal Lifetime Group is a diversified business network providing structural, operational, and strategic support across multiple high-impact sectors globally.
-              </p>
+              <div className="text-xl text-gray-700 font-normal leading-relaxed max-w-2xl space-y-4">
+                <p>
+                  Triumphal Lifetime Group brings together businesses and initiatives serving individuals, organisations and communities across multiple sectors. Our work spans human resources, business consulting, real estate, education, global mobility, digital learning, technology and community development.
+                </p>
+                <p>
+                  Our approach is built around practical solutions, professional service and long-term relationships.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -68,12 +73,10 @@ export default function AboutGroupPage() {
         {/* Stats bar */}
         <section className="border-b border-tlg-stone bg-tlg-midnight">
           <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10">
               {[
                 { value: "3", label: "Countries" },
                 { value: "6+", label: "Operating Divisions" },
-                { value: "500+", label: "Clients Served" },
-                { value: "2017", label: "Year Founded" },
               ].map((stat) => (
                 <div key={stat.label} className="py-10 px-8 text-center">
                   <p className="text-3xl md:text-4xl font-serif text-tlg-signatureGold mb-1">{stat.value}</p>
@@ -93,13 +96,10 @@ export default function AboutGroupPage() {
             </div>
             <div className="lg:col-span-8 space-y-6 text-gray-800 font-normal leading-relaxed text-[15px]">
               <p>
-                Modern business and personal challenges rarely fit neatly into a single category. Whether an enterprise is expanding into a new jurisdiction, or an individual is navigating international education and mobility, the solutions require interconnected expertise.
+                Our roots began with the establishment of the first Triumphal Lifetime business, from which our activities have progressively expanded into additional sectors and markets.
               </p>
               <p>
-                Triumphal Lifetime Group was founded on the principle that integrated advisory - combining human resources, real estate, technology, and compliance under one ecosystem - delivers superior, frictionless results. We remove the friction of coordinating between multiple disconnected firms and replace it with a single, accountable partnership.
-              </p>
-              <p className="text-tlg-midnight font-medium">
-                Our six divisions are not independent silos. They are deliberately designed to work in concert - so that when your business grows, every pillar of support grows with it.
+                Our businesses operate in different specialist areas while sharing common standards of professionalism, service and responsible business practice. Where appropriate, our teams collaborate to provide clients with coordinated support.
               </p>
             </div>
           </div>

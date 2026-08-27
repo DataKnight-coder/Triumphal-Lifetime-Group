@@ -160,7 +160,7 @@ export default function EducationAdvisoryPage() {
               </div>
               <h3 className="text-xl font-serif text-tlg-midnight mb-3">Application Support</h3>
               <p className="text-gray-800 text-sm leading-relaxed flex-1">
-                We assist with organising your documents, reviewing personal statements, and ensuring your application meets the institution's guidelines.
+                We support students through the university application process and visa documentation.
               </p>
             </div></Reveal>
 

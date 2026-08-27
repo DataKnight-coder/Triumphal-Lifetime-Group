@@ -50,25 +50,21 @@ export default function HRConsultingPage() {
         </div>
       </section>
 
-      {/* Stats Strip */}
+      {/* Service Categories Strip */}
       <section className="py-8 bg-tlg-midnight">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-white/10">
-            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center">
-              <span className="text-2xl font-serif text-tlg-signatureGold">60%</span>
-              <span className="text-[11px] uppercase tracking-widest text-white/80 mt-1">of HR issues stem from unclear roles</span>
+            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center justify-center">
+              <span className="text-[13px] font-bold uppercase tracking-[0.2em] text-tlg-signatureGold">Recruitment & Talent</span>
             </div>
-            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center">
-              <span className="text-2xl font-serif text-tlg-signatureGold">3x</span>
-              <span className="text-[11px] uppercase tracking-widest text-white/80 mt-1">ROI from structured performance systems</span>
+            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center justify-center">
+              <span className="text-[13px] font-bold uppercase tracking-[0.2em] text-tlg-signatureGold">HR Policies & Compliance</span>
             </div>
-            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center">
-              <span className="text-2xl font-serif text-tlg-signatureGold">40%</span>
-              <span className="text-[11px] uppercase tracking-widest text-white/80 mt-1">lower turnover with clear onboarding</span>
+            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center justify-center">
+              <span className="text-[13px] font-bold uppercase tracking-[0.2em] text-tlg-signatureGold">Performance & Development</span>
             </div>
-            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center">
-              <span className="text-2xl font-serif text-tlg-signatureGold">Nigeria · UAE · Canada</span>
-              <span className="text-[11px] uppercase tracking-widest text-white/80 mt-1">Markets we serve</span>
+            <div className="flex-1 py-4 md:py-0 md:px-8 flex flex-col items-center text-center justify-center">
+              <span className="text-[13px] font-bold uppercase tracking-[0.2em] text-tlg-signatureGold">Workforce Strategy</span>
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@ export default function CareersPage() {
  Join a Global Network of Experts.
  </h1>
  <p className="text-xl text-gray-800 font-normal leading-relaxed">
- We are continually searching for exceptional talent to drive our consulting, real estate, education, and technology divisions forward.
+ Hiring at Triumphal Lifetime Group is division-specific. Open roles are based on current operational needs across our consulting, real estate, education, and technology divisions.
  </p>
  </div>
  </div>

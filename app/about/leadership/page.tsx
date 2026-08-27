@@ -143,12 +143,12 @@ export default function LeadershipPage() {
  </div>
  <div className="md:col-span-8">
  <h3 className="text-3xl font-serif text-tlg-midnight mb-1">Mr. Charles</h3>
- <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-widest mb-6">Director, Human Resources & Business Advisory</p>
+ <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-widest mb-6">Director, Real Estate & Investment Advisory</p>
  <div className="space-y-4 text-gray-700 font-normal text-sm leading-relaxed">
- <p>Mr. Charles leads the Group's Human Resources and Business Advisory portfolio, driving people and performance strategies for clients across multiple industries. His role spans talent acquisition, workforce planning, performance management, organizational development, HR compliance, and business consulting services that support sustainable growth.</p>
- <p>With a strong commitment to professionalism, innovation, and excellence, Mr. Charles works closely with clients and internal stakeholders to develop tailored, people-centered strategies that enhance productivity, strengthen organizational capability, and build long-term business resilience.</p>
+ <p>Mr. Charles heads the Real Estate and Investment Advisory division, bringing extensive experience in property markets across our operational regions. He oversees portfolio strategy, market research, and client advisory services for both residential and commercial investments.</p>
+ <p>His practical approach to property investment helps clients navigate complex transactions, ensuring that each decision is backed by robust data and clear strategic objectives.</p>
  <blockquote className="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-700">
- "Great organizations are built by investing in people, embracing innovation, and creating workplaces where people can thrive."
+ "Real estate remains a foundational asset class; our role is to provide the clarity required to invest with confidence."
  </blockquote>
  </div>
  </div>

@@ -24,7 +24,7 @@ export default function TechnologyPage() {
               Build Reliable Technology Systems for Your Business.
             </h1></Reveal>
             <Reveal delay={0.2}><p className="text-lg text-gray-800 leading-relaxed max-w-xl mb-10">
-              We help growing companies build, manage, and secure their IT infrastructure - from custom software development and cloud migration to managed IT support, cybersecurity, and process automation.
+              We help businesses improve their digital operations through practical technology solutions, systems support and digital transformation services. We build solutions for our clients and are not a standalone SaaS vendor.
             </p></Reveal>
             
             <Reveal delay={0.3}>

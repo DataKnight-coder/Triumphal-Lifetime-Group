@@ -34,14 +34,14 @@ export default function CharityFoundation() {
  
  <div className="max-w-[1200px] w-full mx-auto px-6 md:px-12 relative z-10 text-center">
  <span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-[0.2em] block mb-8 animate-reveal-up">Philanthropy & Social Impact</span>
- <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-serif text-tlg-midnight leading-[0.9] tracking-tight mb-8 animate-reveal-up-delayed">
- Charity<br />
- <span className="italic font-normal text-gray-700">Foundation.</span>
- </h1>
- <p className="text-xl md:text-2xl text-gray-700 font-normal max-w-3xl mx-auto leading-relaxed animate-reveal-up-delayed mt-12">
- Deploying corporate capital to engineer sustainable social change. We focus on education, healthcare, and economic empowerment across our global operational hubs.
- </p>
- </div>
+  <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-serif text-tlg-midnight leading-[0.9] tracking-tight mb-8 animate-reveal-up-delayed">
+  Supporting People.<br />
+  <span className="italic font-normal text-gray-700">Strengthening Communities.</span>
+  </h1>
+  <p className="text-xl md:text-2xl text-gray-700 font-normal max-w-3xl mx-auto leading-relaxed animate-reveal-up-delayed mt-12">
+  Triumphal Lifetime Charity Foundation supports community-focused initiatives aimed at improving opportunities for individuals and families. Our activities focus on practical assistance, education, humanitarian support and community development.
+  </p>
+  </div>
  </section>
 
  {/* Philosophy / Authority Quote */}
@@ -59,8 +59,8 @@ export default function CharityFoundation() {
  <div className="max-w-[1600px] mx-auto px-6 md:px-12">
  
  <div className="flex flex-col md:flex-row justify-between items-end mb-20">
- <h2 className="text-4xl md:text-6xl font-serif text-tlg-midnight">Areas of Impact</h2>
- <p className="text-gray-700 font-normal max-w-sm mt-6 md:mt-0 leading-relaxed">Targeted, data-driven philanthropic initiatives designed to solve foundational societal challenges.</p>
+ <h2 className="text-4xl md:text-6xl font-serif text-tlg-midnight">Our Strategic Priorities</h2>
+ <p className="text-gray-700 font-normal max-w-sm mt-6 md:mt-0 leading-relaxed">As Triumphal Lifetime Charity Foundation grows, we aim to expand our community impact through carefully developed initiatives in these areas.</p>
  </div>
 
  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
@@ -72,11 +72,11 @@ export default function CharityFoundation() {
  </div>
  <div className="p-12 border-t border-tlg-stone bg-white">
  <span className="text-tlg-signatureGold text-[11px] uppercase font-bold tracking-[0.2em] mb-4 block">01</span>
- <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Educational Infrastructure</h3>
- <p className="text-gray-800 font-normal leading-relaxed mb-8 max-w-2xl">
- We believe access to quality education should not be constrained by geography. Our foundation funds the construction of modern learning facilities, provides advanced digital equipment, and sponsors full-ride scholarships for exceptional students in developing regions.
- </p>
- <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-semibold text-tlg-midnight">
+  <h3 className="text-3xl font-serif text-tlg-midnight mb-6">Educational Infrastructure</h3>
+  <p className="text-gray-800 font-normal leading-relaxed mb-8 max-w-2xl">
+  We believe access to quality education should not be constrained by geography. Our corporate giving initiative aims to support the development of learning facilities, provide digital equipment, and sponsor scholarships for students in developing regions.
+  </p>
+  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-semibold text-tlg-midnight">
  <li className="flex items-center gap-3"><Heart size={16} className="text-tlg-signatureGold"/> Scholarship Funds</li>
  <li className="flex items-center gap-3"><Heart size={16} className="text-tlg-signatureGold"/> School Construction</li>
  <li className="flex items-center gap-3"><Heart size={16} className="text-tlg-signatureGold"/> Technology Grants</li>
@@ -92,10 +92,10 @@ export default function CharityFoundation() {
  </div>
  <div className="p-10 flex-1 flex flex-col justify-center border-t border-tlg-stone bg-white">
  <span className="text-tlg-signatureGold text-[11px] uppercase font-bold tracking-[0.2em] mb-4 block">02</span>
- <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Healthcare Access</h3>
- <p className="text-gray-800 font-normal leading-relaxed text-sm">
- Funding critical medical research, building regional clinics, and providing emergency medical relief to underserved communities across Africa and beyond.
- </p>
+  <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Healthcare Access</h3>
+  <p className="text-gray-800 font-normal leading-relaxed text-sm">
+  We are dedicated to supporting community health initiatives and aim to provide relief and resources to underserved communities across our operational regions.
+  </p>
  </div>
  </div>
 
@@ -103,10 +103,10 @@ export default function CharityFoundation() {
  <div className="md:col-span-5 group relative overflow-hidden bg-white shadow-sm border border-tlg-stone flex flex-col">
  <div className="p-10 flex-1 flex flex-col justify-center">
  <span className="text-tlg-signatureGold text-[11px] uppercase font-bold tracking-[0.2em] mb-4 block">03</span>
- <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Economic Empowerment</h3>
- <p className="text-gray-800 font-normal leading-relaxed text-sm mb-8">
- We issue micro-grants and offer extensive mentorship programs to entrepreneurs, transforming localized small businesses into sustainable community pillars.
- </p>
+  <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Economic Empowerment</h3>
+  <p className="text-gray-800 font-normal leading-relaxed text-sm mb-8">
+  We aim to support local entrepreneurs through corporate grants and mentorship initiatives, with the goal of helping small businesses become sustainable community pillars.
+  </p>
  <Link href="/contact" className="text-xs uppercase tracking-[0.15em] font-bold text-tlg-midnight hover:text-tlg-signatureGold transition-colors flex items-center group-hover:translate-x-2 w-max">
  Partner With Us <ArrowRight size={14} className="ml-2"/>
  </Link>
@@ -120,35 +120,16 @@ export default function CharityFoundation() {
  </div>
  <div className="w-full md:w-1/2 p-10 md:p-12 relative z-10 bg-white md:bg-white/95 backdrop-blur-sm h-full flex flex-col justify-center border-r md:border-none border-tlg-stone">
  <span className="text-tlg-signatureGold text-[11px] uppercase font-bold tracking-[0.2em] mb-4 block">04</span>
- <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Disaster Relief</h3>
- <p className="text-gray-800 font-normal leading-relaxed text-sm">
- Rapid deployment of resources in response to global crises. We leverage our international logistics network to deliver aid where it is most urgently needed.
- </p>
+  <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Disaster Relief</h3>
+  <p className="text-gray-800 font-normal leading-relaxed text-sm">
+  Our foundation is committed to coordinating resources in response to regional crises. We aim to leverage our logistics network to facilitate aid where it is most urgently needed.
+  </p>
  </div>
  </div>
 
  </div>
- </div>
- </section>
-
- {/* Global Impact Metrics */}
- <section className="py-24 bg-white relative border-y border-tlg-stone">
- <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
- <div>
- <h4 className="text-4xl md:text-5xl font-serif text-tlg-midnight mb-2">$5M+</h4>
- <p className="text-[11px] uppercase tracking-[0.2em] text-gray-800 font-bold">Capital Deployed</p>
- </div>
- <div>
- <h4 className="text-4xl md:text-5xl font-serif text-tlg-midnight mb-2">10k+</h4>
- <p className="text-[11px] uppercase tracking-[0.2em] text-gray-800 font-bold">Lives Impacted</p>
- </div>
- <div>
- <h4 className="text-4xl md:text-5xl font-serif text-tlg-midnight mb-2">15+</h4>
- <p className="text-[11px] uppercase tracking-[0.2em] text-gray-800 font-bold">Global Partnerships</p>
- </div>
- <div>
- <h4 className="text-4xl md:text-5xl font-serif text-tlg-midnight mb-2">100%</h4>
- <p className="text-[11px] uppercase tracking-[0.2em] text-gray-800 font-bold">Transparency Guarantee</p>
+ <div className="mt-12 text-sm text-gray-700 italic max-w-4xl border-l-2 border-tlg-signatureGold pl-4">
+ These initiatives represent the Foundation’s future strategic priorities and development goals. Implementation will depend on available funding, regulatory requirements, partnerships and programme feasibility.
  </div>
  </div>
  </section>
