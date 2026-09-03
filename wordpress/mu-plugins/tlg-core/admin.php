@@ -112,6 +112,12 @@ function tlg_add_meta_boxes() {
     }
 }
 
+function tlg_remove_native_custom_fields_boxes() {
+    foreach (array_keys(tlg_content_type_definitions()) as $post_type) {
+        remove_meta_box('postcustom', $post_type, 'normal');
+    }
+}
+
 function tlg_render_meta_box($post, $box) {
     wp_nonce_field('tlg_save_content_fields', 'tlg_content_fields_nonce');
     $fields = $box['args']['fields'];
@@ -269,6 +275,7 @@ function tlg_enable_featured_images() {
 
 add_action('after_setup_theme', 'tlg_enable_featured_images');
 add_action('add_meta_boxes', 'tlg_add_meta_boxes');
+add_action('add_meta_boxes', 'tlg_remove_native_custom_fields_boxes', 20);
 add_action('save_post', 'tlg_save_content_fields', 10, 2);
 add_action('pre_get_posts', 'tlg_apply_admin_ordering');
 add_action('pre_get_posts', 'tlg_apply_faq_division_filter');

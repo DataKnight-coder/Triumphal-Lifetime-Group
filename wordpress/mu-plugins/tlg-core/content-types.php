@@ -6,11 +6,11 @@ if (!defined('ABSPATH')) {
 
 function tlg_content_type_definitions() {
     return [
-        'tlg_leadership' => ['Leadership', 'Leader', 'leadership', 'dashicons-groups', ['title', 'editor', 'thumbnail']],
-        'tlg_services'   => ['Services', 'Service', 'services', 'dashicons-clipboard', ['title', 'editor', 'excerpt', 'thumbnail']],
-        'tlg_careers'    => ['Careers', 'Career', 'careers', 'dashicons-portfolio', ['title', 'editor']],
-        'tlg_faqs'       => ['FAQs', 'FAQ', 'faqs', 'dashicons-editor-help', ['title', 'editor']],
-        'tlg_insights'   => ['Insights', 'Insight', 'insights', 'dashicons-welcome-write-blog', ['title', 'editor', 'excerpt', 'author', 'thumbnail']],
+        'tlg_leadership' => ['Leadership', 'Leader', 'leadership', 'dashicons-groups', ['title', 'editor', 'thumbnail', 'custom-fields']],
+        'tlg_services'   => ['Services', 'Service', 'services', 'dashicons-clipboard', ['title', 'editor', 'excerpt', 'thumbnail', 'custom-fields']],
+        'tlg_careers'    => ['Careers', 'Career', 'careers', 'dashicons-portfolio', ['title', 'editor', 'custom-fields']],
+        'tlg_faqs'       => ['FAQs', 'FAQ', 'faqs', 'dashicons-editor-help', ['title', 'editor', 'custom-fields']],
+        'tlg_insights'   => ['Insights', 'Insight', 'insights', 'dashicons-welcome-write-blog', ['title', 'editor', 'excerpt', 'author', 'thumbnail', 'custom-fields']],
     ];
 }
 
@@ -99,9 +99,8 @@ function tlg_register_content_meta() {
                 'single' => true,
                 'default' => $type === 'integer' ? 0 : '',
                 'sanitize_callback' => $sanitize_callback,
-                'auth_callback' => function () use ($post_type) {
-                    $object = get_post_type_object($post_type);
-                    return $object && current_user_can($object->cap->edit_posts);
+                'auth_callback' => function ($allowed, $meta_key, $post_id) {
+                    return (bool) $post_id && current_user_can('edit_post', $post_id);
                 },
                 'show_in_rest' => true,
             ]);

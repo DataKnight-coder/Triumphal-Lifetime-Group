@@ -166,6 +166,22 @@ async function uploadImage(image, cache) {
   return uploaded.id;
 }
 
+function verifySavedRecord(saved, expected, filename) {
+  const missing = Object.entries(expected.meta ?? {}).filter(([key, value]) => {
+    const savedValue = saved.meta?.[key];
+    return JSON.stringify(savedValue) !== JSON.stringify(value);
+  });
+
+  if (missing.length > 0) {
+    const keys = missing.map(([key]) => key).join(", ");
+    throw new Error(`WordPress did not persist registered metadata for ${filename}: ${keys}. Confirm that the CPT supports custom-fields and the updated MU plugin is active.`);
+  }
+
+  if (expected.featured_media && saved.featured_media !== expected.featured_media) {
+    throw new Error(`WordPress did not persist the featured image for ${filename}.`);
+  }
+}
+
 async function migrate() {
   const report = {};
   const prepared = [];
@@ -227,11 +243,12 @@ async function migrate() {
       Object.keys(record).forEach((key) => record[key] === undefined && delete record[key]);
 
       const existing = slugMatches[0];
-      await request(existing ? `${collection.endpoint}/${existing.id}` : collection.endpoint, {
+      const saved = await request(existing ? `${collection.endpoint}/${existing.id}` : collection.endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(record),
       });
+      verifySavedRecord(saved, record, item.filename);
       totals[existing ? "updated" : "created"] += 1;
     }
   }
