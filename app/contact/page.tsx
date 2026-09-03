@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-import { getGlobalSettings } from "@/lib/content/settings";
+import { getGlobalSettings } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
  title: "Contact Us",

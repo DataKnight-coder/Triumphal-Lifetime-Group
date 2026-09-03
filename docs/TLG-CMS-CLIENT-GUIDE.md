@@ -1,35 +1,35 @@
-# TLG Website Manager — Client Guide
+# TLG WordPress CMS — Client Guide
 
 ## Sign in
 
-1. Open `https://triumphallifetimegroup.com/admin`.
-2. Choose GitHub authentication.
-3. Sign in with the GitHub account that has access to the TLG repository.
+Open `https://cms.triumphallifetimegroup.com/wp-admin` and sign in with your own WordPress account. Never share accounts or passwords. Enable two-factor authentication when it is available.
 
 ## Edit and publish
 
-1. Select a collection from the left menu.
-2. Open an existing entry or create one where creation is enabled.
-3. Edit only verified public website information.
-4. Use Preview to review the entry.
-5. Choose Publish and confirm the change.
-6. Wait for the GitHub commit and Netlify branch build to complete before checking the website.
+1. Choose TLG CMS in the WordPress menu.
+2. Open Global Settings, Leadership, Services, Careers, FAQs, or Insights.
+3. Edit only approved public information.
+4. Use Preview when available, then select Publish or Update.
+5. WordPress queues a Netlify rebuild. Allow the deploy to complete before checking the public site.
 
-## Collection notes
+Several quick saves are combined into one build after about a minute. Draft Insights do not appear publicly and do not trigger a production build.
 
-- Global Settings has one entry only. Leave Address or SEO Open Graph Image blank if no approved value exists.
-- Leadership and Services use `active`/`inactive` status. Inactive records are not displayed.
-- Careers uses `open`/`closed`. Only open vacancies appear; never create sample jobs.
-- FAQs require a division and numeric order. Keep FAQ files flat and use a unique kebab-case slug.
-- Insights with Draft enabled do not appear on the Insights index. Existing article URLs must not be renamed casually.
+## Content notes
+
+- Global Settings controls the company name, main contact details, social profiles, copyright, and default SEO information. Address and social image may remain blank until approved.
+- Leadership uses the title field for the person's name, the main editor for the biography, Featured image for the photo, and Active/Inactive for public visibility.
+- Services uses the main editor for the full description. Put one Key benefit on each line. Only Active services appear.
+- Careers must be genuine vacancies. Only Published records marked Open appear; Closed roles stay hidden.
+- FAQs use the title as the exact question and the editor as the exact answer. Select one solution division or Global, and use Display order for sequencing.
+- Insights use Featured image, Excerpt, Author display name, Category, SEO fields, and the main editor. Keep an existing slug unchanged unless the maintainer has arranged a redirect.
 
 ## Images
 
-Use the media library to upload files no larger than 2 MB. Prefer descriptive, lowercase filenames. Confirm that you have permission to publish every image.
+Use the WordPress Media Library or the Featured image panel. Upload only licensed public assets, use descriptive filenames, and choose appropriately sized web images. Never upload passports, CVs, contracts, customer records, or other private files.
 
-## Safe editing
+## Safe operation
 
-- Do not paste passwords, client records, or private documents into the CMS.
-- Do not change slugs or URLs without checking existing links.
-- Make one logical change per publish where practical.
-- If a published edit is wrong, contact the site maintainer with the entry name and approximate publish time so the Git commit can be reverted safely.
+- Use Active/Inactive, Open/Closed, or Draft instead of deleting valuable content when possible.
+- Do not alter TLG plugin code, WordPress URLs, permalink settings, or the private Publishing hook.
+- If a change is wrong, record the item name and time, correct it, and publish again. Contact the maintainer for a code, deploy, or database rollback.
+- The Media Library, content fields, and Global Settings are sufficient for routine website management; no code edit is required.

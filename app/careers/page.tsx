@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllCareers } from "@/lib/content/careers";
+import { getCareers } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
  title: "Careers",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CareersPage() {
- const openCareers = await getAllCareers();
+ const openCareers = await getCareers();
 
   return (
  <main className="bg-white pt-32 pb-24">
@@ -58,7 +58,7 @@ export default async function CareersPage() {
         <p className="text-xs uppercase tracking-widest text-tlg-signatureGold mb-3">
           {[c.department, c.location, c.employment_type].filter(Boolean).join(" · ")}
         </p>
-        <div className="text-sm text-gray-800 whitespace-pre-line">{c.content}</div>
+        <div className="text-sm text-gray-800 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: c.content }} />
         {c.application_url && (
           <a href={c.application_url} className="inline-flex mt-5 text-xs font-bold uppercase tracking-widest text-tlg-midnight hover:text-tlg-signatureGold transition-colors">
             Apply Now

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { getAllLeadership } from "@/lib/content/leadership";
+import { getLeadershipProfiles } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
   title: "Leadership",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LeadershipPage() {
-  const profiles = (await getAllLeadership()).map((profile) => ({
+  const profiles = (await getLeadershipProfiles()).map((profile) => ({
     name: profile.name || "",
     role: profile.job_title || "",
     image: profile.photo || "/images/team/placeholder.jpeg",

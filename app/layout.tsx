@@ -15,7 +15,7 @@ const manrope = Manrope({
  variable: "--font-manrope",
 });
 
-import { getGlobalSettings } from "@/lib/content/settings";
+import { getGlobalSettings } from "@/lib/wordpress/client";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getGlobalSettings();

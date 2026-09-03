@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Building2, MapPin, Target, Landmark, Home, Phone, Map, ShieldCheck, AreaChart, Search, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import PropertyInventory from "@/components/real-estate/PropertyInventory";
-import { getFaqsByDivision } from "@/lib/content/faqs";
+import { getFaqsByDivision } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
   title: "Real Estate & Investment Advisory - Dubai, UAE & Nigeria | Triumphal Lifetime Group",
@@ -327,7 +327,7 @@ export default async function RealEstatePage() {
                     {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
+                  <div className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: item.answer }} />
                 </details>
               </Reveal>
             ))}

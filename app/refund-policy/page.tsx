@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { getGlobalSettings } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
  title: "Refund & Cancellation Policy | Triumphal Lifetime Group",
  description: "Our policy regarding service fees, refunds, and cancellations.",
 };
 
-export default function RefundPolicyPage() {
+export default async function RefundPolicyPage() {
+ const settings = await getGlobalSettings();
  return (
  <main className="bg-white pt-32 pb-24">
  <section className="relative pt-16 pb-24 border-b border-tlg-stone bg-tlg-ivory">
@@ -69,7 +71,7 @@ export default function RefundPolicyPage() {
 
  <h2>7. How to Request a Refund</h2>
  <p>
-   All refund requests must be submitted in writing to <a href="mailto:info@triumphallifetimegroup.com">info@triumphallifetimegroup.com</a> with the subject line <strong>&ldquo;Refund Request - [Your Name] - [Service]&rdquo;</strong>. Please include your engagement reference number, the date of payment, and the grounds for your request. We will acknowledge receipt within two business days and issue a decision within ten business days.
+   All refund requests must be submitted in writing{settings.general_email && <> to <a href={`mailto:${settings.general_email}`}>{settings.general_email}</a></>} with the subject line <strong>&ldquo;Refund Request - [Your Name] - [Service]&rdquo;</strong>. Please include your engagement reference number, the date of payment, and the grounds for your request. We will acknowledge receipt within two business days and issue a decision within ten business days.
  </p>
 
  <h2>8. Currency and Processing</h2>

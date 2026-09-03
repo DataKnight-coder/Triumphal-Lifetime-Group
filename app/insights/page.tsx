@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { getAllInsights } from "@/lib/content/insights";
+import { getInsights } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
  title: "Insights",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function InsightsPage() {
-  const postsToRender = await getAllInsights();
+  const postsToRender = await getInsights();
 
   return (
     <main className="bg-white pt-32 pb-24">

@@ -1,4 +1,6 @@
-# Triumphal Lifetime Group CMS
+# Triumphal Lifetime Group CMS (Retained Migration Reference)
+
+> This document describes the previous Sveltia transition. WordPress is now the intended production CMS. See `docs/TLG-WORDPRESS-CMS.md`. Keep this file and its content only as rollback and migration evidence until live WordPress records are verified.
 
 ## Architecture
 

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { getGlobalSettings } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
  title: "Accessibility Statement | Triumphal Lifetime Group",
  description: "Our commitment to digital accessibility for all users.",
 };
 
-export default function AccessibilityStatementPage() {
+export default async function AccessibilityStatementPage() {
+ const settings = await getGlobalSettings();
  return (
  <main className="bg-white pt-32 pb-24">
  <section className="relative pt-16 pb-24 border-b border-tlg-stone bg-tlg-ivory">
@@ -64,7 +66,7 @@ export default function AccessibilityStatementPage() {
    We welcome your feedback on the accessibility of our digital platforms. If you experience any barriers or wish to report an accessibility issue, please contact us at:
  </p>
  <p>
-   <strong>Email:</strong> <a href="mailto:info@triumphallifetimegroup.com">info@triumphallifetimegroup.com</a><br />
+   {settings.general_email && <><strong>Email:</strong> <a href={`mailto:${settings.general_email}`}>{settings.general_email}</a><br /></>}
    We aim to respond to accessibility-related feedback within five business days.
  </p>
 

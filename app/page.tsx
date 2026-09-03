@@ -13,8 +13,10 @@ import Reveal from "@/components/animations/Reveal";
 import MagneticButton from "@/components/animations/MagneticButton";
 import ParallaxImage from "@/components/animations/ParallaxImage";
 import TextReveal from "@/components/animations/TextReveal";
+import { getGlobalSettings } from "@/lib/wordpress/client";
 
-export default function Home() {
+export default async function Home() {
+ const settings = await getGlobalSettings();
  return (
  <main className="bg-white">
  {/* 02 - Light Editorial Hero */}
@@ -298,7 +300,7 @@ export default function Home() {
   <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Canadian Office</h3>
   <p className="text-sm text-gray-700 leading-relaxed mb-6">Supporting education advisory, global mobility, and professional relocation for clients targeting Canadian universities, work permits, and study visas across multiple provinces.</p>
   <div className="mt-auto pt-6 border-t border-tlg-stone">
-  <p className="text-xs text-gray-700 uppercase tracking-widest font-bold">+1 647 774 0409</p>
+  {settings.primary_phone && <p className="text-xs text-gray-700 uppercase tracking-widest font-bold">{settings.primary_phone}</p>}
   </div>
   </div>
  </div>

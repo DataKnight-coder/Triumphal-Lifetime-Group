@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MapPin, Phone, Building2 } from "lucide-react";
-import { getAllServices } from "@/lib/content/services";
+import { getServices } from "@/lib/wordpress/client";
 
 export const metadata: Metadata = {
   title: "Our Companies & Divisions",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CompaniesDirectoryPage() {
-  const services = await getAllServices();
+  const services = await getServices();
 
   return (
     <main className="bg-white pt-32 pb-24">

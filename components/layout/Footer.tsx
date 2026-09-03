@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
 import { useRef } from "react";
 import { m, useScroll, useTransform, useReducedMotion } from "motion/react";
-import type { GlobalSettings } from "@/lib/content/settings";
+import type { GlobalSettings } from "@/lib/wordpress/client";
 
 interface FooterProps {
   initialSettings: GlobalSettings;
