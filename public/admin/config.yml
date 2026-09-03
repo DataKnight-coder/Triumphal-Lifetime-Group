@@ -1,0 +1,129 @@
+backend:
+  name: github
+  repo: DataKnight-coder/Triumphal-Lifetime-Group
+  branch: feature/tlg-git-cms
+  auth_methods: [oauth]
+
+media_folder: /public/uploads
+public_folder: /uploads
+
+media_libraries:
+  all:
+    max_file_size: 2097152
+    slugify_filename: true
+
+collections:
+  - name: global_settings
+    label: Global Settings
+    files:
+      - name: global
+        label: Global Settings
+        file: content/settings/global.yml
+        fields:
+          - { label: Company Name, name: company_name, widget: string }
+          - { label: General Email, name: general_email, widget: string }
+          - { label: Primary Phone, name: primary_phone, widget: string }
+          - { label: WhatsApp, name: whatsapp, widget: string }
+          - { label: Address, name: address, widget: string, required: false }
+          - { label: Copyright Text, name: copyright_text, widget: string }
+          - { label: Facebook, name: facebook, widget: string, required: false }
+          - { label: LinkedIn, name: linkedin, widget: string, required: false }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - { label: SEO Description, name: seo_description, widget: text }
+          - { label: SEO Open Graph Image, name: seo_og_image, widget: image, required: false }
+
+  - name: leadership
+    label: Leadership
+    folder: content/leadership
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Job Title, name: job_title, widget: string }
+      - { label: Department, name: department, widget: string, required: false }
+      - { label: Email, name: email, widget: string, required: false }
+      - { label: LinkedIn, name: linkedin, widget: string, required: false }
+      - { label: Photo, name: photo, widget: image }
+      - { label: Display Order, name: display_order, widget: number, value_type: int, default: 0 }
+      - { label: Status, name: status, widget: select, options: [active, inactive], default: active }
+      - { label: Biography, name: body, widget: markdown }
+
+  - name: services
+    label: Services
+    folder: content/services
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Short Description, name: short_description, widget: text }
+      - { label: Featured Image, name: featured_image, widget: image, required: false }
+      - { label: Key Benefits, name: key_benefits, widget: list, required: false }
+      - { label: CTA Text, name: cta_text, widget: string, default: Learn More }
+      - { label: CTA URL, name: cta_url, widget: string }
+      - { label: Display Order, name: display_order, widget: number, value_type: int, default: 0 }
+      - { label: Division, name: division, widget: string }
+      - { label: Status, name: status, widget: select, options: [active, inactive], default: active }
+      - { label: Location Text, name: location_text, widget: string, required: false }
+      - { label: Entity Text, name: entity_text, widget: text, required: false }
+      - { label: Contact Text, name: contact_text, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown, required: false }
+
+  - name: careers
+    label: Careers
+    folder: content/careers
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Department, name: department, widget: string }
+      - { label: Location, name: location, widget: string }
+      - { label: Employment Type, name: employment_type, widget: string }
+      - { label: Application URL, name: application_url, widget: string, required: false }
+      - { label: Job Status, name: job_status, widget: select, options: [open, closed], default: open }
+      - { label: Closing Date, name: closing_date, widget: datetime, required: false, time_format: false }
+      - { label: Display Order, name: display_order, widget: number, value_type: int, default: 0 }
+      - { label: Description, name: body, widget: markdown }
+
+  - name: faqs
+    label: FAQs
+    folder: content/faqs
+    create: true
+    slug: "{{division}}-{{slug}}"
+    fields:
+      - { label: Question, name: question, widget: string }
+      - label: Division
+        name: division
+        widget: select
+        options:
+          - { label: Digital Learning, value: digital-learning }
+          - { label: Education, value: education }
+          - { label: Global Mobility, value: global-mobility }
+          - { label: HR Consulting, value: hr-consulting }
+          - { label: Real Estate, value: real-estate }
+          - { label: Technology, value: technology }
+          - { label: Global / General, value: global }
+      - { label: Order, name: order, widget: number, value_type: int, default: 0 }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Answer, name: body, widget: markdown }
+
+  - name: insights
+    label: Insights
+    folder: content/insights
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Excerpt, name: excerpt, widget: text }
+      - { label: Author, name: author, widget: string }
+      - { label: Publish Date, name: publish_date, widget: datetime, time_format: false }
+      - { label: Featured Image, name: featured_image, widget: image }
+      - { label: Category, name: category, widget: string }
+      - { label: SEO Title, name: seo_title, widget: string, required: false }
+      - { label: SEO Description, name: seo_description, widget: text, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Display Order, name: display_order, widget: number, value_type: int, default: 0 }
+      - { label: Body, name: body, widget: markdown }

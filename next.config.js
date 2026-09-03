@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
   experimental: {
     viewTransition: true,
   },
@@ -11,10 +12,21 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cms.triumphallifetimegroup.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   async redirects() {
     return [
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+        permanent: false,
+      },
       {
         source: '/companies/hr-business-consulting',
         destination: '/solutions/hr-consulting',

@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Plane, FileCheck, Briefcase, Building2, MapPin, GraduationCap, Users } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
+import { getFaqsByDivision } from "@/lib/content/faqs";
 
 export const metadata: Metadata = {
   title: "Global Mobility & Immigration Advisory - Canada, UAE & UK | Triumphal Lifetime Group",
   description: "Administrative support and advisory for study visas, work permits, business visas, family relocation and international settlement. Serving Nigeria, Canada, UAE and UK.",
 };
 
-export default function GlobalMobilityPage() {
+export default async function GlobalMobilityPage() {
+  const faqs = await getFaqsByDivision("global-mobility");
+
   return (
     <main className="bg-white pb-24">
       {/* Hero Section - Split Editorial Layout */}
@@ -241,6 +244,7 @@ export default function GlobalMobilityPage() {
       </section>
 
       {/* FAQ Section */}
+      {faqs.length > 0 && (
       <section className="py-24 bg-white border-y border-tlg-stone">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12">
           <Reveal><div className="text-center mb-16">
@@ -248,26 +252,21 @@ export default function GlobalMobilityPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Global Mobility FAQs</h2>
           </div></Reveal>
           <div className="space-y-0">
-            {[
-              { q: "Are you a licensed immigration firm?", a: "No. We provide administrative coordination, document organisation, logistical planning, and general advisory. We are not a government embassy and do not issue visas. When regulated legal immigration advice is required, we refer you to authorised professionals in the relevant jurisdiction." },
-              { q: "Which visa types do you support?", a: "We support study visas (Canada, UAE), work and business visas, visitor and family visas, and relocation logistics. The specific countries we assist with depend on current bilateral requirements and the nature of your case. Contact us to discuss your situation." },
-              { q: "Can you guarantee my visa approval?", a: "No. Final visa decisions are made by respective governments and are outside our control. What we do is ensure your documentation is as complete, accurate, and well-organised as possible, which reduces the risk of technical refusals." },
-              { q: "What do you do after I receive my visa?", a: "We offer post-approval support including settlement guides, accommodation sourcing guidance, civic registration information, and orientation materials for your destination city. We want your transition to be as smooth as possible, not just your application." },
-              { q: "How long does the process take?", a: "Processing times vary significantly by country, visa type, and the applicant's specific circumstances. Some applications take 4–8 weeks, others take several months. We provide a realistic timeline assessment during your initial consultation." },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <details className="group border-b border-tlg-stone py-6 cursor-pointer">
                   <summary className="flex justify-between items-center font-serif text-lg text-tlg-midnight list-none">
-                    {item.q}
+                    {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.a}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
                 </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-24 bg-tlg-midnight text-white text-center">

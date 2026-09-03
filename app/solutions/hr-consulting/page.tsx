@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Users, Target, Building2, Scale, BarChart3, Presentation, Briefcase, Network, Lightbulb, MapPin } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
+import { getFaqsByDivision } from "@/lib/content/faqs";
 
 export const metadata: Metadata = {
   title: "HR & Business Consulting - Nigeria, UAE & Canada | Triumphal Lifetime Group",
   description: "HR consulting, talent acquisition, organisational design, performance management and leadership training for growing businesses in Nigeria, UAE and Canada.",
 };
 
-export default function HRConsultingPage() {
+export default async function HRConsultingPage() {
+  const faqs = await getFaqsByDivision("hr-consulting");
+
   return (
     <main className="bg-white pb-24">
       {/* Hero Section */}
@@ -431,6 +434,7 @@ export default function HRConsultingPage() {
       </section>
 
       {/* FAQ Section */}
+      {faqs.length > 0 && (
       <section className="py-24 bg-tlg-ivory border-y border-tlg-stone">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12">
           <Reveal><div className="text-center mb-16">
@@ -438,26 +442,21 @@ export default function HRConsultingPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Frequently Asked Questions</h2>
           </div></Reveal>
           <div className="space-y-0">
-            {[
-              { q: "What types of businesses do you work with?", a: "We work with SMEs, growing enterprises, and established organisations across Nigeria, UAE, and Canada. Our clients range from early-stage companies that need to set up their first HR systems, to larger businesses that need recruitment, governance, or performance improvement support." },
-              { q: "Do you offer ongoing HR support or just one-off projects?", a: "Both. We can be engaged for a single project - such as a recruitment campaign, an organisational redesign, or a policy audit - or on a retainer basis to provide continuing HR advisory support to your organisation." },
-              { q: "Can you help us find candidates quickly?", a: "Yes. Our talent acquisition team operates across multiple industries and geographies. The timeline depends on the seniority and specificity of the role, but we prioritise speed without compromising on quality of screening." },
-              { q: "How does the consulting process begin?", a: "Every engagement starts with a structured discovery call where we learn about your organisation, current challenges, workforce size, and goals. From there, we develop a scope of work and proposed deliverables before any work begins." },
-              { q: "Do you work with individuals as well as organisations?", a: "Yes. We maintain a talent network for professionals seeking career guidance, CV review, interview preparation, and job matching. Individuals can register interest through our Careers page." },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <details className="group border-b border-tlg-stone py-6 cursor-pointer">
                   <summary className="flex justify-between items-center font-serif text-lg text-tlg-midnight list-none">
-                    {item.q}
+                    {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.a}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
                 </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-24 bg-tlg-midnight text-white text-center">

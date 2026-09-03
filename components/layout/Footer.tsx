@@ -4,44 +4,49 @@ import Link from "next/link";
 import { ArrowRight, Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
 import { useRef } from "react";
 import { m, useScroll, useTransform, useReducedMotion } from "motion/react";
+import type { GlobalSettings } from "@/lib/content/settings";
 
-const contacts = [
-  {
-    region: "Nigeria",
-    type: "email",
-    label: "africa@triumphallifetimegroup.com",
-    href: "mailto:africa@triumphallifetimegroup.com",
-  },
-  {
-    region: "Canada",
-    type: "tel",
-    label: "+1 647 774 0409",
-    href: "tel:+16477740409",
-  },
-  {
-    region: "UAE",
-    type: "tel",
-    label: "+971 55 199 5483",
-    href: "tel:+971551995483",
-  },
-  {
-    region: "General",
-    type: "email",
-    label: "info@triumphallifetimegroup.com",
-    href: "mailto:info@triumphallifetimegroup.com",
-  },
-];
+interface FooterProps {
+  initialSettings: GlobalSettings;
+}
 
-const socials = [
-  { href: "https://www.facebook.com/triuphalifetimeagency.hr", icon: Facebook, label: "Facebook" },
-  { href: "https://www.linkedin.com/company/triumphal-lifetime/", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://www.instagram.com/triumphallifetimehr/", icon: Instagram, label: "Instagram" },
-  { href: "https://www.youtube.com/channel/UCDYT-iFYM6yfD5yk596mX_w", icon: Youtube, label: "YouTube" },
-];
-
-export default function Footer() {
+export default function Footer({ initialSettings }: FooterProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  const contacts = [
+    {
+      region: "Nigeria",
+      type: "email",
+      label: "africa@triumphallifetimegroup.com",
+      href: "mailto:africa@triumphallifetimegroup.com",
+    },
+    {
+      region: "Canada",
+      type: "tel",
+      label: initialSettings.primary_phone || "",
+      href: `tel:${(initialSettings.primary_phone || "").replace(/\s/g, "")}`,
+    },
+    {
+      region: "UAE",
+      type: "tel",
+      label: "+971 55 199 5483",
+      href: "tel:+971551995483",
+    },
+    {
+      region: "General",
+      type: "email",
+      label: initialSettings.general_email || "",
+      href: `mailto:${initialSettings.general_email || ""}`,
+    },
+  ];
+
+  const socials = [
+    { href: initialSettings.facebook || "", icon: Facebook, label: "Facebook" },
+    { href: initialSettings.linkedin || "", icon: Linkedin, label: "LinkedIn" },
+    { href: initialSettings.instagram || "", icon: Instagram, label: "Instagram" },
+    { href: "https://www.youtube.com/channel/UCDYT-iFYM6yfD5yk596mX_w", icon: Youtube, label: "YouTube" },
+  ];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -86,7 +91,7 @@ export default function Footer() {
               </div>
 
               <div className="text-[11px] text-white/70 uppercase tracking-widest font-semibold">
-                &copy; {new Date().getFullYear()} Triumphal Lifetime Group.<br />All rights reserved.
+                &copy; {new Date().getFullYear()} {initialSettings.company_name}.<br />{initialSettings.copyright_text}
               </div>
             </div>
 

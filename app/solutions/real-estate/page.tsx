@@ -4,12 +4,16 @@ import Image from "next/image";
 import { ArrowRight, Building2, MapPin, Target, Landmark, Home, Phone, Map, ShieldCheck, AreaChart, Search, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import PropertyInventory from "@/components/real-estate/PropertyInventory";
+import { getFaqsByDivision } from "@/lib/content/faqs";
+
 export const metadata: Metadata = {
   title: "Real Estate & Investment Advisory - Dubai, UAE & Nigeria | Triumphal Lifetime Group",
   description: "Invest in Dubai property from Nigeria with Triumphal Lifetime Group. We offer fractional ownership from $40,000, holiday homes, residential, and commercial real estate advisory across UAE and Nigeria.",
 };
 
-export default function RealEstatePage() {
+export default async function RealEstatePage() {
+  const faqs = await getFaqsByDivision("real-estate");
+
   return (
     <main className="bg-white pb-24">
       {/* Hero Section */}
@@ -308,6 +312,7 @@ export default function RealEstatePage() {
       </section>
       
       {/* FAQ Section */}
+      {faqs.length > 0 && (
       <section className="py-24 bg-tlg-ivory border-y border-tlg-stone">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12">
           <Reveal><div className="text-center mb-16">
@@ -315,26 +320,21 @@ export default function RealEstatePage() {
             <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Real Estate FAQs</h2>
           </div></Reveal>
           <div className="space-y-0">
-            {[
-              { q: "How do I invest in Dubai property from Nigeria?", a: "You don't need to travel to Dubai to invest. We can assist with property research and coordinate the process with the relevant licensed professionals and service providers. Payment can often be structured in installments, and we guide you through Dubai Land Department (DLD) registration requirements." },
-              { q: "What does 'fractional ownership' mean?", a: "Fractional ownership allows multiple investors to co-own a premium property by each purchasing a registered ownership share. Your share entitles you to proportional rental income and capital appreciation. You are listed on the Dubai Land Department title deed and can exit by selling your shares after the agreed holding period." },
-              { q: "What is the minimum investment to start?", a: "Fractional ownership shares in Dubai start from approximately $40,000 USD. Full property purchases begin from $240,000. Nigeria commercial properties are priced on application. Contact us with your budget and we will identify the most suitable opportunities." },
-              { q: "Are there taxes on Dubai property gains?", a: "Dubai currently levies 0% capital gains tax on property disposals, which is one of the primary reasons it attracts international investors. You will need to factor in the one-time 4% Dubai Land Department registration fee on purchase." },
-              { q: "What is the holiday homes / short let service?", a: "We manage a curated portfolio of fully-serviced luxury apartments in Dubai available for short-term stays. Bookings are handled through our Nigerian office via WhatsApp, and payment is accepted in Naira or USD. Minimum stays typically start at 3 nights." },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <details className="group border-b border-tlg-stone py-6 cursor-pointer">
                   <summary className="flex justify-between items-center font-serif text-lg text-tlg-midnight list-none">
-                    {item.q}
+                    {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.a}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
                 </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Contact Details & Final CTA */}
       <section className="py-24 bg-tlg-midnight text-white">

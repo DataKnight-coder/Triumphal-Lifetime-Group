@@ -2,12 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import { getGlobalSettings } from "@/lib/content/settings";
+
 export const metadata: Metadata = {
  title: "Contact Us",
  description: "Direct your inquiry to the relevant regional office or operating division of Triumphal Lifetime Group.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+ const settings = await getGlobalSettings();
+ const whatsapp = settings.whatsapp;
+ const generalEmail = settings.general_email;
+ const africaEmail = "africa@triumphallifetimegroup.com";
+ const menaEmail = "mena@triumphallifetimegroup.com";
+ const naEmail = "na@triumphallifetimegroup.com";
+
  return (
  <main className="bg-white min-h-screen">
  {/* Hero */}
@@ -35,14 +44,14 @@ export default function ContactPage() {
  <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Abuja</h3>
  <p className="text-sm text-gray-800 font-normal mb-6">Serving Africa</p>
  <div className="space-y-3">
- <a href="mailto:africa@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
+ <a href={`mailto:${africaEmail}`} className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
  <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
- africa@triumphallifetimegroup.com
+ {africaEmail}
  </a>
- <a href="https://wa.me/2349117777759" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
+ {whatsapp && <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
  <Phone size={14} className="shrink-0 text-tlg-signatureGold" />
  WhatsApp Us
- </a>
+ </a>}
  </div>
  </div>
 
@@ -52,9 +61,9 @@ export default function ContactPage() {
  <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Dubai</h3>
  <p className="text-sm text-gray-800 font-normal mb-6">Serving the Middle East</p>
  <div className="space-y-3">
- <a href="mailto:mena@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
+ <a href={`mailto:${menaEmail}`} className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
  <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
- mena@triumphallifetimegroup.com
+ {menaEmail}
  </a>
  </div>
  </div>
@@ -65,9 +74,9 @@ export default function ContactPage() {
  <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Toronto</h3>
  <p className="text-sm text-gray-800 font-normal mb-6">Serving North America</p>
  <div className="space-y-3">
- <a href="mailto:na@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
+ <a href={`mailto:${naEmail}`} className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
  <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
- na@triumphallifetimegroup.com
+ {naEmail}
  </a>
  </div>
  </div>
@@ -88,7 +97,7 @@ export default function ContactPage() {
  For a structured consultation, use the <Link href="?book=true" className="underline underline-offset-4 hover:text-tlg-signatureGold transition-colors">Book a Consultation</Link> page. For all other inquiries, use this form and we will respond within two business days.
  </p>
  <div className="space-y-4 text-sm text-gray-700 font-normal">
- <p className="flex items-center gap-3"><Mail size={14} className="text-tlg-signatureGold shrink-0" /> info@triumphallifetimegroup.com</p>
+ {generalEmail && <p className="flex items-center gap-3"><Mail size={14} className="text-tlg-signatureGold shrink-0" /> {generalEmail}</p>}
  </div>
  </div>
 

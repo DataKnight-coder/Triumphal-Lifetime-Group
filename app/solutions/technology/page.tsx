@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, ShieldCheck, Database, CloudCog, Network, Laptop, Code2, ServerCog, Cpu } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
+import { getFaqsByDivision } from "@/lib/content/faqs";
 
 export const metadata: Metadata = {
   title: "Information Technology",
   description: "Build reliable technology systems for your business.",
 };
 
-export default function TechnologyPage() {
+export default async function TechnologyPage() {
+  const faqs = await getFaqsByDivision("technology");
+
   return (
     <main className="bg-white pb-24">
       {/* Hero Section */}
@@ -248,6 +251,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* FAQ Section */}
+      {faqs.length > 0 && (
       <section className="py-24 bg-tlg-ivory border-y border-tlg-stone">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12">
           <Reveal><div className="text-center mb-16">
@@ -255,26 +259,21 @@ export default function TechnologyPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">IT Services FAQs</h2>
           </div></Reveal>
           <div className="space-y-0">
-            {[
-              { q: "Do you build websites and mobile apps?", a: "Yes. Our software development service covers web applications, internal management portals, and mobile-first platforms. We scope each project to understand your business requirements before designing any architecture." },
-              { q: "How do you approach cybersecurity?", a: "We start with a vulnerability audit of your existing infrastructure. We then implement layered defences including firewall configurations, access controls, data encryption protocols, and staff security awareness programmes. Ongoing monitoring is available as a managed service." },
-              { q: "What is managed IT support?", a: "Managed IT support means we act as your outsourced technology team - handling helpdesk queries, hardware procurement, network administration, software updates, and proactive system maintenance. This model is cost-effective for organisations that do not need a full in-house IT department." },
-              { q: "Can you help us migrate to cloud systems?", a: "Yes. We plan and execute cloud migrations for Microsoft Azure, Google Cloud, and AWS environments. Our process is phased to avoid disruption: we audit, design the new architecture, migrate in controlled stages, and train your team before full cutover." },
-              { q: "How long does a typical IT engagement take?", a: "It depends on the scope. A cybersecurity audit can take 2–4 weeks. A cloud migration for a medium-sized organisation typically takes 2–4 months. Custom software projects vary. We provide clear timelines and milestone-based delivery during the scoping phase." },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <details className="group border-b border-tlg-stone py-6 cursor-pointer">
                   <summary className="flex justify-between items-center font-serif text-lg text-tlg-midnight list-none">
-                    {item.q}
+                    {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.a}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
                 </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-24 bg-tlg-midnight text-white text-center">

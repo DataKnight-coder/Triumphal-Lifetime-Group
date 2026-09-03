@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, GraduationCap, BookOpen, Globe2, Building } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
+import { getFaqsByDivision } from "@/lib/content/faqs";
 
 export const metadata: Metadata = {
   title: "Education Advisory - Study in Canada, UAE & Nigeria | Triumphal Lifetime Group",
   description: "Expert education advisory for students applying to Canadian, UAE and Nigerian universities. We provide profile assessment, institution research, application support, scholarship research and pre-departure guidance.",
 };
 
-export default function EducationAdvisoryPage() {
+export default async function EducationAdvisoryPage() {
+  const faqs = await getFaqsByDivision("education");
+
   return (
     <main className="bg-white pb-24">
       {/* Hero Section */}
@@ -271,6 +274,7 @@ export default function EducationAdvisoryPage() {
       </section>
 
       {/* FAQ Section */}
+      {faqs.length > 0 && (
       <section className="py-24 bg-white border-y border-tlg-stone">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12">
           <Reveal><div className="text-center mb-16">
@@ -278,26 +282,21 @@ export default function EducationAdvisoryPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Education Advisory FAQs</h2>
           </div></Reveal>
           <div className="space-y-0">
-            {[
-              { q: "Can you guarantee my admission to a university?", a: "No. Final admission decisions belong to the institutions, and we state this clearly. What we can do is help you present the strongest possible application - identifying suitable programmes, reviewing your documents, and preparing your personal statement - to significantly improve your chances." },
-              { q: "Which countries do you help students apply to?", a: "We primarily support applications to Canada, UAE, and Nigeria. Canada is a leading destination due to its post-study work options and immigration pathways. UAE offers fast-growing international campuses. We assess your profile and goals to determine which destination is the best fit." },
-              { q: "Do you help with scholarships?", a: "Yes, we research available bursaries, government scholarships, and institutional funding opportunities that you may be eligible for. We cannot apply on your behalf, but we identify what is available and guide you through the process." },
-              { q: "What if I don't have high grades?", a: "Our advisory is not restricted to top-performing students. We assess your full profile - including work experience, extracurricular background, and career intent - and help identify programmes and institutions where you are realistically competitive." },
-              { q: "How soon should I start the process?", a: "Ideally 6–12 months before your intended start date. Admission timelines, document gathering, scholarship applications, and visa processing all take time. The earlier you start, the more options you have. Reach out to us for a timeline review specific to your situation." },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <details className="group border-b border-tlg-stone py-6 cursor-pointer">
                   <summary className="flex justify-between items-center font-serif text-lg text-tlg-midnight list-none">
-                    {item.q}
+                    {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.a}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
                 </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-24 bg-tlg-midnight text-white text-center">

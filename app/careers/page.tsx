@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { getAllCareers } from "@/lib/content/careers";
 
 export const metadata: Metadata = {
  title: "Careers",
  description: "Join a global network of experts.",
 };
 
-import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+export default async function CareersPage() {
+ const openCareers = await getAllCareers();
 
-export default function CareersPage() {
- return (
+  return (
  <main className="bg-white pt-32 pb-24">
  <section className="relative pt-16 pb-24 border-b border-tlg-stone bg-tlg-ivory">
  <div className="max-w-[1200px] mx-auto px-6 md:px-12">
@@ -49,10 +50,29 @@ export default function CareersPage() {
  </div>
  </div>
 
+ {openCareers.length > 0 ? (
+  <div className="space-y-4">
+    {openCareers.map((c) => (
+      <div key={c.slug} className="border border-tlg-stone p-6 bg-white">
+        <h4 className="text-xl font-serif text-tlg-midnight mb-2">{c.title}</h4>
+        <p className="text-xs uppercase tracking-widest text-tlg-signatureGold mb-3">
+          {[c.department, c.location, c.employment_type].filter(Boolean).join(" · ")}
+        </p>
+        <div className="text-sm text-gray-800 whitespace-pre-line">{c.content}</div>
+        {c.application_url && (
+          <a href={c.application_url} className="inline-flex mt-5 text-xs font-bold uppercase tracking-widest text-tlg-midnight hover:text-tlg-signatureGold transition-colors">
+            Apply Now
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+) : null}
+
  <div className="bg-tlg-ivory border border-tlg-stone p-12 text-center">
- <h3 className="text-2xl font-serif text-tlg-midnight mb-4">Current Openings</h3>
+ <h3 className="text-2xl font-serif text-tlg-midnight mb-4">General Applications</h3>
  <p className="text-gray-800 font-normal mb-8 max-w-lg mx-auto">
- Our current vacancies are managed directly through our HR Consulting division. Please submit your CV and a brief cover letter outlining your target division.
+ Our vacancies are managed directly through our HR Consulting division. Please submit your CV and a brief cover letter outlining your target division.
  </p>
  <Link href="/contact" className="inline-flex items-center justify-center bg-tlg-midnight text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-tlg-signatureGold transition-colors">
  Submit Application

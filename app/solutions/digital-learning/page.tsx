@@ -3,13 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, MonitorPlay, Layers, BookOpen, Code2, Users, FileText } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
+import { getFaqsByDivision } from "@/lib/content/faqs";
 
 export const metadata: Metadata = {
   title: "Digital Products & Learning",
   description: "Deploy training and learning systems that actually work.",
 };
 
-export default function DigitalLearningPage() {
+export default async function DigitalLearningPage() {
+  const faqs = await getFaqsByDivision("digital-learning");
+
   return (
     <main className="bg-white pb-24">
       {/* Hero Section */}
@@ -170,6 +173,7 @@ export default function DigitalLearningPage() {
       </section>
 
       {/* FAQ Section */}
+      {faqs.length > 0 && (
       <section className="py-24 bg-tlg-ivory border-y border-tlg-stone">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12">
           <Reveal><div className="text-center mb-16">
@@ -177,26 +181,21 @@ export default function DigitalLearningPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight">Digital Learning FAQs</h2>
           </div></Reveal>
           <div className="space-y-0">
-            {[
-              { q: "What types of organisations do you build training programmes for?", a: "We work with growing businesses, HR departments, educational institutions, and corporate franchises that need to standardise how they train, onboard, and develop their people. We design programmes for both small teams and large organisations across multiple locations." },
-              { q: "Do you deliver live training or only self-paced content?", a: "Both. We design self-paced digital learning modules and also facilitate live, cohort-based interactive workshops - either in-person or virtually. The format we recommend depends on your team's size, geography, and the nature of the subject matter." },
-              { q: "Can you digitise our existing internal manuals?", a: "Yes. This is one of our core services. We convert internal SOPs, onboarding guides, and operational manuals into structured, engaging digital formats designed for better knowledge retention and scalability across distributed teams." },
-              { q: "What do your downloadable business resources include?", a: "Our digital resource library includes HR policy templates, performance review frameworks, onboarding checklists, business operations toolkits, and leadership guides. These are practical frameworks your team can adapt and implement immediately." },
-              { q: "How long does it take to build a corporate training programme?", a: "This depends on the scope and complexity. A focused module can be delivered in 3–6 weeks. A comprehensive multi-module programme typically takes 2–4 months. We work within your timeline and can phase delivery where needed." },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <details className="group border-b border-tlg-stone py-6 cursor-pointer">
                   <summary className="flex justify-between items-center font-serif text-lg text-tlg-midnight list-none">
-                    {item.q}
+                    {item.question}
                     <span className="text-tlg-signatureGold text-2xl font-normal group-open:rotate-45 transition-transform duration-200 ml-4 shrink-0">+</span>
                   </summary>
-                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.a}</p>
+                  <p className="mt-4 text-sm text-gray-700 leading-relaxed max-w-3xl">{item.answer}</p>
                 </details>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-24 bg-tlg-midnight text-white text-center">
