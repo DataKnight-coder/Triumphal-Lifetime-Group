@@ -72,20 +72,20 @@ function tlg_admin_field_definitions() {
             'intro_body' => ['Introduction body', 'textarea', 'Approved introductory copy. Basic safe HTML is supported.'],
             'services_heading' => ['Services heading', 'text', 'Heading for services or programmes.'],
             'services_intro' => ['Services introduction', 'textarea', 'Optional supporting copy.'],
-            'services_items' => ['Services / programme items', 'textarea', 'One item per line as Heading | Description.'],
+            'services_items' => ['Services / programme items', 'repeater', 'Add items.', ['Heading', 'Description']],
             'audience_heading' => ['Who we help heading', 'text', 'Audience section heading.'],
             'audience_body' => ['Who we help body', 'textarea', 'Audience positioning statement.'],
-            'audience_items' => ['Who we help items', 'textarea', 'One audience per line, optionally Heading | Description.'],
+            'audience_items' => ['Who we help items', 'repeater', 'Add audiences.', ['Heading', 'Description']],
             'positioning_heading' => ['Positioning heading', 'text', 'Outcome or positioning section heading.'],
             'positioning_body' => ['Positioning body', 'textarea', 'Approved positioning copy. Basic safe HTML is supported.'],
             'process_heading' => ['Process heading', 'text', 'Heading for the process or journey.'],
-            'process_items' => ['Process steps', 'textarea', 'One step per line as Step title | Description.'],
+            'process_items' => ['Process steps', 'repeater', 'Add process steps.', ['Step title', 'Description']],
             'benefits_heading' => ['Benefits heading', 'text', 'Heading for benefits or deliverables.'],
             'benefits_body' => ['Benefits introduction', 'textarea', 'Optional supporting copy.'],
-            'benefits_items' => ['Benefit items', 'textarea', 'One benefit per line as Heading | Description.'],
+            'benefits_items' => ['Benefit items', 'repeater', 'Add benefits.', ['Heading', 'Description']],
             'future_heading' => ['Future projects heading', 'text', 'Heading for proposed, not completed, work.'],
             'future_body' => ['Future projects body', 'textarea', 'Clearly label proposed activities as future plans.'],
-            'future_items' => ['Future project items', 'textarea', 'One future item per line as Heading | Description.'],
+            'future_items' => ['Future project items', 'repeater', 'Add future items.', ['Heading', 'Description']],
             'cta_heading' => ['CTA heading', 'text', 'Primary call-to-action heading.'],
             'cta_body' => ['CTA body', 'textarea', 'Short supporting text.'],
             'cta_text' => ['Primary button label', 'text', 'Visible action label.'],
@@ -94,11 +94,11 @@ function tlg_admin_field_definitions() {
             'secondary_cta_url' => ['Secondary button URL', 'text', 'Use a site-relative path or approved HTTPS URL.'],
             'disclaimer_heading' => ['Disclaimer heading', 'text', 'Required compliance heading where applicable.'],
             'disclaimer_body' => ['Disclaimer body', 'textarea', 'Approved no-guarantee or regulatory wording.'],
-            'navigation_items' => ['Primary navigation', 'textarea', 'One link per line as Label | /path.'],
-            'division_items' => ['Division navigation', 'textarea', 'One link per line as Label | /path | /image.jpg.'],
-            'footer_divisions' => ['Footer: Divisions', 'textarea', 'One link per line as Label | /path.'],
-            'footer_company' => ['Footer: Company', 'textarea', 'One link per line as Label | /path.'],
-            'footer_resources' => ['Footer: Resources', 'textarea', 'One link per line as Label | /path.'],
+            'navigation_items' => ['Primary navigation', 'repeater', 'Add navigation links.', ['Label', '/path']],
+            'division_items' => ['Division navigation', 'repeater', 'Add division links.', ['Label', '/path', '/image.jpg']],
+            'footer_divisions' => ['Footer: Divisions', 'repeater', 'Add links.', ['Label', '/path']],
+            'footer_company' => ['Footer: Company', 'repeater', 'Add links.', ['Label', '/path']],
+            'footer_resources' => ['Footer: Resources', 'repeater', 'Add links.', ['Label', '/path']],
             'last_updated' => ['Last updated label', 'text', 'Public date label for policy pages.'],
             'seo_title' => ['SEO title', 'text', 'Unique page title for search and sharing.'],
             'seo_description' => ['SEO description', 'textarea', 'Unique page description.'],
@@ -288,6 +288,75 @@ function tlg_render_meta_box($post, $box) {
                 <td>
                     <?php if ($type === 'textarea') : ?>
                         <textarea class="large-text" rows="4" id="tlg-<?php echo esc_attr($key); ?>" name="tlg_meta[<?php echo esc_attr($key); ?>]"><?php echo esc_textarea($value); ?></textarea>
+                    <?php elseif ($type === 'repeater') : ?>
+                        <?php
+                        $columns = $options;
+                        $rows = array_filter(array_map('trim', explode("\n", $value)));
+                        ?>
+                        <div class="tlg-repeater" data-columns="<?php echo esc_attr(json_encode($columns)); ?>">
+                            <div class="tlg-repeater-rows">
+                                <?php foreach ($rows as $row) : 
+                                    $parts = array_pad(array_map('trim', explode('|', $row)), count($columns), '');
+                                ?>
+                                    <div class="tlg-repeater-row" style="display:flex; gap:10px; margin-bottom:10px;">
+                                        <?php foreach ($columns as $index => $col) : ?>
+                                            <input type="text" class="regular-text" placeholder="<?php echo esc_attr($col); ?>" value="<?php echo esc_attr(trim($parts[$index])); ?>">
+                                        <?php endforeach; ?>
+                                        <button type="button" class="button remove-row">Remove</button>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <button type="button" class="button add-row">Add Row</button>
+                            <textarea class="tlg-repeater-store" style="display:none;" id="tlg-<?php echo esc_attr($key); ?>" name="tlg_meta[<?php echo esc_attr($key); ?>]"><?php echo esc_textarea($value); ?></textarea>
+                        </div>
+                        <script>
+                        if (!window.tlgRepeaterInit) {
+                            window.tlgRepeaterInit = true;
+                            document.addEventListener('click', function(e) {
+                                if (e.target.classList.contains('add-row')) {
+                                    var repeater = e.target.closest('.tlg-repeater');
+                                    var cols = JSON.parse(repeater.getAttribute('data-columns'));
+                                    var row = document.createElement('div');
+                                    row.className = 'tlg-repeater-row';
+                                    row.style.display = 'flex';
+                                    row.style.gap = '10px';
+                                    row.style.marginBottom = '10px';
+                                    var html = '';
+                                    cols.forEach(function(col) {
+                                        html += '<input type="text" class="regular-text" placeholder="' + col + '" value="">';
+                                    });
+                                    html += '<button type="button" class="button remove-row">Remove</button>';
+                                    row.innerHTML = html;
+                                    repeater.querySelector('.tlg-repeater-rows').appendChild(row);
+                                    updateStore(repeater);
+                                }
+                                if (e.target.classList.contains('remove-row')) {
+                                    var repeater = e.target.closest('.tlg-repeater');
+                                    e.target.closest('.tlg-repeater-row').remove();
+                                    updateStore(repeater);
+                                }
+                            });
+                            document.addEventListener('input', function(e) {
+                                if (e.target.closest('.tlg-repeater-row')) {
+                                    updateStore(e.target.closest('.tlg-repeater'));
+                                }
+                            });
+                            function updateStore(repeater) {
+                                var rows = repeater.querySelectorAll('.tlg-repeater-row');
+                                var val = [];
+                                rows.forEach(function(row) {
+                                    var inputs = row.querySelectorAll('input');
+                                    var parts = [];
+                                    inputs.forEach(function(input) { parts.push(input.value.replace(/\|/g, '')); });
+                                    // only push if not completely empty
+                                    if (parts.join('').trim() !== '') {
+                                        val.push(parts.join(' | '));
+                                    }
+                                });
+                                repeater.querySelector('.tlg-repeater-store').value = val.join('\n');
+                            }
+                        }
+                        </script>
                     <?php elseif ($type === 'select') : ?>
                         <select id="tlg-<?php echo esc_attr($key); ?>" name="tlg_meta[<?php echo esc_attr($key); ?>]">
                             <?php foreach ($options as $option_value => $option_label) : ?>

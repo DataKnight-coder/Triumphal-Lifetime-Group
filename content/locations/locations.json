@@ -2,15 +2,15 @@
   {
     "title": "Abuja",
     "slug": "abuja",
-    "description": "",
+    "description": "Triumphal Lifetime Group physical operations in Abuja, Nigeria.",
     "country": "Nigeria",
     "city": "Abuja",
-    "public_label": "Abuja Office",
+    "public_label": "Physical Office",
     "address": "",
     "client_facing": false,
     "operational_status": "active",
     "services_available": [],
-    "public_email": "",
+    "public_email": "africa@triumphallifetimegroup.com",
     "public_phone": "",
     "display_order": 1,
     "status": "active"

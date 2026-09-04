@@ -218,7 +218,7 @@ function tlg_sanitize_leadership_group($value) {
 function tlg_sanitize_public_url($value) {
     $value = trim((string) $value);
     if (str_starts_with($value, '/') && !str_starts_with($value, '//')) {
-        return sanitize_text_field($value);
+        return esc_url_raw($value, ['https']);
     }
     return esc_url_raw($value, ['https']);
 }
