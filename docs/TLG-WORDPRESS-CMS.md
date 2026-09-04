@@ -21,7 +21,7 @@ Cloudflare continues to manage DNS, GitHub stores the frontend source, and Netli
 2. Enable HTTPS and use a supported PHP 8.x release recommended by Hostinger.
 3. In WordPress Settings → Permalinks, choose Post name and save.
 4. Copy `wordpress/mu-plugins/tlg-core.php` and the complete `wordpress/mu-plugins/tlg-core/` directory into `wp-content/mu-plugins/`.
-5. Sign in to WordPress and confirm the TLG CMS menu contains Dashboard, Global Settings, Leadership, Services, Careers, FAQs, Insights, and Publishing. Media remains a normal WordPress menu.
+5. Sign in to WordPress and confirm the TLG CMS menu contains Dashboard, Global Settings, Enquiry Forms, Page Content, Leadership, Services, Careers, FAQs, Insights, Locations, Foundation Content and Publishing. Media remains a normal WordPress menu.
 6. Confirm the WordPress uploads directory is writable through the Media Library. Do not broaden filesystem permissions beyond Hostinger's normal WordPress recommendation.
 
 The plugin uses WordPress core APIs and does not require ACF or another paid field plugin.
@@ -36,6 +36,9 @@ The plugin uses WordPress core APIs and does not require ACF or another paid fie
 | Careers | `tlg_careers` | Published and Open |
 | FAQs | `tlg_faqs` | Published and Active; requested division plus Global |
 | Insights | `tlg_insights` | Published |
+| Fixed page content/navigation/footer/legal | `tlg_pages` | Published and Active |
+| Locations | `tlg_locations` | Published and Active; publish only verified facts |
+| Foundation programmes/impact/future | `tlg_foundation` | Published and Active; impact requires evidence |
 
 All content lists are ordered by Display order, then title, then WordPress ID. Missing FAQ divisions are rejected and are never interpreted as Global.
 
@@ -50,9 +53,13 @@ GET /wp-json/tlg/v1/services
 GET /wp-json/tlg/v1/careers
 GET /wp-json/tlg/v1/faqs?division=technology
 GET /wp-json/tlg/v1/insights
+GET /wp-json/tlg/v1/pages?key=home
+GET /wp-json/tlg/v1/locations
+GET /wp-json/tlg/v1/foundation
+POST /wp-json/tlg/v1/enquiries
 ```
 
-The FAQ route requires one of the six solution division slugs. WordPress core REST authentication protects administrative writes. The TLG plugin registers no public write route. The private Netlify build-hook value is not registered in REST and is never included in settings responses.
+The FAQ route requires one of the six solution division slugs. WordPress core REST authentication protects administrative writes. The only public write route is the validated enquiry endpoint, protected by Origin, honeypot, Turnstile and rate limiting. Private build-hook, mailbox and Turnstile-secret values are never included in REST responses.
 
 ## Next.js configuration
 
@@ -85,7 +92,7 @@ npm run cms:migrate -- --apply
 
 Delete or revoke the temporary Application Password after migration. Do not put it in `.env.example`, Git, documentation, chat transcripts, or build logs. The migration uploads verified local leadership and insight images through the WordPress Media Library and sets featured images.
 
-Expected source counts are 5 leadership profiles, 6 services, 0 careers, 30 FAQs, and 3 insights. Global settings use only the verified values already present in the site; Address and default OG image intentionally remain blank.
+Expected source counts are 8 leadership records (7 active and one conservatively retained inactive conflict), 6 services, 0 careers, 30 FAQs, 3 draft Insights, 25 fixed pages, 0 locations and 0 Foundation items. The migration also deactivates the superseded `arike-adedayo` slug without deleting it. Locations and completed impact remain empty pending evidence.
 
 ## WordPress to Netlify publishing
 
@@ -95,6 +102,10 @@ Expected source counts are 5 leadership profiles, 6 services, 0 careers, 30 FAQs
 4. WordPress coalesces rapid saves into one scheduled request after 60 seconds.
 
 The URL is stored only in the WordPress database. Content drafts do not trigger builds. Relevant published updates, status changes, deletions, and Global Settings changes do.
+
+The publishing integration watches public title, slug, body, excerpt, and publication-date changes; registered TLG metadata; publish/unpublish transitions; featured-image assignment and removal; and file changes to Media Library attachments referenced by visible CMS records or the default social image. Active/Inactive and Open/Closed changes are treated as public visibility changes. Autosaves, revisions, unchanged option saves, draft-only edits, and deletion of non-public records do not queue builds. All qualifying edits share one scheduled event with a 60-second debounce window.
+
+The Netlify hook is saved as the private `tlg_netlify_build_hook` WordPress option with `show_in_rest` disabled. It is used only by the server-side publishing module and is never sent to the TLG REST API, frontend JavaScript, or plugin logs.
 
 ## DNS and Hostinger
 
