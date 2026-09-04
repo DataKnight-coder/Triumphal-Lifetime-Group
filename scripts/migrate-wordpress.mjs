@@ -193,8 +193,25 @@ async function request(route, options = {}) {
     ...options,
     headers: { Accept: "application/json", ...authHeaders(), ...options.headers },
   });
-  if (!response.ok) throw new Error(`${options.method ?? "GET"} ${route}: ${response.status} ${await response.text()}`);
-  return response.json();
+  const responseBody = await response.text();
+  let payload;
+  try {
+    payload = responseBody ? JSON.parse(responseBody) : null;
+  } catch {
+    const summary = responseBody
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 240);
+    throw new Error(
+      `${options.method ?? "GET"} ${route}: WordPress returned non-JSON HTTP ${response.status}. ${summary || "Check the CMS URL, username, Application Password, and any hosting security challenge."}`,
+    );
+  }
+  if (!response.ok) {
+    const message = payload?.message ? String(payload.message) : JSON.stringify(payload);
+    throw new Error(`${options.method ?? "GET"} ${route}: HTTP ${response.status} ${message}`);
+  }
+  return payload;
 }
 
 async function sourceItems(directory) {
