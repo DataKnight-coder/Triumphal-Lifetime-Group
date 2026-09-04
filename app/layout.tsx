@@ -15,7 +15,8 @@ const manrope = Manrope({
  variable: "--font-manrope",
 });
 
-import { getGlobalSettings } from "@/lib/wordpress/client";
+import { getGlobalSettings, getLocations, getPageContent } from "@/lib/wordpress/client";
+import { pageField, pageLinks } from "@/lib/wordpress/page-content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getGlobalSettings();
@@ -50,7 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 import Header from "@/components/layout/Header";
-import dynamic from "next/dynamic";
 import AnimationProvider from "@/components/providers/AnimationProvider";
 
 import ServerFooter from "@/components/layout/ServerFooter";
@@ -59,25 +59,74 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import PwaRegistry from "@/components/providers/PwaRegistry";
 import BookingModal from "@/components/ui/BookingModal";
 
-export default function RootLayout({
- children,
-}: Readonly<{
- children: React.ReactNode;
-}>) {
- return (
- <html lang="en" suppressHydrationWarning>
+export default async function RootLayout({
+  children,
+ }: Readonly<{
+  children: React.ReactNode;
+ }>) {
+  const [settings, navigation, locations] = await Promise.all([getGlobalSettings(), getPageContent("site-navigation"), getLocations()]);
+  const organizationSchema = {
+    "@type": "Corporation",
+    "@id": "https://triumphallifetimegroup.com/#corporation",
+    name: settings.company_name || "Triumphal Lifetime Group",
+    url: "https://triumphallifetimegroup.com",
+    email: settings.general_email || undefined,
+    telephone: settings.primary_phone || undefined,
+    sameAs: [settings.facebook, settings.linkedin, settings.instagram].filter(Boolean),
+    logo: "https://triumphallifetimegroup.com/images/logo.png",
+    description: settings.seo_description || undefined
+  };
+
+  const graphNodes: Record<string, unknown>[] = [organizationSchema, {
+    "@type": "WebSite",
+    "@id": "https://triumphallifetimegroup.com/#website",
+    name: settings.company_name || "Triumphal Lifetime Group",
+    url: "https://triumphallifetimegroup.com",
+  }];
+
+  locations.forEach(loc => {
+    if (loc.operational_status === "active" && loc.address && loc.client_facing) {
+      graphNodes.push({
+        "@type": "LocalBusiness",
+        "@id": `https://triumphallifetimegroup.com/#localbusiness-${loc.slug}`,
+        name: loc.name || "Triumphal Lifetime Group",
+        url: "https://triumphallifetimegroup.com",
+        telephone: loc.phone || settings.primary_phone || "",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: loc.city,
+          addressCountry: loc.country,
+          streetAddress: loc.address
+        }
+      });
+    }
+  });
+
+  return (
+  <html lang="en" suppressHydrationWarning>
+     <head>
+       <script
+         type="application/ld+json"
+         dangerouslySetInnerHTML={{
+           __html: JSON.stringify({
+             "@context": "https://schema.org",
+             "@graph": graphNodes
+           })
+         }}
+       />
+     </head>
  <body suppressHydrationWarning className={`${manrope.variable} ${cormorant.variable} bg-tlg-ivory text-tlg-charcoal flex flex-col min-h-screen safe-pb md:pb-0`}>
  <SmoothScroll>
  <AnimationProvider>
  <PwaRegistry />
  <CustomCursor />
- <Header />
+ <Header navigationLinks={pageLinks(navigation, "navigation_items")} divisionLinks={pageLinks(navigation, "division_items")} ctaText={pageField(navigation, "cta_text")} ctaUrl={pageField(navigation, "cta_url")} />
  <div className="flex-1">
  {children}
  </div>
  <ServerFooter />
  <Suspense fallback={null}>
-   <BookingModal />
+   <BookingModal siteKey={settings.turnstile_site_key} />
  </Suspense>
  </AnimationProvider>
  </SmoothScroll>

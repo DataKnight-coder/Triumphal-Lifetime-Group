@@ -9,8 +9,12 @@ import { usePathname } from "next/navigation";
 import { triggerHaptic } from "@/lib/utils/haptics";
 import MobileDock from "./MobileDock";
 import CommandMenu from "@/components/ui/CommandMenu";
+import type { PageLink } from "@/lib/wordpress/page-content";
+import { trackEvent } from "@/lib/analytics";
 
-export default function Header() {
+type HeaderProps = { navigationLinks: PageLink[]; divisionLinks: PageLink[]; ctaText: string; ctaUrl: string };
+
+export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -37,16 +41,9 @@ export default function Header() {
     }
   }, [mobileMenuOpen]);
 
-  const companiesLinks = [
-    { name: "HR & Business Consulting", path: "/solutions/hr-consulting", image: "/visuals/hr.jpg", desc: "Workforce engineering and executive search." },
-    { name: "Real Estate", path: "/solutions/real-estate", image: "/visuals/real-estate.jpg", desc: "Premium property development and management." },
-    { name: "Education Advisory", path: "/solutions/education", image: "/visuals/education.jpg", desc: "Global academic placement and consulting." },
-    { name: "Global Mobility", path: "/solutions/global-mobility", image: "/visuals/global-mobility.jpg", desc: "Immigration and international relocation." },
-    { name: "Digital Products & Learning", path: "/solutions/digital-learning", image: "/visuals/digital-learning.jpg", desc: "E-learning platforms and skill development." },
-    { name: "Information Technology", path: "/solutions/technology", image: "/visuals/technology.jpg", desc: "Enterprise software and digital transformation." },
-    { name: "Charity Foundation", path: "/impact", image: "/images/impact_hero.jpg", desc: "Community empowerment and disaster relief." },
-    { name: "View All Companies", path: "/companies", image: "/images/hero.jpg", isHighlight: true, desc: "Explore our entire corporate portfolio." },
-  ];
+  const companiesLinks = divisionLinks.map((link) => ({ name: link.label, path: link.url, image: link.image || "/images/hero.jpg", desc: "" }));
+  const divisionsLabel = navigationLinks.find((link) => link.label === "Our Divisions")?.label || "Our Divisions";
+  const searchItems = [...navigationLinks.map((link) => ({ title: link.label, path: link.url, category: "Navigation" })), ...divisionLinks.map((link) => ({ title: link.label, path: link.url, category: divisionsLabel }))];
 
   return (
     <>
@@ -82,8 +79,7 @@ export default function Header() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
             className={`hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white/90'}`}
           >
-            <Link href="/" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">Home</Link>
-            <Link href="/about" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">About</Link>
+            {navigationLinks.filter((link) => link.label !== "Our Divisions").slice(0, 2).map((link) => <Link key={link.url} href={link.url} className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
             
             {/* Our Companies Trigger */}
             <div 
@@ -91,11 +87,11 @@ export default function Header() {
               onMouseEnter={() => { setActiveDropdown('companies'); setHoveredLink(companiesLinks[0].image); }}
             >
               <button className={`flex items-center gap-1.5 px-4 py-2 transition-colors ${activeDropdown === 'companies' ? 'text-tlg-signatureGold' : 'hover:text-tlg-signatureGold'}`}>
-                Our Companies <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
+                {divisionsLabel} <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
               </button>
             </div>
 
-            <Link href="/insights" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">Insights</Link>
+            {navigationLinks.filter((link) => link.label !== "Our Divisions").slice(2).map((link) => <Link key={link.url} href={link.url} className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
           </m.nav>
 
           {/* Right CTA & Search - Desktop */}
@@ -116,10 +112,11 @@ export default function Header() {
             </button>
 
             <Link 
-              href="?book=true" 
+              href={ctaUrl}
+              onClick={() => trackEvent("consultation_click", { placement: "header" })}
               className={`inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-700 shadow-sm hover:shadow-md ${isDarkText && !activeDropdown ? 'bg-tlg-midnight text-white hover:bg-tlg-signatureGold' : 'bg-tlg-signatureGold text-tlg-midnight hover:bg-white'}`}
             >
-              Book a Consultation
+              {ctaText}
             </Link>
           </m.div>
           
@@ -147,12 +144,12 @@ export default function Header() {
                       href={link.path}
                       onMouseEnter={() => setHoveredLink(link.image)}
                       onClick={() => setActiveDropdown(null)}
-                      className={`group flex flex-col p-4 rounded-2xl transition-colors ${hoveredLink === link.image ? 'bg-tlg-ivory' : 'hover:bg-tlg-ivory'} ${link.isHighlight ? 'col-span-2 border border-tlg-stone mt-4 items-center justify-center text-center' : ''}`}
+                      className={`group flex flex-col p-4 rounded-2xl transition-colors ${hoveredLink === link.image ? 'bg-tlg-ivory' : 'hover:bg-tlg-ivory'}`}
                     >
                       <span className={`font-serif text-xl mb-1 transition-colors ${hoveredLink === link.image ? 'text-tlg-signatureGold' : 'text-tlg-midnight'}`}>
                         {link.name}
                       </span>
-                      {!link.isHighlight && (
+                      {link.desc && (
                         <span className="text-xs text-gray-700 font-normal leading-relaxed">
                           {link.desc}
                         </span>
@@ -187,7 +184,7 @@ export default function Header() {
       </header>
 
       {/* Command Menu */}
-      <CommandMenu isOpen={cmdOpen} setIsOpen={setCmdOpen} />
+      <CommandMenu isOpen={cmdOpen} setIsOpen={setCmdOpen} items={searchItems} />
 
       {/* MobileDock */}
       <Suspense fallback={null}>
@@ -227,22 +224,17 @@ export default function Header() {
         <div className="overflow-y-auto hide-scrollbar flex-1 px-8 py-8 pb-[calc(100px+env(safe-area-inset-bottom,20px))]">
           
           <nav className="flex flex-col gap-6">
-            <Link href="/" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Home</Link>
-            <Link href="/about" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">About Us</Link>
+            {navigationLinks.filter((link) => link.label !== "Our Divisions").map((link) => <Link key={link.url} href={link.url} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
             
             <div className="flex flex-col gap-4 border-l-2 border-tlg-ivory pl-4 py-2">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold">Our Companies</span>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold">{divisionsLabel}</span>
               {companiesLinks.map(link => (
-                <Link key={link.name} href={link.path} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className={`text-lg transition-colors ${link.isHighlight ? 'text-tlg-midnight font-medium mt-2' : 'text-gray-700'}`}>
+                <Link key={link.name} href={link.path} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-lg text-gray-700 transition-colors">
                   {link.name}
                 </Link>
               ))}
             </div>
 
-            <Link href="/insights" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Insights & Ideas</Link>
-            <Link href="/impact" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Social Impact</Link>
-            <Link href="/careers" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Careers</Link>
-            <Link href="/contact" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Contact</Link>
           </nav>
 
         </div>

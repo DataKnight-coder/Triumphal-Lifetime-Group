@@ -2,27 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { getInsights } from "@/lib/wordpress/client";
+import { getInsights, getPageContent } from "@/lib/wordpress/client";
+import { pageField, pageMetadata } from "@/lib/wordpress/page-content";
 
-export const metadata: Metadata = {
- title: "Insights",
- description: "Analysis and perspectives on global markets.",
-};
+export async function generateMetadata(): Promise<Metadata> { return pageMetadata(await getPageContent("insights"), "/insights"); }
 
 export default async function InsightsPage() {
-  const postsToRender = await getInsights();
+  const [page, postsToRender] = await Promise.all([getPageContent("insights"), getInsights()]);
 
   return (
     <main className="bg-white pt-32 pb-24">
       <section className="relative pt-16 pb-24 border-b border-tlg-stone bg-tlg-ivory">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <div className="max-w-4xl animate-reveal-up">
-            <span className="text-tlg-signatureGold text-[11px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 block">Insights</span>
+            <span className="text-tlg-signatureGold text-[11px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 block">{pageField(page, "hero_eyebrow")}</span>
             <h1 className="text-4xl md:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8">
-              Analysis & Perspectives.
+              {pageField(page, "hero_title")}
             </h1>
             <p className="text-xl text-gray-800 font-normal leading-relaxed">
-              Research-backed insights into global mobility, corporate restructuring, real estate markets, and digital transformation.
+              {pageField(page, "hero_description")}
             </p>
           </div>
         </div>

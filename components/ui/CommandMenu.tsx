@@ -6,24 +6,9 @@ import { m, AnimatePresence } from "motion/react";
 import { Search, Command, ArrowRight, X } from "lucide-react";
 import { triggerHaptic } from "@/lib/utils/haptics";
 
-const SEARCH_DATA = [
-  { title: "Home", path: "/", category: "General" },
-  { title: "About Us", path: "/about", category: "General" },
-  { title: "Book Consultation", path: "/book", category: "Action" },
-  { title: "All Companies", path: "/companies", category: "Divisions" },
-  { title: "HR & Business Consulting", path: "/solutions/hr-consulting", category: "Divisions" },
-  { title: "Real Estate", path: "/solutions/real-estate", category: "Divisions" },
-  { title: "Education Advisory", path: "/solutions/education", category: "Divisions" },
-  { title: "Global Mobility", path: "/solutions/global-mobility", category: "Divisions" },
-  { title: "Digital Products & Learning", path: "/solutions/digital-learning", category: "Divisions" },
-  { title: "Information Technology", path: "/solutions/technology", category: "Divisions" },
-  { title: "Social Impact & Charity", path: "/impact", category: "Impact" },
-  { title: "Insights & Ideas", path: "/insights", category: "Resources" },
-  { title: "Careers", path: "/careers", category: "General" },
-  { title: "Contact Us", path: "/contact", category: "General" },
-];
+type SearchItem = { title: string; path: string; category: string };
 
-export default function CommandMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (v: boolean) => void }) {
+export default function CommandMenu({ isOpen, setIsOpen, items }: { isOpen: boolean; setIsOpen: (v: boolean) => void; items: SearchItem[] }) {
   const [query, setQuery] = useState("");
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +38,7 @@ export default function CommandMenu({ isOpen, setIsOpen }: { isOpen: boolean; se
     }
   }, [isOpen]);
 
-  const filtered = SEARCH_DATA.filter((item) =>
+  const filtered = items.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase()) ||
     item.category.toLowerCase().includes(query.toLowerCase())
   );

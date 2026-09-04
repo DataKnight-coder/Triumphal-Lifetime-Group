@@ -46,8 +46,13 @@ export default async function InsightPage({ params }: InsightPageProps) {
 
   if (!insight) notFound();
 
+  const articleSchema = { "@context": "https://schema.org", "@type": "Article", headline: insight.title, description: insight.excerpt, image: insight.featured_image ? [insight.featured_image] : undefined, datePublished: insight.publish_date, dateModified: insight.last_reviewed_date || insight.publish_date, author: { "@type": "Person", name: insight.author }, reviewer: insight.reviewer ? { "@type": "Person", name: insight.reviewer } : undefined, mainEntityOfPage: `https://triumphallifetimegroup.com/insights/${insight.slug}` };
+  const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://triumphallifetimegroup.com" }, { "@type": "ListItem", position: 2, name: "Insights", item: "https://triumphallifetimegroup.com/insights" }, { "@type": "ListItem", position: 3, name: insight.title }] };
+
   return (
     <main className="bg-white pt-32 pb-24">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
       <section className="relative pt-16 pb-12 bg-tlg-ivory border-b border-tlg-stone">
         <div className="max-w-[800px] mx-auto px-6 md:px-12 text-center">
           <Reveal>
@@ -67,6 +72,7 @@ export default async function InsightPage({ params }: InsightPageProps) {
             <div className="flex items-center justify-center gap-6 text-xs text-gray-700 uppercase tracking-widest font-bold">
               <span className="flex items-center gap-2"><Calendar size={14} /> {formatDate(insight.publish_date)}</span>
               <span className="flex items-center gap-2"><User size={14} /> {insight.author}</span>
+              {insight.reviewer && <span>Reviewed by {insight.reviewer}</span>}
             </div>
           </Reveal>
         </div>
@@ -96,6 +102,7 @@ export default async function InsightPage({ params }: InsightPageProps) {
               dangerouslySetInnerHTML={{ __html: insight.content }}
             />
           </Reveal>
+          {(insight.last_reviewed_date || insight.sources.length > 0) && <aside className="mt-14 border-t border-tlg-stone pt-8 text-sm text-gray-700">{insight.last_reviewed_date && <p><strong>Last reviewed:</strong> {formatDate(insight.last_reviewed_date)}</p>}{insight.sources.length > 0 && <div className="mt-5"><strong>Sources</strong><ul className="list-disc pl-5 mt-2 space-y-1">{insight.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.name}</a></li>)}</ul></div>}</aside>}
         </div>
       </section>
     </main>
