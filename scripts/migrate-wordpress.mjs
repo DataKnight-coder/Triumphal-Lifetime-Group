@@ -192,10 +192,31 @@ function authHeaders() {
 }
 
 async function request(route, options = {}) {
-  const response = await fetch(`${apiOrigin}/wp-json/wp/v2/${route}`, {
-    ...options,
-    headers: { Accept: "application/json", ...authHeaders(), ...options.headers },
-  });
+  const method = options.method ?? "GET";
+  const maxAttempts = method === "GET" ? 4 : 1;
+  let response;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      response = await fetch(`${apiOrigin}/wp-json/wp/v2/${route}`, {
+        ...options,
+        headers: { Accept: "application/json", ...authHeaders(), ...options.headers },
+      });
+      if (response.status !== 429 && response.status < 500) break;
+      if (attempt === maxAttempts) break;
+      await response.arrayBuffer();
+    } catch (error) {
+      if (attempt === maxAttempts) {
+        const reason = error instanceof Error ? error.message : String(error);
+        throw new Error(`${method} ${route}: network request failed after ${maxAttempts} attempts (${reason}).`);
+      }
+    }
+
+    const delayMs = 750 * (2 ** (attempt - 1));
+    console.warn(`${method} ${route}: temporary network/server failure; retrying in ${delayMs}ms (${attempt}/${maxAttempts}).`);
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+  }
+
   const responseBody = await response.text();
   let payload;
   try {
@@ -207,12 +228,12 @@ async function request(route, options = {}) {
       .trim()
       .slice(0, 240);
     throw new Error(
-      `${options.method ?? "GET"} ${route}: WordPress returned non-JSON HTTP ${response.status}. ${summary || "Check the CMS URL, username, Application Password, and any hosting security challenge."}`,
+      `${method} ${route}: WordPress returned non-JSON HTTP ${response.status}. ${summary || "Check the CMS URL, username, Application Password, and any hosting security challenge."}`,
     );
   }
   if (!response.ok) {
     const message = payload?.message ? String(payload.message) : JSON.stringify(payload);
-    throw new Error(`${options.method ?? "GET"} ${route}: HTTP ${response.status} ${message}`);
+    throw new Error(`${method} ${route}: HTTP ${response.status} ${message}`);
   }
   return payload;
 }
