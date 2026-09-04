@@ -188,22 +188,45 @@ export async function fetchFromWordPress<T>(
   const url = endpointUrl(endpoint);
   if (!url) return null;
 
-  try {
-    const response = await fetch(url, {
-      headers: { Accept: "application/json" },
-      next: { revalidate: 60 },
-    });
-    if (!response.ok) {
-      console.warn(`WordPress API request failed (${response.status}): ${endpoint}`);
+  const maxAttempts = 4;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: { Accept: "application/json" },
+        next: { revalidate: 60 },
+      });
+      const retryable = response.status === 429 || response.status >= 500;
+      if (retryable && attempt < maxAttempts) {
+        const delayMs = 500 * (2 ** (attempt - 1));
+        console.warn(
+          `WordPress API request temporarily failed (${response.status}): ${endpoint}; retrying in ${delayMs}ms (${attempt}/${maxAttempts}).`,
+        );
+        await response.arrayBuffer();
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        continue;
+      }
+      if (!response.ok) {
+        console.warn(`WordPress API request failed (${response.status}): ${endpoint}`);
+        return null;
+      }
+      const parsed = parse(await response.json());
+      if (parsed === null) console.warn(`WordPress API returned malformed data: ${endpoint}`);
+      return parsed;
+    } catch (error: unknown) {
+      if (attempt < maxAttempts) {
+        const delayMs = 500 * (2 ** (attempt - 1));
+        console.warn(
+          `WordPress API request was interrupted: ${endpoint}; retrying in ${delayMs}ms (${attempt}/${maxAttempts}).`,
+        );
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        continue;
+      }
+      console.warn(`WordPress API is unavailable after ${maxAttempts} attempts: ${endpoint}`, error);
       return null;
     }
-    const parsed = parse(await response.json());
-    if (parsed === null) console.warn(`WordPress API returned malformed data: ${endpoint}`);
-    return parsed;
-  } catch (error: unknown) {
-    console.warn(`WordPress API is unavailable: ${endpoint}`, error);
-    return null;
   }
+
+  return null;
 }
 
 function parseSettings(value: unknown): GlobalSettings | null {
