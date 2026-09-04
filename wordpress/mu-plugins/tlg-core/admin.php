@@ -295,7 +295,7 @@ function tlg_render_meta_box($post, $box) {
                         ?>
                         <div class="tlg-repeater" data-columns="<?php echo esc_attr(json_encode($columns)); ?>">
                             <div class="tlg-repeater-rows">
-                                <?php foreach ($rows as $row) : 
+                                <?php foreach ($rows as $row) :
                                     $parts = array_pad(array_map('trim', explode('|', $row)), count($columns), '');
                                 ?>
                                     <div class="tlg-repeater-row" style="display:flex; gap:10px; margin-bottom:10px;">
