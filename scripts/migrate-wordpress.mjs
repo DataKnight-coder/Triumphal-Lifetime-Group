@@ -7,6 +7,9 @@ const root = process.cwd();
 const apiOrigin = process.env.WORDPRESS_API_URL?.replace(/\/+$/, "");
 const username = process.env.WORDPRESS_USERNAME;
 const applicationPassword = process.env.WORDPRESS_APPLICATION_PASSWORD;
+const editableStatusQuery = ["publish", "draft", "pending", "private", "future"]
+  .map((status) => `status[]=${encodeURIComponent(status)}`)
+  .join("&");
 
 const supersededRecords = [
   {
@@ -316,12 +319,12 @@ async function migrate() {
 
   for (const collection of prepared) {
     const existingRecords = collection.endpoint === "faqs"
-      ? await request("faqs?context=edit&per_page=100&status=publish,draft,pending,private")
+      ? await request(`faqs?context=edit&per_page=100&${editableStatusQuery}`)
       : [];
 
     for (const item of collection.items) {
       const record = { ...item.record };
-      const slugMatches = await request(`${collection.endpoint}?slug=${encodeURIComponent(record.slug)}&context=edit&status=publish,draft,pending,private`);
+      const slugMatches = await request(`${collection.endpoint}?slug=${encodeURIComponent(record.slug)}&context=edit&${editableStatusQuery}`);
 
       if (collection.endpoint === "faqs" && slugMatches.length === 0) {
         const equivalent = existingRecords.find((candidate) =>
@@ -353,7 +356,7 @@ async function migrate() {
   }
 
   for (const superseded of supersededRecords) {
-    const matches = await request(`${superseded.endpoint}?slug=${encodeURIComponent(superseded.slug)}&context=edit&status=publish,draft,pending,private`);
+    const matches = await request(`${superseded.endpoint}?slug=${encodeURIComponent(superseded.slug)}&context=edit&${editableStatusQuery}`);
     if (!matches[0]) continue;
     const saved = await request(`${superseded.endpoint}/${matches[0].id}`, {
       method: "POST",
