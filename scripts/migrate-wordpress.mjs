@@ -8,6 +8,15 @@ const apiOrigin = process.env.WORDPRESS_API_URL?.replace(/\/+$/, "");
 const username = process.env.WORDPRESS_USERNAME;
 const applicationPassword = process.env.WORDPRESS_APPLICATION_PASSWORD;
 
+const supersededRecords = [
+  {
+    endpoint: "leadership",
+    slug: "arike-adedayo",
+    reason: "Superseded by the client-corrected Adekemi Arike Adedayo record.",
+    meta: { _tlg_status: "inactive" },
+  },
+];
+
 const collections = [
   {
     directory: "leadership",
@@ -20,6 +29,9 @@ const collections = [
       meta: {
         _tlg_job_title: data.job_title ?? "",
         _tlg_department: data.department ?? "",
+        _tlg_leadership_group: data.leadership_group ?? "division-head",
+        _tlg_core_expertise: Array.isArray(data.core_expertise) ? data.core_expertise.join("\n") : "",
+        _tlg_qualifications: Array.isArray(data.qualifications) ? data.qualifications.join("\n") : "",
         _tlg_email: data.email ?? "",
         _tlg_linkedin: data.linkedin ?? "",
         _tlg_display_order: data.display_order ?? 0,
@@ -99,11 +111,72 @@ const collections = [
       meta: {
         _tlg_category: data.category ?? "",
         _tlg_author_name: data.author ?? "",
+        _tlg_reviewer_name: data.reviewer ?? "",
+        _tlg_last_reviewed: data.last_reviewed ?? "",
+        _tlg_sources: Array.isArray(data.sources) ? data.sources.map((source) => `${source.name} | ${source.url}`).join("\n") : "",
+        _tlg_related_division: data.related_division ?? "",
         _tlg_seo_title: data.seo_title ?? "",
         _tlg_seo_description: data.seo_description ?? "",
         _tlg_display_order: data.display_order ?? 0,
       },
       image: data.featured_image,
+    }),
+  },
+  {
+    directory: "pages",
+    endpoint: "site-pages",
+    jsonFile: "pages.json",
+    build: (data) => ({
+      title: data.title,
+      slug: data.slug,
+      content: data.body ?? "",
+      status: "publish",
+      meta: Object.fromEntries(Object.entries(data.fields ?? {}).map(([key, value]) => [`_tlg_${key}`, value])),
+      image: data.image,
+    }),
+  },
+  {
+    directory: "locations",
+    endpoint: "locations",
+    jsonFile: "locations.json",
+    build: (data) => ({
+      title: data.title,
+      slug: data.slug,
+      content: data.description ?? "",
+      status: "publish",
+      meta: {
+        _tlg_country: data.country ?? "",
+        _tlg_city: data.city ?? "",
+        _tlg_public_label: data.public_label ?? "",
+        _tlg_address: data.address ?? "",
+        _tlg_client_facing: data.client_facing ? "yes" : "no",
+        _tlg_operational_status: data.operational_status ?? "unconfirmed",
+        _tlg_services_available: Array.isArray(data.services_available) ? data.services_available.join("\n") : "",
+        _tlg_public_email: data.public_email ?? "",
+        _tlg_public_phone: data.public_phone ?? "",
+        _tlg_display_order: data.display_order ?? 0,
+        _tlg_status: data.status ?? "inactive",
+      },
+      image: data.image,
+    }),
+  },
+  {
+    directory: "foundation",
+    endpoint: "foundation",
+    jsonFile: "items.json",
+    build: (data) => ({
+      title: data.title,
+      slug: data.slug,
+      content: data.description ?? "",
+      status: "publish",
+      meta: {
+        _tlg_item_type: data.item_type ?? "programme",
+        _tlg_location: data.location ?? "",
+        _tlg_year: data.year ?? 0,
+        _tlg_display_order: data.display_order ?? 0,
+        _tlg_status: data.status ?? "inactive",
+      },
+      image: data.image,
     }),
   },
 ];
@@ -131,6 +204,13 @@ async function sourceItems(directory) {
     const parsed = matter(await readFile(path.join(directoryPath, name), "utf8"));
     return { data: parsed.data, content: parsed.content.trim(), filename: name };
   }));
+}
+
+async function sourceJsonItems(directory, filename) {
+  const filePath = path.join(root, "content", directory, filename);
+  const records = JSON.parse(await readFile(filePath, "utf8"));
+  if (!Array.isArray(records)) throw new Error(`${filePath} must contain a JSON array.`);
+  return records.map((data, index) => ({ data, content: data.body ?? data.description ?? "", filename: `${filename}#${index + 1}` }));
 }
 
 function normalized(value) {
@@ -187,7 +267,9 @@ async function migrate() {
   const prepared = [];
 
   for (const collection of collections) {
-    const items = await sourceItems(collection.directory);
+    const items = collection.jsonFile
+      ? await sourceJsonItems(collection.directory, collection.jsonFile)
+      : await sourceItems(collection.directory);
     report[collection.directory] = items.length;
     prepared.push({ ...collection, items: items.map((item) => ({ ...item, record: collection.build(item.data, item.content) })) });
   }
@@ -213,7 +295,7 @@ async function migrate() {
   if (!apiOrigin?.startsWith("https://")) throw new Error("WORDPRESS_API_URL must be an HTTPS WordPress origin.");
 
   const imageCache = new Map();
-  const totals = { created: 0, updated: 0, equivalentDuplicatesSkipped: 0 };
+  const totals = { created: 0, updated: 0, supersededRecordsDeactivated: 0, equivalentDuplicatesSkipped: 0 };
 
   for (const collection of prepared) {
     const existingRecords = collection.endpoint === "faqs"
@@ -251,6 +333,19 @@ async function migrate() {
       verifySavedRecord(saved, record, item.filename);
       totals[existing ? "updated" : "created"] += 1;
     }
+  }
+
+  for (const superseded of supersededRecords) {
+    const matches = await request(`${superseded.endpoint}?slug=${encodeURIComponent(superseded.slug)}&context=edit&status=publish,draft,pending,private`);
+    if (!matches[0]) continue;
+    const saved = await request(`${superseded.endpoint}/${matches[0].id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ meta: superseded.meta }),
+    });
+    verifySavedRecord(saved, { meta: superseded.meta }, superseded.slug);
+    totals.supersededRecordsDeactivated += 1;
+    console.log(`Deactivated superseded record ${superseded.slug}: ${superseded.reason}`);
   }
 
   console.log("Migration complete:", totals);

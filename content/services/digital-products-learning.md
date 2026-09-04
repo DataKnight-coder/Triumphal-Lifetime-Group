@@ -1,17 +1,17 @@
 ---
-title: "Digital Products & Learning"
+title: "Digital Products & E-commerce"
 slug: "digital-products-learning"
-short_description: "Creating practical learning resources and professional development programmes."
+short_description: "Digital resources and online products are currently in development."
 featured_image: ""
 key_benefits: []
 cta_text: "Learn More"
-cta_url: "/solutions/digital-learning"
+cta_url: "/digital-products-ecommerce"
 display_order: 5
 division: "digital-learning"
 status: "active"
-location_text: "Global (Digital)"
+location_text: ""
 entity_text: "Operating as a division of Triumphal Lifetime Group"
-contact_text: "Online Support"
+contact_text: ""
 ---
 
-Creating practical learning resources and professional development programmes.
+Our digital resources and online products are currently in development. They are being designed to support individuals, entrepreneurs and businesses with practical tools, knowledge and resources.

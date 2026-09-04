@@ -5,13 +5,13 @@ short_description: "Helping businesses improve digital operations and systems su
 featured_image: ""
 key_benefits: []
 cta_text: "Learn More"
-cta_url: "/solutions/technology"
+cta_url: "/it-solutions"
 display_order: 6
 division: "technology"
 status: "active"
-location_text: "Nigeria / UAE"
+location_text: ""
 entity_text: "Operating as a division of Triumphal Lifetime Group"
-contact_text: "Contact Regional Office"
+contact_text: ""
 ---
 
 Helping businesses improve digital operations and systems support.

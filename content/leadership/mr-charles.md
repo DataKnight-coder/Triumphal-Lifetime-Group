@@ -3,11 +3,14 @@ name: "Mr. Charles"
 slug: "mr-charles"
 job_title: "Director, Real Estate & Investment Advisory"
 department: "Real Estate & Investment Advisory"
+leadership_group: "division-head"
+core_expertise: []
+qualifications: []
 email: ""
 linkedin: ""
 photo: "/images/team/CHARLES.jpeg"
 display_order: 5
-status: "active"
+status: "inactive"
 ---
 
 <p>Mr. Charles heads the Real Estate and Investment Advisory division, bringing extensive experience in property markets across our operational regions. He oversees portfolio strategy, market research, and client advisory services for both residential and commercial investments.</p>

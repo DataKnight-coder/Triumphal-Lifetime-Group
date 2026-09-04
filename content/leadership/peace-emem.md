@@ -3,6 +3,13 @@ name: "Peace Emem"
 slug: "peace-emem"
 job_title: "Group Chief Operating Officer (COO)"
 department: "Executive Leadership"
+leadership_group: "executive"
+core_expertise:
+  - "Operations"
+  - "Business processes"
+  - "Service delivery"
+  - "Internal coordination"
+qualifications: []
 email: ""
 linkedin: ""
 photo: "/images/team/ENEM.jpeg"

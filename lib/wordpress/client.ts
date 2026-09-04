@@ -13,6 +13,16 @@ export const FAQ_DIVISIONS = [
 export type FAQDivision = (typeof FAQ_DIVISIONS)[number];
 export type RequestedFAQDivision = Exclude<FAQDivision, "global">;
 
+export const PAGE_KEYS = [
+  "home", "about", "our-story", "companies", "hr-consulting", "real-estate",
+  "education", "global-mobility", "technology", "digital-products", "foundation",
+  "global-presence", "leadership", "careers", "contact", "insights", "partners",
+  "privacy", "terms", "disclaimer", "cookies", "accessibility", "refund-policy",
+  "site-navigation", "site-footer",
+] as const;
+
+export type PageKey = (typeof PAGE_KEYS)[number];
+
 export interface GlobalSettings {
   company_name?: string;
   general_email?: string;
@@ -25,6 +35,7 @@ export interface GlobalSettings {
   copyright_text?: string;
   seo_description?: string;
   seo_og_image?: string;
+  turnstile_site_key?: string;
 }
 
 export interface LeadershipProfile {
@@ -32,6 +43,9 @@ export interface LeadershipProfile {
   slug: string;
   job_title: string;
   department: string;
+  leadership_group: "executive" | "division-head";
+  core_expertise: string[];
+  qualifications: string[];
   content: string;
   email: string;
   linkedin: string;
@@ -81,13 +95,54 @@ export interface Insight {
   slug: string;
   excerpt: string;
   author: string;
+  reviewer: string;
   publish_date: string;
+  last_reviewed_date?: string;
   featured_image?: string;
   category: string;
+  sources: { name: string; url: string }[];
+  related_division: string;
   seo_title: string;
   seo_description: string;
   content: string;
   display_order: number;
+}
+
+export interface PageContent {
+  key: PageKey;
+  title: string;
+  body: string;
+  hero_image?: string;
+  fields: Record<string, string>;
+  modified_at: string;
+}
+
+export interface Location {
+  name: string;
+  slug: string;
+  description: string;
+  country: string;
+  city: string;
+  public_label: string;
+  address: string;
+  client_facing: boolean;
+  operational_status: "active" | "remote" | "planned" | "unconfirmed";
+  services: string[];
+  email: string;
+  phone: string;
+  image?: string;
+  order: number;
+}
+
+export interface FoundationItem {
+  title: string;
+  slug: string;
+  description: string;
+  type: "programme" | "impact" | "future";
+  location: string;
+  year: number;
+  image?: string;
+  order: number;
 }
 
 type UnknownRecord = Record<string, unknown>;
@@ -113,6 +168,10 @@ function optionalString(record: UnknownRecord, key: string): string | undefined 
 
 function isFAQDivision(value: string): value is FAQDivision {
   return (FAQ_DIVISIONS as readonly string[]).includes(value);
+}
+
+function isPageKey(value: string): value is PageKey {
+  return (PAGE_KEYS as readonly string[]).includes(value);
 }
 
 function endpointUrl(endpoint: string): string | null {
@@ -152,6 +211,7 @@ function parseSettings(value: unknown): GlobalSettings | null {
   const keys: (keyof GlobalSettings)[] = [
     "company_name", "general_email", "primary_phone", "whatsapp", "address",
     "facebook", "linkedin", "instagram", "copyright_text", "seo_description", "seo_og_image",
+    "turnstile_site_key",
   ];
   const settings: GlobalSettings = {};
   for (const key of keys) {
@@ -173,6 +233,9 @@ function parseLeadershipItem(value: unknown): LeadershipProfile | null {
     slug,
     job_title: jobTitle,
     department: stringValue(value, "department") ?? "",
+    leadership_group: value.leadershipGroup === "executive" ? "executive" : "division-head",
+    core_expertise: Array.isArray(value.coreExpertise) && value.coreExpertise.every((item) => typeof item === "string") ? value.coreExpertise : [],
+    qualifications: Array.isArray(value.qualifications) && value.qualifications.every((item) => typeof item === "string") ? value.qualifications : [],
     content: biography,
     email: stringValue(value, "email") ?? "",
     linkedin: stringValue(value, "linkedin") ?? "",
@@ -245,19 +308,90 @@ function parseInsightItem(value: unknown): Insight | null {
   const body = stringValue(value, "body");
   const order = numberValue(value, "order");
   if (title === null || slug === null || body === null || order === null) return null;
+  const rawSources = value.sources ?? [];
+  if (!Array.isArray(rawSources)) return null;
+  const sources = rawSources.map((source) => {
+    if (!isRecord(source)) return null;
+    const name = stringValue(source, "name");
+    const url = stringValue(source, "url");
+    return name !== null && url !== null ? { name, url } : null;
+  });
+  if (sources.some((source) => source === null)) return null;
   return {
     title,
     slug,
     excerpt: stringValue(value, "excerpt") ?? "",
     author: stringValue(value, "author") ?? "",
+    reviewer: stringValue(value, "reviewer") ?? "",
     publish_date: stringValue(value, "publishedAt") ?? "",
+    last_reviewed_date: optionalString(value, "lastReviewedAt"),
     featured_image: optionalString(value, "image"),
     category: stringValue(value, "category") ?? "",
+    sources: sources as { name: string; url: string }[],
+    related_division: stringValue(value, "relatedDivision") ?? "",
     seo_title: stringValue(value, "seoTitle") ?? "",
     seo_description: stringValue(value, "seoDescription") ?? "",
     content: body,
     display_order: order,
   };
+}
+
+function parsePage(value: unknown): PageContent | null {
+  if (!isRecord(value)) return null;
+  const key = stringValue(value, "key");
+  const title = stringValue(value, "title");
+  const body = stringValue(value, "body");
+  const modifiedAt = stringValue(value, "modifiedAt");
+  const rawFields = value.fields;
+  if (key === null || !isPageKey(key) || title === null || body === null || modifiedAt === null || !isRecord(rawFields)) return null;
+  const fields: Record<string, string> = {};
+  for (const [field, fieldValue] of Object.entries(rawFields)) {
+    if (typeof fieldValue !== "string") return null;
+    fields[field] = fieldValue;
+  }
+  return { key, title, body, hero_image: optionalString(value, "heroImage"), fields, modified_at: modifiedAt };
+}
+
+function parseLocation(value: unknown): Location | null {
+  if (!isRecord(value)) return null;
+  const name = stringValue(value, "name");
+  const slug = stringValue(value, "slug");
+  const description = stringValue(value, "description");
+  const country = stringValue(value, "country");
+  const city = stringValue(value, "city");
+  const publicLabel = stringValue(value, "publicLabel");
+  const address = stringValue(value, "address");
+  const operationalStatus = stringValue(value, "operationalStatus");
+  const order = numberValue(value, "order");
+  const services = value.services;
+  if (
+    name === null || slug === null || description === null || country === null || city === null
+    || publicLabel === null || address === null || order === null
+    || !["active", "remote", "planned", "unconfirmed"].includes(operationalStatus ?? "")
+    || !Array.isArray(services) || !services.every((item) => typeof item === "string")
+  ) return null;
+  return {
+    name, slug, description, country, city, public_label: publicLabel, address,
+    client_facing: value.clientFacing === true,
+    operational_status: operationalStatus as Location["operational_status"],
+    services,
+    email: stringValue(value, "email") ?? "",
+    phone: stringValue(value, "phone") ?? "",
+    image: optionalString(value, "image"), order,
+  };
+}
+
+function parseFoundationItem(value: unknown): FoundationItem | null {
+  if (!isRecord(value)) return null;
+  const title = stringValue(value, "title");
+  const slug = stringValue(value, "slug");
+  const description = stringValue(value, "description");
+  const type = stringValue(value, "type");
+  const location = stringValue(value, "location");
+  const year = numberValue(value, "year");
+  const order = numberValue(value, "order");
+  if (title === null || slug === null || description === null || !["programme", "impact", "future"].includes(type ?? "") || location === null || year === null || order === null) return null;
+  return { title, slug, description, type: type as FoundationItem["type"], location, year, image: optionalString(value, "image"), order };
 }
 
 function parseArray<T>(value: unknown, parseItem: (item: unknown) => T | null): T[] | null {
@@ -316,4 +450,19 @@ export async function getInsights(): Promise<Insight[]> {
     await fetchFromWordPress(endpoint, (value) => parseArray(value, parseInsightItem)),
     endpoint,
   );
+}
+
+export async function getPageContent(key: PageKey): Promise<PageContent> {
+  const endpoint = `tlg/v1/pages?key=${encodeURIComponent(key)}`;
+  return requireWordPress(await fetchFromWordPress(endpoint, parsePage), endpoint);
+}
+
+export async function getLocations(): Promise<Location[]> {
+  const endpoint = "tlg/v1/locations";
+  return requireWordPress(await fetchFromWordPress(endpoint, (value) => parseArray(value, parseLocation)), endpoint);
+}
+
+export async function getFoundationItems(): Promise<FoundationItem[]> {
+  const endpoint = "tlg/v1/foundation";
+  return requireWordPress(await fetchFromWordPress(endpoint, (value) => parseArray(value, parseFoundationItem)), endpoint);
 }

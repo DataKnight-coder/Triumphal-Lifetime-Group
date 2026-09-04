@@ -68,6 +68,36 @@ function tlg_sanitize_build_hook($value) {
     return $url && wp_http_validate_url($url) ? $url : '';
 }
 
+function tlg_form_setting_defaults() {
+    return [
+        'destination_email' => '',
+        'turnstile_site_key' => '',
+        'turnstile_secret' => '',
+        'allowed_origin' => 'https://triumphallifetimegroup.com',
+        'retention_days' => 90,
+    ];
+}
+
+function tlg_get_form_settings() {
+    $saved = get_option('tlg_form_settings', []);
+    return array_merge(tlg_form_setting_defaults(), is_array($saved) ? $saved : []);
+}
+
+function tlg_sanitize_form_settings($input) {
+    $input = is_array($input) ? $input : [];
+    $existing = tlg_get_form_settings();
+    $secret = isset($input['turnstile_secret']) ? sanitize_text_field(wp_unslash($input['turnstile_secret'])) : '';
+    $retention_days = isset($input['retention_days']) ? absint($input['retention_days']) : 90;
+
+    return [
+        'destination_email' => sanitize_email(wp_unslash($input['destination_email'] ?? '')),
+        'turnstile_site_key' => sanitize_text_field(wp_unslash($input['turnstile_site_key'] ?? '')),
+        'turnstile_secret' => $secret !== '' ? $secret : $existing['turnstile_secret'],
+        'allowed_origin' => esc_url_raw(wp_unslash($input['allowed_origin'] ?? ''), ['https']),
+        'retention_days' => min(365, max(30, $retention_days)),
+    ];
+}
+
 function tlg_register_settings() {
     register_setting('tlg_global_settings_group', 'tlg_global_settings', [
         'type' => 'array',
@@ -80,6 +110,13 @@ function tlg_register_settings() {
         'type' => 'string',
         'sanitize_callback' => 'tlg_sanitize_build_hook',
         'default' => '',
+        'show_in_rest' => false,
+    ]);
+
+    register_setting('tlg_forms_group', 'tlg_form_settings', [
+        'type' => 'array',
+        'sanitize_callback' => 'tlg_sanitize_form_settings',
+        'default' => tlg_form_setting_defaults(),
         'show_in_rest' => false,
     ]);
 }
@@ -138,6 +175,50 @@ function tlg_render_publishing_page() {
                 </tr>
             </table>
             <?php submit_button('Save Publishing Settings'); ?>
+        </form>
+    </div>
+    <?php
+}
+
+function tlg_render_forms_page() {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    $settings = tlg_get_form_settings();
+    $secret_configured = !empty($settings['turnstile_secret']);
+    ?>
+    <div class="wrap">
+        <h1>TLG Enquiry Forms</h1>
+        <p>Configure the business-controlled destination and Cloudflare Turnstile keys. The secret is stored only in WordPress and is never returned by REST.</p>
+        <form method="post" action="options.php">
+            <?php settings_fields('tlg_forms_group'); ?>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row"><label for="tlg-form-destination">Destination email</label></th>
+                    <td><input class="regular-text" type="email" id="tlg-form-destination" name="tlg_form_settings[destination_email]" value="<?php echo esc_attr($settings['destination_email']); ?>" required></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tlg-turnstile-site-key">Turnstile site key</label></th>
+                    <td><input class="regular-text" type="text" id="tlg-turnstile-site-key" name="tlg_form_settings[turnstile_site_key]" value="<?php echo esc_attr($settings['turnstile_site_key']); ?>" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tlg-turnstile-secret">Turnstile secret</label></th>
+                    <td>
+                        <input class="regular-text" type="password" id="tlg-turnstile-secret" name="tlg_form_settings[turnstile_secret]" value="" autocomplete="new-password" placeholder="<?php echo $secret_configured ? esc_attr('Configured; leave blank to keep') : esc_attr('Not configured'); ?>">
+                        <p class="description">The existing secret is never rendered back into this page.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tlg-form-origin">Allowed public origin</label></th>
+                    <td><input class="regular-text" type="url" id="tlg-form-origin" name="tlg_form_settings[allowed_origin]" value="<?php echo esc_attr($settings['allowed_origin']); ?>" required></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tlg-form-retention">Consent audit retention</label></th>
+                    <td><input class="small-text" type="number" min="30" max="365" id="tlg-form-retention" name="tlg_form_settings[retention_days]" value="<?php echo esc_attr((string) $settings['retention_days']); ?>"> days</td>
+                </tr>
+            </table>
+            <?php submit_button('Save Form Settings'); ?>
         </form>
     </div>
     <?php

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: TLG Headless CMS
  * Description: Native WordPress content types, admin fields, REST API, and Netlify publishing for Triumphal Lifetime Group.
- * Version: 2.0.0
+ * Version: 3.0.0
  * Author: Triumphal Lifetime Group
  */
 
@@ -10,12 +10,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('TLG_CMS_VERSION', '2.0.0');
+if (!defined('DISALLOW_FILE_EDIT')) {
+    define('DISALLOW_FILE_EDIT', true);
+}
+
+define('TLG_CMS_VERSION', '3.0.0');
 define('TLG_CMS_PATH', __DIR__ . '/tlg-core');
 
 require_once TLG_CMS_PATH . '/content-types.php';
 require_once TLG_CMS_PATH . '/settings.php';
 require_once TLG_CMS_PATH . '/rest-api.php';
+require_once TLG_CMS_PATH . '/forms.php';
 require_once TLG_CMS_PATH . '/admin.php';
 require_once TLG_CMS_PATH . '/publishing.php';
 

@@ -9,6 +9,9 @@ function tlg_admin_field_definitions() {
         'tlg_leadership' => [
             'job_title' => ['Job title', 'text', 'Public role or position.'],
             'department' => ['Department', 'text', 'Optional business division or department.'],
+            'leadership_group' => ['Leadership group', 'select', 'Choose where this profile appears.', ['executive' => 'Executive Leadership', 'division-head' => 'Directors / Division Heads']],
+            'core_expertise' => ['Core expertise', 'textarea', 'Enter one verified area of expertise per line.'],
+            'qualifications' => ['Verified qualifications', 'textarea', 'Enter one verified qualification per line. Leave blank if documentary confirmation is unavailable.'],
             'email' => ['Email', 'email', 'Optional public email address.'],
             'linkedin' => ['LinkedIn URL', 'url', 'Optional full profile URL.'],
             'display_order' => ['Display order', 'number', 'Lower numbers appear first.'],
@@ -51,9 +54,125 @@ function tlg_admin_field_definitions() {
         'tlg_insights' => [
             'category' => ['Category', 'text', 'Public article category.'],
             'author_name' => ['Author display name', 'text', 'Public byline; this may be a team or editorial desk.'],
+            'reviewer_name' => ['Reviewer', 'text', 'Optional named reviewer for high-trust content.'],
+            'last_reviewed' => ['Last reviewed', 'date', 'Date on which sources and claims were last checked.'],
+            'sources' => ['Sources', 'textarea', 'One source per line as Source name | https://source.example/page. Use current authoritative sources.'],
+            'related_division' => ['Related division', 'select', 'Optional division used for related navigation.', array_combine(array_merge([''], tlg_allowed_divisions()), array_merge(['None'], array_map(function ($division) { return ucwords(str_replace('-', ' ', $division)); }, tlg_allowed_divisions())))],
             'seo_title' => ['SEO title', 'text', 'Optional search title override.'],
             'seo_description' => ['SEO description', 'textarea', 'Optional search description override.'],
             'display_order' => ['Display order', 'number', 'Lower numbers appear first on the Insights page.'],
+        ],
+        'tlg_pages' => [
+            'page_key' => ['Page template', 'select', 'Select the fixed website layout this record controls.', array_combine(tlg_page_keys(), array_map(function ($key) { return ucwords(str_replace('-', ' ', $key)); }, tlg_page_keys()))],
+            'hero_eyebrow' => ['Hero eyebrow', 'text', 'Short label displayed above the main heading.'],
+            'hero_title' => ['Hero title', 'text', 'The page H1.'],
+            'hero_description' => ['Hero description', 'textarea', 'Concise opening statement.'],
+            'hero_image_alt' => ['Hero image alt text', 'text', 'Describe the featured image for visitors using assistive technology.'],
+            'intro_heading' => ['Introduction heading', 'text', 'First section heading.'],
+            'intro_body' => ['Introduction body', 'textarea', 'Approved introductory copy. Basic safe HTML is supported.'],
+            'services_heading' => ['Services heading', 'text', 'Heading for services or programmes.'],
+            'services_intro' => ['Services introduction', 'textarea', 'Optional supporting copy.'],
+            'services_items' => ['Services / programme items', 'textarea', 'One item per line as Heading | Description.'],
+            'audience_heading' => ['Who we help heading', 'text', 'Audience section heading.'],
+            'audience_body' => ['Who we help body', 'textarea', 'Audience positioning statement.'],
+            'audience_items' => ['Who we help items', 'textarea', 'One audience per line, optionally Heading | Description.'],
+            'positioning_heading' => ['Positioning heading', 'text', 'Outcome or positioning section heading.'],
+            'positioning_body' => ['Positioning body', 'textarea', 'Approved positioning copy. Basic safe HTML is supported.'],
+            'process_heading' => ['Process heading', 'text', 'Heading for the process or journey.'],
+            'process_items' => ['Process steps', 'textarea', 'One step per line as Step title | Description.'],
+            'benefits_heading' => ['Benefits heading', 'text', 'Heading for benefits or deliverables.'],
+            'benefits_body' => ['Benefits introduction', 'textarea', 'Optional supporting copy.'],
+            'benefits_items' => ['Benefit items', 'textarea', 'One benefit per line as Heading | Description.'],
+            'future_heading' => ['Future projects heading', 'text', 'Heading for proposed, not completed, work.'],
+            'future_body' => ['Future projects body', 'textarea', 'Clearly label proposed activities as future plans.'],
+            'future_items' => ['Future project items', 'textarea', 'One future item per line as Heading | Description.'],
+            'cta_heading' => ['CTA heading', 'text', 'Primary call-to-action heading.'],
+            'cta_body' => ['CTA body', 'textarea', 'Short supporting text.'],
+            'cta_text' => ['Primary button label', 'text', 'Visible action label.'],
+            'cta_url' => ['Primary button URL', 'text', 'Use a site-relative path or approved HTTPS URL.'],
+            'secondary_cta_text' => ['Secondary button label', 'text', 'Optional secondary action.'],
+            'secondary_cta_url' => ['Secondary button URL', 'text', 'Use a site-relative path or approved HTTPS URL.'],
+            'disclaimer_heading' => ['Disclaimer heading', 'text', 'Required compliance heading where applicable.'],
+            'disclaimer_body' => ['Disclaimer body', 'textarea', 'Approved no-guarantee or regulatory wording.'],
+            'navigation_items' => ['Primary navigation', 'textarea', 'One link per line as Label | /path.'],
+            'division_items' => ['Division navigation', 'textarea', 'One link per line as Label | /path | /image.jpg.'],
+            'footer_divisions' => ['Footer: Divisions', 'textarea', 'One link per line as Label | /path.'],
+            'footer_company' => ['Footer: Company', 'textarea', 'One link per line as Label | /path.'],
+            'footer_resources' => ['Footer: Resources', 'textarea', 'One link per line as Label | /path.'],
+            'last_updated' => ['Last updated label', 'text', 'Public date label for policy pages.'],
+            'seo_title' => ['SEO title', 'text', 'Unique page title for search and sharing.'],
+            'seo_description' => ['SEO description', 'textarea', 'Unique page description.'],
+            'seo_og_image' => ['Social image URL', 'url', 'Optional 1200×630 approved public image.'],
+            'display_order' => ['Display order', 'number', 'Stable ordering for fixed page records.'],
+            'status' => ['Status', 'select', 'Only Active page records are public.', ['active' => 'Active', 'inactive' => 'Inactive']],
+        ],
+        'tlg_locations' => [
+            'country' => ['Country', 'text', 'Verified country name.'],
+            'city' => ['City', 'text', 'Verified city; leave blank when not confirmed.'],
+            'public_label' => ['Public label', 'select', 'Use only the label supported by evidence.', ['Headquarters' => 'Headquarters', 'Physical Office' => 'Physical Office', 'Registered Office' => 'Registered Office', 'Operating Office' => 'Operating Office', 'Regional Contact' => 'Regional Contact', 'Operations' => 'Operations', 'Market Served' => 'Market Served']],
+            'address' => ['Public address', 'textarea', 'Publish only an approved client-facing address.'],
+            'client_facing' => ['Client-facing?', 'select', 'Can clients physically attend?', ['no' => 'No / unconfirmed', 'yes' => 'Yes']],
+            'operational_status' => ['Operational status', 'select', 'Current verified status.', ['unconfirmed' => 'Unconfirmed', 'active' => 'Active', 'remote' => 'Remote support', 'planned' => 'Planned (not public operations)']],
+            'services_available' => ['Services available', 'textarea', 'One verified service per line.'],
+            'public_email' => ['Public email', 'email', 'Optional approved location contact.'],
+            'public_phone' => ['Public phone', 'text', 'Optional approved location contact.'],
+            'display_order' => ['Display order', 'number', 'Lower numbers appear first.'],
+            'status' => ['Publishing status', 'select', 'Only Active locations appear publicly.', ['active' => 'Active', 'inactive' => 'Inactive']],
+        ],
+        'tlg_foundation' => [
+            'item_type' => ['Content type', 'select', 'Keep completed impact separate from programmes and future projects.', ['programme' => 'Programme', 'impact' => 'Completed impact', 'future' => 'Future project']],
+            'location' => ['Location', 'text', 'Required for completed impact; must be verified.'],
+            'year' => ['Year', 'number', 'Required for completed impact; must be verified.'],
+            'display_order' => ['Display order', 'number', 'Lower numbers appear first.'],
+            'status' => ['Publishing status', 'select', 'Only Active, verified items appear publicly.', ['active' => 'Active', 'inactive' => 'Inactive']],
+        ],
+    ];
+}
+
+function tlg_admin_field_sections() {
+    return [
+        'tlg_leadership' => [
+            'Profile Details' => ['job_title', 'department', 'leadership_group', 'core_expertise', 'qualifications'],
+            'Public Contact' => ['email', 'linkedin'],
+            'Publishing' => ['display_order', 'status'],
+        ],
+        'tlg_services' => [
+            'Page Content' => ['short_description', 'key_benefits', 'division', 'location_text', 'entity_text', 'contact_text'],
+            'CTA' => ['cta_text', 'cta_url'],
+            'Publishing' => ['display_order', 'status'],
+        ],
+        'tlg_careers' => [
+            'Role Details' => ['department', 'location', 'employment_type', 'closing_date'],
+            'Application' => ['application_url'],
+            'Publishing' => ['job_status', 'display_order'],
+        ],
+        'tlg_insights' => [
+            'Article Content' => [],
+            'Featured Image' => [],
+            'Article Details' => ['category', 'author_name', 'related_division'],
+            'Sources & Review' => ['reviewer_name', 'last_reviewed', 'sources'],
+            'SEO' => ['seo_title', 'seo_description'],
+            'Publishing' => ['display_order'],
+        ],
+        'tlg_pages' => [
+            'Page Content' => ['page_key', 'hero_eyebrow', 'hero_title', 'hero_description', 'intro_heading', 'intro_body'],
+            'Page Sections' => ['services_heading', 'services_intro', 'services_items', 'audience_heading', 'audience_body', 'audience_items', 'positioning_heading', 'positioning_body', 'process_heading', 'process_items', 'benefits_heading', 'benefits_body', 'benefits_items', 'future_heading', 'future_body', 'future_items'],
+            'Images' => ['hero_image_alt'],
+            'CTA' => ['cta_heading', 'cta_body', 'cta_text', 'cta_url', 'secondary_cta_text', 'secondary_cta_url'],
+            'Compliance / Disclaimer' => ['disclaimer_heading', 'disclaimer_body', 'last_updated'],
+            'Navigation / Footer' => ['navigation_items', 'division_items', 'footer_divisions', 'footer_company', 'footer_resources'],
+            'SEO' => ['seo_title', 'seo_description', 'seo_og_image'],
+            'Publishing' => ['display_order', 'status'],
+        ],
+        'tlg_locations' => [
+            'Location Details' => ['country', 'city', 'public_label', 'address', 'client_facing', 'operational_status', 'services_available'],
+            'Public Contact' => ['public_email', 'public_phone'],
+            'Publishing' => ['display_order', 'status'],
+        ],
+        'tlg_foundation' => [
+            'Item Details' => ['item_type', 'location', 'year'],
+            'Images' => [],
+            'Publishing' => ['display_order', 'status'],
         ],
     ];
 }
@@ -72,6 +191,7 @@ function tlg_register_admin_menu() {
     add_submenu_page('tlg-dashboard', 'TLG Dashboard', 'Dashboard', 'edit_posts', 'tlg-dashboard', 'tlg_render_dashboard');
     add_submenu_page('tlg-dashboard', 'Global Settings', 'Global Settings', 'manage_options', 'tlg-global-settings', 'tlg_render_global_settings_page');
     add_submenu_page('tlg-dashboard', 'Publishing', 'Publishing', 'manage_options', 'tlg-publishing', 'tlg_render_publishing_page');
+    add_submenu_page('tlg-dashboard', 'Enquiry Forms', 'Enquiry Forms', 'manage_options', 'tlg-forms', 'tlg_render_forms_page');
 }
 
 function tlg_render_dashboard() {
@@ -85,6 +205,9 @@ function tlg_render_dashboard() {
         'tlg_careers' => 'Careers',
         'tlg_faqs' => 'FAQs',
         'tlg_insights' => 'Insights',
+        'tlg_pages' => 'Page Content',
+        'tlg_locations' => 'Locations',
+        'tlg_foundation' => 'Foundation Content',
     ];
     ?>
     <div class="wrap">
@@ -107,8 +230,31 @@ function tlg_render_dashboard() {
 }
 
 function tlg_add_meta_boxes() {
+    $sections = tlg_admin_field_sections();
     foreach (tlg_admin_field_definitions() as $post_type => $fields) {
-        add_meta_box('tlg-content-fields', 'TLG Content Details', 'tlg_render_meta_box', $post_type, 'normal', 'high', ['fields' => $fields]);
+        if (!isset($sections[$post_type])) {
+            add_meta_box('tlg-content-fields', 'TLG Content Details', 'tlg_render_meta_box', $post_type, 'normal', 'high', ['fields' => $fields]);
+            continue;
+        }
+
+        foreach ($sections[$post_type] as $section => $field_keys) {
+            $section_fields = array_intersect_key($fields, array_flip($field_keys));
+            if (!$section_fields && !in_array($section, ['Images', 'Article Content', 'Featured Image'], true)) {
+                continue;
+            }
+            if (in_array($section, ['Images', 'Article Content', 'Featured Image'], true)) {
+                $section_fields = $section_fields ?: [];
+            }
+            add_meta_box(
+                'tlg-' . sanitize_key($section),
+                $section,
+                'tlg_render_meta_box',
+                $post_type,
+                'normal',
+                $section === 'Page Content' || $section === 'Article Details' ? 'high' : 'default',
+                ['fields' => $section_fields]
+            );
+        }
     }
 }
 
@@ -121,6 +267,14 @@ function tlg_remove_native_custom_fields_boxes() {
 function tlg_render_meta_box($post, $box) {
     wp_nonce_field('tlg_save_content_fields', 'tlg_content_fields_nonce');
     $fields = $box['args']['fields'];
+    if (!$fields) {
+        if ($box['id'] === 'tlg-articlecontent') {
+            echo '<p>Use the main content editor above for the complete reviewed article body.</p>';
+        } else {
+            echo '<p>Use the Featured image panel to choose the approved public image. Add descriptive alternative text in the Media Library.</p>';
+        }
+        return;
+    }
     ?>
     <table class="form-table" role="presentation">
         <?php foreach ($fields as $key => $definition) : ?>
@@ -260,6 +414,9 @@ function tlg_content_title_placeholder($title, $post) {
         'tlg_careers' => 'Job title',
         'tlg_faqs' => 'FAQ question',
         'tlg_insights' => 'Insight title',
+        'tlg_pages' => 'Page name',
+        'tlg_locations' => 'Location name',
+        'tlg_foundation' => 'Programme, impact or project name',
     ];
     return $labels[$post->post_type] ?? $title;
 }
@@ -270,7 +427,7 @@ function tlg_simplify_admin_menu() {
 }
 
 function tlg_enable_featured_images() {
-    add_theme_support('post-thumbnails', ['tlg_leadership', 'tlg_services', 'tlg_insights']);
+    add_theme_support('post-thumbnails', ['tlg_leadership', 'tlg_services', 'tlg_insights', 'tlg_pages', 'tlg_locations', 'tlg_foundation']);
 }
 
 add_action('after_setup_theme', 'tlg_enable_featured_images');

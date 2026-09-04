@@ -3,6 +3,12 @@ name: "Olugbemiga Dada Ogedengbe"
 slug: "olugbemiga-dada-ogedengbe"
 job_title: "Director, Information Technology"
 department: "Information Technology"
+leadership_group: "division-head"
+core_expertise:
+  - "Business technology consulting"
+  - "Digital business systems"
+  - "Technical support"
+qualifications: []
 email: ""
 linkedin: ""
 photo: "/images/team/DADA.jpeg"
@@ -10,7 +16,5 @@ display_order: 3
 status: "active"
 ---
 
-<p>As Director of Information Technology at Triumphal Lifetime Group, Olugbemiga Dada Ogedengbe leads the Group's technology strategy and digital transformation agenda, driving innovative, secure, and scalable technology solutions that support long-term growth.</p>
-<p>His responsibilities span IT infrastructure, cybersecurity, cloud solutions, systems implementation, data management, and IT governance, ensuring that technology remains aligned with the Group's strategic objectives and supports operational excellence.</p>
-<p>Olugbemiga champions digital innovation across the Group, leveraging technology to enhance operational efficiency, strengthen data security, improve client experiences, and build organizational resilience.</p>
-<blockquote class="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-700">"Technology should empower people, simplify business, and create opportunities for innovation and sustainable growth."</blockquote>
+<p>Olugbemiga Dada Ogedengbe leads the Group's Information Technology division. His role focuses on practical business technology consulting, digital business systems and technical support.</p>
+<p>He works with clients and internal teams to understand operational needs and coordinate suitable technology support within an agreed project scope.</p>
