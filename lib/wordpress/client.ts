@@ -1,10 +1,3 @@
-import { getAllCareers } from "@/lib/content/careers";
-import { getFaqsByDivision as getLocalFaqsByDivision } from "@/lib/content/faqs";
-import { getAllInsights } from "@/lib/content/insights";
-import { getAllLeadership } from "@/lib/content/leadership";
-import { getAllServices } from "@/lib/content/services";
-import { getGlobalSettings as getLocalGlobalSettings } from "@/lib/content/settings";
-
 const API_BASE = process.env.WORDPRESS_API_URL?.replace(/\/+$/, "");
 
 export const FAQ_DIVISIONS = [
@@ -273,65 +266,54 @@ function parseArray<T>(value: unknown, parseItem: (item: unknown) => T | null): 
   return parsed.some((item) => item === null) ? null : (parsed as T[]);
 }
 
+function requireWordPress<T>(value: T | null, endpoint: string): T {
+  if (value !== null) return value;
+  throw new Error(
+    `WordPress CMS request failed for ${endpoint}. Confirm WORDPRESS_API_URL and the TLG REST API are available.`,
+  );
+}
+
 export async function getGlobalSettings(): Promise<GlobalSettings> {
-  return (await fetchFromWordPress("tlg/v1/settings", parseSettings)) ?? getLocalGlobalSettings();
+  const endpoint = "tlg/v1/settings";
+  return requireWordPress(await fetchFromWordPress(endpoint, parseSettings), endpoint);
 }
 
 export async function getLeadershipProfiles(): Promise<LeadershipProfile[]> {
-  const remote = await fetchFromWordPress("tlg/v1/leadership", (value) => parseArray(value, parseLeadershipItem));
-  if (remote !== null) return remote;
-  return (await getAllLeadership()).map((profile) => ({
-    name: profile.name ?? "", slug: profile.slug ?? "", job_title: profile.job_title ?? "",
-    department: profile.department ?? "", content: profile.content, email: profile.email ?? "",
-    linkedin: profile.linkedin ?? "", photo: profile.photo, display_order: profile.display_order ?? 0,
-  }));
+  const endpoint = "tlg/v1/leadership";
+  return requireWordPress(
+    await fetchFromWordPress(endpoint, (value) => parseArray(value, parseLeadershipItem)),
+    endpoint,
+  );
 }
 
 export async function getServices(): Promise<Service[]> {
-  const remote = await fetchFromWordPress("tlg/v1/services", (value) => parseArray(value, parseServiceItem));
-  if (remote !== null) return remote;
-  return (await getAllServices()).map((service) => ({
-    title: service.title ?? "", slug: service.slug ?? "", short_description: service.short_description ?? "",
-    content: service.content, featured_image: service.featured_image, key_benefits: service.key_benefits ?? [],
-    cta_text: service.cta_text ?? "", cta_url: service.cta_url ?? "", display_order: service.display_order ?? 0,
-    division: service.division ?? "", location_text: service.location_text ?? "",
-    entity_text: service.entity_text ?? "", contact_text: service.contact_text ?? "",
-  }));
+  const endpoint = "tlg/v1/services";
+  return requireWordPress(
+    await fetchFromWordPress(endpoint, (value) => parseArray(value, parseServiceItem)),
+    endpoint,
+  );
 }
 
 export async function getCareers(): Promise<Career[]> {
-  const remote = await fetchFromWordPress("tlg/v1/careers", (value) => parseArray(value, parseCareerItem));
-  if (remote !== null) return remote;
-  return (await getAllCareers()).map((career) => ({
-    title: career.title ?? "", slug: career.slug ?? "", department: career.department ?? "",
-    location: career.location ?? "", employment_type: career.employment_type ?? "", content: career.content,
-    application_url: career.application_url ?? "", job_status: "open", closing_date: career.closing_date,
-    display_order: career.display_order ?? 0,
-  }));
+  const endpoint = "tlg/v1/careers";
+  return requireWordPress(
+    await fetchFromWordPress(endpoint, (value) => parseArray(value, parseCareerItem)),
+    endpoint,
+  );
 }
 
 export async function getFaqsByDivision(division: RequestedFAQDivision): Promise<FAQ[]> {
-  const remote = await fetchFromWordPress(
-    `tlg/v1/faqs?division=${encodeURIComponent(division)}`,
-    (value) => parseArray(value, parseFAQItem),
+  const endpoint = `tlg/v1/faqs?division=${encodeURIComponent(division)}`;
+  return requireWordPress(
+    await fetchFromWordPress(endpoint, (value) => parseArray(value, parseFAQItem)),
+    endpoint,
   );
-  if (remote !== null) return remote;
-  return (await getLocalFaqsByDivision(division)).map((faq) => ({
-    question: faq.question,
-    answer: faq.answer,
-    division: faq.division ?? division,
-    order: faq.order ?? 0,
-    slug: faq.slug ?? "",
-  }));
 }
 
 export async function getInsights(): Promise<Insight[]> {
-  const remote = await fetchFromWordPress("tlg/v1/insights", (value) => parseArray(value, parseInsightItem));
-  if (remote !== null) return remote;
-  return (await getAllInsights()).map((insight) => ({
-    title: insight.title ?? "", slug: insight.slug ?? "", excerpt: insight.excerpt ?? "",
-    author: insight.author ?? "", publish_date: insight.publish_date ?? "", featured_image: insight.featured_image,
-    category: insight.category ?? "", seo_title: insight.seo_title ?? "", seo_description: insight.seo_description ?? "",
-    content: insight.content, display_order: insight.display_order ?? 0,
-  }));
+  const endpoint = "tlg/v1/insights";
+  return requireWordPress(
+    await fetchFromWordPress(endpoint, (value) => parseArray(value, parseInsightItem)),
+    endpoint,
+  );
 }

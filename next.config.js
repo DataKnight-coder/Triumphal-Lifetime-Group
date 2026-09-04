@@ -23,11 +23,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/admin',
-        destination: '/admin/index.html',
-        permanent: false,
-      },
-      {
         source: '/companies/hr-business-consulting',
         destination: '/solutions/hr-consulting',
         permanent: true,

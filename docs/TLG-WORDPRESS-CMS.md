@@ -62,7 +62,7 @@ Configure this server-side variable in local development and Netlify:
 WORDPRESS_API_URL=https://cms.triumphallifetimegroup.com
 ```
 
-Use the WordPress origin only; do not append `/wp-json/wp/v2`. The strict client in `lib/wordpress/client.ts` validates every response. A valid empty collection stays empty. An unavailable or malformed API returns the retained local migration content until live WordPress records are verified. This bridge must be removed only after the live API count and content audit passes.
+Use the WordPress origin only; do not append `/wp-json/wp/v2`. The strict client in `lib/wordpress/client.ts` validates every response. A valid empty collection stays empty. An unavailable or malformed API fails the consuming build or request explicitly; production never falls back to repository content.
 
 ## Content migration
 
@@ -107,7 +107,7 @@ Create the `cms` DNS record only after Hostinger supplies the actual hostname or
 - Export WordPress content periodically and retain off-platform copies.
 - For a frontend regression, redeploy the last known-good Netlify deploy or revert the responsible Git commit; never reset a shared branch destructively.
 - For a CMS regression, restore the confirmed pre-change Hostinger backup or roll back the plugin files to a known Git revision.
-- Keep the retained `content/`, `lib/content/`, and Sveltia history until the live WordPress content audit has passed.
+- Keep `content/` as the audited input for the idempotent migration utility and as rollback evidence. The unused `lib/content/` adapter and prior Sveltia implementation remain available in Git history and are not production data sources.
 
 ## Security and handover
 

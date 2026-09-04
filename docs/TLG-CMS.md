@@ -1,17 +1,17 @@
 # Triumphal Lifetime Group CMS (Retained Migration Reference)
 
-> This document describes the previous Sveltia transition. WordPress is now the intended production CMS. See `docs/TLG-WORDPRESS-CMS.md`. Keep this file and its content only as rollback and migration evidence until live WordPress records are verified.
+> Historical reference only. This document describes the retired Sveltia implementation as it existed before the verified WordPress cutover. Its file paths and runtime statements are intentionally not current. See `docs/TLG-WORDPRESS-CMS.md` for the active architecture and use Git history for restoration evidence.
 
 ## Architecture
 
-The CMS is a Git-backed publishing workflow:
+The retired CMS was a Git-backed publishing workflow:
 
 ```text
 Editor → /admin → Sveltia CMS → GitHub feature/tlg-git-cms
        → Netlify build → Next.js website
 ```
 
-Sveltia CMS is loaded from the pinned `@sveltia/cms@0.187.0` CDN script in `public/admin/index.html`. The project does not bundle a second Sveltia dependency and does not use WordPress, PHP, MySQL, ACF, Netlify Identity, Git Gateway, or a Cloudflare Worker for the active content flow.
+Before cutover, Sveltia CMS loaded from a pinned CDN script in `public/admin/index.html`. That public entry point and its redirect have now been removed; the historical files remain recoverable from Git.
 
 ## Content structure
 
@@ -26,7 +26,7 @@ content/
 public/uploads/  CMS-managed uploads (2 MB maximum)
 ```
 
-The public website reads local YAML and Markdown during the Next.js build through `lib/content`. It does not call GitHub or WordPress at runtime.
+Before cutover, the public website read local YAML and Markdown during the Next.js build through `lib/content`. Production now reads WordPress exclusively through `lib/wordpress/client.ts`.
 
 ## Collections
 

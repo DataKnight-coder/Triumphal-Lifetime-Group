@@ -1,10 +1,10 @@
 # WordPress CMS Migration Walkthrough
 
-## Current transition
+## Completed transition
 
-The Next.js design and routes are unchanged. Active pages now call the strict WordPress client for Global Settings, Leadership, Services, Careers, FAQs, and Insights. Until Hostinger access is available and live records are verified, the client falls back only on API failure to the retained local migration files. A successful empty response remains empty and does not invoke fallback content.
+Active pages call the strict WordPress client for Global Settings, Leadership, Services, Careers, FAQs, and Insights. The live WordPress content audit, final CMS domain, Netlify environment variable, publishing hook, and branch preview were verified before the final cutover. Production has no local-content fallback; a missing or malformed WordPress response fails explicitly, while a valid empty collection remains empty.
 
-Sveltia files and local Markdown have intentionally not been deleted. They are migration evidence and rollback material, not the intended final production source.
+The public Sveltia admin files were removed after verification. The local Markdown/YAML inventory remains as migration and rollback evidence and as input to `npm run cms:migrate`; it is not read by production pages.
 
 ## Verified migration inventory
 
@@ -31,7 +31,7 @@ No vacancies or missing contact values were invented. The WordPress migration co
 8. Configure Netlify `WORDPRESS_API_URL` and the private WordPress Publishing build hook.
 9. Produce and inspect an actual Netlify preview.
 10. Test a harmless edit for each applicable content type, wait for the rebuild, verify it, and revert the edit.
-11. Only after the live audit passes, remove the local-content bridge and active Sveltia admin dependency in a separate reviewed commit.
+11. After the live audit passed, remove the local-content bridge and active Sveltia admin dependency in a separate reviewed commit.
 
 ## Duplicate policy
 
