@@ -1,0 +1,23 @@
+"use client";
+
+import { useState } from "react";
+import Image, { ImageProps } from "next/image";
+
+interface SafeImageProps extends Omit<ImageProps, "onError"> {
+  fallback: React.ReactNode;
+}
+
+export function SafeImage({ fallback, ...props }: SafeImageProps) {
+  const [error, setError] = useState(false);
+
+  if (error || !props.src) {
+    return <>{fallback}</>;
+  }
+
+  return (
+    <Image
+      {...props}
+      onError={() => setError(true)}
+    />
+  );
+}

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { getLeadershipProfiles, getPageContent } from "@/lib/wordpress/client";
 import { pageField, pageMetadata } from "@/lib/wordpress/page-content";
+
+export const revalidate = 60; // Revalidate every 60 seconds
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata(await getPageContent("leadership"), "/leadership");
@@ -137,19 +140,18 @@ function ExecutiveBentoCard({
     <article className="group relative bg-[#0a1512] border border-white/10 rounded-[32px] overflow-hidden flex flex-col xl:flex-row shadow-2xl hover:border-tlg-signatureGold/30 transition-all duration-700">
       {/* Photo */}
       <div className="relative w-full xl:w-[45%] shrink-0 aspect-[4/3] xl:aspect-auto bg-tlg-stone/10 overflow-hidden">
-        {profile.photo ? (
-          <Image
-            src={profile.photo}
-            alt={profile.name}
-            fill
-            className="object-cover object-top transition-transform duration-1000 group-hover:scale-105"
-            sizes="(max-width:1280px) 100vw, 35vw"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight flex items-center justify-center p-8">
-            <span className="text-6xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
-          </div>
-        )}
+        <SafeImage
+          src={profile.photo || ""}
+          alt={profile.name}
+          fill
+          className="object-cover object-top transition-transform duration-1000 group-hover:scale-105"
+          sizes="(max-width:1280px) 100vw, 35vw"
+          fallback={
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight flex items-center justify-center p-8">
+              <span className="text-6xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
+            </div>
+          }
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1512] via-transparent to-transparent xl:bg-gradient-to-r xl:from-transparent xl:via-transparent xl:to-[#0a1512]" />
       </div>
 
@@ -215,19 +217,18 @@ function DivisionCard({
     <article className="group relative bg-[#0a1512] border border-white/10 rounded-2xl overflow-hidden hover:border-tlg-signatureGold/40 transition-colors duration-500 shadow-xl">
       {/* Photo */}
       <div className="relative aspect-[4/5] overflow-hidden bg-tlg-stone/10">
-        {profile.photo ? (
-          <Image
-            src={profile.photo}
-            alt={profile.name}
-            fill
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight">
-            <span className="text-5xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
-          </div>
-        )}
+        <SafeImage
+          src={profile.photo || ""}
+          alt={profile.name}
+          fill
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
+          fallback={
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight">
+              <span className="text-5xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
+            </div>
+          }
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1512] via-[#0a1512]/40 to-transparent" />
       </div>
 
