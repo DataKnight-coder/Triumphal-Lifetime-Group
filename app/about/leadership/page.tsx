@@ -88,10 +88,15 @@ export default async function LeadershipPage() {
               <div className="flex-1 h-px bg-white/10 ml-4" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {divisionHeads.map((profile) => (
-                <DivisionCard key={profile.slug} profile={profile} />
-              ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {divisionHeads.map((profile, i) => {
+                const isLastOdd = divisionHeads.length % 2 !== 0 && i === divisionHeads.length - 1;
+                return (
+                  <div key={profile.slug} className={isLastOdd ? "lg:col-span-2" : ""}>
+                    <ExecutiveBentoCard profile={profile} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -205,64 +210,4 @@ function ExecutiveBentoCard({
   );
 }
 
-/* ─────────────────────────────────────
-   Division Leader Card
-───────────────────────────────────────*/
-function DivisionCard({
-  profile,
-}: {
-  profile: import("@/lib/wordpress/client").LeadershipProfile;
-}) {
-  return (
-    <article className="group relative bg-[#0a1512] border border-white/10 rounded-2xl overflow-hidden hover:border-tlg-signatureGold/40 transition-colors duration-500 shadow-xl">
-      {/* Photo */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-tlg-stone/10">
-        <SafeImage
-          src={profile.photo || ""}
-          alt={profile.name}
-          fill
-          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
-          fallback={
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight">
-              <span className="text-5xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
-            </div>
-          }
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1512] via-[#0a1512]/40 to-transparent" />
-      </div>
 
-      {/* Info */}
-      <div className="p-6 relative z-10">
-        <p className="text-tlg-signatureGold text-[9px] font-bold uppercase tracking-[0.4em] mb-2">
-          {profile.job_title}
-        </p>
-        <h3 className="text-lg font-serif leading-snug !text-white">{profile.name}</h3>
-
-        {profile.core_expertise.length > 0 && (
-          <p className="text-[11px] mt-3 leading-relaxed !text-white/50">
-            {profile.core_expertise.slice(0, 2).join(" · ")}
-          </p>
-        )}
-
-        {profile.linkedin && (
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest transition-colors !text-white/30 hover:!text-tlg-signatureGold"
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-            LinkedIn
-          </a>
-        )}
-      </div>
-
-      {/* Hover gold accent line */}
-      <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-tlg-signatureGold group-hover:w-full transition-all duration-500" />
-    </article>
-  );
-}
