@@ -33,7 +33,7 @@ export default async function LeadershipPage() {
           <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block animate-reveal-up">
             {pageField(page, "hero_eyebrow") || "The People Behind The Mission"}
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.02] tracking-tight max-w-4xl">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white leading-[1.02] tracking-tight max-w-4xl">
             {pageField(page, "hero_title") || (
               <>
                 Our
@@ -61,7 +61,7 @@ export default async function LeadershipPage() {
           <div className="max-w-[1400px] mx-auto px-6 md:px-16 pt-20 pb-8">
             <div className="flex items-center gap-5 mb-12">
               <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em]">01</span>
-              <h2 className="text-2xl md:text-3xl font-serif">Executive Leadership</h2>
+              <h2 className="text-2xl md:text-3xl font-serif text-white">Executive Leadership</h2>
               <div className="flex-1 h-px bg-white/10 ml-4" />
             </div>
           </div>
@@ -95,7 +95,7 @@ export default async function LeadershipPage() {
           <div className="max-w-[1400px] mx-auto px-6 md:px-16">
             <div className="flex items-center gap-5 mb-16">
               <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em]">02</span>
-              <h2 className="text-2xl md:text-3xl font-serif">Division Leadership</h2>
+              <h2 className="text-2xl md:text-3xl font-serif text-white">Division Leadership</h2>
               <div className="flex-1 h-px bg-white/10 ml-4" />
             </div>
 
@@ -120,7 +120,7 @@ export default async function LeadershipPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
           <div>
             <p className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em] mb-4">Work With Us</p>
-            <h2 className="text-3xl md:text-5xl font-serif leading-tight max-w-lg">
+            <h2 className="text-3xl md:text-5xl font-serif text-white leading-tight max-w-lg">
               Ready to connect with our team?
             </h2>
           </div>
@@ -187,7 +187,7 @@ function LeaderPanel({
             <p className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.4em] mb-4">
               {profile.job_title}
             </p>
-            <h3 className="text-3xl md:text-4xl font-serif leading-tight">{profile.name}</h3>
+            <h3 className="text-3xl md:text-4xl font-serif text-white leading-tight">{profile.name}</h3>
             <div className="mt-4 h-px w-12 bg-tlg-signatureGold/40" />
           </div>
 
@@ -288,7 +288,7 @@ function DivisionCard({
         <p className="text-tlg-signatureGold text-[9px] font-bold uppercase tracking-[0.4em] mb-2">
           {profile.job_title}
         </p>
-        <h3 className="text-lg font-serif leading-snug">{profile.name}</h3>
+        <h3 className="text-lg font-serif text-white leading-snug">{profile.name}</h3>
 
         {profile.core_expertise.length > 0 && (
           <p className="text-white/40 text-[11px] mt-3 leading-relaxed">

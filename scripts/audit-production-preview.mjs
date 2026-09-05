@@ -108,9 +108,17 @@ try {
       let response;
       try {
         response = await page.goto(`${preview}${route}`, { waitUntil: "domcontentloaded", timeout: 15_000 });
+        if (viewport.width < 768 && route !== "/contact") {
+          await page.waitForSelector("#mobile-menu-trigger", { state: "visible", timeout: 4_000 }).catch(() => undefined);
+        }
+        await page.waitForTimeout(800);
+        if (saveScreenshots) {
+          const viewportDirectory = path.join(outputDirectory, viewport.name);
+          await mkdir(viewportDirectory, { recursive: true });
+          await page.screenshot({ path: path.join(viewportDirectory, `${routeFile(route)}.png`), fullPage: false });
+        }
         await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
         await page.waitForTimeout(500);
-        await page.evaluate(() => window.scrollTo(0, 0));
       } catch (error) {
         fail(`${viewport.name} ${route}: navigation failed (${error instanceof Error ? error.message : String(error)})`);
         await page.close();
@@ -179,11 +187,6 @@ try {
         }
       }
 
-      if (saveScreenshots) {
-        const viewportDirectory = path.join(outputDirectory, viewport.name);
-        await mkdir(viewportDirectory, { recursive: true });
-        await page.screenshot({ path: path.join(viewportDirectory, `${routeFile(route)}.png`), fullPage: false });
-      }
       await page.close();
       }));
     }
