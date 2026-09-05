@@ -6,6 +6,10 @@ import { chromium } from "playwright";
 const preview = (process.env.AUDIT_BASE_URL || "https://deploy-preview-1--triumphal-lifetime-group.netlify.app").replace(/\/+$/, "");
 const outputDirectory = process.env.AUDIT_OUTPUT_DIR || path.join(process.cwd(), ".audit-artifacts");
 const saveScreenshots = process.env.AUDIT_SCREENSHOTS === "1";
+const requestedConcurrency = Number.parseInt(process.env.AUDIT_CONCURRENCY || "2", 10);
+const auditConcurrency = Number.isFinite(requestedConcurrency) && requestedConcurrency > 0
+  ? requestedConcurrency
+  : 2;
 
 const routes = [
   "/", "/about", "/about/our-story", "/global-presence", "/leadership", "/companies",
@@ -92,8 +96,8 @@ const browser = await chromium.launch({ headless: true, executablePath: installe
 try {
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: "reduce" });
-    for (let routeIndex = 0; routeIndex < routes.length; routeIndex += 4) {
-      await Promise.all(routes.slice(routeIndex, routeIndex + 4).map(async (route) => {
+    for (let routeIndex = 0; routeIndex < routes.length; routeIndex += auditConcurrency) {
+      await Promise.all(routes.slice(routeIndex, routeIndex + auditConcurrency).map(async (route) => {
       console.log(`[${viewport.name}] ${route}`);
       const page = await context.newPage();
       const consoleErrors = [];
@@ -107,7 +111,7 @@ try {
       });
       let response;
       try {
-        response = await page.goto(`${preview}${route}`, { waitUntil: "domcontentloaded", timeout: 15_000 });
+        response = await page.goto(`${preview}${route}`, { waitUntil: "domcontentloaded", timeout: 30_000 });
         if (viewport.width < 768 && route !== "/contact") {
           await page.waitForSelector("#mobile-menu-trigger", { state: "visible", timeout: 4_000 }).catch(() => undefined);
         }
@@ -127,7 +131,16 @@ try {
 
       if (!response?.ok()) fail(`${viewport.name} ${route}: HTTP ${response?.status() ?? "unknown"}`);
       const result = await page.evaluate(() => {
+        const isVisiblyRendered = (element) => {
+          if (!element || element.getBoundingClientRect().height === 0 || element.getBoundingClientRect().width === 0) return false;
+          for (let current = element; current; current = current.parentElement) {
+            const style = getComputedStyle(current);
+            if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return false;
+          }
+          return true;
+        };
         const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute("href") || "";
+        const primaryHeading = document.querySelector("h1");
         const images = Array.from(document.images).map((image) => ({ src: image.currentSrc || image.src, alt: image.getAttribute("alt"), loaded: image.complete && image.naturalWidth > 0 }));
         const links = Array.from(document.querySelectorAll("a[href]")).map((anchor) => ({
           href: anchor.getAttribute("href") || "",
@@ -143,6 +156,7 @@ try {
           description: document.querySelector('meta[name="description"]')?.getAttribute("content")?.trim() || "",
           canonical,
           h1Count: document.querySelectorAll("h1").length,
+          h1Visible: isVisiblyRendered(primaryHeading),
           header: Boolean(document.querySelector("header")),
           footer: Boolean(document.querySelector("footer")),
           overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -157,6 +171,7 @@ try {
       if (!result.description) fail(`${viewport.name} ${route}: missing meta description`);
       if (!result.canonical.startsWith("https://triumphallifetimegroup.com")) fail(`${viewport.name} ${route}: invalid canonical ${result.canonical || "(missing)"}`);
       if (result.h1Count !== 1) fail(`${viewport.name} ${route}: expected one H1, found ${result.h1Count}`);
+      if (!result.h1Visible) fail(`${viewport.name} ${route}: primary heading is not visibly rendered`);
       if (!result.header) fail(`${viewport.name} ${route}: header missing`);
       if (!result.footer) fail(`${viewport.name} ${route}: footer missing`);
       if (result.overflow > 1) fail(`${viewport.name} ${route}: horizontal overflow ${result.overflow}px`);
