@@ -1,152 +1,107 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 
-export const metadata: Metadata = {
- title: "Contact Us",
- description: "Direct your inquiry to the relevant regional office or operating division of Triumphal Lifetime Group.",
-};
+import EnquiryForm from "@/components/forms/EnquiryForm";
+import {
+  getGlobalSettings,
+  getLocations,
+  getPageContent,
+} from "@/lib/wordpress/client";
+import { pageField, pageMetadata } from "@/lib/wordpress/page-content";
 
-export default function ContactPage() {
- return (
- <main className="bg-white min-h-screen">
- {/* Hero */}
- <section className="pt-40 pb-24 bg-tlg-midnight text-white">
- <div className="max-w-[1200px] mx-auto px-6 md:px-12">
- <span className="text-tlg-signatureGold text-[11px] font-bold uppercase tracking-[0.3em] mb-6 block">Get In Touch</span>
- <h1 className="text-5xl md:text-7xl font-serif leading-[1.05] mb-6 max-w-2xl">
- Let&rsquo;s Start a Conversation.
- </h1>
- <p className="text-white/90 font-normal text-lg max-w-xl leading-relaxed">
- Reach the team directly - by regional office, or send a general inquiry and we will route it to the right division.
- </p>
- </div>
- </section>
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata(await getPageContent("contact"), "/contact");
+}
 
- {/* Regional Offices */}
- <section className="py-20 bg-tlg-ivory border-b border-tlg-stone">
- <div className="max-w-[1200px] mx-auto px-6 md:px-12">
- <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-800 mb-12">Regional Offices</p>
- <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-tlg-stone border border-tlg-stone">
+export default async function ContactPage() {
+  const [page, settings, locations] = await Promise.all([
+    getPageContent("contact"),
+    getGlobalSettings(),
+    getLocations(),
+  ]);
 
- {/* Nigeria */}
- <div className="p-10 hover:bg-white transition-colors group">
- <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 block">Nigeria</span>
- <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Abuja</h3>
- <p className="text-sm text-gray-800 font-normal mb-6">Serving Africa</p>
- <div className="space-y-3">
- <a href="mailto:africa@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
- <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
- africa@triumphallifetimegroup.com
- </a>
- <a href="https://wa.me/2349117777759" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
- <Phone size={14} className="shrink-0 text-tlg-signatureGold" />
- WhatsApp Us
- </a>
- </div>
- </div>
+  const publicLocations = locations.filter(
+    (location) => location.operational_status === "active" && location.client_facing,
+  );
 
- {/* UAE */}
- <div className="p-10 hover:bg-white transition-colors group">
- <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 block">United Arab Emirates</span>
- <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Dubai</h3>
- <p className="text-sm text-gray-800 font-normal mb-6">Serving the Middle East</p>
- <div className="space-y-3">
- <a href="mailto:mena@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
- <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
- mena@triumphallifetimegroup.com
- </a>
- </div>
- </div>
+  return (
+    <main className="min-h-screen bg-white">
+      <section className="bg-tlg-midnight pb-24 pt-40 text-white">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold">
+            {pageField(page, "hero_eyebrow")}
+          </span>
+          <h1 className="max-w-3xl font-serif text-5xl leading-[1.05] text-white md:text-7xl">
+            {pageField(page, "hero_title")}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90">
+            {pageField(page, "hero_description")}
+          </p>
+        </div>
+      </section>
 
- {/* Canada */}
- <div className="p-10 hover:bg-white transition-colors group">
- <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold mb-4 block">Canada</span>
- <h3 className="text-2xl font-serif text-tlg-midnight mb-1">Toronto</h3>
- <p className="text-sm text-gray-800 font-normal mb-6">Serving North America</p>
- <div className="space-y-3">
- <a href="mailto:na@triumphallifetimegroup.com" className="flex items-center gap-3 text-sm text-gray-800 hover:text-tlg-signatureGold transition-colors font-normal">
- <Mail size={14} className="shrink-0 text-tlg-signatureGold" />
- na@triumphallifetimegroup.com
- </a>
- </div>
- </div>
+      <section className="bg-tlg-ivory py-20">
+        <div className="mx-auto grid max-w-[1200px] gap-14 px-6 md:grid-cols-[0.8fr_1.2fr] md:px-12">
+          <div>
+            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold">
+              Contact
+            </p>
+            <h2 className="font-serif text-4xl text-tlg-midnight">
+              {pageField(page, "intro_heading")}
+            </h2>
+            <p className="mt-5 leading-relaxed text-gray-700">
+              {pageField(page, "intro_body")}
+            </p>
 
- </div>
- </div>
- </section>
+            {settings.general_email ? (
+              <a
+                className="mt-8 flex items-center gap-3 text-sm text-tlg-midnight hover:text-tlg-signatureGold"
+                href={`mailto:${settings.general_email}`}
+              >
+                <Mail aria-hidden="true" size={17} />
+                {settings.general_email}
+              </a>
+            ) : null}
 
- {/* Inquiry Form */}
- <section className="py-24">
- <div className="max-w-[1200px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+            {publicLocations.length ? (
+              <div className="mt-10 space-y-5">
+                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-tlg-midnight">
+                  Verified locations
+                </h3>
+                {publicLocations.map((location) => (
+                  <div key={location.slug} className="flex gap-3 text-sm text-gray-700">
+                    <MapPin aria-hidden="true" className="mt-0.5 shrink-0 text-tlg-signatureGold" size={16} />
+                    <div>
+                      <p className="font-semibold text-tlg-midnight">{location.name}</p>
+                      <p>{[location.city, location.country].filter(Boolean).join(", ")}</p>
+                      {location.address ? <p>{location.address}</p> : null}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
 
- {/* Left - Context */}
- <div className="lg:col-span-2">
- <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold mb-6 block">General Inquiry</span>
- <h2 className="text-3xl md:text-4xl font-serif text-tlg-midnight mb-6 leading-[1.2]">Send Us a Message</h2>
- <p className="text-gray-700 font-normal leading-relaxed mb-10 text-sm">
- For a structured consultation, use the <Link href="?book=true" className="underline underline-offset-4 hover:text-tlg-signatureGold transition-colors">Book a Consultation</Link> page. For all other inquiries, use this form and we will respond within two business days.
- </p>
- <div className="space-y-4 text-sm text-gray-700 font-normal">
- <p className="flex items-center gap-3"><Mail size={14} className="text-tlg-signatureGold shrink-0" /> info@triumphallifetimegroup.com</p>
- </div>
- </div>
+          <div className="border border-tlg-stone bg-white p-7 shadow-sm md:p-10">
+            <EnquiryForm
+              siteKey={settings.turnstile_site_key}
+            />
+          </div>
+        </div>
+      </section>
 
- {/* Right - Form */}
- <div className="lg:col-span-3 bg-tlg-ivory border border-tlg-stone p-8 md:p-12">
- <form className="space-y-6">
- <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div>
- <label className="block text-xs font-bold uppercase tracking-widest text-tlg-midnight mb-2">Full Name</label>
- <input type="text" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
- </div>
- <div>
- <label className="block text-xs font-bold uppercase tracking-widest text-tlg-midnight mb-2">Email Address</label>
- <input type="email" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
- </div>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div>
- <label className="block text-xs font-bold uppercase tracking-widest text-tlg-midnight mb-2">Phone (Optional)</label>
- <input type="tel" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
- </div>
- <div>
- <label className="block text-xs font-bold uppercase tracking-widest text-tlg-midnight mb-2">Country</label>
- <input type="text" className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm" />
- </div>
- </div>
- <div>
- <label className="block text-xs font-bold uppercase tracking-widest text-tlg-midnight mb-2">Division / Subject</label>
- <select className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-gray-800 text-sm">
- <option>HR &amp; Business Consulting</option>
- <option>Real Estate Advisory</option>
- <option>Global Mobility</option>
- <option>Education Advisory</option>
- <option>Information Technology</option>
- <option>Digital Products &amp; Learning</option>
- <option>Social Impact / Foundation</option>
- <option>General / Other</option>
- </select>
- </div>
- <div>
- <label className="block text-xs font-bold uppercase tracking-widest text-tlg-midnight mb-2">Message</label>
- <textarea rows={5} className="w-full border border-tlg-stone p-3 bg-white focus:outline-none focus:border-tlg-midnight transition-colors text-sm text-gray-800"></textarea>
- </div>
- <div className="flex items-start gap-3">
- <input type="checkbox" id="privacy" className="mt-1 accent-tlg-midnight" />
- <label htmlFor="privacy" className="text-xs text-gray-800 font-normal leading-relaxed">
- I agree to the processing of my personal data in accordance with the <Link href="/privacy" className="underline underline-offset-4 hover:text-tlg-signatureGold transition-colors">Privacy Policy</Link>.
- </label>
- </div>
- <button type="button" className="w-full bg-tlg-midnight text-white p-4 text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-tlg-signatureGold transition-colors">
- Send Message
- </button>
- <p className="text-center text-xs text-gray-800 italic">We aim to respond within two business days.</p>
- </form>
- </div>
-
- </div>
- </section>
- </main>
- );
+      {pageField(page, "disclaimer_body") ? (
+        <section className="border-t border-tlg-stone bg-white py-12">
+          <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-tlg-midnight">
+              {pageField(page, "disclaimer_heading")}
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-gray-700">
+              {pageField(page, "disclaimer_body")}
+            </p>
+          </div>
+        </section>
+      ) : null}
+    </main>
+  );
 }

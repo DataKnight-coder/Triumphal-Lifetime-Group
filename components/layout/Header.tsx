@@ -2,23 +2,27 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { ChevronDown, Menu, X, Search, Command } from "lucide-react";
 import { m, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import { triggerHaptic } from "@/lib/utils/haptics";
-import MobileDock from "./MobileDock";
+import MobileDock, { MobileDockFallback } from "./MobileDock";
 import CommandMenu from "@/components/ui/CommandMenu";
+import type { PageLink } from "@/lib/wordpress/page-content";
+import { trackEvent } from "@/lib/analytics";
 
-export default function Header() {
+type HeaderProps = { navigationLinks: PageLink[]; divisionLinks: PageLink[]; ctaText: string; ctaUrl: string };
+
+export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const mobileCloseRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuWasOpen = useRef(false);
   const pathname = usePathname();
-  
-  const isDarkText = !scrolled && pathname !== "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,34 +34,45 @@ export default function Header() {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      mobileMenuWasOpen.current = true;
+      requestAnimationFrame(() => mobileCloseRef.current?.focus());
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = previousOverflow;
+      if (mobileMenuWasOpen.current) {
+        document.getElementById("mobile-menu-trigger")?.focus();
+        mobileMenuWasOpen.current = false;
+      }
     }
+    return () => { document.body.style.overflow = previousOverflow; };
   }, [mobileMenuOpen]);
 
-  const companiesLinks = [
-    { name: "HR & Business Consulting", path: "/solutions/hr-consulting", image: "/visuals/hr.jpg", desc: "Workforce engineering and executive search." },
-    { name: "Real Estate", path: "/solutions/real-estate", image: "/visuals/real-estate.jpg", desc: "Premium property development and management." },
-    { name: "Education Advisory", path: "/solutions/education", image: "/visuals/education.jpg", desc: "Global academic placement and consulting." },
-    { name: "Global Mobility", path: "/solutions/global-mobility", image: "/visuals/global-mobility.jpg", desc: "Immigration and international relocation." },
-    { name: "Digital Products & Learning", path: "/solutions/digital-learning", image: "/visuals/digital-learning.jpg", desc: "E-learning platforms and skill development." },
-    { name: "Information Technology", path: "/solutions/technology", image: "/visuals/technology.jpg", desc: "Enterprise software and digital transformation." },
-    { name: "Charity Foundation", path: "/impact", image: "/images/impact_hero.jpg", desc: "Community empowerment and disaster relief." },
-    { name: "View All Companies", path: "/companies", image: "/images/hero.jpg", isHighlight: true, desc: "Explore our entire corporate portfolio." },
-  ];
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMobileMenuOpen(false);
+      setActiveDropdown(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  const companiesLinks = divisionLinks.map((link) => ({ name: link.label, path: link.url, image: link.image || "/images/hero.jpg", desc: "" }));
+  const divisionsLabel = navigationLinks.find((link) => link.label === "Our Divisions")?.label || "Our Divisions";
+  const searchItems = [...navigationLinks.map((link) => ({ title: link.label, path: link.url, category: "Navigation" })), ...divisionLinks.map((link) => ({ title: link.label, path: link.url, category: divisionsLabel }))];
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 flex items-center h-20 md:h-24 px-6 md:px-12 ${scrolled || activeDropdown ? 'bg-tlg-midnight shadow-2xl' : 'bg-transparent pt-4'}`}>
+      <header className={`fixed top-0 left-0 w-full z-50 bg-tlg-midnight transition-shadow duration-300 flex items-center h-20 md:h-24 px-6 md:px-12 ${scrolled || activeDropdown ? 'shadow-2xl' : 'shadow-md'}`}>
         
         <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between">
           
           {/* Logo - Left */}
           <m.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
             <Link 
@@ -65,11 +80,11 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-4 group"
             >
-              <div className={`w-14 h-14 min-w-[56px] shrink-0 relative overflow-hidden rounded-full transition-all duration-700 ${!isDarkText || activeDropdown ? 'border border-white/20' : 'drop-shadow-sm'}`}>
+              <div className="w-14 h-14 md:w-16 md:h-16 min-w-[56px] shrink-0 relative overflow-hidden rounded-full border border-white/20 transition-all duration-300">
                 <Image src="/logo.png" alt="TLG Crest" fill className="object-cover scale-110" />
               </div>
               <div className="flex flex-col items-start leading-none group-hover:opacity-80 transition-opacity">
-                <span className={`font-serif text-xl font-medium tracking-tight transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white'}`}>Triumphal</span>
+                <span className="font-serif text-xl md:text-2xl font-medium tracking-tight text-white transition-colors duration-300">Triumphal</span>
                 <span className="text-[0.65rem] tracking-[0.25em] uppercase text-tlg-signatureGold font-sans mt-1.5 font-bold">Lifetime Group</span>
               </div>
             </Link>
@@ -77,37 +92,45 @@ export default function Header() {
 
           {/* Center Navigation - Desktop */}
           <m.nav 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: -10 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className={`hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white/90'}`}
+            aria-label="Primary navigation"
+            className="hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-white/90"
           >
-            <Link href="/" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">Home</Link>
-            <Link href="/about" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">About</Link>
+            {navigationLinks.filter((link) => link.label !== "Our Divisions").slice(0, 2).map((link) => <Link key={link.url} href={link.url} className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
             
             {/* Our Companies Trigger */}
             <div 
               className="relative flex items-center h-full"
               onMouseEnter={() => { setActiveDropdown('companies'); setHoveredLink(companiesLinks[0].image); }}
             >
-              <button className={`flex items-center gap-1.5 px-4 py-2 transition-colors ${activeDropdown === 'companies' ? 'text-tlg-signatureGold' : 'hover:text-tlg-signatureGold'}`}>
-                Our Companies <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
+              <button
+                type="button"
+                aria-expanded={activeDropdown === "companies"}
+                aria-controls="division-navigation-menu"
+                aria-haspopup="true"
+                onClick={() => setActiveDropdown((current) => current === "companies" ? null : "companies")}
+                className={`flex items-center gap-1.5 px-4 py-2 transition-colors ${activeDropdown === 'companies' ? 'text-tlg-signatureGold' : 'hover:text-tlg-signatureGold'}`}
+              >
+                {divisionsLabel} <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
               </button>
             </div>
 
-            <Link href="/insights" className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">Insights</Link>
+            {navigationLinks.filter((link) => link.label !== "Our Divisions").slice(2).map((link) => <Link key={link.url} href={link.url} className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
           </m.nav>
 
           {/* Right CTA & Search - Desktop */}
           <m.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: 20 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="hidden xl:flex items-center gap-4"
           >
             <button 
               onClick={() => { triggerHaptic(); setCmdOpen(true); }}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors border ${isDarkText && !activeDropdown ? 'border-tlg-stone text-tlg-midnight hover:bg-tlg-ivory' : 'border-white/20 text-white hover:bg-white/10'}`}
+              aria-label="Open site search"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors border border-white/20 text-white hover:bg-white/10"
             >
               <Search size={14} />
               <div className="flex items-center gap-1 text-[9px] font-bold tracking-widest uppercase opacity-70">
@@ -116,10 +139,11 @@ export default function Header() {
             </button>
 
             <Link 
-              href="?book=true" 
-              className={`inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-700 shadow-sm hover:shadow-md ${isDarkText && !activeDropdown ? 'bg-tlg-midnight text-white hover:bg-tlg-signatureGold' : 'bg-tlg-signatureGold text-tlg-midnight hover:bg-white'}`}
+              href={ctaUrl}
+              onClick={() => trackEvent("consultation_click", { placement: "header" })}
+              className="inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full bg-tlg-signatureGold text-tlg-midnight transition-all duration-300 shadow-sm hover:bg-white hover:shadow-md"
             >
-              Book a Consultation
+              {ctaText}
             </Link>
           </m.div>
           
@@ -135,6 +159,9 @@ export default function Header() {
               transition={{ duration: 0.3, ease: "easeOut" }}
               onMouseEnter={() => setActiveDropdown('companies')}
               onMouseLeave={() => setActiveDropdown(null)}
+              id="division-navigation-menu"
+              role="navigation"
+              aria-label="Our divisions"
               className="absolute top-full left-0 w-full bg-white border-t border-tlg-stone shadow-2xl z-40 overflow-hidden"
             >
               <div className="max-w-[1600px] mx-auto px-12 py-12 flex gap-12 min-h-[400px]">
@@ -147,12 +174,12 @@ export default function Header() {
                       href={link.path}
                       onMouseEnter={() => setHoveredLink(link.image)}
                       onClick={() => setActiveDropdown(null)}
-                      className={`group flex flex-col p-4 rounded-2xl transition-colors ${hoveredLink === link.image ? 'bg-tlg-ivory' : 'hover:bg-tlg-ivory'} ${link.isHighlight ? 'col-span-2 border border-tlg-stone mt-4 items-center justify-center text-center' : ''}`}
+                      className={`group flex flex-col p-4 rounded-2xl transition-colors ${hoveredLink === link.image ? 'bg-tlg-ivory' : 'hover:bg-tlg-ivory'}`}
                     >
                       <span className={`font-serif text-xl mb-1 transition-colors ${hoveredLink === link.image ? 'text-tlg-signatureGold' : 'text-tlg-midnight'}`}>
                         {link.name}
                       </span>
-                      {!link.isHighlight && (
+                      {link.desc && (
                         <span className="text-xs text-gray-700 font-normal leading-relaxed">
                           {link.desc}
                         </span>
@@ -187,10 +214,10 @@ export default function Header() {
       </header>
 
       {/* Command Menu */}
-      <CommandMenu isOpen={cmdOpen} setIsOpen={setCmdOpen} />
+      <CommandMenu isOpen={cmdOpen} setIsOpen={setCmdOpen} items={searchItems} />
 
       {/* MobileDock */}
-      <Suspense fallback={null}>
+      <Suspense fallback={<MobileDockFallback onOpenMenu={() => setMobileMenuOpen(true)} />}>
         <MobileDock onOpenMenu={() => setMobileMenuOpen(true)} />
       </Suspense>
 
@@ -210,12 +237,18 @@ export default function Header() {
         }`}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+        aria-hidden={!mobileMenuOpen}
+        inert={!mobileMenuOpen}
       >
         {/* Drag Handle & Header */}
         <div className="shrink-0 pt-4 pb-2 px-6 flex justify-between items-center border-b border-tlg-stone/50">
           <div className="w-12 h-1.5 bg-gray-200 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>
-          <span className="font-serif text-lg text-tlg-midnight mt-4">Menu</span>
+          <span id="mobile-menu-title" className="font-serif text-lg text-tlg-midnight mt-4">Menu</span>
           <button 
+            ref={mobileCloseRef}
+            type="button"
+            aria-label="Close navigation menu"
             onClick={() => setMobileMenuOpen(false)}
             className="p-2 -mr-2 mt-4 text-gray-800 hover:text-tlg-midnight transition-colors"
           >
@@ -227,22 +260,17 @@ export default function Header() {
         <div className="overflow-y-auto hide-scrollbar flex-1 px-8 py-8 pb-[calc(100px+env(safe-area-inset-bottom,20px))]">
           
           <nav className="flex flex-col gap-6">
-            <Link href="/" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Home</Link>
-            <Link href="/about" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">About Us</Link>
+            {navigationLinks.filter((link) => link.label !== "Our Divisions").map((link) => <Link key={link.url} href={link.url} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
             
             <div className="flex flex-col gap-4 border-l-2 border-tlg-ivory pl-4 py-2">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold">Our Companies</span>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-tlg-signatureGold">{divisionsLabel}</span>
               {companiesLinks.map(link => (
-                <Link key={link.name} href={link.path} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className={`text-lg transition-colors ${link.isHighlight ? 'text-tlg-midnight font-medium mt-2' : 'text-gray-700'}`}>
+                <Link key={link.name} href={link.path} onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-lg text-gray-700 transition-colors">
                   {link.name}
                 </Link>
               ))}
             </div>
 
-            <Link href="/insights" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Insights & Ideas</Link>
-            <Link href="/impact" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Social Impact</Link>
-            <Link href="/careers" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Careers</Link>
-            <Link href="/contact" onClick={() => { triggerHaptic(); setMobileMenuOpen(false); }} className="text-2xl font-serif text-tlg-midnight hover:text-tlg-signatureGold transition-colors">Contact</Link>
           </nav>
 
         </div>

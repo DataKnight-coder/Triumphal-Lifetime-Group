@@ -5,15 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { Home, Briefcase, Menu } from "lucide-react";
 import { triggerHaptic } from "@/lib/utils/haptics";
 
-export default function MobileDock({ onOpenMenu }: { onOpenMenu: () => void }) {
- const pathname = usePathname();
- const searchParams = useSearchParams();
-
- // Hide the dock on these pages
- if (searchParams.get("book") === "true" || pathname === "/contact") {
- return null;
- }
-
+function MobileDockView({ pathname, onOpenMenu }: { pathname: string; onOpenMenu: () => void }) {
  return (
  <div className="fixed bottom-0 left-0 w-full z-50 md:hidden pointer-events-none pb-[env(safe-area-inset-bottom)] px-4">
  <div className="pointer-events-auto bg-white/95 backdrop-blur-md shadow-2xl border border-tlg-stone/50 rounded-full mb-4 px-2 py-2 flex items-center justify-between">
@@ -37,6 +29,9 @@ export default function MobileDock({ onOpenMenu }: { onOpenMenu: () => void }) {
  </Link>
  
  <button 
+ id="mobile-menu-trigger"
+ type="button"
+ aria-label="Open navigation menu"
  onClick={() => {
  triggerHaptic();
  onOpenMenu();
@@ -60,4 +55,19 @@ export default function MobileDock({ onOpenMenu }: { onOpenMenu: () => void }) {
  </div>
  </div>
  );
+}
+
+export function MobileDockFallback({ onOpenMenu }: { onOpenMenu: () => void }) {
+ return <MobileDockView pathname="" onOpenMenu={onOpenMenu} />;
+}
+
+export default function MobileDock({ onOpenMenu }: { onOpenMenu: () => void }) {
+ const pathname = usePathname();
+ const searchParams = useSearchParams();
+
+ if (searchParams.get("book") === "true" || pathname === "/contact") {
+ return null;
+ }
+
+ return <MobileDockView pathname={pathname} onOpenMenu={onOpenMenu} />;
 }

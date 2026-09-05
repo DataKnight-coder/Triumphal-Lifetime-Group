@@ -1,172 +1,308 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
- title: "Leadership",
- description: "Guided by experience across North America, the Middle East, and Africa.",
-};
-
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { SafeImage } from "@/components/ui/SafeImage";
+import { getLeadershipProfiles, getPageContent } from "@/lib/wordpress/client";
+import { pageField, pageMetadata } from "@/lib/wordpress/page-content";
 
-export default function LeadershipPage() {
- return (
- <main className="bg-white pt-32 pb-24">
- <section className="relative pt-16 pb-24 border-b border-tlg-stone bg-tlg-ivory">
- <div className="max-w-[1200px] mx-auto px-6 md:px-12">
- <Link href="/about" className="inline-flex items-center text-xs font-bold uppercase tracking-[0.2em] text-gray-800 hover:text-tlg-midnight transition-colors mb-12">
- <ArrowRight size={14} className="mr-2 rotate-180" /> Back to About
- </Link>
- 
- <div className="max-w-4xl animate-reveal-up">
- <span className="text-tlg-signatureGold text-[11px] md:text-xs font-bold uppercase tracking-[0.3em] mb-6 block">Leadership</span>
- <h1 className="text-4xl md:text-6xl font-serif text-tlg-midnight leading-[1.1] mb-8">
- Guided by Experience.
- </h1>
- <p className="text-xl text-gray-800 font-normal leading-relaxed">
- Our executive board brings together decades of rigorous cross-sector experience in international markets.
- </p>
- </div>
- </div>
- </section>
+export const revalidate = 60; // Revalidate every 60 seconds
 
- {/* CEO - Featured */}
- <section className="py-24 border-b border-tlg-stone">
- <div className="max-w-[1200px] mx-auto px-6 md:px-12">
- <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold mb-16 block">Founder & Group Chief Executive</span>
- <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
- 
- {/* Photo */}
- <div className="relative w-full aspect-[3/4] max-w-sm overflow-hidden bg-tlg-stone/20">
- <Image
- src="/images/team/ARIKE_ADEBAYO.jpeg"
- alt="Arike Adedayo - Founder & Group CEO"
- fill
- className="object-cover object-top"
- priority
- />
- </div>
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata(await getPageContent("leadership"), "/leadership");
+}
 
- {/* Bio */}
- <div>
- <h2 className="text-4xl md:text-5xl font-serif text-tlg-midnight mb-2">
- Arike Adedayo
- </h2>
- <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-[0.25em] mb-8">
- Founder & Group Chief Executive Officer
- </p>
- <div className="space-y-5 text-gray-800 font-normal leading-relaxed text-[15px]">
- <p>
- Arike Adedayo is the Founder and Group Chief Executive Officer of Triumphal Lifetime Group, an integrated ecosystem of companies delivering solutions across human resources and business consulting, information technology, real estate, student advisory, global visa services, digital commerce, and community impact.
- </p>
- <p>
- As Group CEO, she provides strategic leadership across the Group, shaping its vision, corporate strategy, governance, partnerships, and long-term growth. Working alongside the executive leadership team, she is focused on building sustainable businesses, strengthening operational excellence, and creating opportunities for people, businesses, and communities.
- </p>
- <p>
- Her leadership is grounded in integrity, innovation, professionalism, and service, with a commitment to ensuring that each company maintains its distinct purpose while contributing to the Group's shared vision and long-term value creation.
- </p>
- <blockquote className="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-800">
- "Leadership is about creating opportunities, empowering people, building sustainable institutions, and creating lasting value for future generations."
- </blockquote>
- </div>
- </div>
- </div>
- </div>
- </section>
+export default async function LeadershipPage() {
+  const [page, profiles] = await Promise.all([getPageContent("leadership"), getLeadershipProfiles()]);
 
- {/* Executive Team */}
- <section className="py-24">
- <div className="max-w-[1200px] mx-auto px-6 md:px-12">
- <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-800 mb-12 block">Executive Board</span>
- <div className="space-y-24">
-          
- {/* Peace Emem */}
- <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
- <div className="md:col-span-4 relative aspect-[3/4] overflow-hidden bg-tlg-stone/20">
- <Image src="/images/team/ENEM.jpeg" alt="Peace Emem" fill className="object-cover object-top" />
- </div>
- <div className="md:col-span-8">
- <h3 className="text-3xl font-serif text-tlg-midnight mb-1">Peace Emem</h3>
- <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-widest mb-6">Group Chief Operating Officer (COO)</p>
- <div className="space-y-4 text-gray-700 font-normal text-sm leading-relaxed">
- <p>As Group Chief Operating Officer of Triumphal Lifetime Group, Peace Emem Olorunkunle oversees the Group's day-to-day operations and works closely with the Group CEO, President, and executive leadership team to translate strategic priorities into effective execution across the Group's companies.</p>
- <p>She provides operational leadership across business processes, service delivery, performance management, internal coordination, and organizational efficiency. Her role focuses on ensuring that each company operates effectively while maintaining the standards, values, and strategic direction of Triumphal Lifetime Group.</p>
- <p>With a strong commitment to operational excellence, accountability, and continuous improvement, Peace helps strengthen collaboration across the Group, improve performance, and build scalable systems that support sustainable growth.</p>
- <blockquote className="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-700">
- "Operational excellence is achieved when people, processes, and purpose work together to turn vision into measurable results."
- </blockquote>
- </div>
- </div>
- </div>
+  const executives = profiles.filter((p) => p.leadership_group === "executive");
+  const divisionHeads = profiles.filter((p) => p.leadership_group === "division-head");
 
- {/* Olugbemiga Dada Ogedengbe */}
- <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
- <div className="md:col-span-4 relative aspect-[3/4] overflow-hidden bg-tlg-stone/20">
- <Image src="/images/team/DADA.jpeg" alt="Olugbemiga Dada Ogedengbe" fill className="object-cover object-top" />
- </div>
- <div className="md:col-span-8">
- <h3 className="text-3xl font-serif text-tlg-midnight mb-1">Olugbemiga Dada Ogedengbe</h3>
- <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-widest mb-6">Director, Information Technology</p>
- <div className="space-y-4 text-gray-700 font-normal text-sm leading-relaxed">
- <p>As Director of Information Technology at Triumphal Lifetime Group, Olugbemiga Dada Ogedengbe leads the Group's technology strategy and digital transformation agenda, driving innovative, secure, and scalable technology solutions that support long-term growth.</p>
- <p>His responsibilities span IT infrastructure, cybersecurity, cloud solutions, systems implementation, data management, and IT governance, ensuring that technology remains aligned with the Group's strategic objectives and supports operational excellence.</p>
- <p>Olugbemiga champions digital innovation across the Group, leveraging technology to enhance operational efficiency, strengthen data security, improve client experiences, and build organizational resilience.</p>
- <blockquote className="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-700">
- "Technology should empower people, simplify business, and create opportunities for innovation and sustainable growth."
- </blockquote>
- </div>
- </div>
- </div>
+  return (
+    <main className="bg-tlg-midnight text-white min-h-screen">
+      {/* ── CINEMATIC HERO ── */}
+      <section className="relative flex flex-col justify-end min-h-[55vh] pt-40 pb-16 px-6 md:px-16 overflow-hidden">
+        {/* Background texture */}
+        <div className="absolute inset-0 bg-gradient-to-br from-tlg-midnight via-[#0d1f1a] to-tlg-midnight opacity-95" />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: "32px 32px",
+          }}
+        />
+        {/* Gold accent bar */}
+        <div className="absolute left-0 top-0 w-[3px] h-full bg-gradient-to-b from-transparent via-tlg-signatureGold to-transparent" />
 
- {/* Kingsley Chukwuemeka Udenna */}
- <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
- <div className="md:col-span-4 relative aspect-[3/4] overflow-hidden bg-tlg-stone/20">
- <Image src="/images/team/KINGSLEY.jpeg" alt="Kingsley Chukwuemeka Udenna" fill className="object-cover object-top" />
- </div>
- <div className="md:col-span-8">
- <h3 className="text-3xl font-serif text-tlg-midnight mb-1">Kingsley Chukwuemeka Udenna</h3>
- <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-widest mb-6">Director, Human Resources & Business Advisory</p>
- <div className="space-y-4 text-gray-700 font-normal text-sm leading-relaxed">
- <p>Kingsley Chukwuemeka Udenna leads the Group's Human Resources and Business Advisory portfolio, driving people and performance strategies for clients across multiple industries. His role spans talent acquisition, workforce planning, performance management, organizational development, HR compliance, and business consulting services that support sustainable growth.</p>
- <p>With a strong commitment to professionalism, innovation, and excellence, Kingsley works closely with clients and internal stakeholders to develop tailored, people-centered strategies that enhance productivity, strengthen organizational capability, and build long-term business resilience.</p>
- <blockquote className="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-700">
- "Great organizations are built by investing in people, embracing innovation, and creating workplaces where people can thrive."
- </blockquote>
- </div>
- </div>
- </div>
+        <div className="relative z-10 max-w-[1400px] mx-auto w-full">
+          <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block animate-reveal-up">
+            {pageField(page, "hero_eyebrow") || "The People Behind The Mission"}
+          </span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.02] tracking-tight max-w-4xl !text-white">
+            {pageField(page, "hero_title") || (
+              <>
+                Our
+                <em className="not-italic text-tlg-signatureGold"> Leadership</em>
+              </>
+            )}
+          </h1>
+          {pageField(page, "hero_description") && (
+            <p className="text-lg md:text-xl mt-8 max-w-2xl leading-relaxed !text-white/70">
+              {pageField(page, "hero_description")}
+            </p>
+          )}
+          <div className="mt-12 flex items-center gap-4">
+            <div className="h-px w-16 bg-tlg-signatureGold/50" />
+            <span className="text-[10px] uppercase tracking-widest font-bold !text-white/40">
+              {profiles.length} Leader{profiles.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+        </div>
+      </section>
 
- {/* Mr. Charles */}
- <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
- <div className="md:col-span-4 relative aspect-[3/4] overflow-hidden bg-tlg-stone/20">
- <Image src="/images/team/CHARLES.jpeg" alt="Mr. Charles" fill className="object-cover object-top" />
- </div>
- <div className="md:col-span-8">
- <h3 className="text-3xl font-serif text-tlg-midnight mb-1">Mr. Charles</h3>
- <p className="text-xs text-tlg-signatureGold font-bold uppercase tracking-widest mb-6">Director, Real Estate & Investment Advisory</p>
- <div className="space-y-4 text-gray-700 font-normal text-sm leading-relaxed">
- <p>Mr. Charles heads the Real Estate and Investment Advisory division, bringing extensive experience in property markets across our operational regions. He oversees portfolio strategy, market research, and client advisory services for both residential and commercial investments.</p>
- <p>His practical approach to property investment helps clients navigate complex transactions, ensuring that each decision is backed by robust data and clear strategic objectives.</p>
- <blockquote className="border-l-2 border-tlg-signatureGold pl-4 mt-6 text-sm italic text-gray-700">
- "Real estate remains a foundational asset class; our role is to provide the clarity required to invest with confidence."
- </blockquote>
- </div>
- </div>
- </div>
+      {/* ── EXECUTIVE LEADERSHIP — BENTO GRID ── */}
+      {executives.length > 0 && (
+        <section className="border-t border-white/10 py-20 md:py-28">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-16">
+            <div className="flex items-center gap-5 mb-16">
+              <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em]">01</span>
+              <h2 className="text-2xl md:text-3xl font-serif !text-white">Executive Leadership</h2>
+              <div className="flex-1 h-px bg-white/10 ml-4" />
+            </div>
 
- </div>
- 
- <div className="mt-24 border-t border-tlg-stone pt-16 text-center max-w-2xl mx-auto">
- <h4 className="text-2xl font-serif text-tlg-midnight mb-6">Join Our Global Team</h4>
- <p className="text-gray-700 font-normal mb-8">
- We are constantly seeking exceptional talent to drive our divisions forward. Explore current opportunities across our international offices.
- </p>
- <Link href="/careers" className="inline-flex items-center justify-center bg-transparent border border-tlg-stone text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:border-tlg-midnight transition-colors">
- View Careers
- </Link>
- </div>
- </div>
- </section>
- </main>
- );
+            {/* Bento Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {executives.map((profile) => (
+                <ExecutiveBentoCard key={profile.slug} profile={profile} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── DIVISION LEADERSHIP — BENTO GRID ── */}
+      {divisionHeads.length > 0 && (
+        <section className="border-t border-white/10 py-20 md:py-28">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-16">
+            <div className="flex items-center gap-5 mb-16">
+              <span className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em]">02</span>
+              <h2 className="text-2xl md:text-3xl font-serif !text-white">Division Leadership</h2>
+              <div className="flex-1 h-px bg-white/10 ml-4" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {divisionHeads.map((profile, i) => {
+                // A true dynamic Bento Grid logic:
+                // Pattern: Wide (2), Square (1), Square (1), Wide (2), Wide (3, full width)
+                let spanClass = "lg:col-span-1 md:col-span-1"; 
+                let useWideCard = false;
+
+                if (i % 5 === 0) {
+                  spanClass = "lg:col-span-2 md:col-span-2";
+                  useWideCard = true;
+                } else if (i % 5 === 3) {
+                  spanClass = "lg:col-span-2 md:col-span-2";
+                  useWideCard = true;
+                } else if (i % 5 === 4) {
+                  spanClass = "lg:col-span-3 md:col-span-2";
+                  useWideCard = true;
+                }
+
+                // If it's the very last item and it's alone on a row, make it span full to avoid awkward space
+                const remainingInRow = (divisionHeads.length - i) % 3;
+                if (i === divisionHeads.length - 1) {
+                   if (remainingInRow === 1) {
+                      spanClass = "lg:col-span-3 md:col-span-2";
+                      useWideCard = true;
+                   } else if (remainingInRow === 2) {
+                      spanClass = "lg:col-span-2 md:col-span-2";
+                      useWideCard = true;
+                   }
+                }
+
+                return (
+                  <div key={profile.slug} className={spanClass}>
+                    {useWideCard ? (
+                      <ExecutiveBentoCard profile={profile} isDivisionBento />
+                    ) : (
+                      <DivisionCard profile={profile} />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── EMPTY STATE ── */}
+      {profiles.length === 0 && (
+        <section className="py-40 text-center text-lg !text-white/40">
+          Leadership profiles will be published after review.
+        </section>
+      )}
+
+      {/* ── CLOSING CTA ── */}
+      <section className="border-t border-white/10 py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+          <div>
+            <p className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.5em] mb-4">Work With Us</p>
+            <h2 className="text-3xl md:text-5xl font-serif leading-tight max-w-lg !text-white">
+              Ready to connect with our team?
+            </h2>
+          </div>
+          <a
+            href="/contact?book=true"
+            className="shrink-0 inline-flex items-center gap-3 bg-tlg-signatureGold text-tlg-midnight px-9 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
+          >
+            Book a Consultation
+            <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+              <path d="M1 5h11M7 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+/* ─────────────────────────────────────
+   Executive Bento Grid Card
+───────────────────────────────────────*/
+function ExecutiveBentoCard({
+  profile,
+  isDivisionBento = false,
+}: {
+  profile: import("@/lib/wordpress/client").LeadershipProfile;
+  isDivisionBento?: boolean;
+}) {
+  return (
+    <article className="h-full group relative bg-[#0a1512] border border-white/10 rounded-[32px] overflow-hidden flex flex-col xl:flex-row shadow-2xl hover:border-tlg-signatureGold/30 transition-all duration-700">
+      {/* Photo */}
+      <div className={`relative w-full ${isDivisionBento ? "xl:w-[40%]" : "xl:w-[45%]"} shrink-0 aspect-[4/3] xl:aspect-auto bg-tlg-stone/10 overflow-hidden`}>
+        <SafeImage
+          src={profile.photo || ""}
+          alt={profile.name}
+          fill
+          className="object-cover object-top transition-transform duration-1000 group-hover:scale-105"
+          sizes="(max-width:1280px) 100vw, 35vw"
+          fallback={
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight flex items-center justify-center p-8">
+              <span className="text-6xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
+            </div>
+          }
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1512] via-transparent to-transparent xl:bg-gradient-to-r xl:from-transparent xl:via-transparent xl:to-[#0a1512]" />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 flex flex-col justify-center p-8 sm:p-10 z-10">
+        <p className="text-tlg-signatureGold text-[10px] font-bold uppercase tracking-[0.4em] mb-4">
+          {profile.job_title}
+        </p>
+        <h3 className={`font-serif leading-tight mb-6 !text-white ${isDivisionBento ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl"}`}>{profile.name}</h3>
+        
+        {/* Bio */}
+        <div
+          className="text-sm leading-relaxed mb-8 !text-white/60 line-clamp-4 prose-p:!text-white/60 prose-p:my-2"
+          dangerouslySetInnerHTML={{ __html: profile.content }}
+        />
+
+        {/* Expertise pills */}
+        {profile.core_expertise.length > 0 && (
+          <div className="mt-auto">
+            <p className="text-[9px] uppercase tracking-widest font-bold mb-3 !text-white/30">Core Expertise</p>
+            <div className="flex flex-wrap gap-2">
+              {profile.core_expertise.slice(0, 3).map((e) => (
+                <span
+                  key={e}
+                  className="px-3 py-1.5 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-wider !text-white/50 bg-white/5"
+                >
+                  {e}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* LinkedIn */}
+        {profile.linkedin && (
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors !text-white/40 hover:!text-tlg-signatureGold"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            LinkedIn Profile
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/* ─────────────────────────────────────
+   Division Leader Card (Square/Portrait)
+───────────────────────────────────────*/
+function DivisionCard({
+  profile,
+}: {
+  profile: import("@/lib/wordpress/client").LeadershipProfile;
+}) {
+  return (
+    <article className="h-full group relative bg-[#0a1512] border border-white/10 rounded-2xl overflow-hidden hover:border-tlg-signatureGold/40 transition-colors duration-500 shadow-xl flex flex-col">
+      {/* Photo */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-tlg-stone/10 shrink-0">
+        <SafeImage
+          src={profile.photo || ""}
+          alt={profile.name}
+          fill
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
+          fallback={
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0d1f1a] to-tlg-midnight">
+              <span className="text-5xl font-serif !text-white/10">{profile.name.charAt(0)}</span>
+            </div>
+          }
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1512] via-[#0a1512]/40 to-transparent" />
+      </div>
+
+      {/* Info */}
+      <div className="p-6 relative z-10 flex flex-col flex-1">
+        <p className="text-tlg-signatureGold text-[9px] font-bold uppercase tracking-[0.4em] mb-2">
+          {profile.job_title}
+        </p>
+        <h3 className="text-lg font-serif leading-snug !text-white">{profile.name}</h3>
+
+        {profile.core_expertise.length > 0 && (
+          <p className="text-[11px] mt-3 leading-relaxed !text-white/50">
+            {profile.core_expertise.slice(0, 2).join(" · ")}
+          </p>
+        )}
+
+        <div className="mt-auto pt-5">
+          {profile.linkedin && (
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest transition-colors !text-white/30 hover:!text-tlg-signatureGold"
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              LinkedIn
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Hover gold accent line */}
+      <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-tlg-signatureGold group-hover:w-full transition-all duration-500" />
+    </article>
+  );
 }
