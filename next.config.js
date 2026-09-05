@@ -3,6 +3,9 @@ const nextConfig = {
   outputFileTracingRoot: __dirname,
   experimental: {
     viewTransition: true,
+    cpus: 1,
+    staticGenerationMaxConcurrency: 1,
+    staticGenerationMinPagesPerWorker: 100,
   },
   images: {
     remotePatterns: [
