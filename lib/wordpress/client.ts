@@ -182,6 +182,24 @@ function optionalString(record: UnknownRecord, key: string): string | undefined 
   return typeof value === "string" && value.length > 0 ? value : undefined;
 }
 
+// These seven attachments were created during the CMS migration, but their
+// WordPress files are missing. Keep the public site intact until an editor
+// replaces each image in WordPress; every other CMS media URL passes through.
+const MIGRATED_MEDIA_RECOVERY: Readonly<Record<string, string>> = {
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/hr.jpg": "/visuals/hr.jpg",
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/real-estate.jpg": "/visuals/real-estate.jpg",
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/global-mobility.jpg": "/visuals/global-mobility.jpg",
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/ENEM.jpeg": "/images/team/ENEM.jpeg",
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/DADA.jpeg": "/images/team/DADA.jpeg",
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/KINGSLEY.jpeg": "/images/team/KINGSLEY.jpeg",
+  "https://cms.triumphallifetimegroup.com/wp-content/uploads/2026/09/CHARLES.jpeg": "/images/team/CHARLES.jpeg",
+};
+
+function optionalMediaUrl(record: UnknownRecord, key: string): string | undefined {
+  const value = optionalString(record, key);
+  return value ? (MIGRATED_MEDIA_RECOVERY[value] ?? value) : undefined;
+}
+
 function isFAQDivision(value: string): value is FAQDivision {
   return (FAQ_DIVISIONS as readonly string[]).includes(value);
 }
@@ -285,7 +303,7 @@ function parseLeadershipItem(value: unknown): LeadershipProfile | null {
     content: biography,
     email: stringValue(value, "email") ?? "",
     linkedin: stringValue(value, "linkedin") ?? "",
-    photo: optionalString(value, "photo"),
+    photo: optionalMediaUrl(value, "photo"),
     display_order: order,
   };
 }
@@ -303,7 +321,7 @@ function parseServiceItem(value: unknown): Service | null {
     slug,
     short_description: stringValue(value, "shortDescription") ?? "",
     content: description,
-    featured_image: optionalString(value, "image"),
+    featured_image: optionalMediaUrl(value, "image"),
     key_benefits: benefits,
     cta_text: stringValue(value, "ctaText") ?? "",
     cta_url: stringValue(value, "ctaUrl") ?? "",
@@ -371,7 +389,7 @@ function parseInsightItem(value: unknown): Insight | null {
     reviewer: stringValue(value, "reviewer") ?? "",
     publish_date: stringValue(value, "publishedAt") ?? "",
     last_reviewed_date: optionalString(value, "lastReviewedAt"),
-    featured_image: optionalString(value, "image"),
+    featured_image: optionalMediaUrl(value, "image"),
     category: stringValue(value, "category") ?? "",
     sources: sources as { name: string; url: string }[],
     related_division: stringValue(value, "relatedDivision") ?? "",
@@ -395,7 +413,7 @@ function parsePage(value: unknown): PageContent | null {
     if (typeof fieldValue !== "string") return null;
     fields[field] = fieldValue;
   }
-  return { key, title, body, hero_image: optionalString(value, "heroImage"), fields, modified_at: modifiedAt };
+  return { key, title, body, hero_image: optionalMediaUrl(value, "heroImage"), fields, modified_at: modifiedAt };
 }
 
 function parseLocation(value: unknown): Location | null {
@@ -423,7 +441,7 @@ function parseLocation(value: unknown): Location | null {
     services,
     email: stringValue(value, "email") ?? "",
     phone: stringValue(value, "phone") ?? "",
-    image: optionalString(value, "image"), order,
+    image: optionalMediaUrl(value, "image"), order,
   };
 }
 
@@ -437,7 +455,7 @@ function parseFoundationItem(value: unknown): FoundationItem | null {
   const year = numberValue(value, "year");
   const order = numberValue(value, "order");
   if (title === null || slug === null || description === null || !["programme", "impact", "future"].includes(type ?? "") || location === null || year === null || order === null) return null;
-  return { title, slug, description, type: type as FoundationItem["type"], location, year, image: optionalString(value, "image"), order };
+  return { title, slug, description, type: type as FoundationItem["type"], location, year, image: optionalMediaUrl(value, "image"), order };
 }
 
 function parseArray<T>(value: unknown, parseItem: (item: unknown) => T | null): T[] | null {
