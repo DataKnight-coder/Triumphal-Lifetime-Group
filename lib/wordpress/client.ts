@@ -1,4 +1,20 @@
 const API_BASE = process.env.WORDPRESS_API_URL?.replace(/\/+$/, "");
+const MAX_CONCURRENT_CMS_REQUESTS = 2;
+let activeCmsRequests = 0;
+const cmsRequestQueue: (() => void)[] = [];
+
+async function withCmsRequestPermit<T>(request: () => Promise<T>): Promise<T> {
+  if (activeCmsRequests >= MAX_CONCURRENT_CMS_REQUESTS) {
+    await new Promise<void>((resolve) => cmsRequestQueue.push(resolve));
+  }
+  activeCmsRequests += 1;
+  try {
+    return await request();
+  } finally {
+    activeCmsRequests -= 1;
+    cmsRequestQueue.shift()?.();
+  }
+}
 
 export const FAQ_DIVISIONS = [
   "digital-learning",
@@ -181,14 +197,14 @@ function endpointUrl(endpoint: string): string | null {
 }
 
 /** Null means unavailable/malformed; a valid empty array remains empty. */
-export async function fetchFromWordPress<T>(
+async function fetchFromWordPressUnlocked<T>(
   endpoint: string,
   parse: (value: unknown) => T | null,
 ): Promise<T | null> {
   const url = endpointUrl(endpoint);
   if (!url) return null;
 
-  const maxAttempts = 4;
+  const maxAttempts = 6;
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     try {
       const response = await fetch(url, {
@@ -227,6 +243,13 @@ export async function fetchFromWordPress<T>(
   }
 
   return null;
+}
+
+export async function fetchFromWordPress<T>(
+  endpoint: string,
+  parse: (value: unknown) => T | null,
+): Promise<T | null> {
+  return withCmsRequestPermit(() => fetchFromWordPressUnlocked(endpoint, parse));
 }
 
 function parseSettings(value: unknown): GlobalSettings | null {
