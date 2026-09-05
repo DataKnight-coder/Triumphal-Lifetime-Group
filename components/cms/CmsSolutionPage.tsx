@@ -87,7 +87,7 @@ export default async function CmsSolutionPage({ pageKey, faqDivision }: CmsSolut
         <section className="py-20 bg-tlg-midnight text-white">
           <div className="max-w-[1100px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-serif mb-6">{pageField(page, "audience_heading")}</h2>
+              <h2 className="text-3xl md:text-4xl font-serif text-white mb-6">{pageField(page, "audience_heading")}</h2>
               <p className="text-white/80 leading-relaxed">{pageField(page, "audience_body")}</p>
             </div>
             {audiences.length > 0 && <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">{audiences.map((item) => <li key={item.title} className="flex gap-3 text-sm"><CheckCircle2 size={18} className="text-tlg-signatureGold shrink-0" />{item.title}</li>)}</ul>}
@@ -150,7 +150,7 @@ export default async function CmsSolutionPage({ pageKey, faqDivision }: CmsSolut
       {pageField(page, "cta_heading") && (
         <section className="py-24 bg-tlg-midnight text-white text-center">
           <div className="max-w-3xl mx-auto px-6">
-            <h2 className="text-3xl md:text-5xl font-serif mb-6">{pageField(page, "cta_heading")}</h2>
+            <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">{pageField(page, "cta_heading")}</h2>
             {pageField(page, "cta_body") && <p className="text-white/80 mb-10">{pageField(page, "cta_body")}</p>}
             <Link href={pageField(page, "cta_url")} className="inline-flex bg-tlg-signatureGold text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-white transition-colors">{pageField(page, "cta_text")}</Link>
           </div>

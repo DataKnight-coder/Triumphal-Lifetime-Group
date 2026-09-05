@@ -37,6 +37,9 @@ export default function MobileDock({ onOpenMenu }: { onOpenMenu: () => void }) {
  </Link>
  
  <button 
+ id="mobile-menu-trigger"
+ type="button"
+ aria-label="Open navigation menu"
  onClick={() => {
  triggerHaptic();
  onOpenMenu();

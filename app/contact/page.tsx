@@ -36,7 +36,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           <span className="mb-6 block text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold">
             {pageField(page, "hero_eyebrow")}
           </span>
-          <h1 className="max-w-3xl font-serif text-5xl leading-[1.05] md:text-7xl">
+          <h1 className="max-w-3xl font-serif text-5xl leading-[1.05] text-white md:text-7xl">
             {pageField(page, "hero_title")}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90">

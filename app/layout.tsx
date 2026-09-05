@@ -116,12 +116,13 @@ export default async function RootLayout({
        />
      </head>
  <body suppressHydrationWarning className={`${manrope.variable} ${cormorant.variable} bg-tlg-ivory text-tlg-charcoal flex flex-col min-h-screen safe-pb md:pb-0`}>
+ <a href="#main-content" className="fixed left-4 top-4 z-[300] -translate-y-24 rounded bg-white px-4 py-2 font-bold text-tlg-midnight shadow-lg transition-transform focus:translate-y-0">Skip to main content</a>
  <SmoothScroll>
  <AnimationProvider>
  <PwaRegistry />
  <CustomCursor />
  <Header navigationLinks={pageLinks(navigation, "navigation_items")} divisionLinks={pageLinks(navigation, "division_items")} ctaText={pageField(navigation, "cta_text")} ctaUrl={pageField(navigation, "cta_url")} />
- <div className="flex-1">
+ <div id="main-content" tabIndex={-1} className="flex-1">
  {children}
  </div>
  <ServerFooter />

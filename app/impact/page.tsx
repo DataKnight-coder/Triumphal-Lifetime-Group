@@ -9,8 +9,122 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function FoundationPage() {
-  const [page, items, leadership] = await Promise.all([getPageContent("foundation"), getFoundationItems(), getLeadershipProfiles()]);
+  const [page, items, leadership] = await Promise.all([
+    getPageContent("foundation"),
+    getFoundationItems(),
+    getLeadershipProfiles(),
+  ]);
   const founder = leadership.find((profile) => profile.slug === "adekemi-arike-adedayo");
   const audiences = pageItems(page, "audience_items");
-  return <main className="bg-white pt-32 pb-24"><section className="py-16 md:py-24 bg-tlg-ivory border-b border-tlg-stone"><div className="max-w-[1200px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center"><div><span className="text-tlg-signatureGold text-[11px] font-bold uppercase tracking-[0.3em] mb-5 block">{pageField(page, "hero_eyebrow")}</span><h1 className="text-4xl md:text-6xl font-serif text-tlg-midnight mb-7">{pageField(page, "hero_title")}</h1><p className="text-xl text-gray-800">{pageField(page, "hero_description")}</p></div>{page.hero_image && <div className="relative aspect-[4/3] rounded-[28px] overflow-hidden"><Image src={page.hero_image} alt={pageField(page, "hero_image_alt") || page.title} fill priority className="object-cover" /></div>}</div></section><section className="py-24"><div className="max-w-[1000px] mx-auto px-6 md:px-12"><h2 className="text-3xl md:text-5xl font-serif text-tlg-midnight mb-7">{pageField(page, "intro_heading")}</h2><div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{__html: pageField(page, "intro_body")}} />{audiences.length > 0 && <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">{audiences.map((item) => <article key={item.title} className="bg-tlg-ivory p-7 rounded-xl"><h3 className="font-serif text-xl text-tlg-midnight mb-2">{item.title}</h3><p className="text-sm text-gray-700">{item.description}</p></article>)}</div>}</div></section>{founder && <section className="py-20 bg-tlg-midnight text-white"><div className="max-w-[1000px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10 items-center">{founder.photo && <div className="relative aspect-[3/4] overflow-hidden"><Image src={founder.photo} alt={founder.name} fill className="object-cover object-top" /></div>}<div><span className="text-tlg-signatureGold text-xs font-bold uppercase tracking-widest">Foundation Leadership</span><h2 className="text-3xl font-serif mt-4 mb-2">{founder.name}</h2><p className="text-white/70 text-sm mb-5">{founder.job_title}</p><div className="text-white/85 text-sm leading-relaxed" dangerouslySetInnerHTML={{__html: founder.content}} /></div></div></section>}{["programme", "impact", "future"].map((type) => {const group = items.filter((item) => item.type === type); if (!group.length) return null; return <section key={type} className="py-20"><div className="max-w-[1100px] mx-auto px-6 md:px-12"><h2 className="text-3xl font-serif capitalize text-tlg-midnight mb-10">{type === "impact" ? "Verified Impact" : `${type}s`}</h2><div className="grid grid-cols-1 md:grid-cols-3 gap-6">{group.map((item) => <article key={item.slug} className="border border-tlg-stone rounded-xl p-7"><h3 className="text-xl font-serif text-tlg-midnight">{item.title}</h3><p className="text-sm text-gray-700 mt-3">{item.description}</p></article>)}</div></div></section>})}<section className="py-20 bg-tlg-ivory text-center"><div className="max-w-2xl mx-auto px-6"><h2 className="text-3xl font-serif text-tlg-midnight mb-6">{pageField(page, "cta_heading")}</h2><p className="text-gray-700 mb-8">{pageField(page, "cta_body")}</p>{pageField(page, "cta_text") && <Link href={pageField(page, "cta_url")} className="inline-flex bg-tlg-midnight text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest">{pageField(page, "cta_text")}</Link>}</div></section></main>;
+
+  return (
+    <main className="bg-white pb-24 pt-32">
+      <section className="border-b border-tlg-stone bg-tlg-ivory py-16 md:py-24">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-14 px-6 md:px-12 lg:grid-cols-2">
+          <div>
+            <span className="mb-5 block text-[11px] font-bold uppercase tracking-[0.3em] text-tlg-signatureGold">
+              {pageField(page, "hero_eyebrow")}
+            </span>
+            <h1 className="mb-7 font-serif text-4xl text-tlg-midnight md:text-6xl">
+              {pageField(page, "hero_title")}
+            </h1>
+            <p className="text-xl text-gray-800">{pageField(page, "hero_description")}</p>
+          </div>
+          {page.hero_image && (
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[28px]">
+              <Image
+                src={page.hero_image}
+                alt={pageField(page, "hero_image_alt") || page.title}
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="py-24">
+        <div className="mx-auto max-w-[1000px] px-6 md:px-12">
+          <h2 className="mb-7 font-serif text-3xl text-tlg-midnight md:text-5xl">
+            {pageField(page, "intro_heading")}
+          </h2>
+          <div
+            className="leading-relaxed text-gray-700"
+            dangerouslySetInnerHTML={{ __html: pageField(page, "intro_body") }}
+          />
+          {audiences.length > 0 && (
+            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {audiences.map((item) => (
+                <article key={item.title} className="rounded-xl bg-tlg-ivory p-7">
+                  <h3 className="mb-2 font-serif text-xl text-tlg-midnight">{item.title}</h3>
+                  <p className="text-sm text-gray-700">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {founder && (
+        <section className="bg-tlg-midnight py-20 text-white">
+          <div className="mx-auto grid max-w-[1000px] grid-cols-1 items-center gap-10 px-6 md:grid-cols-[260px_1fr] md:px-12">
+            {founder.photo && (
+              <div className="relative aspect-[3/4] overflow-hidden">
+                <Image src={founder.photo} alt={founder.name} fill className="object-cover object-top" />
+              </div>
+            )}
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-tlg-signatureGold">
+                Foundation Leadership
+              </span>
+              <h2 className="mb-2 mt-4 font-serif text-3xl text-white">{founder.name}</h2>
+              <p className="mb-5 text-sm text-white/70">{founder.job_title}</p>
+              <div
+                className="text-sm leading-relaxed text-white/85"
+                dangerouslySetInnerHTML={{ __html: founder.content }}
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {["programme", "impact", "future"].map((type) => {
+        const group = items.filter((item) => item.type === type);
+        if (!group.length) return null;
+        return (
+          <section key={type} className="py-20">
+            <div className="mx-auto max-w-[1100px] px-6 md:px-12">
+              <h2 className="mb-10 font-serif text-3xl capitalize text-tlg-midnight">
+                {type === "impact" ? "Verified Impact" : `${type}s`}
+              </h2>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                {group.map((item) => (
+                  <article key={item.slug} className="rounded-xl border border-tlg-stone p-7">
+                    <h3 className="font-serif text-xl text-tlg-midnight">{item.title}</h3>
+                    <p className="mt-3 text-sm text-gray-700">{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      <section className="bg-tlg-ivory py-20 text-center">
+        <div className="mx-auto max-w-2xl px-6">
+          <h2 className="mb-6 font-serif text-3xl text-tlg-midnight">{pageField(page, "cta_heading")}</h2>
+          <p className="mb-8 text-gray-700">{pageField(page, "cta_body")}</p>
+          {pageField(page, "cta_text") && (
+            <Link
+              href={pageField(page, "cta_url")}
+              className="inline-flex rounded-full bg-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-widest text-white"
+            >
+              {pageField(page, "cta_text")}
+            </Link>
+          )}
+        </div>
+      </section>
+    </main>
+  );
 }

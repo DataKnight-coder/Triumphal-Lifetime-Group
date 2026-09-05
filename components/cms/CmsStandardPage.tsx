@@ -41,13 +41,13 @@ export default async function CmsStandardPage({ pageKey }: { pageKey: PageKey })
       )}
 
       {pageField(page, "positioning_heading") && (
-        <section className="py-20 bg-tlg-midnight text-white"><div className="max-w-[900px] mx-auto px-6 md:px-12"><h2 className="text-3xl md:text-5xl font-serif mb-7">{pageField(page, "positioning_heading")}</h2><div className="text-white/85 leading-relaxed" dangerouslySetInnerHTML={{ __html: pageField(page, "positioning_body") }} /></div></section>
+        <section className="py-20 bg-tlg-midnight text-white"><div className="max-w-[900px] mx-auto px-6 md:px-12"><h2 className="text-3xl md:text-5xl font-serif text-white mb-7">{pageField(page, "positioning_heading")}</h2><div className="text-white/85 leading-relaxed" dangerouslySetInnerHTML={{ __html: pageField(page, "positioning_body") }} /></div></section>
       )}
 
       {directoryServices.length > 0 && (
         <section className="py-20 md:py-24 bg-tlg-emerald text-white">
           <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-            <h2 className="text-3xl md:text-5xl font-serif mb-5">{pageField(page, "services_heading")}</h2>
+            <h2 className="text-3xl md:text-5xl font-serif text-white mb-5">{pageField(page, "services_heading")}</h2>
             <p className="text-white/80 max-w-3xl mb-12">{pageField(page, "services_intro")}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {directoryServices.map((service) => <Link key={service.slug} href={service.cta_url || "/companies"} className="rounded-[22px] bg-white text-tlg-midnight p-7 hover:-translate-y-1 transition-transform"><h3 className="text-xl font-serif mb-3">{service.title}</h3><p className="text-sm text-gray-700 leading-relaxed">{service.short_description}</p><span className="inline-flex items-center mt-5 text-xs font-bold uppercase tracking-widest">{service.cta_text || "Explore"}<ArrowRight size={13} className="ml-2" /></span></Link>)}
@@ -86,7 +86,7 @@ export default async function CmsStandardPage({ pageKey }: { pageKey: PageKey })
       )}
 
       {pageField(page, "cta_text") && (
-        <section className="py-20 bg-tlg-midnight text-white text-center"><div className="max-w-3xl mx-auto px-6"><h2 className="text-3xl md:text-5xl font-serif mb-6">{pageField(page, "cta_heading")}</h2>{pageField(page, "cta_body") && <p className="text-white/80 mb-9">{pageField(page, "cta_body")}</p>}<div className="flex flex-wrap justify-center gap-4"><Link href={pageField(page, "cta_url")} className="inline-flex bg-tlg-signatureGold text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full">{pageField(page, "cta_text")}</Link>{pageField(page, "secondary_cta_text") && <Link href={pageField(page, "secondary_cta_url")} className="inline-flex border border-white/30 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full">{pageField(page, "secondary_cta_text")}</Link>}</div></div></section>
+        <section className="py-20 bg-tlg-midnight text-white text-center"><div className="max-w-3xl mx-auto px-6"><h2 className="text-3xl md:text-5xl font-serif text-white mb-6">{pageField(page, "cta_heading")}</h2>{pageField(page, "cta_body") && <p className="text-white/80 mb-9">{pageField(page, "cta_body")}</p>}<div className="flex flex-wrap justify-center gap-4"><Link href={pageField(page, "cta_url")} className="inline-flex bg-tlg-signatureGold text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full">{pageField(page, "cta_text")}</Link>{pageField(page, "secondary_cta_text") && <Link href={pageField(page, "secondary_cta_url")} className="inline-flex border border-white/30 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full">{pageField(page, "secondary_cta_text")}</Link>}</div></div></section>
       )}
     </main>
   );

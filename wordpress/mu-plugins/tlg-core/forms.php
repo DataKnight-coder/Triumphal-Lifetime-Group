@@ -105,7 +105,7 @@ function tlg_rest_submit_enquiry($request) {
         return tlg_form_error('tlg_invalid_contact', 'Enter a valid phone number and country.', 422);
     }
     if (!in_array($service, tlg_enquiry_services(), true) || tlg_text_length($message) < 10 || tlg_text_length($message) > 3000) {
-        return tlg_form_error('tlg_invalid_enquiry', 'Choose a valid service and provide a message between 10 and 5,000 characters.', 422);
+        return tlg_form_error('tlg_invalid_enquiry', 'Choose a valid service and provide a message between 10 and 3,000 characters.', 422);
     }
     if (!$consent) {
         return tlg_form_error('tlg_consent_required', 'Privacy consent is required.', 422);

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { ChevronDown, Menu, X, Search, Command } from "lucide-react";
 import { m, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
@@ -20,9 +20,9 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const mobileCloseRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuWasOpen = useRef(false);
   const pathname = usePathname();
-  
-  const isDarkText = !scrolled && pathname !== "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,12 +34,30 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      mobileMenuWasOpen.current = true;
+      requestAnimationFrame(() => mobileCloseRef.current?.focus());
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = previousOverflow;
+      if (mobileMenuWasOpen.current) {
+        document.getElementById("mobile-menu-trigger")?.focus();
+        mobileMenuWasOpen.current = false;
+      }
     }
+    return () => { document.body.style.overflow = previousOverflow; };
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMobileMenuOpen(false);
+      setActiveDropdown(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
 
   const companiesLinks = divisionLinks.map((link) => ({ name: link.label, path: link.url, image: link.image || "/images/hero.jpg", desc: "" }));
   const divisionsLabel = navigationLinks.find((link) => link.label === "Our Divisions")?.label || "Our Divisions";
@@ -47,7 +65,7 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 flex items-center h-20 md:h-24 px-6 md:px-12 ${scrolled || activeDropdown ? 'bg-tlg-midnight shadow-2xl' : 'bg-transparent pt-4'}`}>
+      <header className={`fixed top-0 left-0 w-full z-50 bg-tlg-midnight transition-shadow duration-300 flex items-center h-20 md:h-24 px-6 md:px-12 ${scrolled || activeDropdown ? 'shadow-2xl' : 'shadow-md'}`}>
         
         <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between">
           
@@ -62,11 +80,11 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-4 group"
             >
-              <div className={`w-14 h-14 min-w-[56px] shrink-0 relative overflow-hidden rounded-full transition-all duration-700 ${!isDarkText || activeDropdown ? 'border border-white/20' : 'drop-shadow-sm'}`}>
+              <div className="w-14 h-14 md:w-16 md:h-16 min-w-[56px] shrink-0 relative overflow-hidden rounded-full border border-white/20 transition-all duration-300">
                 <Image src="/logo.png" alt="TLG Crest" fill className="object-cover scale-110" />
               </div>
               <div className="flex flex-col items-start leading-none group-hover:opacity-80 transition-opacity">
-                <span className={`font-serif text-xl font-medium tracking-tight transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white'}`}>Triumphal</span>
+                <span className="font-serif text-xl md:text-2xl font-medium tracking-tight text-white transition-colors duration-300">Triumphal</span>
                 <span className="text-[0.65rem] tracking-[0.25em] uppercase text-tlg-signatureGold font-sans mt-1.5 font-bold">Lifetime Group</span>
               </div>
             </Link>
@@ -77,7 +95,8 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className={`hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-700 ${isDarkText && !activeDropdown ? 'text-tlg-midnight' : 'text-white/90'}`}
+            aria-label="Primary navigation"
+            className="hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-white/90"
           >
             {navigationLinks.filter((link) => link.label !== "Our Divisions").slice(0, 2).map((link) => <Link key={link.url} href={link.url} className="px-4 py-2 hover:text-tlg-signatureGold transition-colors">{link.label}</Link>)}
             
@@ -86,7 +105,14 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
               className="relative flex items-center h-full"
               onMouseEnter={() => { setActiveDropdown('companies'); setHoveredLink(companiesLinks[0].image); }}
             >
-              <button className={`flex items-center gap-1.5 px-4 py-2 transition-colors ${activeDropdown === 'companies' ? 'text-tlg-signatureGold' : 'hover:text-tlg-signatureGold'}`}>
+              <button
+                type="button"
+                aria-expanded={activeDropdown === "companies"}
+                aria-controls="division-navigation-menu"
+                aria-haspopup="true"
+                onClick={() => setActiveDropdown((current) => current === "companies" ? null : "companies")}
+                className={`flex items-center gap-1.5 px-4 py-2 transition-colors ${activeDropdown === 'companies' ? 'text-tlg-signatureGold' : 'hover:text-tlg-signatureGold'}`}
+              >
                 {divisionsLabel} <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'companies' ? 'rotate-180' : ''}`} />
               </button>
             </div>
@@ -103,7 +129,8 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
           >
             <button 
               onClick={() => { triggerHaptic(); setCmdOpen(true); }}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors border ${isDarkText && !activeDropdown ? 'border-tlg-stone text-tlg-midnight hover:bg-tlg-ivory' : 'border-white/20 text-white hover:bg-white/10'}`}
+              aria-label="Open site search"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors border border-white/20 text-white hover:bg-white/10"
             >
               <Search size={14} />
               <div className="flex items-center gap-1 text-[9px] font-bold tracking-widest uppercase opacity-70">
@@ -114,7 +141,7 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
             <Link 
               href={ctaUrl}
               onClick={() => trackEvent("consultation_click", { placement: "header" })}
-              className={`inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-700 shadow-sm hover:shadow-md ${isDarkText && !activeDropdown ? 'bg-tlg-midnight text-white hover:bg-tlg-signatureGold' : 'bg-tlg-signatureGold text-tlg-midnight hover:bg-white'}`}
+              className="inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] rounded-full bg-tlg-signatureGold text-tlg-midnight transition-all duration-300 shadow-sm hover:bg-white hover:shadow-md"
             >
               {ctaText}
             </Link>
@@ -132,6 +159,9 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
               transition={{ duration: 0.3, ease: "easeOut" }}
               onMouseEnter={() => setActiveDropdown('companies')}
               onMouseLeave={() => setActiveDropdown(null)}
+              id="division-navigation-menu"
+              role="navigation"
+              aria-label="Our divisions"
               className="absolute top-full left-0 w-full bg-white border-t border-tlg-stone shadow-2xl z-40 overflow-hidden"
             >
               <div className="max-w-[1600px] mx-auto px-12 py-12 flex gap-12 min-h-[400px]">
@@ -207,12 +237,18 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
         }`}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+        aria-hidden={!mobileMenuOpen}
+        inert={!mobileMenuOpen}
       >
         {/* Drag Handle & Header */}
         <div className="shrink-0 pt-4 pb-2 px-6 flex justify-between items-center border-b border-tlg-stone/50">
           <div className="w-12 h-1.5 bg-gray-200 rounded-full absolute top-3 left-1/2 -translate-x-1/2"></div>
-          <span className="font-serif text-lg text-tlg-midnight mt-4">Menu</span>
+          <span id="mobile-menu-title" className="font-serif text-lg text-tlg-midnight mt-4">Menu</span>
           <button 
+            ref={mobileCloseRef}
+            type="button"
+            aria-label="Close navigation menu"
             onClick={() => setMobileMenuOpen(false)}
             className="p-2 -mr-2 mt-4 text-gray-800 hover:text-tlg-midnight transition-colors"
           >

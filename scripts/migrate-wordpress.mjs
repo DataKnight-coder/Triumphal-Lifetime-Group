@@ -7,9 +7,7 @@ const root = process.cwd();
 const apiOrigin = process.env.WORDPRESS_API_URL?.replace(/\/+$/, "");
 const username = process.env.WORDPRESS_USERNAME;
 const applicationPassword = process.env.WORDPRESS_APPLICATION_PASSWORD;
-const editableStatusQuery = ["publish", "draft", "pending", "private", "future"]
-  .map((status) => `status[]=${encodeURIComponent(status)}`)
-  .join("&");
+const editableStatuses = ["publish", "draft", "pending", "private", "future"];
 
 const supersededRecords = [
   {
@@ -238,6 +236,17 @@ async function request(route, options = {}) {
   return payload;
 }
 
+async function requestEditable(route, firstMatch = false) {
+  const records = [];
+  for (const status of editableStatuses) {
+    const separator = route.includes("?") ? "&" : "?";
+    const matches = await request(`${route}${separator}status=${encodeURIComponent(status)}`);
+    records.push(...matches);
+    if (firstMatch && matches.length) break;
+  }
+  return [...new Map(records.map((record) => [record.id, record])).values()];
+}
+
 async function sourceItems(directory) {
   const directoryPath = path.join(root, "content", directory);
   const names = (await readdir(directoryPath)).filter((name) => name.endsWith(".md")).sort();
@@ -263,26 +272,48 @@ function localImagePath(image) {
   return path.join(root, "public", ...image.split("/").filter(Boolean));
 }
 
+async function remoteImageExists(url) {
+  if (typeof url !== "string" || !url.startsWith("https://")) return false;
+  try {
+    const response = await fetch(url, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(15_000) });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 async function uploadImage(image, cache) {
   const filePath = localImagePath(image);
   if (!filePath) return undefined;
   if (cache.has(filePath)) return cache.get(filePath);
 
   const filename = path.basename(filePath);
+  const extension = path.extname(filename);
   const stem = path.basename(filePath, path.extname(filePath)).toLowerCase().replace(/[^a-z0-9]+/g, "-");
   const existing = await request(`media?slug=${encodeURIComponent(stem)}&context=edit&per_page=1`);
-  if (existing[0]?.id) {
+  if (existing[0]?.id && await remoteImageExists(existing[0].source_url)) {
     cache.set(filePath, existing[0].id);
     return existing[0].id;
   }
 
-  const mime = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" }[path.extname(filename).toLowerCase()];
+  const repairStem = `${stem}-tlg-parity`;
+  const repaired = await request(`media?slug=${encodeURIComponent(repairStem)}&context=edit&per_page=1`);
+  if (repaired[0]?.id && await remoteImageExists(repaired[0].source_url)) {
+    cache.set(filePath, repaired[0].id);
+    return repaired[0].id;
+  }
+
+  const mime = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" }[extension.toLowerCase()];
   if (!mime) throw new Error(`Unsupported image type: ${filename}`);
+  const uploadFilename = existing[0]?.id ? `${repairStem}${extension.toLowerCase()}` : filename;
   const uploaded = await request("media", {
     method: "POST",
-    headers: { "Content-Type": mime, "Content-Disposition": `attachment; filename="${filename.replaceAll('"', '')}"` },
+    headers: { "Content-Type": mime, "Content-Disposition": `attachment; filename="${uploadFilename.replaceAll('"', '')}"` },
     body: await readFile(filePath),
   });
+  if (!await remoteImageExists(uploaded.source_url)) {
+    throw new Error(`WordPress accepted ${uploadFilename}, but the public media URL is unavailable: ${uploaded.source_url || "missing source_url"}`);
+  }
   cache.set(filePath, uploaded.id);
   return uploaded.id;
 }
@@ -340,12 +371,12 @@ async function migrate() {
 
   for (const collection of prepared) {
     const existingRecords = collection.endpoint === "faqs"
-      ? await request(`faqs?context=edit&per_page=100&${editableStatusQuery}`)
+      ? await requestEditable("faqs?context=edit&per_page=100")
       : [];
 
     for (const item of collection.items) {
       const record = { ...item.record };
-      const slugMatches = await request(`${collection.endpoint}?slug=${encodeURIComponent(record.slug)}&context=edit&${editableStatusQuery}`);
+      const slugMatches = await requestEditable(`${collection.endpoint}?slug=${encodeURIComponent(record.slug)}&context=edit`, true);
 
       if (collection.endpoint === "faqs" && slugMatches.length === 0) {
         const equivalent = existingRecords.find((candidate) =>
@@ -377,7 +408,7 @@ async function migrate() {
   }
 
   for (const superseded of supersededRecords) {
-    const matches = await request(`${superseded.endpoint}?slug=${encodeURIComponent(superseded.slug)}&context=edit&${editableStatusQuery}`);
+    const matches = await requestEditable(`${superseded.endpoint}?slug=${encodeURIComponent(superseded.slug)}&context=edit`, true);
     if (!matches[0]) continue;
     const saved = await request(`${superseded.endpoint}/${matches[0].id}`, {
       method: "POST",
