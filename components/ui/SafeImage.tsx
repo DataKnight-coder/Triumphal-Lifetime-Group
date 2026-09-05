@@ -7,7 +7,7 @@ interface SafeImageProps extends Omit<ImageProps, "onError"> {
   fallback: React.ReactNode;
 }
 
-export function SafeImage({ fallback, ...props }: SafeImageProps) {
+export function SafeImage({ fallback, alt, ...props }: SafeImageProps) {
   const [error, setError] = useState(false);
 
   if (error || !props.src) {
@@ -17,6 +17,7 @@ export function SafeImage({ fallback, ...props }: SafeImageProps) {
   return (
     <Image
       {...props}
+      alt={alt}
       onError={() => setError(true)}
     />
   );

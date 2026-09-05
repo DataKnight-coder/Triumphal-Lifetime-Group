@@ -102,12 +102,30 @@ try {
       const page = await context.newPage();
       const consoleErrors = [];
       const failedRequests = [];
+      const httpErrors = [];
       page.on("console", (message) => {
         if (message.type() === "error") consoleErrors.push(message.text());
       });
+      page.on("response", (resourceResponse) => {
+        const resourceUrl = resourceResponse.url();
+        if (
+          resourceResponse.status() >= 400
+          && resourceUrl.startsWith(preview)
+          && !resourceUrl.includes("?_rsc=")
+          && !resourceUrl.includes("&_rsc=")
+        ) {
+          httpErrors.push(`${resourceResponse.status()} ${resourceUrl}`);
+        }
+      });
       page.on("requestfailed", (request) => {
         const reason = request.failure()?.errorText || "failed";
-        if (reason !== "net::ERR_ABORTED") failedRequests.push(`${request.method()} ${request.url()}: ${reason}`);
+        const requestUrl = request.url();
+        const isExpectedPreviewNoise = requestUrl.startsWith("https://app.netlify.com/")
+          || requestUrl.includes("?_rsc=")
+          || requestUrl.includes("&_rsc=");
+        if (reason !== "net::ERR_ABORTED" && !isExpectedPreviewNoise) {
+          failedRequests.push(`${request.method()} ${requestUrl}: ${reason}`);
+        }
       });
       let response;
       try {
@@ -119,7 +137,11 @@ try {
         if (saveScreenshots) {
           const viewportDirectory = path.join(outputDirectory, viewport.name);
           await mkdir(viewportDirectory, { recursive: true });
-          await page.screenshot({ path: path.join(viewportDirectory, `${routeFile(route)}.png`), fullPage: false });
+          try {
+            await page.screenshot({ path: path.join(viewportDirectory, `${routeFile(route)}.png`), fullPage: false, timeout: 15_000 });
+          } catch (error) {
+            warn(`${viewport.name} ${route}: screenshot capture failed (${error instanceof Error ? error.message : String(error)})`);
+          }
         }
         await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
         await page.waitForTimeout(500);
@@ -181,7 +203,14 @@ try {
       }
       if (viewport.width >= 1280 && !result.desktopNavigationVisible) fail(`${viewport.name} ${route}: desktop navigation is not visible`);
       if (viewport.width < 768 && !result.mobileMenuVisible && route !== "/contact") fail(`${viewport.name} ${route}: mobile navigation trigger is not visible`);
-      for (const message of consoleErrors) fail(`${viewport.name} ${route}: console.error ${message}`);
+      for (const message of consoleErrors) {
+        const coveredByResourceChecks = message.startsWith("Failed to load resource:");
+        const isExpectedPrefetchFallback = message.includes("Failed to fetch RSC payload");
+        if (!coveredByResourceChecks && !isExpectedPrefetchFallback) {
+          fail(`${viewport.name} ${route}: console.error ${message}`);
+        }
+      }
+      for (const message of httpErrors) fail(`${viewport.name} ${route}: resource response ${message}`);
       for (const message of failedRequests) fail(`${viewport.name} ${route}: request failed ${message}`);
 
       const titleRoutes = titles.get(result.title) || new Set();

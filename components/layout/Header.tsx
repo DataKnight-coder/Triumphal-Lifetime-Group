@@ -7,7 +7,7 @@ import { ChevronDown, Menu, X, Search, Command } from "lucide-react";
 import { m, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import { triggerHaptic } from "@/lib/utils/haptics";
-import MobileDock from "./MobileDock";
+import MobileDock, { MobileDockFallback } from "./MobileDock";
 import CommandMenu from "@/components/ui/CommandMenu";
 import type { PageLink } from "@/lib/wordpress/page-content";
 import { trackEvent } from "@/lib/analytics";
@@ -71,8 +71,8 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
           
           {/* Logo - Left */}
           <m.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
             <Link 
@@ -92,8 +92,8 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
 
           {/* Center Navigation - Desktop */}
           <m.nav 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: -10 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
             aria-label="Primary navigation"
             className="hidden xl:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-white/90"
@@ -122,8 +122,8 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
 
           {/* Right CTA & Search - Desktop */}
           <m.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: 20 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="hidden xl:flex items-center gap-4"
           >
@@ -217,7 +217,7 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
       <CommandMenu isOpen={cmdOpen} setIsOpen={setCmdOpen} items={searchItems} />
 
       {/* MobileDock */}
-      <Suspense fallback={null}>
+      <Suspense fallback={<MobileDockFallback onOpenMenu={() => setMobileMenuOpen(true)} />}>
         <MobileDock onOpenMenu={() => setMobileMenuOpen(true)} />
       </Suspense>
 

@@ -11,11 +11,37 @@ declare global {
 
 type EnquiryFormProps = { siteKey?: string; initialService?: string; compact?: boolean; onSuccess?: (reference: string) => void };
 
+const SERVICE_LABELS: Readonly<Record<string, string>> = {
+  "hr-consulting": "HR & Business Consulting",
+  "HR Consulting": "HR & Business Consulting",
+  "real-estate": "Real Estate Advisory",
+  "Real Estate": "Real Estate Advisory",
+  education: "Global Education Advisory",
+  "Education Advisory": "Global Education Advisory",
+  "global-mobility": "Global Mobility Services",
+  "Global Mobility": "Global Mobility Services",
+  technology: "Information Technology",
+  IT: "Information Technology",
+  "digital-learning": "Digital Products & E-commerce",
+  "Digital Products": "Digital Products & E-commerce",
+  foundation: "Charity Foundation",
+  Foundation: "Charity Foundation",
+};
+
+function serviceLabel(value: string): string {
+  return SERVICE_LABELS[value] || value;
+}
+
 export default function EnquiryForm({ siteKey = "", initialService = "", compact = false, onSuccess }: EnquiryFormProps) {
   const id = useId().replace(/:/g, "");
   const [token, setToken] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [selectedService, setSelectedService] = useState(() => serviceLabel(initialService));
+  useEffect(() => {
+    const queryService = new URLSearchParams(window.location.search).get("service") || "";
+    setSelectedService(serviceLabel(initialService || queryService));
+  }, [initialService]);
   useEffect(() => {
     window.tlgTurnstileVerified = (value) => setToken(value);
     window.tlgTurnstileExpired = () => setToken("");
@@ -41,7 +67,7 @@ export default function EnquiryForm({ siteKey = "", initialService = "", compact
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5"><label className="text-xs font-bold uppercase tracking-widest">Full name<input required name="name" autoComplete="name" maxLength={120} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal" /></label><label className="text-xs font-bold uppercase tracking-widest">Email<input required name="email" type="email" inputMode="email" autoComplete="email" maxLength={190} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal" /></label></div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5"><label className="text-xs font-bold uppercase tracking-widest">Phone (optional)<input name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={50} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal" /></label><label className="text-xs font-bold uppercase tracking-widest">Country<input required name="country" autoComplete="country-name" maxLength={100} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal" /></label></div>
     <input type="hidden" name="formType" value={compact ? "consultation" : "contact"} />
-    <label className="block text-xs font-bold uppercase tracking-widest">Division / subject<select required name="service" defaultValue={({"hr-consulting":"HR & Business Consulting","HR Consulting":"HR & Business Consulting","real-estate":"Real Estate Advisory","Real Estate":"Real Estate Advisory","education":"Global Education Advisory","Education Advisory":"Global Education Advisory","global-mobility":"Global Mobility Services","Global Mobility":"Global Mobility Services","technology":"Information Technology","IT":"Information Technology","digital-learning":"Digital Products & E-commerce","Digital Products":"Digital Products & E-commerce","foundation":"Charity Foundation","Foundation":"Charity Foundation"} as Record<string,string>)[initialService] || initialService} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal"><option value="">Select a division</option><option>HR &amp; Business Consulting</option><option>Real Estate Advisory</option><option>Global Education Advisory</option><option>Global Mobility Services</option><option>Information Technology</option><option>Digital Products &amp; E-commerce</option><option>Charity Foundation</option><option>General Enquiry</option></select></label>
+    <label className="block text-xs font-bold uppercase tracking-widest">Division / subject<select required name="service" value={selectedService} onChange={(event) => setSelectedService(event.target.value)} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal"><option value="">Select a division</option><option>HR &amp; Business Consulting</option><option>Real Estate Advisory</option><option>Global Education Advisory</option><option>Global Mobility Services</option><option>Information Technology</option><option>Digital Products &amp; E-commerce</option><option>Charity Foundation</option><option>General Enquiry</option></select></label>
     <label className="block text-xs font-bold uppercase tracking-widest">Message<textarea required name="message" rows={compact ? 3 : 5} minLength={10} maxLength={3000} className="mt-2 w-full border border-tlg-stone bg-white p-3 font-normal normal-case tracking-normal" /></label>
     <label className="sr-only">Leave this field empty<input name="company_website" tabIndex={-1} autoComplete="off" /></label>
     <label className="flex gap-3 text-xs font-normal normal-case tracking-normal"><input required name="consent" value="yes" type="checkbox" className="mt-1" />I agree to the processing of my enquiry in accordance with the <Link href="/privacy" className="underline">Privacy Policy</Link>.</label>

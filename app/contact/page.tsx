@@ -13,16 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata(await getPageContent("contact"), "/contact");
 }
 
-type ContactPageProps = {
-  searchParams: Promise<{ service?: string }>;
-};
-
-export default async function ContactPage({ searchParams }: ContactPageProps) {
-  const [page, settings, locations, query] = await Promise.all([
+export default async function ContactPage() {
+  const [page, settings, locations] = await Promise.all([
     getPageContent("contact"),
     getGlobalSettings(),
     getLocations(),
-    searchParams,
   ]);
 
   const publicLocations = locations.filter(
@@ -89,7 +84,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
           <div className="border border-tlg-stone bg-white p-7 shadow-sm md:p-10">
             <EnquiryForm
-              initialService={query.service ?? ""}
               siteKey={settings.turnstile_site_key}
             />
           </div>
