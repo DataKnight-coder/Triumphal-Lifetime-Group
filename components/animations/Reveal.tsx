@@ -32,7 +32,7 @@ export default function Reveal({
 
   const offset = prefersReducedMotion ? {} : getDirectionOffset();
   const transitionSettings = prefersReducedMotion 
-    ? { duration, delay } 
+    ? { duration: 0, delay: 0 }
     : { duration, delay, ease: [0.21, 0.47, 0.32, 0.98] as any };
     
   const viewportSettings = prefersReducedMotion
@@ -41,7 +41,7 @@ export default function Reveal({
 
   return (
     <m.div
-      initial={{ opacity: 0, ...offset }}
+      initial={prefersReducedMotion ? false : { opacity: 1, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={viewportSettings}
       transition={transitionSettings}

@@ -7,13 +7,14 @@ The Triumphal Lifetime Group Master Website is a high-performance, international
 - **Framework:** Next.js (App Router)
 - **Language:** Strict TypeScript
 - **UI/Styling:** React, Tailwind CSS, accessible component primitives
-- **Hosting/Deployment:** Cloudflare Workers via OpenNext adapter, Workers Static Assets
-- **Storage:** Cloudflare R2 (for secure document uploads and media)
+- **Hosting/Deployment:** Netlify, with Cloudflare managing public DNS
+- **Content:** Headless WordPress on Hostinger through the normalized TLG REST API
+- **Media:** WordPress Media Library for CMS-managed public assets
 - **Security:** Cloudflare Turnstile (form protection)
 - **Version Control:** Git & GitHub
 
 ## Data & Content Model
-The platform uses a headless CMS architecture pattern, initially implemented via a local content adapter to allow for easy replacement with a true headless CMS later.
+The platform uses headless WordPress as the verified source of truth. Production pages access normalized CMS data only through `lib/wordpress/client.ts`; retained repository content is migration and rollback evidence, not a runtime fallback.
 
 **Core Entities:**
 - `SiteSettings`
