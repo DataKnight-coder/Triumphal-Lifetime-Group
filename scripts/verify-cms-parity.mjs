@@ -16,6 +16,9 @@ assert(byKey.get("education").fields.process_items.split("\n").length === 6, "Ed
 assert(byKey.get("digital-products").fields.hero_eyebrow.toLowerCase().includes("coming soon"), "Digital Products must remain Coming Soon.");
 assert(byKey.get("real-estate").fields.disclaimer_body.includes("not guaranteed"), "Real Estate disclaimer is missing.");
 assert(byKey.get("global-mobility").fields.disclaimer_body.includes("does not guarantee visa approval"), "Mobility disclaimer is missing.");
+const legalDisclaimer = byKey.get("disclaimer");
+assert((legalDisclaimer.body.match(/<h2>/g) ?? []).length === 3, "Legal Disclaimer source sections were not preserved.");
+assert(!legalDisclaimer.fields.disclaimer_heading && !legalDisclaimer.fields.disclaimer_body, "Legacy Legal Disclaimer callout must be empty.");
 
 const contentTypes = await read("wordpress/mu-plugins/tlg-core/content-types.php");
 for (const type of ["tlg_leadership", "tlg_services", "tlg_careers", "tlg_faqs", "tlg_insights", "tlg_pages", "tlg_locations", "tlg_foundation"]) {

@@ -1,4 +1,10 @@
-import { createCmsPage } from "@/components/cms/create-cms-page";
-const route = createCmsPage("disclaimer", "/disclaimer");
-export const generateMetadata = route.generateMetadata;
-export default route.Page;
+import type { Metadata } from "next";
+import CmsLegalDisclaimerPage from "@/components/cms/CmsLegalDisclaimerPage";
+import { getPageContent } from "@/lib/wordpress/client";
+import { pageMetadata } from "@/lib/wordpress/page-content";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return pageMetadata(await getPageContent("disclaimer"), "/disclaimer");
+}
+
+export default CmsLegalDisclaimerPage;

@@ -13,6 +13,8 @@ function tlg_register_rest_routes() {
         '/faqs' => 'tlg_rest_faqs',
         '/insights' => 'tlg_rest_insights',
         '/pages' => 'tlg_rest_page',
+        '/flexible-page' => 'tlg_rest_flexible_page',
+        '/flexible-pages' => 'tlg_rest_flexible_pages',
         '/locations' => 'tlg_rest_locations',
         '/foundation' => 'tlg_rest_foundation',
     ];
@@ -246,6 +248,68 @@ function tlg_rest_page($request) {
         'fields' => $fields,
         'modifiedAt' => get_post_modified_time(DATE_ATOM, true, $post),
     ]);
+}
+
+function tlg_public_flexible_page($post) {
+    if (!$post || $post->post_type !== 'page' || $post->post_status !== 'publish' || $post->post_password !== '') {
+        return false;
+    }
+
+    foreach (get_post_ancestors($post) as $ancestor_id) {
+        $ancestor = get_post($ancestor_id);
+        if (!$ancestor || $ancestor->post_status !== 'publish' || $ancestor->post_password !== '') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function tlg_flexible_page_data($post) {
+    $body = tlg_post_body($post);
+    $cms_home = untrailingslashit(home_url('/'));
+    $public_home = 'https://triumphallifetimegroup.com';
+    $body = str_replace(
+        ['href="' . $cms_home . '/', "href='" . $cms_home . '/'],
+        ['href="' . $public_home . '/', "href='" . $public_home . '/'],
+        $body
+    );
+
+    return [
+        'path' => get_page_uri($post),
+        'title' => get_the_title($post),
+        'summary' => sanitize_text_field($post->post_excerpt),
+        'body' => $body,
+        'image' => tlg_post_image($post->ID),
+        'modifiedAt' => get_post_modified_time(DATE_ATOM, true, $post),
+    ];
+}
+
+function tlg_rest_flexible_page($request) {
+    $path = trim((string) $request->get_param('path'), '/');
+    if ($path === '' || !preg_match('~^[a-z0-9-]+(?:/[a-z0-9-]+)*$~', $path)) {
+        return rest_ensure_response(['found' => false]);
+    }
+
+    $post = get_page_by_path($path, OBJECT, 'page');
+    if (!tlg_public_flexible_page($post) || get_page_uri($post) !== $path) {
+        return rest_ensure_response(['found' => false]);
+    }
+
+    return rest_ensure_response(['found' => true, 'page' => tlg_flexible_page_data($post)]);
+}
+
+function tlg_rest_flexible_pages() {
+    $posts = get_posts([
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'numberposts' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'suppress_filters' => false,
+    ]);
+
+    return rest_ensure_response(array_values(array_map('tlg_flexible_page_data', array_filter($posts, 'tlg_public_flexible_page'))));
 }
 
 function tlg_rest_locations() {

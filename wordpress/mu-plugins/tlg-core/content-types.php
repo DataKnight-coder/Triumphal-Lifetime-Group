@@ -11,7 +11,7 @@ function tlg_content_type_definitions() {
         'tlg_careers'    => ['Careers', 'Career', 'careers', 'dashicons-portfolio', ['title', 'editor', 'custom-fields']],
         'tlg_faqs'       => ['FAQs', 'FAQ', 'faqs', 'dashicons-editor-help', ['title', 'editor', 'custom-fields']],
         'tlg_insights'   => ['Insights', 'Insight', 'insights', 'dashicons-welcome-write-blog', ['title', 'editor', 'excerpt', 'author', 'thumbnail', 'custom-fields']],
-        'tlg_pages'      => ['Page Content', 'Fixed Page', 'site-pages', 'dashicons-admin-page', ['title', 'editor', 'thumbnail', 'custom-fields']],
+        'tlg_pages'      => ['Page Content', 'Fixed Page', 'site-pages', 'dashicons-admin-page', ['title', 'editor', 'thumbnail', 'custom-fields', 'revisions']],
         'tlg_locations'  => ['Locations', 'Location', 'locations', 'dashicons-location-alt', ['title', 'editor', 'thumbnail', 'custom-fields']],
         'tlg_foundation' => ['Foundation Content', 'Foundation Item', 'foundation', 'dashicons-heart', ['title', 'editor', 'thumbnail', 'custom-fields']],
     ];
@@ -45,6 +45,8 @@ function tlg_register_content_types() {
             'capability_type' => 'post',
         ]);
     }
+
+    add_post_type_support('page', 'excerpt');
 }
 
 function tlg_meta_definitions() {
@@ -177,6 +179,7 @@ function tlg_register_content_meta() {
                     return (bool) $post_id && current_user_can('edit_post', $post_id);
                 },
                 'show_in_rest' => true,
+                'revisions_enabled' => $post_type === 'tlg_pages',
             ]);
         }
     }

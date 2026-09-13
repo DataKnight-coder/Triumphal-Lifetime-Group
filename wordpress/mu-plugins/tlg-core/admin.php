@@ -267,6 +267,12 @@ function tlg_remove_native_custom_fields_boxes() {
 function tlg_render_meta_box($post, $box) {
     wp_nonce_field('tlg_save_content_fields', 'tlg_content_fields_nonce');
     $fields = $box['args']['fields'];
+    if ($post->post_type === 'tlg_pages' && get_post_meta($post->ID, '_tlg_page_key', true) === 'disclaimer') {
+        unset($fields['disclaimer_heading'], $fields['disclaimer_body']);
+        if ($box['id'] === 'tlg-compliancedisclaimer') {
+            echo '<p>Edit, add, remove, and reorder Legal Disclaimer sections in the main content editor. Each heading and paragraph there appears once on the public page.</p>';
+        }
+    }
     if (!$fields) {
         if ($box['id'] === 'tlg-articlecontent') {
             echo '<p>Use the main content editor above for the complete reviewed article body.</p>';
@@ -302,6 +308,8 @@ function tlg_render_meta_box($post, $box) {
                                         <?php foreach ($columns as $index => $col) : ?>
                                             <input type="text" class="regular-text" placeholder="<?php echo esc_attr($col); ?>" value="<?php echo esc_attr(trim($parts[$index])); ?>">
                                         <?php endforeach; ?>
+                                        <button type="button" class="button move-row-up" aria-label="Move row up">Up</button>
+                                        <button type="button" class="button move-row-down" aria-label="Move row down">Down</button>
                                         <button type="button" class="button remove-row">Remove</button>
                                     </div>
                                 <?php endforeach; ?>
@@ -325,6 +333,8 @@ function tlg_render_meta_box($post, $box) {
                                     cols.forEach(function(col) {
                                         html += '<input type="text" class="regular-text" placeholder="' + col + '" value="">';
                                     });
+                                    html += '<button type="button" class="button move-row-up" aria-label="Move row up">Up</button>';
+                                    html += '<button type="button" class="button move-row-down" aria-label="Move row down">Down</button>';
                                     html += '<button type="button" class="button remove-row">Remove</button>';
                                     row.innerHTML = html;
                                     repeater.querySelector('.tlg-repeater-rows').appendChild(row);
@@ -334,6 +344,17 @@ function tlg_render_meta_box($post, $box) {
                                     var repeater = e.target.closest('.tlg-repeater');
                                     e.target.closest('.tlg-repeater-row').remove();
                                     updateStore(repeater);
+                                }
+                                if (e.target.classList.contains('move-row-up') || e.target.classList.contains('move-row-down')) {
+                                    var rowToMove = e.target.closest('.tlg-repeater-row');
+                                    var rowList = rowToMove.parentElement;
+                                    if (e.target.classList.contains('move-row-up') && rowToMove.previousElementSibling) {
+                                        rowList.insertBefore(rowToMove, rowToMove.previousElementSibling);
+                                    } else if (e.target.classList.contains('move-row-down') && rowToMove.nextElementSibling) {
+                                        rowList.insertBefore(rowToMove.nextElementSibling, rowToMove);
+                                    }
+                                    updateStore(e.target.closest('.tlg-repeater'));
+                                    e.target.focus();
                                 }
                             });
                             document.addEventListener('input', function(e) {
@@ -496,13 +517,36 @@ function tlg_simplify_admin_menu() {
 }
 
 function tlg_enable_featured_images() {
-    add_theme_support('post-thumbnails', ['tlg_leadership', 'tlg_services', 'tlg_insights', 'tlg_pages', 'tlg_locations', 'tlg_foundation']);
+    add_theme_support('post-thumbnails', ['page', 'tlg_leadership', 'tlg_services', 'tlg_insights', 'tlg_pages', 'tlg_locations', 'tlg_foundation']);
 }
 
 add_action('after_setup_theme', 'tlg_enable_featured_images');
 add_action('add_meta_boxes', 'tlg_add_meta_boxes');
 add_action('add_meta_boxes', 'tlg_remove_native_custom_fields_boxes', 20);
 add_action('save_post', 'tlg_save_content_fields', 10, 2);
+
+function tlg_add_public_page_url_box() {
+    add_meta_box('tlg-public-page-url', 'Public website URL', 'tlg_render_public_page_url_box', 'page', 'side');
+}
+
+function tlg_render_public_page_url_box($post) {
+    $path = get_page_uri($post);
+    if (!$path || $post->post_status === 'auto-draft') {
+        echo '<p>Save the page as a draft to see its public website URL.</p>';
+        return;
+    }
+
+    $url = 'https://triumphallifetimegroup.com/' . ltrim($path, '/');
+    echo '<p><code style="overflow-wrap:anywhere;">' . esc_html($url) . '</code></p>';
+    if ($post->post_status === 'publish') {
+        echo '<p><a href="' . esc_url($url) . '" target="_blank" rel="noopener noreferrer">Open public page</a></p>';
+    } else {
+        echo '<p>This URL will work after you publish the page and the website build finishes.</p>';
+    }
+    echo '<p>Use a URL that does not belong to an existing site page. Add the link in TLG CMS → Page Content → Site Navigation if you want it in the menu.</p>';
+}
+
+add_action('add_meta_boxes_page', 'tlg_add_public_page_url_box');
 add_action('pre_get_posts', 'tlg_apply_admin_ordering');
 add_action('pre_get_posts', 'tlg_apply_faq_division_filter');
 add_action('restrict_manage_posts', 'tlg_faq_division_filter');

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getInsights, getPageContent, type PageKey } from "@/lib/wordpress/client";
+import { getFlexiblePages, getInsights, getPageContent, type PageKey } from "@/lib/wordpress/client";
 
 const pages: { path: string; key: PageKey; priority: number }[] = [
   { path: "", key: "home", priority: 1 }, { path: "/about", key: "about", priority: .8 },
@@ -16,9 +16,11 @@ const pages: { path: string; key: PageKey; priority: number }[] = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://triumphallifetimegroup.com";
-  const [cmsPages, insights] = await Promise.all([Promise.all(pages.map((item) => getPageContent(item.key))), getInsights()]);
+  const [cmsPages, insights, flexiblePages] = await Promise.all([Promise.all(pages.map((item) => getPageContent(item.key))), getInsights(), getFlexiblePages()]);
+  const fixedPaths = new Set(pages.map((item) => item.path));
   return [
     ...pages.map((item, index) => ({ url: `${base}${item.path}`, lastModified: cmsPages[index].modified_at, changeFrequency: "weekly" as const, priority: item.priority })),
     ...insights.map((insight) => ({ url: `${base}/insights/${insight.slug}`, lastModified: insight.last_reviewed_date || insight.publish_date, changeFrequency: "monthly" as const, priority: .6 })),
+    ...flexiblePages.filter((page) => !fixedPaths.has(`/${page.path}`) && !page.path.startsWith("insights/")).map((page) => ({ url: `${base}/${page.path}`, lastModified: page.modified_at, changeFrequency: "weekly" as const, priority: .5 })),
   ];
 }

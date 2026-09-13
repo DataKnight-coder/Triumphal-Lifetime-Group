@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import {
@@ -8,6 +8,7 @@ import {
   getPageContent,
 } from "@/lib/wordpress/client";
 import { pageField, pageMetadata } from "@/lib/wordpress/page-content";
+import { nigeriaWhatsAppContact } from "@/lib/wordpress/contact";
 
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata(await getPageContent("contact"), "/contact");
@@ -23,6 +24,7 @@ export default async function ContactPage() {
   const publicLocations = locations.filter(
     (location) => location.operational_status === "active" && location.client_facing,
   );
+  const nigeriaContact = nigeriaWhatsAppContact(settings);
 
   return (
     <main className="min-h-screen bg-white">
@@ -60,6 +62,19 @@ export default async function ContactPage() {
               >
                 <Mail aria-hidden="true" size={17} />
                 {settings.general_email}
+              </a>
+            ) : null}
+
+            {nigeriaContact ? (
+              <a
+                className="mt-4 flex items-center gap-3 text-sm text-tlg-midnight hover:text-tlg-signatureGold"
+                href={nigeriaContact.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`WhatsApp Nigeria at ${nigeriaContact.display}`}
+              >
+                <MessageCircle aria-hidden="true" size={17} />
+                Nigeria WhatsApp: {nigeriaContact.display}
               </a>
             ) : null}
 

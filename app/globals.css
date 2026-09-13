@@ -143,3 +143,29 @@ details > summary::marker {
   display: none;
 }
 
+/* WordPress Pages use a small set of core blocks inside the shared site layout. */
+.cms-flexible-body { color: #181A1C; line-height: 1.8; overflow-wrap: anywhere; }
+.cms-flexible-body > * + * { margin-top: 1.5rem; }
+.cms-flexible-body h2, .cms-flexible-body h3, .cms-flexible-body h4 { color: #07152F; font-family: var(--font-cormorant), serif; line-height: 1.15; font-weight: 600; }
+.cms-flexible-body h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 3.5rem; }
+.cms-flexible-body h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top: 2.5rem; }
+.cms-flexible-body h4 { font-size: 1.5rem; margin-top: 2rem; }
+.cms-flexible-body a { color: #082A19; text-decoration: underline; text-underline-offset: 3px; }
+.cms-flexible-body a:hover { color: #D09A3A; }
+.cms-flexible-body ul, .cms-flexible-body ol { padding-left: 1.5rem; }
+.cms-flexible-body ul { list-style: disc; }
+.cms-flexible-body ol { list-style: decimal; }
+.cms-flexible-body li + li { margin-top: .5rem; }
+.cms-flexible-body img, .cms-flexible-body video, .cms-flexible-body iframe { max-width: 100%; height: auto; }
+.cms-flexible-body figure { max-width: 100%; }
+.cms-flexible-body figcaption { margin-top: .5rem; color: #575b60; font-size: .875rem; text-align: center; }
+.cms-flexible-body blockquote { border-left: 3px solid #D09A3A; padding: .5rem 0 .5rem 1.5rem; font-family: var(--font-cormorant), serif; font-size: 1.5rem; color: #07152F; }
+.cms-flexible-body hr { margin: 3rem 0; border: 0; border-top: 1px solid #EEEEEE; }
+.cms-flexible-body .wp-block-columns { display: flex; flex-wrap: wrap; gap: 2rem; }
+.cms-flexible-body .wp-block-column { flex: 1 1 16rem; min-width: 0; }
+.cms-flexible-body .wp-block-button__link { display: inline-block; border-radius: 9999px; background: #D09A3A; padding: .85rem 1.5rem; color: #07152F; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+.cms-flexible-body .wp-block-button__link:hover { background: #07152F; color: #fff; }
+.cms-flexible-body .wp-block-table { overflow-x: auto; }
+.cms-flexible-body table { width: 100%; border-collapse: collapse; }
+.cms-flexible-body th, .cms-flexible-body td { border: 1px solid #EEEEEE; padding: .65rem; text-align: left; }
+

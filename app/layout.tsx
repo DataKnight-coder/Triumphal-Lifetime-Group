@@ -17,6 +17,7 @@ const manrope = Manrope({
 
 import { getGlobalSettings, getLocations, getPageContent } from "@/lib/wordpress/client";
 import { pageField, pageLinks } from "@/lib/wordpress/page-content";
+import { nigeriaWhatsAppContact } from "@/lib/wordpress/contact";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getGlobalSettings();
@@ -65,6 +66,7 @@ export default async function RootLayout({
   children: React.ReactNode;
  }>) {
   const [settings, navigation, locations] = await Promise.all([getGlobalSettings(), getPageContent("site-navigation"), getLocations()]);
+  const nigeriaContact = nigeriaWhatsAppContact(settings);
   const organizationSchema = {
     "@type": "Corporation",
     "@id": "https://triumphallifetimegroup.com/#corporation",
@@ -72,6 +74,13 @@ export default async function RootLayout({
     url: "https://triumphallifetimegroup.com",
     email: settings.general_email || undefined,
     telephone: settings.primary_phone || undefined,
+    contactPoint: nigeriaContact ? [{
+      "@type": "ContactPoint",
+      telephone: nigeriaContact.international,
+      contactType: "Nigeria WhatsApp",
+      areaServed: "NG",
+      url: nigeriaContact.whatsappUrl,
+    }] : undefined,
     sameAs: [settings.facebook, settings.linkedin, settings.instagram].filter(Boolean),
     logo: "https://triumphallifetimegroup.com/images/logo.png",
     description: settings.seo_description || undefined

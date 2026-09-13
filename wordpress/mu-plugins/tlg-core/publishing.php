@@ -8,6 +8,7 @@ function tlg_publishable_post_types() {
     return [
         'tlg_leadership', 'tlg_services', 'tlg_careers', 'tlg_faqs', 'tlg_insights',
         'tlg_pages', 'tlg_locations', 'tlg_foundation',
+        'page',
     ];
 }
 
@@ -26,6 +27,10 @@ function tlg_has_public_visibility($post) {
 
     if ($post->post_type === 'tlg_insights') {
         return true;
+    }
+
+    if ($post->post_type === 'page') {
+        return $post->post_password === '';
     }
 
     return get_post_meta($post->ID, '_tlg_status', true) === 'active';
@@ -61,11 +66,16 @@ function tlg_queue_build_after_status_transition($new_status, $old_status, $post
 }
 
 function tlg_queue_build_after_post_update($post_id, $post_after, $post_before) {
-    if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id) || !tlg_is_publicly_visible($post_after)) {
+    if (
+        wp_is_post_autosave($post_id)
+        || wp_is_post_revision($post_id)
+        || !tlg_is_publishable_post_type($post_after->post_type)
+        || (!tlg_is_publicly_visible($post_after) && !tlg_is_publicly_visible($post_before))
+    ) {
         return;
     }
 
-    $public_fields = ['post_title', 'post_name', 'post_content', 'post_excerpt', 'post_date', 'post_date_gmt'];
+    $public_fields = ['post_title', 'post_name', 'post_parent', 'post_password', 'post_content', 'post_excerpt', 'post_date', 'post_date_gmt'];
     foreach ($public_fields as $field) {
         if ($post_after->$field !== $post_before->$field) {
             tlg_queue_netlify_build();

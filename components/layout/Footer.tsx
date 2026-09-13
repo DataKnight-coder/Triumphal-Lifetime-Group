@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import type { GlobalSettings, Location, PageContent } from "@/lib/wordpress/client";
 import { pageField, pageLinks } from "@/lib/wordpress/page-content";
+import { nigeriaWhatsAppContact } from "@/lib/wordpress/contact";
 
 export default function Footer({ settings, footer, locations }: { settings: GlobalSettings; footer: PageContent; locations: Location[] }) {
+  const nigeriaContact = nigeriaWhatsAppContact(settings);
   const columns = [
     { heading: "Divisions", links: pageLinks(footer, "footer_divisions") },
     { heading: "Company", links: pageLinks(footer, "footer_company") },
@@ -42,6 +44,7 @@ export default function Footer({ settings, footer, locations }: { settings: Glob
             <div>
               {settings.general_email && <a href={`mailto:${settings.general_email}`}>{settings.general_email}</a>}
               {settings.primary_phone && <a className="mt-2 block" href={`tel:${settings.primary_phone.replace(/[^+\d]/g, "")}`}>{settings.primary_phone}</a>}
+              {nigeriaContact && <a className="mt-2 block" href={nigeriaContact.whatsappUrl} target="_blank" rel="noopener noreferrer">Nigeria WhatsApp: {nigeriaContact.display}</a>}
             </div>
             <div>
               {locations.filter((location) => location.client_facing).map((location) => <address key={location.slug} className="mb-3 not-italic"><strong className="text-white">{location.public_label ? `${location.city} ${location.public_label}` : location.name}</strong><br />{location.address}</address>)}

@@ -133,6 +133,15 @@ export interface PageContent {
   modified_at: string;
 }
 
+export interface FlexiblePage {
+  path: string;
+  title: string;
+  summary: string;
+  body: string;
+  image?: string;
+  modified_at: string;
+}
+
 export interface Location {
   name: string;
   slug: string;
@@ -416,6 +425,27 @@ function parsePage(value: unknown): PageContent | null {
   return { key, title, body, hero_image: optionalMediaUrl(value, "heroImage"), fields, modified_at: modifiedAt };
 }
 
+function parseFlexiblePage(value: unknown): FlexiblePage | null {
+  if (!isRecord(value)) return null;
+  const path = stringValue(value, "path");
+  const title = stringValue(value, "title");
+  const summary = stringValue(value, "summary");
+  const body = stringValue(value, "body");
+  const modifiedAt = stringValue(value, "modifiedAt");
+  if (!path || !/^[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(path) || title === null || summary === null || body === null || modifiedAt === null) return null;
+  return { path, title, summary, body, image: optionalMediaUrl(value, "image"), modified_at: modifiedAt };
+}
+
+type FlexiblePageLookup = { found: false } | { found: true; page: FlexiblePage };
+
+function parseFlexiblePageLookup(value: unknown): FlexiblePageLookup | null {
+  if (!isRecord(value)) return null;
+  if (value.found === false) return { found: false };
+  if (value.found !== true) return null;
+  const page = parseFlexiblePage(value.page);
+  return page ? { found: true, page } : null;
+}
+
 function parseLocation(value: unknown): Location | null {
   if (!isRecord(value)) return null;
   const name = stringValue(value, "name");
@@ -519,6 +549,17 @@ export async function getInsights(): Promise<Insight[]> {
 export async function getPageContent(key: PageKey): Promise<PageContent> {
   const endpoint = `tlg/v1/pages?key=${encodeURIComponent(key)}`;
   return requireWordPress(await fetchFromWordPress(endpoint, parsePage), endpoint);
+}
+
+export async function getFlexiblePage(path: string): Promise<FlexiblePage | null> {
+  const endpoint = `tlg/v1/flexible-page?path=${encodeURIComponent(path)}`;
+  const result = requireWordPress(await fetchFromWordPress(endpoint, parseFlexiblePageLookup), endpoint);
+  return result.found ? result.page : null;
+}
+
+export async function getFlexiblePages(): Promise<FlexiblePage[]> {
+  const endpoint = "tlg/v1/flexible-pages";
+  return requireWordPress(await fetchFromWordPress(endpoint, (value) => parseArray(value, parseFlexiblePage)), endpoint);
 }
 
 export async function getLocations(): Promise<Location[]> {

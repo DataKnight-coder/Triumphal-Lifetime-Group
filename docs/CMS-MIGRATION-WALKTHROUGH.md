@@ -50,6 +50,12 @@ WordPress admin field
 
 Validate typecheck and production build locally, then check the homepage, contact, companies, careers, insights, leadership, and all six solution routes. The live API test must cover status, schema, deterministic ordering, FAQ division-plus-Global behavior, image URLs, and the empty Careers response.
 
+## Legal Disclaimer and contact update
+
+Deploy the updated WordPress MU plugin before the frontend. On its first request, it moves any legitimate text from the old Legal Disclaimer callout into the WordPress page editor, skips the obsolete legal-review placeholder, and clears the callout fields. It also replaces the known obsolete general email and Nigeria WhatsApp values in saved Global Settings, and replaces the old general mailbox if it is the enquiry form destination. The existing Canada primary phone is deliberately unchanged. Back up WordPress before deploying, and confirm the migrated page body and settings in the admin UI.
+
+Then deploy the frontend and let the WordPress publishing hook rebuild Netlify. Verify `/disclaimer` has one ordered set of sections, the page title and summary follow CMS edits, the last-updated label appears, the footer and contact page show `admin@triumphallifetimegroup.com` and `0903 186 5491`, and the Nigeria link opens `https://wa.me/2349031865491`. Send one test enquiry to verify the mailbox destination. Do not run the full `cms:migrate -- --apply` against edited production content: it upserts the entire retained source inventory and could overwrite newer CMS edits.
+
 ## Rollback
 
 For frontend code, revert the responsible Git commit and redeploy the known-good Netlify build. For WordPress data or plugin failures, use the confirmed Hostinger backup or restore the plugin version from Git. Keep the public apex domain on Netlify throughout; a `cms` DNS change must use Hostinger's actual target and receive production approval.

@@ -23,9 +23,9 @@ function tlg_global_setting_fields() {
 function tlg_verified_setting_defaults() {
     return [
         'company_name' => 'Triumphal Lifetime Group',
-        'general_email' => 'info@triumphallifetimegroup.com',
+        'general_email' => 'admin@triumphallifetimegroup.com',
         'primary_phone' => '+1 647 774 0409',
-        'whatsapp' => '+2349117777759',
+        'whatsapp' => '+2349031865491',
         'address' => '',
         'facebook' => 'https://www.facebook.com/triuphalifetimeagency.hr',
         'linkedin' => 'https://www.linkedin.com/company/triumphal-lifetime/',
@@ -40,6 +40,52 @@ function tlg_get_global_settings() {
     $saved = get_option('tlg_global_settings', []);
     return array_merge(tlg_verified_setting_defaults(), is_array($saved) ? $saved : []);
 }
+
+function tlg_upgrade_official_contact_settings() {
+    if (get_option('tlg_official_contact_upgrade_v1', false)) {
+        return;
+    }
+
+    $saved = get_option('tlg_global_settings', []);
+    if (!is_array($saved)) {
+        $saved = [];
+    }
+
+    $changed = false;
+    if (strcasecmp((string) ($saved['general_email'] ?? ''), 'info@triumphallifetimegroup.com') === 0) {
+        $saved['general_email'] = 'admin@triumphallifetimegroup.com';
+        $changed = true;
+    }
+    if (in_array(preg_replace('/\D/', '', (string) ($saved['whatsapp'] ?? '')), ['2349117777759', '09117777759'], true)) {
+        $saved['whatsapp'] = '+2349031865491';
+        $changed = true;
+    }
+
+    if ($changed) {
+        update_option('tlg_global_settings', $saved);
+    }
+    $global_saved = get_option('tlg_global_settings', []);
+    $global_verified = !$changed || (is_array($global_saved)
+        && ($global_saved['general_email'] ?? null) === ($saved['general_email'] ?? null)
+        && ($global_saved['whatsapp'] ?? null) === ($saved['whatsapp'] ?? null));
+
+    $form_settings = get_option('tlg_form_settings', []);
+    $form_changed = false;
+    if (is_array($form_settings) && strcasecmp((string) ($form_settings['destination_email'] ?? ''), 'info@triumphallifetimegroup.com') === 0) {
+        $form_settings['destination_email'] = 'admin@triumphallifetimegroup.com';
+        update_option('tlg_form_settings', $form_settings);
+        $form_changed = true;
+    }
+    $form_saved = get_option('tlg_form_settings', []);
+    $form_verified = !$form_changed || (is_array($form_saved)
+        && ($form_saved['destination_email'] ?? null) === $form_settings['destination_email']);
+
+    if ($global_verified && $form_verified) {
+        update_option('tlg_official_contact_upgrade_v1', true, false);
+    }
+}
+
+add_action('init', 'tlg_upgrade_official_contact_settings');
 
 function tlg_sanitize_global_settings($input) {
     $input = is_array($input) ? $input : [];
