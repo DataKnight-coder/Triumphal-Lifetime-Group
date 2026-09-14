@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { SafeImage } from "@/components/ui/SafeImage";
 import { getLeadershipProfiles, getPageContent } from "@/lib/wordpress/client";
 import { pageField, pageMetadata } from "@/lib/wordpress/page-content";
@@ -149,7 +150,7 @@ export default async function LeadershipPage() {
               Ready to connect with our team?
             </h2>
           </div>
-          <a
+          <Link
             href="/contact?book=true"
             className="shrink-0 inline-flex items-center gap-3 bg-tlg-signatureGold text-tlg-midnight px-9 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
           >
@@ -157,7 +158,7 @@ export default async function LeadershipPage() {
             <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
               <path d="M1 5h11M7 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </Link>
         </div>
       </section>
     </main>
