@@ -5,11 +5,13 @@ Do not start until the production WordPress administrator and Netlify deployer h
 ## Required preflight gate
 
 - [x] Lint `tlg-core.php`, `tlg-core/admin.php`, `tlg-core/settings.php`, and `tlg-core/upgrades.php` with a real PHP CLI.
-- [ ] Obtain a staging or disposable copy of the production WordPress database, back it up, and freeze CMS editing there.
-- [ ] Record staging Legal Disclaimer editor content, legacy fields, Global Settings, and enquiry form destination before applying the plugin.
-- [ ] Run the migration on staging. Confirm the three original sections, any legitimate legacy text, cleared fields only after a verified save, official contact values, and preservation of unrelated administrator values. Ambiguous content must remain intact for manual review.
-- [ ] Run a second staging request. Confirm there is no duplicate or additional append, no contact overwrite, and no second side effect; confirm the two migration markers.
+- [x] Import the 2026-09-13 13:51 Hostinger database backup into an isolated local MySQL instance with WordPress 7.1 and no outgoing HTTP or WordPress cron.
+- [x] Record the copied Legal Disclaimer editor content, legacy fields, Global Settings, and enquiry form destination before applying the plugin.
+- [x] Run the migration on the disposable copy. The three original sections stayed byte-for-byte unchanged; obsolete callout fields cleared; official contact defaults resolved; the custom form destination was preserved. A separate valid-legacy-text case appended once, and an ambiguous case preserved both legacy fields and left the completion marker unset for manual review.
+- [x] Run a second request. No disclaimer append, contact overwrite, or other relevant content change occurred; both markers prevented a rerun after a completed migration.
 - [x] Inspect the lock failure/recovery behavior below before authorizing production deployment.
+
+The disposable test used a snapshot from 2026-09-13, not the later live form-setting change. Production still requires a fresh restorable backup and a direct comparison of current CMS content before deploying. The local test used MySQL 8.0.40 while Hostinger uses MariaDB 11.8.9; confirm the live migration result in WordPress before deploying the frontend.
 
 ## Deployment order
 
@@ -44,7 +46,8 @@ If the marker is absent and the lock exists, first confirm no migration request 
 
 - [ ] `admin@triumphallifetimegroup.com` is visible where the official email appears; links use `mailto:admin@triumphallifetimegroup.com`.
 - [ ] Nigeria/Abuja displays `0903 186 5491`; CMS and structured contact data use `+2349031865491`; WhatsApp links open `https://wa.me/2349031865491`.
-- [ ] No obsolete official Nigeria number or general email appears in the website, CMS settings, or relevant form destination. Preserve deliberately distinct departmental addresses and the Canada primary phone.
+- [ ] No obsolete official Nigeria number or general email appears in the website or CMS settings. Preserve deliberately distinct departmental addresses and the Canada primary phone.
+- [ ] **TLG CMS → Enquiry Forms → Destination email** remains `admin@triumphallifetimegroup.com`. This was set directly in live WordPress on 2026-09-14 and must be rechecked if a database backup is restored.
 - [ ] Submit one real test enquiry and confirm delivery to the configured mailbox. Do not change DNS or Hostinger mailbox settings.
 - [ ] Send Gmail → `admin@triumphallifetimegroup.com`, confirm arrival in Hostinger, then reply Hostinger → Gmail and confirm receipt.
 
