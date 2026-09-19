@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
@@ -48,6 +48,11 @@ export async function generateMetadata(): Promise<Metadata> {
       images: settings?.seo_og_image ? [settings.seo_og_image] : [],
     },
     manifest: "/manifest.json",
+    icons: {
+      icon: [{ url: "/icon.png", type: "image/png" }],
+      apple: "/icon.png",
+      shortcut: "/icon.png",
+    },
   };
 }
 
@@ -82,7 +87,7 @@ export default async function RootLayout({
       url: nigeriaContact.whatsappUrl,
     }] : undefined,
     sameAs: [settings.facebook, settings.linkedin, settings.instagram].filter(Boolean),
-    logo: "https://triumphallifetimegroup.com/images/logo.png",
+    logo: "https://triumphallifetimegroup.com/icon.png",
     description: settings.seo_description || undefined
   };
 
@@ -142,5 +147,5 @@ export default async function RootLayout({
  </SmoothScroll>
  </body>
  </html>
- );
+  );
 }
