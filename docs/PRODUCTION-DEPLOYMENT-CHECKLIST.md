@@ -45,7 +45,7 @@ If the marker is absent and the lock exists, first confirm no migration request 
 ### Contact and email
 
 - [ ] `admin@triumphallifetimegroup.com` is visible where the official email appears; links use `mailto:admin@triumphallifetimegroup.com`.
-- [ ] Nigeria/Abuja displays `0903 186 5491`; CMS and structured contact data use `+2349031865491`; WhatsApp links open `https://wa.me/2349031865491`.
+- [ ] Nigeria/Abuja displays `+234 903 186 5491`; CMS and structured contact data use `+2349031865491`; WhatsApp links open `https://wa.me/2349031865491`.
 - [ ] No obsolete official Nigeria number or general email appears in the website or CMS settings. Preserve deliberately distinct departmental addresses and the Canada primary phone.
 - [ ] **TLG CMS → Enquiry Forms → Destination email** remains `admin@triumphallifetimegroup.com`. This was set directly in live WordPress on 2026-09-14 and must be rechecked if a database backup is restored.
 - [ ] Submit one real test enquiry and confirm delivery to the configured mailbox. Do not change DNS or Hostinger mailbox settings.

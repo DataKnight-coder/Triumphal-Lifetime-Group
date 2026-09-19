@@ -2,7 +2,7 @@
 
 | Conflict | Resolution |
 |---|---|
-| Seven companies vs six divisions plus Foundation | Latest direct correction wins: six specialist service divisions plus Charity Foundation. |
+| Seven companies vs seven divisions plus Foundation | Latest direct correction wins: seven standalone divisions plus Charity Foundation. |
 | Four-step homepage process vs Consult / Implement / Support | Latest three-step wording wins exactly. |
 | Mr Charles vs Joseph as Real Estate director | Joseph record is migrated from the latest supplied correction. Mr Charles is retained, marked inactive and not deleted. Client must confirm the final title. |
 | Historic founding/expansion narrative vs evidence rule | Replaced with neutral service-led copy; chronology stays unpublished until verified. |

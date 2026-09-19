@@ -6,4 +6,3 @@ slug: "what-payment-options-will-be-available"
 ---
 
 Supported payment methods, currencies and any applicable charges will be published before the official launch.
-

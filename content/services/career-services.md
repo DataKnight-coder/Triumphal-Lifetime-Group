@@ -15,4 +15,3 @@ contact_text: ""
 ---
 
 Practical career support for graduates, career changers, experienced professionals and international job seekers.
-

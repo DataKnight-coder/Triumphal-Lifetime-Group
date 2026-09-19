@@ -42,6 +42,6 @@ The parity implementation must move the client-editable values above into constr
 
 ## Remediated state
 
-The production runtime now classifies Home, About, Our Story, Companies, all six divisions, Foundation, Leadership, Careers, Contact, Insights index/detail, Global Presence, Partners, legal/policy pages, primary/mobile navigation and footer as `FULLY_WORDPRESS` for client-editable content. All render through the strict WordPress client; no `app/` or `components/` runtime module imports `lib/content/`.
+The production runtime now classifies Home, About, Our Story, Companies, all seven divisions, Foundation, Leadership, Careers, Contact, Insights index/detail, Global Presence, Partners, legal/policy pages, primary/mobile navigation and footer as `FULLY_WORDPRESS` for client-editable content. All render through the strict WordPress client; no `app/` or `components/` runtime module imports `lib/content/`.
 
 `DEVELOPER_CONTROLLED` values remain limited to presentation and safety logic. `/careers/apply`, `/book`, duplicate policy paths and legacy route families are redirects, not independent content pages. Repository content is retained only for controlled migration, local contract tests and rollback evidence.

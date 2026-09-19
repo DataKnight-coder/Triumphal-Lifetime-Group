@@ -10,7 +10,7 @@
 | TypeScript | PASS |
 | CMS parity contract suite | PASS |
 | Production Next.js build against the local WordPress contract | PASS: 43 routes |
-| Browser canonical pages/H1/schema | PASS for all six divisions, Foundation, Leadership, Careers, Contact, Privacy and Terms |
+| Browser canonical pages/H1/schema | PASS for all seven divisions, Foundation, Leadership, Careers, Contact, Privacy and Terms |
 | One-hop legacy redirect | PASS: `/solutions/hr-consulting` resolved directly to `/hr-business-consulting` |
 | Form semantics | PASS: labelled fields, consent, honeypot and disabled submission before verification |
 
