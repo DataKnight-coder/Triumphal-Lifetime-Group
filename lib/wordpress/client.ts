@@ -186,6 +186,17 @@ function stringValue(record: UnknownRecord, key: string): string | null {
   return typeof value === "string" ? value : null;
 }
 
+function decodeWordPressText(value: string): string {
+  return value
+    .replace(/&#x([0-9a-f]+);/gi, (_, code: string) => String.fromCodePoint(Number.parseInt(code, 16)))
+    .replace(/&#(\d+);/g, (_, code: string) => String.fromCodePoint(Number.parseInt(code, 10)))
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;|&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
 function numberValue(record: UnknownRecord, key: string): number | null {
   const value = record[key];
   return typeof value === "number" && Number.isFinite(value) ? value : null;
@@ -287,7 +298,8 @@ export async function fetchFromWordPress<T>(
 function parseSettings(value: unknown): GlobalSettings | null {
   if (!isRecord(value)) return null;
   const keys: (keyof GlobalSettings)[] = [
-    "company_name", "general_email", "primary_phone", "whatsapp", "address",
+    "company_name", "tagline", "general_email", "primary_phone", "whatsapp",
+    "nigeria_phone", "canada_phone", "uae_phone", "address",
     "facebook", "linkedin", "instagram", "copyright_text", "seo_description", "seo_og_image",
     "turnstile_site_key",
   ];
@@ -331,7 +343,7 @@ function parseServiceItem(value: unknown): Service | null {
   const benefits = value.keyBenefits;
   if (title === null || slug === null || description === null || order === null || !Array.isArray(benefits) || !benefits.every((item) => typeof item === "string")) return null;
   return {
-    title,
+    title: decodeWordPressText(title),
     slug,
     short_description: stringValue(value, "shortDescription") ?? "",
     content: description,
