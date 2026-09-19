@@ -1,4 +1,13 @@
-import { createCmsPage } from "@/components/cms/create-cms-page";
-const route = createCmsPage("partners", "/partners");
-export const generateMetadata = route.generateMetadata;
-export default route.Page;
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+export function generateMetadata(): Metadata {
+  return {
+    title: { absolute: "Page not found | Triumphal Lifetime Group" },
+    robots: { index: false, follow: false },
+  };
+}
+
+export default function PartnersPage() {
+  notFound();
+}

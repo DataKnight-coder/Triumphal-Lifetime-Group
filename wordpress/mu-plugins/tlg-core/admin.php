@@ -40,6 +40,7 @@ function tlg_admin_field_definitions() {
         ],
         'tlg_faqs' => [
             'division' => ['Division', 'select', 'Choose the relevant solution, or Global for every solution.', [
+                'career-services' => 'Career Services',
                 'digital-learning' => 'Digital Learning',
                 'education' => 'Education',
                 'global-mobility' => 'Global Mobility',

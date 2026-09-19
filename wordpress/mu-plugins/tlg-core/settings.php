@@ -7,9 +7,13 @@ if (!defined('ABSPATH')) {
 function tlg_global_setting_fields() {
     return [
         'company_name' => ['Company name', 'text', 'The public company name used throughout the website.'],
+        'tagline' => ['Tagline', 'text', 'The approved public tagline.'],
         'general_email' => ['General email', 'email', 'The main public contact email address.'],
         'primary_phone' => ['Primary phone', 'text', 'Include the international dialling code.'],
         'whatsapp' => ['WhatsApp', 'text', 'Use an international number without a wa.me URL.'],
+        'nigeria_phone' => ['Nigeria phone', 'text', 'Approved public Nigeria number in international format.'],
+        'canada_phone' => ['Canada phone', 'text', 'Approved public Canada number in international format.'],
+        'uae_phone' => ['UAE phone', 'text', 'Approved public UAE number in international format.'],
         'address' => ['Address', 'textarea', 'Leave blank until a verified public office address is available.'],
         'facebook' => ['Facebook URL', 'url', 'Full public profile URL.'],
         'linkedin' => ['LinkedIn URL', 'url', 'Full public profile URL.'],
@@ -23,9 +27,13 @@ function tlg_global_setting_fields() {
 function tlg_verified_setting_defaults() {
     return [
         'company_name' => 'Triumphal Lifetime Group',
+        'tagline' => 'Empowering People. Building Businesses. Transforming Communities.',
         'general_email' => 'admin@triumphallifetimegroup.com',
         'primary_phone' => '+1 647 774 0409',
         'whatsapp' => '+2349031865491',
+        'nigeria_phone' => '+234 903 186 5491',
+        'canada_phone' => '+1 647 774 0409',
+        'uae_phone' => '+971 55 199 5483',
         'address' => '',
         'facebook' => 'https://www.facebook.com/triuphalifetimeagency.hr',
         'linkedin' => 'https://www.linkedin.com/company/triumphal-lifetime/',

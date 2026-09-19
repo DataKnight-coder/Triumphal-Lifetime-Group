@@ -153,6 +153,9 @@ export default async function CmsSolutionPage({ pageKey, faqDivision }: CmsSolut
             <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">{pageField(page, "cta_heading")}</h2>
             {pageField(page, "cta_body") && <p className="text-white/80 mb-10">{pageField(page, "cta_body")}</p>}
             <Link href={pageField(page, "cta_url")} className="inline-flex bg-tlg-signatureGold text-tlg-midnight px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-white transition-colors">{pageField(page, "cta_text")}</Link>
+            {pageField(page, "secondary_cta_text") && pageField(page, "secondary_cta_url") && (
+              <Link href={pageField(page, "secondary_cta_url")} className="ml-4 inline-flex border border-white/40 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-tlg-midnight transition-colors">{pageField(page, "secondary_cta_text")}</Link>
+            )}
           </div>
         </section>
       )}

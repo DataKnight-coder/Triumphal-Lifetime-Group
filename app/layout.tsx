@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     ? `${settings.company_name} | Integrated Global Advisory`
     : "Triumphal Lifetime Group | Integrated Global Advisory";
 
-  const defaultDescription = settings?.seo_description || "A diversified business network providing structural, operational, and strategic support across multiple high-impact sectors globally.";
+  const defaultDescription = settings?.seo_description || "A diversified business network providing structural, operational and strategic support across multiple high-impact sectors globally.";
 
   const siteUrl = "https://triumphallifetimegroup.com";
 

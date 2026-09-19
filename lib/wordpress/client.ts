@@ -17,6 +17,7 @@ async function withCmsRequestPermit<T>(request: () => Promise<T>): Promise<T> {
 }
 
 export const FAQ_DIVISIONS = [
+  "career-services",
   "digital-learning",
   "education",
   "global-mobility",
@@ -30,7 +31,7 @@ export type FAQDivision = (typeof FAQ_DIVISIONS)[number];
 export type RequestedFAQDivision = Exclude<FAQDivision, "global">;
 
 export const PAGE_KEYS = [
-  "home", "about", "our-story", "companies", "hr-consulting", "real-estate",
+  "home", "about", "our-story", "companies", "hr-consulting", "career-services", "real-estate",
   "education", "global-mobility", "technology", "digital-products", "foundation",
   "global-presence", "leadership", "careers", "contact", "insights", "partners",
   "privacy", "terms", "disclaimer", "cookies", "accessibility", "refund-policy",
@@ -41,9 +42,13 @@ export type PageKey = (typeof PAGE_KEYS)[number];
 
 export interface GlobalSettings {
   company_name?: string;
+  tagline?: string;
   general_email?: string;
   primary_phone?: string;
   whatsapp?: string;
+  nigeria_phone?: string;
+  canada_phone?: string;
+  uae_phone?: string;
   address?: string;
   facebook?: string;
   linkedin?: string;

@@ -20,7 +20,7 @@ const mapped = {
 const server = http.createServer((request, response) => {
   const url = new URL(request.url, `http://127.0.0.1:${port}`);
   let payload;
-  if (url.pathname === "/wp-json/tlg/v1/settings") payload = { company_name:"Triumphal Lifetime Group", general_email:"admin@triumphallifetimegroup.com", primary_phone:"+1 647 774 0409", whatsapp:"+2349031865491", copyright_text:"All rights reserved.", turnstile_site_key:"" };
+  if (url.pathname === "/wp-json/tlg/v1/settings") payload = { company_name:"Triumphal Lifetime Group", tagline:"Empowering People. Building Businesses. Transforming Communities.", general_email:"admin@triumphallifetimegroup.com", primary_phone:"+1 647 774 0409", whatsapp:"+2349031865491", nigeria_phone:"+234 903 186 5491", canada_phone:"+1 647 774 0409", uae_phone:"+971 55 199 5483", copyright_text:"All rights reserved.", turnstile_site_key:"" };
   else if (url.pathname === "/wp-json/tlg/v1/pages") { const item = pages.find((page) => page.fields.page_key === url.searchParams.get("key")); payload = item ? { key:item.fields.page_key, title:item.title, body:item.body || "", heroImage:item.image || null, fields:Object.fromEntries(Object.entries(item.fields).filter(([key]) => !["page_key","status","display_order"].includes(key)).map(([key,value]) => [key,String(value)])), modifiedAt:"2026-09-04T00:00:00Z" } : null; }
   else if (url.pathname === "/wp-json/tlg/v1/flexible-page") { const page = flexiblePages.find((item) => item.path === url.searchParams.get("path")); payload = page ? { found:true, page } : { found:false }; }
   else if (url.pathname === "/wp-json/tlg/v1/flexible-pages") payload = flexiblePages;

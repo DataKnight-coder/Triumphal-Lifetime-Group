@@ -7,13 +7,15 @@ function assert(condition, message) { if (!condition) throw new Error(message); 
 
 const pages = JSON.parse(await read("content/pages/pages.json"));
 const byKey = new Map(pages.map((page) => [page.fields?.page_key, page]));
-assert(pages.length === 25 && byKey.size === 25, "Expected 25 unique structured page records.");
-for (const key of ["home", "hr-consulting", "real-estate", "education", "global-mobility", "technology", "digital-products", "foundation", "contact", "site-navigation", "site-footer"]) assert(byKey.has(key), `Missing structured page: ${key}`);
+assert(pages.length === 26 && byKey.size === 26, "Expected 26 unique structured page records.");
+for (const key of ["home", "hr-consulting", "career-services", "real-estate", "education", "global-mobility", "technology", "digital-products", "foundation", "contact", "site-navigation", "site-footer"]) assert(byKey.has(key), `Missing structured page: ${key}`);
 for (const page of pages.filter((item) => item.image?.startsWith("/"))) await access(path.join(root, "public", page.image.slice(1))).catch(() => { throw new Error(`Missing page image: ${page.image}`); });
 assert(byKey.get("home").fields.process_items.includes("Consult | We take time") && byKey.get("home").fields.process_items.includes("Implement | We develop") && byKey.get("home").fields.process_items.includes("Support | We provide"), "Homepage three-step process is incomplete.");
 assert(byKey.get("hr-consulting").fields.services_items.split("\n").length === 9, "HR must have exactly nine approved services.");
 assert(byKey.get("education").fields.process_items.split("\n").length === 6, "Education must have exactly six approved stages.");
 assert(byKey.get("digital-products").fields.hero_eyebrow.toLowerCase().includes("coming soon"), "Digital Products must remain Coming Soon.");
+assert(byKey.get("career-services").fields.services_items.split("\n").length === 11, "Career Services must contain all eleven approved services.");
+assert(byKey.get("site-navigation").fields.division_items.split("\n").length === 7, "Navigation must contain seven divisions.");
 assert(byKey.get("real-estate").fields.disclaimer_body.includes("not guaranteed"), "Real Estate disclaimer is missing.");
 assert(byKey.get("global-mobility").fields.disclaimer_body.includes("does not guarantee visa approval"), "Mobility disclaimer is missing.");
 const legalDisclaimer = byKey.get("disclaimer");

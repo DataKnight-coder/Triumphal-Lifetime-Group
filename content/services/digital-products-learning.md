@@ -6,7 +6,7 @@ featured_image: ""
 key_benefits: []
 cta_text: "Learn More"
 cta_url: "/digital-products-ecommerce"
-display_order: 5
+display_order: 7
 division: "digital-learning"
 status: "active"
 location_text: ""

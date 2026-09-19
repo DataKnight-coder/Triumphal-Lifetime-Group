@@ -25,6 +25,7 @@ export default function Footer({ settings, footer, locations }: { settings: Glob
         <div className="mx-auto max-w-[1500px]">
           <div className="grid grid-cols-1 gap-14 border-b border-white/15 pb-16 lg:grid-cols-[1.3fr_2fr]">
             <div>
+              {settings.tagline && <p className="mb-5 font-serif text-xl text-tlg-signatureGold">{settings.tagline}</p>}
               <h2 className="font-serif text-3xl leading-tight text-white md:text-5xl">{pageField(footer, "cta_heading")}</h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/80">{pageField(footer, "intro_body")}</p>
               <Link href={pageField(footer, "cta_url")} className="mt-8 inline-flex rounded-full bg-tlg-signatureGold px-7 py-3 text-xs font-bold uppercase tracking-widest text-tlg-midnight">{pageField(footer, "cta_text")}</Link>
@@ -43,8 +44,10 @@ export default function Footer({ settings, footer, locations }: { settings: Glob
           <div className="grid grid-cols-1 gap-8 pt-10 text-[15px] leading-relaxed text-white/80 md:grid-cols-3">
             <div>
               {settings.general_email && <a href={`mailto:${settings.general_email}`}>{settings.general_email}</a>}
-              {settings.primary_phone && <a className="mt-2 block" href={`tel:${settings.primary_phone.replace(/[^+\d]/g, "")}`}>{settings.primary_phone}</a>}
-              {nigeriaContact && <a className="mt-2 block" href={nigeriaContact.whatsappUrl} target="_blank" rel="noopener noreferrer">Nigeria WhatsApp: {nigeriaContact.display}</a>}
+              {settings.nigeria_phone && <a className="mt-2 block" href={`tel:${settings.nigeria_phone.replace(/[^+\d]/g, "")}`}>Nigeria: {settings.nigeria_phone}</a>}
+              {settings.canada_phone && <a className="mt-2 block" href={`tel:${settings.canada_phone.replace(/[^+\d]/g, "")}`}>Canada: {settings.canada_phone}</a>}
+              {settings.uae_phone && <a className="mt-2 block" href={`tel:${settings.uae_phone.replace(/[^+\d]/g, "")}`}>UAE: {settings.uae_phone}</a>}
+              {nigeriaContact && <a className="mt-2 block" href={nigeriaContact.whatsappUrl} target="_blank" rel="noopener noreferrer">WhatsApp: {nigeriaContact.international}</a>}
             </div>
             <div>
               {locations.filter((location) => location.client_facing).map((location) => <address key={location.slug} className="mb-3 not-italic"><strong className="text-white">{location.public_label ? `${location.city} ${location.public_label}` : location.name}</strong><br />{location.address}</address>)}

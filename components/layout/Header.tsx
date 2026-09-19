@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef, Suspense } from "react";
-import { ChevronDown, Menu, X, Search, Command } from "lucide-react";
+import { ChevronDown, Menu, X, Search } from "lucide-react";
 import { m, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import { triggerHaptic } from "@/lib/utils/haptics";
@@ -133,9 +133,6 @@ export default function Header({ navigationLinks, divisionLinks, ctaText, ctaUrl
               className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors border border-white/20 text-white hover:bg-white/10"
             >
               <Search size={14} />
-              <div className="flex items-center gap-1 text-[9px] font-bold tracking-widest uppercase opacity-70">
-                <Command size={10} /> K
-              </div>
             </button>
 
             <Link 

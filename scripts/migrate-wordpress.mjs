@@ -16,6 +16,18 @@ const supersededRecords = [
     reason: "Superseded by the client-corrected Adekemi Arike Adedayo record.",
     meta: { _tlg_status: "inactive" },
   },
+  ...[
+    "can-you-digitise-our-existing-internal-manuals",
+    "do-you-deliver-live-training-or-only-self-paced-content",
+    "how-long-does-it-take-to-build-a-corporate-training-programme",
+    "what-do-your-downloadable-business-resources-include",
+    "what-types-of-organisations-do-you-build-training-programmes-for",
+  ].map((slug) => ({
+    endpoint: "faqs",
+    slug,
+    reason: "Replaced by approved pre-launch Digital Products FAQs.",
+    meta: { _tlg_status: "inactive" },
+  })),
 ];
 
 const collections = [

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import EnquiryForm from "@/components/forms/EnquiryForm";
 import {
@@ -74,9 +74,16 @@ export default async function ContactPage() {
                 aria-label={`WhatsApp Nigeria at ${nigeriaContact.display}`}
               >
                 <MessageCircle aria-hidden="true" size={17} />
-                Nigeria WhatsApp: {nigeriaContact.display}
+                WhatsApp: {nigeriaContact.international}
               </a>
             ) : null}
+
+            {[['Nigeria', settings.nigeria_phone], ['Canada', settings.canada_phone], ['UAE', settings.uae_phone]].map(([label, phone]) => phone ? (
+              <a key={label} className="mt-4 flex items-center gap-3 text-sm text-tlg-midnight hover:text-tlg-signatureGold" href={`tel:${phone.replace(/[^+\d]/g, "")}`}>
+                <Phone aria-hidden="true" size={17} />
+                {label}: {phone}
+              </a>
+            ) : null)}
 
             {publicLocations.length ? (
               <div className="mt-10 space-y-5">

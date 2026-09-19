@@ -39,7 +39,9 @@ export function pageMetadata(page: PageContent, canonicalPath: string): Metadata
   const canonical = `https://triumphallifetimegroup.com${canonicalPath}`;
 
   return {
-    title,
+    // CMS SEO titles are complete editorial titles. Marking them absolute avoids
+    // the root layout template appending the organisation name a second time.
+    title: { absolute: title },
     description,
     alternates: { canonical },
     openGraph: {

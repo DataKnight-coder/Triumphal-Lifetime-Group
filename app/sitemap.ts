@@ -5,11 +5,12 @@ const pages: { path: string; key: PageKey; priority: number }[] = [
   { path: "", key: "home", priority: 1 }, { path: "/about", key: "about", priority: .8 },
   { path: "/about/our-story", key: "our-story", priority: .6 }, { path: "/companies", key: "companies", priority: .8 },
   { path: "/hr-business-consulting", key: "hr-consulting", priority: .8 }, { path: "/real-estate-advisory", key: "real-estate", priority: .8 },
+  { path: "/career-services", key: "career-services", priority: .8 },
   { path: "/global-education-advisory", key: "education", priority: .8 }, { path: "/global-mobility-visa-services", key: "global-mobility", priority: .8 },
   { path: "/it-solutions", key: "technology", priority: .8 }, { path: "/digital-products-ecommerce", key: "digital-products", priority: .7 },
   { path: "/charity-foundation", key: "foundation", priority: .7 }, { path: "/global-presence", key: "global-presence", priority: .6 },
   { path: "/leadership", key: "leadership", priority: .7 }, { path: "/careers", key: "careers", priority: .6 },
-  { path: "/contact", key: "contact", priority: .7 }, { path: "/insights", key: "insights", priority: .7 }, { path: "/partners", key: "partners", priority: .5 },
+  { path: "/contact", key: "contact", priority: .7 }, { path: "/insights", key: "insights", priority: .7 },
   { path: "/privacy", key: "privacy", priority: .3 }, { path: "/terms", key: "terms", priority: .3 }, { path: "/disclaimer", key: "disclaimer", priority: .3 },
   { path: "/cookies", key: "cookies", priority: .3 }, { path: "/accessibility", key: "accessibility", priority: .3 }, { path: "/refund-policy", key: "refund-policy", priority: .3 },
 ];

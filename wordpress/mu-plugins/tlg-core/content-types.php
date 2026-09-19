@@ -186,12 +186,12 @@ function tlg_register_content_meta() {
 }
 
 function tlg_allowed_divisions() {
-    return ['digital-learning', 'education', 'global-mobility', 'hr-consulting', 'real-estate', 'technology', 'global'];
+    return ['career-services', 'digital-learning', 'education', 'global-mobility', 'hr-consulting', 'real-estate', 'technology', 'global'];
 }
 
 function tlg_page_keys() {
     return [
-        'home', 'about', 'our-story', 'companies', 'hr-consulting', 'real-estate',
+        'home', 'about', 'our-story', 'companies', 'hr-consulting', 'career-services', 'real-estate',
         'education', 'global-mobility', 'technology', 'digital-products', 'foundation',
         'global-presence', 'leadership', 'careers', 'contact', 'insights', 'partners',
         'privacy', 'terms', 'disclaimer', 'cookies', 'accessibility', 'refund-policy',
