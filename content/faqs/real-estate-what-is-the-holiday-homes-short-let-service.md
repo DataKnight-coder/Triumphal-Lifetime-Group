@@ -1,5 +1,5 @@
 ---
-question: "What is the holiday homes / short let service?"
+question: "What is the holiday-home or short-let service?"
 division: "real-estate"
 order: 5
 slug: "what-is-the-holiday-homes-short-let-service"

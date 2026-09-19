@@ -4,7 +4,7 @@
 |---|---|---|
 | WordPress as runtime content source | DONE | Public business copy is fetched through `lib/wordpress/client.ts`; repository fixtures are migration/test inputs only. |
 | Structured fixed-page editing | DONE | `tlg_pages` provides constrained hero, section, CTA, disclaimer, navigation, footer and SEO fields. |
-| Six divisions and Foundation copy | DONE | Approved copy is in `content/pages/pages.json`; six service records remain separate. |
+| Seven divisions and Foundation copy | DONE | Approved copy is in `content/pages/pages.json`; seven service records remain separate. |
 | Leadership | PARTIAL | Structured groups and trust fields are complete. Final titles/biographies require client confirmation. Mr Charles is retained but inactive pending resolution. |
 | Locations | BLOCKED_CLIENT_CONFIRMATION | CPT and frontend are complete; no location is seeded or labelled as an office without evidence. |
 | Foundation impact | BLOCKED_CLIENT_CONFIRMATION | Programme/impact/future model is complete; no completed impact record is seeded without evidence. |
