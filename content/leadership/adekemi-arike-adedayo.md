@@ -1,7 +1,7 @@
 ---
 name: "Adekemi Arike Adedayo"
 slug: "adekemi-arike-adedayo"
-job_title: "Founder & Group Chief Executive Officer"
+job_title: "Founder and Group Chief Executive Officer"
 department: "Executive Leadership"
 leadership_group: "executive"
 core_expertise:
@@ -12,7 +12,7 @@ core_expertise:
 qualifications:
   - "BA (Hons) International Business Management, First Class Honours, University of Hertfordshire, United Kingdom"
   - "BSc Economics, Imo State University, Nigeria"
-  - "CHRP, CHRM & CHRC, American Certification Institute"
+  - "CHRP, CHRM and CHRC, American Certification Institute"
 email: ""
 linkedin: ""
 photo: "/images/team/adekemi.jpeg"
@@ -26,8 +26,8 @@ With extensive experience in business leadership and human resources consulting,
 
 She is also the Founder of Triumphal Lifetime Charity Foundation, reflecting her commitment to community development and humanitarian initiatives.
 
-### Education & Professional Qualifications
+### Education and Professional Qualifications
 
 * BA (Hons) International Business Management — First Class Honours, University of Hertfordshire, United Kingdom
 * BSc Economics, Imo State University, Nigeria
-* CHRP, CHRM & CHRC, American Certification Institute
+* CHRP, CHRM and CHRC, American Certification Institute

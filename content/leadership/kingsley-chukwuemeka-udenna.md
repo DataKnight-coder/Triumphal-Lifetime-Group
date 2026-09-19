@@ -1,8 +1,8 @@
 ---
 name: "Kingsley Chukwuemeka Udenna"
 slug: "kingsley-chukwuemeka-udenna"
-job_title: "Director, Human Resources & Business Advisory"
-department: "Human Resources & Business Advisory"
+job_title: "Director, Human Resources and Business Advisory"
+department: "Human Resources and Business Advisory"
 leadership_group: "division-head"
 core_expertise:
   - "Human resources consulting"

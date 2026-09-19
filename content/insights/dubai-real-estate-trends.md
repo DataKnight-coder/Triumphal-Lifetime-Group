@@ -9,7 +9,7 @@ sources: []
 related_division: "real-estate"
 publish_date: "2026-08-12"
 featured_image: "/visuals/real-estate.jpg"
-category: "Real Estate"
+category: "Real Estate Service"
 seo_title: "Dubai Commercial Real Estate: Q3 2026 Market Analysis | Triumphal Lifetime Group"
 seo_description: "A Dubai commercial real estate article awaiting source and compliance review."
 draft: true

@@ -47,7 +47,7 @@
       "positioning_heading": "How the Group Is Structured",
       "positioning_body": "The Group operates through specialist service divisions. A division is not presented as a separately incorporated company unless that status has been documented and approved for publication.",
       "services_heading": "Seven Specialist Divisions and a Charity Foundation",
-      "services_items": "HR & Business Consulting | Practical people, workplace and business support.\nCareer Services | CV, résumé, LinkedIn, interview and job-search support.\nGlobal Education Advisory | Guidance for study planning and applications.\nGlobal Mobility Services | Visa application guidance and administrative coordination.\nReal Estate | Advisory, sourcing and transaction support.\nInformation Technology | Practical technology and digital business support.\nDigital Products & E-commerce | Digital resources currently in development.\nCharity Foundation | Humanitarian and community-development initiatives.",
+      "services_items": "HR and Business Consulting | Practical people, workplace and business support.\nCareer Services | CV, résumé, LinkedIn, interview and job-search support.\nGlobal Education Advisory | Guidance for study planning and applications.\nGlobal Mobility Services | Visa application guidance and administrative coordination.\nReal Estate Service | Advisory, sourcing and transaction support.\nInformation Technology | Practical technology and digital business support.\nDigital Products and E-commerce | Digital resources currently in development.\nCharity Foundation | Humanitarian and community-development initiatives.",
       "cta_heading": "Explore the support available across the Group.",
       "cta_text": "View Our Divisions",
       "cta_url": "/companies",
@@ -98,19 +98,19 @@
     }
   },
   {
-    "title": "HR & Business Consulting",
+    "title": "HR and Business Consulting",
     "slug": "hr-consulting",
     "body": "",
     "image": "/visuals/hr.jpg",
     "fields": {
       "page_key": "hr-consulting",
-      "hero_eyebrow": "HR & Business Consulting",
+      "hero_eyebrow": "HR and Business Consulting",
       "hero_title": "Build stronger people, systems and businesses.",
       "hero_description": "Practical HR and business support for start-ups, SMEs, entrepreneurs and growing organisations.",
       "hero_image_alt": "HR and business consultation",
       "intro_heading": "Practical Support for Better Workplaces",
       "intro_body": "We help organisations strengthen people management, workplace documentation, business processes and day-to-day operational structure.",
-      "services_heading": "Our HR & Business Consulting Services",
+      "services_heading": "Our HR and Business Consulting Services",
       "services_items": "HR Consulting and Advisory | Practical guidance on people and workplace matters.\nRecruitment Support | Structured support for role definition, sourcing and selection.\nHR Policies and Documentation | Clear workplace policies, templates and records.\nEmployee Onboarding | Consistent processes for welcoming and equipping employees.\nPerformance Management | Practical frameworks for objectives, feedback and development.\nPayroll and WPS Support | Administrative payroll and Wage Protection System coordination where applicable.\nHR Audits | Reviews of existing people practices, records and controls.\nTraining and Development | Learning support designed around team and organisational needs.\nBusiness Advisory | Practical guidance on structure, systems and business operations.",
       "audience_heading": "Who We Help",
       "audience_body": "We support start-ups, SMEs, entrepreneurs, and growing organisations seeking practical HR and business solutions.",
@@ -123,7 +123,7 @@
       "cta_url": "/contact?book=true&service=HR%20Consulting",
       "disclaimer_heading": "Important Information",
       "disclaimer_body": "Our services provide general HR and business support. Outcomes depend on each organisation's circumstances, decisions and implementation. Regulated legal, tax or financial advice must be provided by appropriately authorised professionals.",
-      "seo_title": "HR & Business Consulting | Triumphal Lifetime Group",
+      "seo_title": "HR and Business Consulting | Triumphal Lifetime Group",
       "seo_description": "Practical HR consulting, recruitment support, policies, onboarding, performance management, audits, training and business advisory.",
       "display_order": 5,
       "status": "active"
@@ -160,15 +160,15 @@
     }
   },
   {
-    "title": "Real Estate Advisory",
+    "title": "Real Estate Service",
     "slug": "real-estate",
     "body": "",
     "image": "/visuals/real-estate.jpg",
     "fields": {
       "page_key": "real-estate",
-      "hero_eyebrow": "Real Estate",
+      "hero_eyebrow": "Real Estate Service",
       "hero_title": "Informed support for property decisions.",
-      "hero_description": "We provide real estate advisory and transaction coordination, with regulated or licensed brokerage activities delivered through appropriately licensed real estate professionals.",
+      "hero_description": "We provide Real Estate Service and transaction coordination, with regulated or licensed brokerage activities delivered through appropriately licensed real estate professionals.",
       "hero_image_alt": "Modern residential and commercial property",
       "intro_heading": "Property Support Built Around Your Requirements",
       "intro_body": "We help clients define their property needs, consider available options and coordinate appropriate next steps with relevant professionals and counterparties.",
@@ -181,7 +181,7 @@
       "cta_url": "/contact?book=true&service=Real%20Estate",
       "disclaimer_heading": "Property Risk Disclaimer",
       "disclaimer_body": "Property values, rental income and investment returns are not guaranteed and may rise or fall. Clients should conduct appropriate due diligence. Regulated or licensed brokerage activities are delivered through appropriately licensed real estate professionals.",
-      "seo_title": "Real Estate Advisory | Triumphal Lifetime Group",
+      "seo_title": "Real Estate Service | Triumphal Lifetime Group",
       "seo_description": "Property advisory, sourcing, buying, selling, rental support and client coordination without guaranteed investment outcomes.",
       "display_order": 6,
       "status": "active"
@@ -274,14 +274,14 @@
     }
   },
   {
-    "title": "Digital Products & E-commerce",
+    "title": "Digital Products and E-commerce",
     "slug": "digital-products",
     "body": "",
     "image": "/visuals/digital-learning.jpg",
     "fields": {
       "page_key": "digital-products",
       "hero_eyebrow": "Coming Soon",
-      "hero_title": "Digital Products & E-commerce",
+      "hero_title": "Digital Products and E-commerce",
       "hero_description": "Our digital resources and online products are currently in development. They are being designed to support individuals, entrepreneurs and businesses with practical tools, knowledge and resources.",
       "hero_image_alt": "Digital resources in development",
       "intro_heading": "Practical Resources in Development",
@@ -433,7 +433,7 @@
     "body": "",
     "fields": {
       "page_key": "partners",
-      "hero_eyebrow": "Partners & Affiliates",
+      "hero_eyebrow": "Partners and Affiliates",
       "hero_title": "Verified relationships only.",
       "hero_description": "No organisation is presented as a formal partner, affiliate, regulator or institutional relationship without documentary confirmation and publication approval.",
       "intro_heading": "Partnership information",
@@ -465,13 +465,13 @@
     }
   },
   {
-    "title": "Terms & Conditions",
+    "title": "Terms and Conditions",
     "slug": "terms",
     "body": "<h2>Services and third-party decisions</h2><p>We provide professional support within an agreed scope. Universities, scholarship bodies, employers, property counterparties, financial institutions, technology providers and government authorities make their own decisions.</p><h2>No guaranteed outcomes</h2><p>We do not guarantee visa approval, admission, scholarships, employment, recruitment outcomes, property appreciation, rental income, investment returns, business performance, technology performance or digital-product outcomes.</p><h2>Client responsibilities</h2><p>Clients must provide accurate information, review documents and decisions, meet deadlines, obtain independent regulated advice where appropriate and comply with applicable laws.</p><h2>Payments, cancellations and refunds</h2><p>Commercial terms, fees, cancellation rights and refund rules are set out in the applicable service agreement. Digital Products are not yet available for purchase; terms will be provided when products launch.</p><h2>Intellectual property and acceptable use</h2><p>Website materials may not be reproduced or commercially exploited without permission, except where applicable law permits.</p><h2>Liability and jurisdiction</h2><p>Our liability is limited to the extent permitted by applicable law. Governing law and jurisdiction are determined by the applicable service agreement.</p>",
     "fields": {
       "page_key": "terms",
       "hero_eyebrow": "Legal",
-      "hero_title": "Terms & Conditions",
+      "hero_title": "Terms and Conditions",
       "hero_description": "General terms governing use of this website and engagement with our services.",
       "last_updated": "September 2026",
       "disclaimer_heading": "Important Notice",
@@ -557,7 +557,7 @@
     "fields": {
       "page_key": "site-navigation",
       "navigation_items": "Home | /\nAbout | /about\nOur Divisions | /companies\nLeadership | /leadership\nFoundation | /charity-foundation\nInsights | /insights\nContact | /contact",
-      "division_items": "HR & Business Consulting | /hr-business-consulting | /visuals/hr.jpg\nCareer Services | /career-services | /visuals/edu-career.jpg\nGlobal Education Advisory | /global-education-advisory | /visuals/education.jpg\nGlobal Mobility Services | /global-mobility-visa-services | /visuals/global-mobility.jpg\nReal Estate | /real-estate-advisory | /visuals/real-estate.jpg\nInformation Technology | /it-solutions | /visuals/technology.jpg\nDigital Products & E-commerce | /digital-products-ecommerce | /visuals/digital-learning.jpg",
+      "division_items": "HR and Business Consulting | /hr-business-consulting | /visuals/hr.jpg\nCareer Services | /career-services | /visuals/edu-career.jpg\nGlobal Education Advisory | /global-education-advisory | /visuals/education.jpg\nGlobal Mobility Services | /global-mobility-visa-services | /visuals/global-mobility.jpg\nReal Estate Service | /real-estate-advisory | /visuals/real-estate.jpg\nInformation Technology | /it-solutions | /visuals/technology.jpg\nDigital Products and E-commerce | /digital-products-ecommerce | /visuals/digital-learning.jpg",
       "cta_text": "Book a Consultation",
       "cta_url": "/contact?book=true",
       "status": "active",
@@ -571,9 +571,9 @@
     "fields": {
       "page_key": "site-footer",
       "intro_body": "Practical professional support across seven specialist divisions, alongside responsible community impact through our Charity Foundation.",
-      "footer_divisions": "HR & Business Consulting | /hr-business-consulting\nCareer Services | /career-services\nGlobal Education Advisory | /global-education-advisory\nGlobal Mobility Services | /global-mobility-visa-services\nReal Estate | /real-estate-advisory\nInformation Technology | /it-solutions\nDigital Products & E-commerce | /digital-products-ecommerce",
+      "footer_divisions": "HR and Business Consulting | /hr-business-consulting\nCareer Services | /career-services\nGlobal Education Advisory | /global-education-advisory\nGlobal Mobility Services | /global-mobility-visa-services\nReal Estate Service | /real-estate-advisory\nInformation Technology | /it-solutions\nDigital Products and E-commerce | /digital-products-ecommerce",
       "footer_company": "About | /about\nLeadership | /leadership\nCareers | /careers\nFoundation | /charity-foundation\nContact | /contact",
-      "footer_resources": "Insights | /insights\nPrivacy Policy | /privacy\nTerms & Conditions | /terms\nLegal Disclaimer | /disclaimer\nCookie Policy | /cookies\nAccessibility | /accessibility",
+      "footer_resources": "Insights | /insights\nPrivacy Policy | /privacy\nTerms and Conditions | /terms\nLegal Disclaimer | /disclaimer\nCookie Policy | /cookies\nAccessibility | /accessibility",
       "cta_heading": "Tell us how we can help you.",
       "cta_text": "Book a Consultation",
       "cta_url": "/contact?book=true",

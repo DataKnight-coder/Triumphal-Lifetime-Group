@@ -1,7 +1,7 @@
 ---
 name: "Joseph Adedunmola"
 slug: "joseph-adedunmola"
-job_title: "Director, Real Estate"
+job_title: "Director, Real Estate Service"
 department: "Executive Leadership"
 leadership_group: "division-head"
 core_expertise:

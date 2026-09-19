@@ -1,5 +1,5 @@
 ---
-title: "Digital Products & E-commerce"
+title: "Digital Products and E-commerce"
 slug: "digital-products-learning"
 short_description: "Digital resources and online products are currently in development."
 featured_image: ""

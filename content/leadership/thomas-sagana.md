@@ -1,7 +1,7 @@
 ---
 name: "Thomas Sagana"
 slug: "thomas-sagana"
-job_title: "Director, Digital Products & E-Commerce"
+job_title: "Director, Digital Products and E-commerce"
 department: "Executive Leadership"
 leadership_group: "division-head"
 core_expertise:

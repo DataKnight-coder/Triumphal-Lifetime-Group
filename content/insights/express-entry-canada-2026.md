@@ -2,7 +2,7 @@
 title: "Navigating the Canadian Express Entry System in 2026"
 slug: "express-entry-canada-2026"
 excerpt: "A Canadian immigration article awaiting current official-source and regulatory review before publication."
-author: "Mobility & Immigration Desk"
+author: "Mobility and Immigration Desk"
 reviewer: ""
 last_reviewed: ""
 sources: []

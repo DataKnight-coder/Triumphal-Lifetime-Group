@@ -1,5 +1,5 @@
 ---
-title: "Real Estate"
+title: "Real Estate Service"
 slug: "real-estate-advisory"
 short_description: "Supporting clients with residential and commercial property sourcing and transaction coordination."
 featured_image: ""
