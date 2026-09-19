@@ -1,5 +1,5 @@
 ---
-title: "HR and Business Consulting"
+title: "HR & Business Consulting"
 slug: "hr-business-consulting"
 short_description: "Providing recruitment, organisational design, and workforce strategy support to businesses."
 featured_image: ""

@@ -1,8 +1,8 @@
 ---
 name: "Mr. Charles"
 slug: "mr-charles"
-job_title: "Director, Real Estate Service and Investment Advisory"
-department: "Real Estate Service and Investment Advisory"
+job_title: "Director, Real Estate and Investment Advisory"
+department: "Real Estate and Investment Advisory"
 leadership_group: "division-head"
 core_expertise: []
 qualifications: []
