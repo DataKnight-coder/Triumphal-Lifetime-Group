@@ -35,7 +35,7 @@ function tlg_verified_setting_defaults() {
         'canada_phone' => '+1 647 774 0409',
         'uae_phone' => '+971 55 199 5483',
         'address' => '',
-        'facebook' => 'https://www.facebook.com/triuphalifetimeagency.hr',
+        'facebook' => 'https://www.facebook.com/profile.php?id=61594480810265',
         'linkedin' => 'https://www.linkedin.com/company/triumphal-lifetime/',
         'instagram' => 'https://www.instagram.com/triumphallifetimehr/',
         'copyright_text' => 'All rights reserved.',
